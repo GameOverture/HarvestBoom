@@ -175,6 +175,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HarvestBoom.cpp" />
+    <ClCompile Include="IEnemy.cpp" />
+    <ClCompile Include="IPlant.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="pch.cpp">
@@ -187,6 +189,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
+    <ClInclude Include="IEnemy.h" />
+    <ClInclude Include="IPlant.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="World.h" />

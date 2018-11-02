@@ -4,7 +4,9 @@
 
 World::World(HarvestBoom &gameRef) :	HyEntity2d(nullptr),
 										m_GameRef(gameRef),
-										m_Player(this)
+										m_Player(this),
+										m_Plant(this),
+										m_Enemy(this)
 {
 }
 

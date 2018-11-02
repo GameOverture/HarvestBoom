@@ -19,6 +19,12 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="IPlant.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="IEnemy.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -29,5 +35,9 @@
       <Filter>Actors</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="IPlant.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemy.h" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,8 @@
 
 enum Controls
 {
-	MoveUp = 0,
+	ShowFPS = 0,
+	MoveUp,
 	MoveRight,
 	MoveDown,
 	MoveLeft
