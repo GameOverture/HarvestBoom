@@ -75,6 +75,9 @@ void World::ConstructLevel()
 	if(m_pShed->CollisionTest(m_Player))
 		m_Player.Equip();
 
+	//float fDist = glm::distance(m_Player.pos.Get(), pCam->pos.Get());
+	//if(fDist > 100.0f)
+	//	pCam->pos.Set(100.0f * glm::normalize(m_Player.pos.Get() - pCam->pos.Get()));
 	pCam->pos.Set(m_Player.pos);
 
 	float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
