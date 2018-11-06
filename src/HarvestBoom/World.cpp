@@ -47,37 +47,30 @@ void World::ConstructLevel()
 	m_pDirt->pos.Set(-500.0f, -1500.0f);
 
 	m_Fence[0] = new AreaImpassable(&m_AreaManager);
-	m_Fence[0]->SetSize(750.0f, 30.0f);
+	m_Fence[0]->SetSize(750, 30);
 	m_Fence[0]->pos.Set(-400.0f, 200.0f);
 
 	m_Fence[1] = new AreaImpassable(&m_AreaManager);
-	m_Fence[1]->SetSize(30.0f, 750.0f);
+	m_Fence[1]->SetSize(30, 750);
 	m_Fence[1]->pos.Set(-400.0f, -450.0f);
 
 	m_Fence[2] = new AreaImpassable(&m_AreaManager);
-	m_Fence[2]->SetSize(30.0f, 750.0f);
+	m_Fence[2]->SetSize(30, 750);
 	m_Fence[2]->pos.Set(400.0f, -450.0f);
 
 	m_Fence[3] = new AreaImpassable(&m_AreaManager);
-	m_Fence[3]->SetSize(750.0f, 30.0f);
+	m_Fence[3]->SetSize(750, 30);
 	m_Fence[3]->pos.Set(-400.0f, -450.0f);
-	
-	//m_pShed = new AreaStructure(&m_AreaManager);
-	//m_pBarn = new AreaStructure(&m_AreaManager);
 }
 
 /*virtual*/ void World::OnUpdate() /*override*/
 {
-	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
-
 	m_pHome->CollisionTest(m_Player);
 
 	if(m_pShed->CollisionTest(m_Player))
 		m_Player.Equip();
 
-	//float fDist = glm::distance(m_Player.pos.Get(), pCam->pos.Get());
-	//if(fDist > 100.0f)
-	//	pCam->pos.Set(100.0f * glm::normalize(m_Player.pos.Get() - pCam->pos.Get()));
+	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
 	pCam->pos.Set(m_Player.pos);
 
 	float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
