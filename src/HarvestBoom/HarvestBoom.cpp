@@ -2,8 +2,7 @@
 #include "HarvestBoom.h"
 
 HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
-													m_World(*this),
-													m_Test(HY_SYSTEM_FONT, nullptr)
+													m_World(*this)
 {
 }
 
@@ -20,11 +19,10 @@ HarvestBoom::~HarvestBoom()
 	Input().MapBtn(MoveRight, HYKEY_Right);
 	Input().MapBtn(MoveDown, HYKEY_Down);
 	Input().MapBtn(MoveLeft, HYKEY_Left);
+	Input().MapBtn(UseEquip, HYKEY_Space);
 	
+	m_World.ConstructLevel();
 	m_World.Load();
-
-	m_Test.Load();
-	m_Test.TextSet("Hello asdf asdf ");
 
 	return true;
 }

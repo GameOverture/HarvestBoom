@@ -15,8 +15,6 @@ class HarvestBoom : public IHyApplication
 	HyCamera2d *	m_pCamera;
 	World			m_World;
 
-	HyText2d		m_Test;
-
 public:
 	HarvestBoom(HarmonyInit &initStruct);
 	virtual ~HarvestBoom();
