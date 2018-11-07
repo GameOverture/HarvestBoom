@@ -12,6 +12,12 @@ AreaStructure::~AreaStructure()
 
 bool AreaStructure::CollisionTest(Player &playerRef)
 {
+	//b2Manifold manifold;
+	//b2CollidePolygons(&manifold,
+	//				  static_cast<b2PolygonShape *>(m_Ground.GetShape().GetB2Shape()),
+	//				  b2Transform(b2Vec2(m_Ground.pos.X(), m_Ground.pos.Y()), b2Rot(0.0f)),
+	//				  playerRef.GetWorldAABB()
+
 	if(m_Ground.GetShape().TestPoint(playerRef.pos.Get()) == false)
 		return false;
 

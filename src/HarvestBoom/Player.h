@@ -9,6 +9,8 @@ class Player : public HyEntity2d
 
 	glm::vec2			m_vVelocity;
 
+	HyShape2d			m_Collision;
+
 public:
 	Player(HyEntity2d *pParent);
 	virtual ~Player();

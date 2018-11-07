@@ -8,7 +8,8 @@
 Player::Player(HyEntity2d *pParent) :	HyEntity2d(pParent),
 										m_Body(this),
 										m_Tool(this),
-										m_Text(HY_SYSTEM_FONT, this)
+										m_Text(HY_SYSTEM_FONT, this),
+										m_Collision(this)
 {
 	m_vVelocity.x = m_vVelocity.y = 0.0f;
 
