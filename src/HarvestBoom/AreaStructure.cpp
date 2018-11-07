@@ -2,8 +2,17 @@
 #include "AreaStructure.h"
 #include "Player.h"
 
-AreaStructure::AreaStructure(HyEntity2d *pParent) :	IArea(Structure, pParent)
+AreaStructure::AreaStructure(HyEntity2d *pParent) :	IArea(Structure, pParent),
+													m_CollidePt1(nullptr),
+													m_CollidePt2(nullptr)
 {
+	m_CollidePt1.GetShape().SetAsCircle(5.0f);
+	m_CollidePt1.SetDisplayOrder(5000);
+	m_CollidePt1.Load();
+
+	m_CollidePt2.GetShape().SetAsCircle(5.0f);
+	m_CollidePt2.SetDisplayOrder(5000);
+	m_CollidePt2.Load();
 }
 
 AreaStructure::~AreaStructure()
@@ -12,16 +21,16 @@ AreaStructure::~AreaStructure()
 
 bool AreaStructure::CollisionTest(Player &playerRef)
 {
-	//b2Manifold manifold;
-	//b2CollidePolygons(&manifold,
-	//				  static_cast<b2PolygonShape *>(m_Ground.GetShape().GetB2Shape()),
-	//				  b2Transform(b2Vec2(m_Ground.pos.X(), m_Ground.pos.Y()), b2Rot(0.0f)),
-	//				  playerRef.GetWorldAABB()
+	b2WorldManifold manifold;
+	bool bCollided = m_Ground.GetShape().IsColliding(playerRef.GetCollision(), manifold);
 
-	if(m_Ground.GetShape().TestPoint(playerRef.pos.Get()) == false)
+	if(bCollided == false)// m_Ground.GetShape().TestPoint(playerRef.pos.Get()) == false)
 		return false;
 
-	if(abs(playerRef.pos.X() - pos.X()) < abs(playerRef.pos.Y() - pos.Y()))
+	m_CollidePt1.pos.Set(manifold.points[0].x, manifold.points[0].y);
+	m_CollidePt2.pos.Set(manifold.points[1].x, manifold.points[1].y);
+
+	/*if(abs(playerRef.pos.X() - pos.X()) < abs(playerRef.pos.Y() - pos.Y()))
 	{
 		if(playerRef.pos.X() <= pos.X() + (m_vSize.x * 0.5f))
 			playerRef.pos.X(pos.X());
@@ -34,7 +43,7 @@ bool AreaStructure::CollisionTest(Player &playerRef)
 			playerRef.pos.Y(pos.Y());
 		else
 			playerRef.pos.Y(pos.Y() + m_vSize.y);
-	}
+	}*/
 
 	return true;
 }

@@ -16,6 +16,7 @@ public:
 	virtual ~Player();
 
 	float GetMagnitude();
+	HyShape2d &GetCollision();
 
 	void Equip();
 	bool IsEquipped();

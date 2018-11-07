@@ -35,6 +35,11 @@ float Player::GetMagnitude()
 	return glm::length(m_vVelocity);
 }
 
+HyShape2d &Player::GetCollision()
+{
+	return m_Body.GetShape();
+}
+
 void Player::Equip()
 {
 	m_Tool.SetEnabled(true);
