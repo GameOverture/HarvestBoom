@@ -43,6 +43,9 @@
     <ClCompile Include="AreaImpassable.cpp">
       <Filter>World\Areas</Filter>
     </ClCompile>
+    <ClCompile Include="IActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -72,5 +75,6 @@
     <ClInclude Include="AreaImpassable.h">
       <Filter>World\Areas</Filter>
     </ClInclude>
+    <ClInclude Include="IActor.h" />
   </ItemGroup>
 </Project>

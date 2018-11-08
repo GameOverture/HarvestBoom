@@ -1,9 +1,12 @@
 #pragma once
 #include "Harmony/HyEngine.h"
 
+#define TILE_SIZE 42.0f
+
 enum Controls
 {
-	ShowFPS = 0,
+	ToggleFPS = 0,
+	ToggleGrid,
 	MoveUp,
 	MoveRight,
 	MoveDown,

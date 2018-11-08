@@ -179,6 +179,7 @@
     <ClCompile Include="AreaImpassable.cpp" />
     <ClCompile Include="AreaStructure.cpp" />
     <ClCompile Include="HarvestBoom.cpp" />
+    <ClCompile Include="IActor.cpp" />
     <ClCompile Include="IArea.cpp" />
     <ClCompile Include="IEnemy.cpp" />
     <ClCompile Include="IPlant.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="AreaImpassable.h" />
     <ClInclude Include="AreaStructure.h" />
     <ClInclude Include="HarvestBoom.h" />
+    <ClInclude Include="IActor.h" />
     <ClInclude Include="IArea.h" />
     <ClInclude Include="IEnemy.h" />
     <ClInclude Include="IPlant.h" />

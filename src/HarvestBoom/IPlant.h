@@ -1,6 +1,7 @@
 #pragma once
+#include "IActor.h"
 
-class IPlant : public HyEntity2d
+class IPlant : public IActor
 {
 	HyPrimitive2d		m_Body;
 

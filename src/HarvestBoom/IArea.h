@@ -22,5 +22,6 @@ public:
 	virtual ~IArea();
 
 	void SetSize(uint32 uiWidth, uint32 uiHeight);
+	void SetPos(int32 iX, int32 iY);
 };
 

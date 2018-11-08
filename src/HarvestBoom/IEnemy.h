@@ -1,6 +1,7 @@
 #pragma once
+#include "IActor.h"
 
-class IEnemy : public HyEntity2d
+class IEnemy : public IActor
 {
 	HyPrimitive2d	m_Body;
 public:

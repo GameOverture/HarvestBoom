@@ -9,14 +9,51 @@
 #include "AreaImpassable.h"
 #include "AreaStructure.h"
 
+#define DEBUG_GRID_SIZE 50
+
+World::DebugGrid::DebugGrid(HyEntity2d *pParent) :	HyEntity2d(pParent),
+													m_Text(HY_SYSTEM_FONT, this)
+{
+	m_Text.UseWindowCoordinates(0);
+	m_Text.TextSetAlignment(HYALIGN_Right);
+	
+	m_DebugGridHorz.reserve(DEBUG_GRID_SIZE);
+	m_DebugGridVert.reserve(DEBUG_GRID_SIZE);
+
+	for(int32 i = -DEBUG_GRID_SIZE; i < DEBUG_GRID_SIZE; ++i)
+	{
+		m_DebugGridHorz.push_back(HY_NEW HyPrimitive2d(this));
+		m_DebugGridHorz.back()->GetShape().SetAsLineSegment(glm::vec2(-1000.0f, i * TILE_SIZE), glm::vec2(1000.0f, i * TILE_SIZE));
+		if(i == 0)
+			m_DebugGridHorz.back()->topColor.Set(1.0f, 1.0f, 0.0f);
+		else if(i % 5)
+			m_DebugGridHorz.back()->topColor.Set(1.0f, 0.0f, 0.0f);
+		else
+			m_DebugGridHorz.back()->topColor.Set(1.0f, 1.0f, 1.0f);
+
+		m_DebugGridVert.push_back(HY_NEW HyPrimitive2d(this));
+		m_DebugGridVert.back()->GetShape().SetAsLineSegment(glm::vec2(i * TILE_SIZE, -1000.0f), glm::vec2(i * TILE_SIZE, 1000.0f));
+		if(i == 0)
+			m_DebugGridVert.back()->topColor.Set(1.0f, 1.0f, 0.0f);
+		else if(i % 5)
+			m_DebugGridVert.back()->topColor.Set(1.0f, 0.0f, 0.0f);
+		else
+			m_DebugGridVert.back()->topColor.Set(1.0f, 1.0f, 1.0f);
+	}
+	ReverseDisplayOrder(true);
+}
+
 World::World(HarvestBoom &gameRef) :	HyEntity2d(nullptr),
 										m_GameRef(gameRef),
 										m_Player(this),
 										m_pHome(nullptr),
 										m_pDirt(nullptr),
 										m_pShed(nullptr),
-										m_AreaManager(this)
+										m_AreaManager(this),
+										m_DebugGrid(this)
 {
+	m_DebugGrid.SetEnabled(false);
+	m_DebugGrid.SetDisplayOrder(9999);
 }
 
 World::~World()
@@ -32,35 +69,33 @@ void World::DeleteArea()
 
 void World::ConstructLevel()
 {
+	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
+
 	DeleteArea();
 
+	m_pDirt = new AreaDirt(&m_AreaManager);
+	m_pDirt->SetSize(1000, 1000);
+	m_pDirt->SetPos(-500, -500);
+
 	m_pHome = new AreaStructure(&m_AreaManager);
-	m_pHome->SetSize(200, 150);
-	m_pHome->pos.Set(-100.0f, -75.0f);
+	m_pHome->SetSize(11, 6);
+	m_pHome->SetPos(-5, 0);
 
 	m_pShed = new AreaStructure(&m_AreaManager);
-	m_pShed->SetSize(150, 75);
-	m_pShed->pos.Set(150.0f, 75.0f);
+	m_pShed->SetSize(4, 3);
+	m_pShed->SetPos(8, 5);
 
-	m_pDirt = new AreaDirt(&m_AreaManager);
-	m_pDirt->SetSize(1000, 3000);
-	m_pDirt->pos.Set(-500.0f, -1500.0f);
+	m_FenceTop = new AreaImpassable(&m_AreaManager);
+	m_FenceTop->SetSize(28, 1);
+	m_FenceTop->SetPos(-12, 12);
 
-	m_Fence[0] = new AreaImpassable(&m_AreaManager);
-	m_Fence[0]->SetSize(750, 30);
-	m_Fence[0]->pos.Set(-400.0f, 200.0f);
+	m_FenceLeft = new AreaImpassable(&m_AreaManager);
+	m_FenceLeft->SetSize(1, 50);
+	m_FenceLeft->SetPos(-12, -38);
 
-	m_Fence[1] = new AreaImpassable(&m_AreaManager);
-	m_Fence[1]->SetSize(30, 750);
-	m_Fence[1]->pos.Set(-400.0f, -450.0f);
-
-	m_Fence[2] = new AreaImpassable(&m_AreaManager);
-	m_Fence[2]->SetSize(30, 750);
-	m_Fence[2]->pos.Set(400.0f, -450.0f);
-
-	m_Fence[3] = new AreaImpassable(&m_AreaManager);
-	m_Fence[3]->SetSize(750, 30);
-	m_Fence[3]->pos.Set(-400.0f, -450.0f);
+	m_FenceRight = new AreaImpassable(&m_AreaManager);
+	m_FenceRight->SetSize(1, 50);
+	m_FenceRight->SetPos(15, -38);
 }
 
 /*virtual*/ void World::OnUpdate() /*override*/
@@ -82,8 +117,17 @@ void World::ConstructLevel()
 	if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
 	{
 		IPlant *pNewPlant = new IPlant(&m_PlantManager);
-		pNewPlant->pos.Set(m_Player.pos);
+		pNewPlant->SetPos(m_Player.GetPos());
 		pNewPlant->Load();
 		m_PlantList.push_back(pNewPlant);
 	}
+
+	if(Hy_App().Input().IsActionReleased(ToggleGrid))
+		m_DebugGrid.SetEnabled(!m_DebugGrid.IsEnabled());
+
+	std::string sDebugText = "Pos ";
+	sDebugText += std::to_string(m_Player.GetPos().x);
+	sDebugText += ",";
+	sDebugText += std::to_string(m_Player.GetPos().y);
+	m_DebugGrid.GetText().TextSet(sDebugText);
 }

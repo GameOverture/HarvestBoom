@@ -35,5 +35,10 @@ void IArea::SetSize(uint32 uiWidth, uint32 uiHeight)
 {
 	m_vSize.x = uiWidth;
 	m_vSize.y = uiHeight;
-	m_Ground.GetShape().SetAsBox(uiWidth, uiHeight);
+	m_Ground.GetShape().SetAsBox(uiWidth * TILE_SIZE, uiHeight * TILE_SIZE);
+}
+
+void IArea::SetPos(int32 iX, int32 iY)
+{
+	pos.Set(iX * TILE_SIZE, iY * TILE_SIZE);
 }

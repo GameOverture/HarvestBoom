@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "IEnemy.h"
 
-IEnemy::IEnemy(HyEntity2d *pParent) :	HyEntity2d(pParent),
+IEnemy::IEnemy(HyEntity2d *pParent) :	IActor(pParent),
 										m_Body(this)
 {
 	m_Body.GetShape().SetAsBox(10.0f, 10.0f);

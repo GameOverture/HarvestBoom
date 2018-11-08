@@ -14,14 +14,27 @@ class World : public HyEntity2d
 	
 	Player					m_Player;
 
-	AreaStructure *			m_pHome;
 	AreaDirt *				m_pDirt;
+	AreaStructure *			m_pHome;
 	AreaStructure *			m_pShed;
-	AreaImpassable *		m_Fence[4];
+	AreaImpassable *		m_FenceTop;
+	AreaImpassable *		m_FenceLeft;
+	AreaImpassable *		m_FenceRight;
 	HyEntity2d				m_AreaManager;
 
 	std::vector<IPlant *>	m_PlantList;
 	HyEntity2d				m_PlantManager;
+
+	class DebugGrid : public HyEntity2d
+	{
+		HyText2d						m_Text;
+		std::vector<HyPrimitive2d *>	m_DebugGridHorz;
+		std::vector<HyPrimitive2d *>	m_DebugGridVert;
+	public:
+		DebugGrid(HyEntity2d *pParent);
+		HyText2d &GetText() { return m_Text; }
+	};
+	DebugGrid				m_DebugGrid;
 
 public:
 	World(HarvestBoom &gameRef);

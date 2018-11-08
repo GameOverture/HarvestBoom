@@ -5,7 +5,7 @@
 #define ACCEL 200.0f
 #define STOP 500.0f
 
-Player::Player(HyEntity2d *pParent) :	HyEntity2d(pParent),
+Player::Player(HyEntity2d *pParent) :	IActor(pParent),
 										m_Body(this),
 										m_Tool(this),
 										m_Text(HY_SYSTEM_FONT, this),

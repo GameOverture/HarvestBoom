@@ -1,7 +1,7 @@
 #pragma once
-#include "pch.h"
+#include "IActor.h"
 
-class Player : public HyEntity2d
+class Player : public IActor
 {
 	HyPrimitive2d		m_Body;
 	HyPrimitive2d		m_Tool;
