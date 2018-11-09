@@ -8,8 +8,15 @@
                 {
                     "bottom": 220,
                     "checksum": 1059189656,
+                    "left": 1134,
+                    "right": 1354,
+                    "top": 0
+                },
+                {
+                    "bottom": 1131,
+                    "checksum": 3192802500,
                     "left": 0,
-                    "right": 220,
+                    "right": 1131,
                     "top": 0
                 }
             ]

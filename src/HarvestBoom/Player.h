@@ -9,7 +9,7 @@ class Player : public IActor
 
 	glm::vec2			m_vVelocity;
 
-	HyShape2d			m_Collision;
+	HyPrimitive2d		m_Collision;
 
 public:
 	Player(HyEntity2d *pParent);
@@ -21,5 +21,5 @@ public:
 	void Equip();
 	bool IsEquipped();
 
-	virtual void OnUpdate() override;
+	void HandleInput();
 };

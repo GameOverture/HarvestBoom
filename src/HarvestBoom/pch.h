@@ -14,6 +14,9 @@ enum Controls
 	UseEquip
 };
 
+#define DISPLAYORDER_UI			99999
+#define DISPLAYORDER_DayNight	99998
+#define DISPLAYORDER_DebugGrid	9999
 #define DISPLAYORDER_Object		4
 
 #define DISPLAYORDER_Structure	3

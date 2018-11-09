@@ -46,6 +46,8 @@ World::DebugGrid::DebugGrid(HyEntity2d *pParent) :	HyEntity2d(pParent),
 World::World(HarvestBoom &gameRef) :	HyEntity2d(nullptr),
 										m_GameRef(gameRef),
 										m_Player(this),
+										m_DayNight(this),
+										m_Stamina(this),
 										m_pHome(nullptr),
 										m_pDirt(nullptr),
 										m_pShed(nullptr),
@@ -53,7 +55,9 @@ World::World(HarvestBoom &gameRef) :	HyEntity2d(nullptr),
 										m_DebugGrid(this)
 {
 	m_DebugGrid.SetEnabled(false);
-	m_DebugGrid.SetDisplayOrder(9999);
+	m_DebugGrid.SetDisplayOrder(DISPLAYORDER_DebugGrid);
+	m_DayNight.SetDisplayOrder(DISPLAYORDER_UI);
+	m_Stamina.SetDisplayOrder(DISPLAYORDER_UI);
 }
 
 World::~World()
@@ -70,6 +74,8 @@ void World::DeleteArea()
 void World::ConstructLevel()
 {
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
+
+	m_Stamina.pos.Set(50.0f, 50.0f);
 
 	DeleteArea();
 
@@ -96,10 +102,15 @@ void World::ConstructLevel()
 	m_FenceRight = new AreaImpassable(&m_AreaManager);
 	m_FenceRight->SetSize(1, 50);
 	m_FenceRight->SetPos(15, -38);
+
+	m_DayNight.Start();
 }
 
 /*virtual*/ void World::OnUpdate() /*override*/
 {
+	if(m_DayNight.IsCycling())
+		m_Player.HandleInput();
+
 	m_pHome->CollisionTest(m_Player);
 
 	if(m_pShed->CollisionTest(m_Player))
@@ -107,12 +118,13 @@ void World::ConstructLevel()
 
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
 	pCam->pos.Set(m_Player.pos);
-
 	float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
 	if(pCam->GetZoom() > fZoom)
 		pCam->SetZoom(fZoom);
 	else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
 		pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
+
+	m_Stamina.Offset((0.0001f * m_Player.GetMagnitude()) * -Hy_UpdateStep());
 
 	if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
 	{

@@ -178,6 +178,7 @@
     <ClCompile Include="AreaDirt.cpp" />
     <ClCompile Include="AreaImpassable.cpp" />
     <ClCompile Include="AreaStructure.cpp" />
+    <ClCompile Include="DayNight.cpp" />
     <ClCompile Include="HarvestBoom.cpp" />
     <ClCompile Include="IActor.cpp" />
     <ClCompile Include="IArea.cpp" />
@@ -191,6 +192,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Stamina.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +200,7 @@
     <ClInclude Include="AreaDirt.h" />
     <ClInclude Include="AreaImpassable.h" />
     <ClInclude Include="AreaStructure.h" />
+    <ClInclude Include="DayNight.h" />
     <ClInclude Include="HarvestBoom.h" />
     <ClInclude Include="IActor.h" />
     <ClInclude Include="IArea.h" />
@@ -205,6 +208,7 @@
     <ClInclude Include="IPlant.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Stamina.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

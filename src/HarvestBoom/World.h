@@ -1,6 +1,8 @@
 #pragma once
 #include "pch.h"
 #include "Player.h"
+#include "DayNight.h"
+#include "Stamina.h"
 
 class HarvestBoom;
 class AreaStructure;
@@ -13,6 +15,8 @@ class World : public HyEntity2d
 	HarvestBoom &			m_GameRef;
 	
 	Player					m_Player;
+	DayNight				m_DayNight;
+	Stamina					m_Stamina;
 
 	AreaDirt *				m_pDirt;
 	AreaStructure *			m_pHome;
