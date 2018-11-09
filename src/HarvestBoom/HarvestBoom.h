@@ -5,6 +5,8 @@
 
 class HarvestBoom : public IHyApplication
 {
+	static LtGAudioSndBank *	sm_pSoundBank;
+
 	enum class GameState : uint32
 	{
 		Splash = 0,
@@ -18,6 +20,8 @@ class HarvestBoom : public IHyApplication
 public:
 	HarvestBoom(HarmonyInit &initStruct);
 	virtual ~HarvestBoom();
+
+	static LtGAudioSndBank *GetSndBank();
 
 	virtual bool Initialize() override;
 	virtual bool Update() override;

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "DayNight.h"
+#include "HarvestBoom.h"
 
 #define DAYNIGHT_SIDEMARGIN 50.0f
 #define DAYNIGHT_TOPMARGIN 50.0f
@@ -42,7 +43,9 @@ void DayNight::Start()
 
 	switch(m_MainText.GetTag())
 	{
-	case 0:	m_MainText.TextSet("Good Morning!");	break;
+	case 0:	m_MainText.TextSet("Good Morning!");
+		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
+		break;
 	case 1:	m_MainText.TextSet("Get Set...");	break;
 	case 2:	m_MainText.TextSet("GO!");	break;
 	}
@@ -117,7 +120,10 @@ void DayNight::SetTime(float fTime)
 		{
 			m_MainText.SetTag(m_MainText.GetTag() + 1);
 			if(m_MainText.GetTag() == 3)
+			{
+				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_DAYTIME_16BIT);
 				m_eState = STATE_Cycling;
+			}
 			else
 				Start();
 		}

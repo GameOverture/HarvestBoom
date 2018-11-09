@@ -1,5 +1,7 @@
 #pragma once
 #include "Harmony/HyEngine.h"
+#include "Audio/LtGAudioManager.h"
+#include "Audio/LtGAudioCues.h"
 
 #define TILE_SIZE 42.0f
 

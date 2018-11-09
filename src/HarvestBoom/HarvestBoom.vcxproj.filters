@@ -14,6 +14,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{b8a75d4c-2ab4-4420-ad82-f6dbbb551a3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{e370e882-b420-47a8-a788-feebfbd1ba4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HarvestBoom.cpp" />
@@ -55,6 +58,12 @@
     <ClCompile Include="Stamina.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Audio\LtGAudioBanks.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\LtGAudioManager.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -91,5 +100,22 @@
     <ClInclude Include="Stamina.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Audio\LtGAudioBanks.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\LtGAudioLinks.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\LtGAudioManager.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\LtGAudioCues.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Audio\BuildAudioLinks.pl">
+      <Filter>Audio</Filter>
+    </None>
   </ItemGroup>
 </Project>

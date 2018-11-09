@@ -1,13 +1,27 @@
 #include "pch.h"
 #include "HarvestBoom.h"
+#include "Audio/LtGAudioLinks.h"
+
+LtGAudioSndBank *HarvestBoom::sm_pSoundBank = nullptr;
 
 HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
 													m_World(*this)
 {
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Initialize LgEntity's audio bank pointer
+	LtGAudioManager *pAudioManager = LtGAudioManager::GetInstance();
+	pAudioManager->Init(initStruct);
+	pAudioManager->LinkSoundandWaveInformation((const char ***)szWAVEDEPENDENCIES, (char **)szSOUNDBANKS);
+	sm_pSoundBank = LtGAudioManager::GetInstance()->Load("basegame");
 }
 
 HarvestBoom::~HarvestBoom()
 {
+}
+
+/*static*/ LtGAudioSndBank *HarvestBoom::GetSndBank()
+{
+	return sm_pSoundBank;
 }
 
 /*virtual*/ bool HarvestBoom::Initialize() /*override*/
@@ -25,7 +39,7 @@ HarvestBoom::~HarvestBoom()
 	Input().MapBtn(MoveLeft, HYKEY_Left);
 	Input().MapAlternativeBtn(MoveLeft, HYKEY_A);
 	Input().MapBtn(UseEquip, HYKEY_Space);
-	
+
 	m_World.ConstructLevel();
 	m_World.Load();
 
