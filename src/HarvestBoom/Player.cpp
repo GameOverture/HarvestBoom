@@ -5,7 +5,7 @@
 #define PLAYER_ACCEL 300.0f
 #define PLAYER_DECEL 600.0f
 
-#define PLAYER_WIDTH 25.0f
+#define PLAYER_WIDTH 18.0f
 #define PLAYER_HEIGHT (TILE_SIZE * 2)
 
 Player::Player(HyEntity2d *pParent) :	IActor(pParent),
@@ -23,7 +23,6 @@ Player::Player(HyEntity2d *pParent) :	IActor(pParent),
 	m_Tool.GetShape().SetAsBox(5.0f, 30.0f);
 	m_Tool.pos.Set(10.0f, 25.0f);
 	m_Tool.rot.Set(30.0f);
-	SetDisplayOrder(DISPLAYORDER_Object);
 
 	m_Collision.GetShape().SetAsBox(PLAYER_WIDTH, 10.0f);
 	m_Collision.pos.X(-PLAYER_WIDTH * 0.5f);	// Center

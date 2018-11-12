@@ -174,10 +174,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AreaAsphalt.cpp" />
-    <ClCompile Include="AreaDirt.cpp" />
-    <ClCompile Include="AreaImpassable.cpp" />
-    <ClCompile Include="AreaStructure.cpp" />
+    <ClCompile Include="AreaManager.cpp" />
     <ClCompile Include="Audio\LtGAudioBanks.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -193,7 +190,7 @@
     <ClCompile Include="DayNight.cpp" />
     <ClCompile Include="HarvestBoom.cpp" />
     <ClCompile Include="IActor.cpp" />
-    <ClCompile Include="IArea.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="IEnemy.cpp" />
     <ClCompile Include="IPlant.cpp" />
     <ClCompile Include="main.cpp" />
@@ -208,10 +205,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AreaAsphalt.h" />
-    <ClInclude Include="AreaDirt.h" />
-    <ClInclude Include="AreaImpassable.h" />
-    <ClInclude Include="AreaStructure.h" />
+    <ClInclude Include="AreaManager.h" />
     <ClInclude Include="Audio\LtGAudioBanks.h" />
     <ClInclude Include="Audio\LtGAudioCues.h" />
     <ClInclude Include="Audio\LtGAudioLinks.h" />
@@ -219,7 +213,7 @@
     <ClInclude Include="DayNight.h" />
     <ClInclude Include="HarvestBoom.h" />
     <ClInclude Include="IActor.h" />
-    <ClInclude Include="IArea.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="IEnemy.h" />
     <ClInclude Include="IPlant.h" />
     <ClInclude Include="Player.h" />

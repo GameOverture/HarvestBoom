@@ -4,10 +4,6 @@
 #include "Player.h"
 #include "IPlant.h"
 #include "IEnemy.h"
-#include "AreaAsphalt.h"
-#include "AreaDirt.h"
-#include "AreaImpassable.h"
-#include "AreaStructure.h"
 
 #define DEBUG_GRID_SIZE 50
 
@@ -48,9 +44,6 @@ World::World(HarvestBoom &gameRef) :	HyEntity2d(nullptr),
 										m_Player(this),
 										m_DayNight(this),
 										m_Stamina(this),
-										m_pHome(nullptr),
-										m_pDirt(nullptr),
-										m_pShed(nullptr),
 										m_AreaManager(this),
 										m_DebugGrid(this)
 {
@@ -62,13 +55,6 @@ World::World(HarvestBoom &gameRef) :	HyEntity2d(nullptr),
 
 World::~World()
 {
-	DeleteArea();
-}
-
-void World::DeleteArea()
-{
-	while(m_AreaManager.ChildCount() > 0)
-		delete m_AreaManager.ChildGet(0);	// Deleting a IHyNode will remove itself from the parent
 }
 
 void World::ConstructLevel()
@@ -77,31 +63,8 @@ void World::ConstructLevel()
 
 	m_Stamina.pos.Set(50.0f, 50.0f);
 
-	DeleteArea();
-
-	m_pDirt = new AreaDirt(&m_AreaManager);
-	m_pDirt->SetSize(1000, 1000);
-	m_pDirt->SetPos(-500, -500);
-
-	m_pHome = new AreaStructure(&m_AreaManager);
-	m_pHome->SetSize(11, 6);
-	m_pHome->SetPos(-5, 0);
-
-	m_pShed = new AreaStructure(&m_AreaManager);
-	m_pShed->SetSize(4, 3);
-	m_pShed->SetPos(8, 5);
-
-	m_FenceTop = new AreaImpassable(&m_AreaManager);
-	m_FenceTop->SetSize(28, 1);
-	m_FenceTop->SetPos(-12, 12);
-
-	m_FenceLeft = new AreaImpassable(&m_AreaManager);
-	m_FenceLeft->SetSize(1, 50);
-	m_FenceLeft->SetPos(-12, -38);
-
-	m_FenceRight = new AreaImpassable(&m_AreaManager);
-	m_FenceRight->SetSize(1, 50);
-	m_FenceRight->SetPos(15, -38);
+	m_AreaManager.ResetTiles();
+	m_AreaManager.ConstructLevel1();
 
 	m_DayNight.Start();
 }
@@ -111,28 +74,27 @@ void World::ConstructLevel()
 	if(m_DayNight.IsCycling())
 		m_Player.HandleInput();
 
-	m_pHome->CollisionTest(m_Player);
-
-	if(m_pShed->CollisionTest(m_Player))
-		m_Player.Equip();
+	m_AreaManager.UpdatePlayer(m_Player);
 
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
-	pCam->pos.Set(m_Player.pos);
-	float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
-	if(pCam->GetZoom() > fZoom)
-		pCam->SetZoom(fZoom);
-	else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
-		pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
+	pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
+	pCam->SetZoom(2.0f);
+
+	//float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
+	//if(pCam->GetZoom() > fZoom)
+	//	pCam->SetZoom(fZoom);
+	//else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
+	//	pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
 
 	m_Stamina.Offset((0.0001f * m_Player.GetMagnitude()) * -Hy_UpdateStep());
 
-	if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
-	{
-		IPlant *pNewPlant = new IPlant(&m_PlantManager);
-		pNewPlant->SetPos(m_Player.GetPos());
-		pNewPlant->Load();
-		m_PlantList.push_back(pNewPlant);
-	}
+	//if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
+	//{
+	//	IPlant *pNewPlant = new IPlant(&m_PlantManager);
+	//	pNewPlant->SetPos(m_Player.GetPos());
+	//	pNewPlant->Load();
+	//	m_PlantList.push_back(pNewPlant);
+	//}
 
 	if(Hy_App().Input().IsActionReleased(ToggleGrid))
 		m_DebugGrid.SetEnabled(!m_DebugGrid.IsEnabled());

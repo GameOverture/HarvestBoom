@@ -6,8 +6,6 @@ IEnemy::IEnemy(HyEntity2d *pParent) :	IActor(pParent),
 {
 	m_Body.GetShape().SetAsBox(10.0f, 10.0f);
 	m_Body.topColor.Set(1.0f, 0.0f, 0.0);
-
-	SetDisplayOrder(DISPLAYORDER_Object);
 }
 
 IEnemy::~IEnemy()

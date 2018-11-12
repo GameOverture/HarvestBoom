@@ -3,7 +3,7 @@
 #include "Audio/LtGAudioManager.h"
 #include "Audio/LtGAudioCues.h"
 
-#define TILE_SIZE 42.0f
+#define TILE_SIZE 21.0f
 
 enum Controls
 {
@@ -16,12 +16,21 @@ enum Controls
 	UseEquip
 };
 
-#define DISPLAYORDER_UI			99999
-#define DISPLAYORDER_DayNight	99998
-#define DISPLAYORDER_DebugGrid	9999
-#define DISPLAYORDER_Object		4
+enum TileType
+{
+	Unknown = 0,
+	Grass,
+	House,
+	HouseDoor,
+	Dirt,
+	Impassable
+};
 
-#define DISPLAYORDER_Structure	3
-#define DISPLAYORDER_Impassable	2
-#define DISPLAYORDER_Asphalt	1
-#define DISPLAYORDER_Dirt		0
+#define DISPLAYORDER_UI				9999999
+#define DISPLAYORDER_DayNight		9999998
+#define DISPLAYORDER_DebugCollision	9999997
+#define DISPLAYORDER_DebugGrid		999999
+
+#define DISPLAYORDER_Player		1
+
+#define DISPLAYORDER_PerRow		10

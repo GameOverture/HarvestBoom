@@ -3,11 +3,9 @@
 #include "Player.h"
 #include "DayNight.h"
 #include "Stamina.h"
+#include "AreaManager.h"
 
 class HarvestBoom;
-class AreaStructure;
-class AreaDirt;
-class AreaImpassable;
 class IPlant;
 
 class World : public HyEntity2d
@@ -18,16 +16,10 @@ class World : public HyEntity2d
 	DayNight				m_DayNight;
 	Stamina					m_Stamina;
 
-	AreaDirt *				m_pDirt;
-	AreaStructure *			m_pHome;
-	AreaStructure *			m_pShed;
-	AreaImpassable *		m_FenceTop;
-	AreaImpassable *		m_FenceLeft;
-	AreaImpassable *		m_FenceRight;
-	HyEntity2d				m_AreaManager;
+	AreaManager				m_AreaManager;
 
-	std::vector<IPlant *>	m_PlantList;
-	HyEntity2d				m_PlantManager;
+	//std::vector<IPlant *>	m_PlantList;
+	//HyEntity2d				m_PlantManager;
 
 	class DebugGrid : public HyEntity2d
 	{
@@ -44,7 +36,6 @@ public:
 	World(HarvestBoom &gameRef);
 	virtual ~World();
 
-	void DeleteArea();
 	void ConstructLevel();
 
 	virtual void OnUpdate() override;

@@ -34,21 +34,6 @@
     <ClCompile Include="IEnemy.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
-    <ClCompile Include="IArea.cpp">
-      <Filter>World\Areas</Filter>
-    </ClCompile>
-    <ClCompile Include="AreaStructure.cpp">
-      <Filter>World\Areas</Filter>
-    </ClCompile>
-    <ClCompile Include="AreaAsphalt.cpp">
-      <Filter>World\Areas</Filter>
-    </ClCompile>
-    <ClCompile Include="AreaDirt.cpp">
-      <Filter>World\Areas</Filter>
-    </ClCompile>
-    <ClCompile Include="AreaImpassable.cpp">
-      <Filter>World\Areas</Filter>
-    </ClCompile>
     <ClCompile Include="IActor.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
@@ -64,6 +49,12 @@
     <ClCompile Include="Audio\LtGAudioManager.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="AreaManager.cpp">
+      <Filter>World\Areas</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>World\Areas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -77,23 +68,6 @@
     <ClInclude Include="IPlant.h">
       <Filter>Actors</Filter>
     </ClInclude>
-    <ClInclude Include="IEnemy.h" />
-    <ClInclude Include="IArea.h">
-      <Filter>World\Areas</Filter>
-    </ClInclude>
-    <ClInclude Include="AreaStructure.h">
-      <Filter>World\Areas</Filter>
-    </ClInclude>
-    <ClInclude Include="AreaAsphalt.h">
-      <Filter>World\Areas</Filter>
-    </ClInclude>
-    <ClInclude Include="AreaDirt.h">
-      <Filter>World\Areas</Filter>
-    </ClInclude>
-    <ClInclude Include="AreaImpassable.h">
-      <Filter>World\Areas</Filter>
-    </ClInclude>
-    <ClInclude Include="IActor.h" />
     <ClInclude Include="DayNight.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -111,6 +85,18 @@
     </ClInclude>
     <ClInclude Include="Audio\LtGAudioCues.h">
       <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaManager.h">
+      <Filter>World\Areas</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>World\Areas</Filter>
+    </ClInclude>
+    <ClInclude Include="IActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemy.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
