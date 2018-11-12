@@ -5,7 +5,7 @@
 LtGAudioSndBank *HarvestBoom::sm_pSoundBank = nullptr;
 
 HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
-													m_World(*this)
+													m_eGameState(GAMESTATE_Title)
 {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Initialize LgEntity's audio bank pointer
@@ -40,20 +40,36 @@ HarvestBoom::~HarvestBoom()
 	Input().MapAlternativeBtn(MoveLeft, HYKEY_A);
 	Input().MapBtn(UseEquip, HYKEY_Space);
 
-	m_World.ConstructLevel();
-	m_World.Load();
+	m_TitleScrn.Construct();
+	m_TitleScrn.Load();
+
+	m_Game.Construct();
+	m_Game.Load();
 
 	return true;
 }
 
 /*virtual*/ bool HarvestBoom::Update() /*override*/
 {
-	if(Input().IsActionReleased(ToggleFPS))
+	switch(m_eGameState)
 	{
-		if(Hy_Diagnostics().GetShowFlags() == 0)
-			Hy_Diagnostics().Show(HYDIAG_ALL, 16.0f, Window().GetFramebufferSize().y - 16.0f);
-		else
-			Hy_Diagnostics().Show(HYDIAG_NONE, 16.0f, Window().GetFramebufferSize().y - 16.0f);
+	case GAMESTATE_Splash:
+		break;
+
+	case GAMESTATE_Title: {
+		TitleScreenValue eValue = m_TitleScrn.GameUpdate();
+		if(TITLE_Play == eValue)
+		{
+			m_TitleScrn.SetEnabled(false);
+			m_eGameState = GAMESTATE_Game;
+		}
+		else if(TITLE_Quit == eValue)
+			return false;
+		} break;
+
+	case GAMESTATE_Game:
+		m_Game.GameUpdate();
+		break;
 	}
 
 	return true;

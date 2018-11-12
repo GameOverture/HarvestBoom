@@ -22,10 +22,27 @@ enum TileType
 	Grass,
 	House,
 	HouseDoor,
+	HouseWindow,
 	Dirt,
 	Impassable
 };
 
+enum TitleScreenValue
+{
+	TITLE_Nothing = 0,
+	TITLE_Play,
+	TITLE_Quit
+};
+
+enum PlantState
+{
+	PLANTSTATE_Sprout = 0,
+	PLANTSTATE_Growing,
+	PLANTSTATE_Harvest
+};
+
+#define DISPLAYORDER_Title			999999999
+#define DISPLAYORDER_Panel			99999999
 #define DISPLAYORDER_UI				9999999
 #define DISPLAYORDER_DayNight		9999998
 #define DISPLAYORDER_DebugCollision	9999997

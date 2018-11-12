@@ -1,107 +1,174 @@
 #include "pch.h"
 #include "World.h"
-#include "HarvestBoom.h"
+#include "Tile.h"
 #include "Player.h"
-#include "IPlant.h"
-#include "IEnemy.h"
 
-#define DEBUG_GRID_SIZE 50
-
-World::DebugGrid::DebugGrid(HyEntity2d *pParent) :	HyEntity2d(pParent),
-													m_Text(HY_SYSTEM_FONT, this)
+World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
+									m_CollidePt1(nullptr),
+									m_CollidePt2(nullptr),
+									m_uiSetRowCurrentIndex(0)
 {
-	m_Text.UseWindowCoordinates(0);
-	m_Text.TextSetAlignment(HYALIGN_Right);
-	
-	m_DebugGridHorz.reserve(DEBUG_GRID_SIZE);
-	m_DebugGridVert.reserve(DEBUG_GRID_SIZE);
+	m_CollidePt1.GetShape().SetAsCircle(2.0f);
+	m_CollidePt1.topColor.Set(1.0f, 1.0f, 0.0f);
+	m_CollidePt1.SetDisplayOrder(DISPLAYORDER_DebugCollision);
 
-	for(int32 i = -DEBUG_GRID_SIZE; i < DEBUG_GRID_SIZE; ++i)
+	m_CollidePt2.GetShape().SetAsCircle(2.0f);
+	m_CollidePt2.topColor.Set(1.0f, 1.0f, 0.0f);
+	m_CollidePt2.SetDisplayOrder(DISPLAYORDER_DebugCollision);
+
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
-		m_DebugGridHorz.push_back(HY_NEW HyPrimitive2d(this));
-		m_DebugGridHorz.back()->GetShape().SetAsLineSegment(glm::vec2(-1000.0f, i * TILE_SIZE), glm::vec2(1000.0f, i * TILE_SIZE));
-		if(i == 0)
-			m_DebugGridHorz.back()->topColor.Set(1.0f, 1.0f, 0.0f);
-		else if(i % 5)
-			m_DebugGridHorz.back()->topColor.Set(1.0f, 0.0f, 0.0f);
-		else
-			m_DebugGridHorz.back()->topColor.Set(1.0f, 1.0f, 1.0f);
-
-		m_DebugGridVert.push_back(HY_NEW HyPrimitive2d(this));
-		m_DebugGridVert.back()->GetShape().SetAsLineSegment(glm::vec2(i * TILE_SIZE, -1000.0f), glm::vec2(i * TILE_SIZE, 1000.0f));
-		if(i == 0)
-			m_DebugGridVert.back()->topColor.Set(1.0f, 1.0f, 0.0f);
-		else if(i % 5)
-			m_DebugGridVert.back()->topColor.Set(1.0f, 0.0f, 0.0f);
-		else
-			m_DebugGridVert.back()->topColor.Set(1.0f, 1.0f, 1.0f);
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+			m_pTileGrid[i][j] = nullptr;
 	}
-	ReverseDisplayOrder(true);
-}
-
-World::World(HarvestBoom &gameRef) :	HyEntity2d(nullptr),
-										m_GameRef(gameRef),
-										m_Player(this),
-										m_DayNight(this),
-										m_Stamina(this),
-										m_AreaManager(this),
-										m_DebugGrid(this)
-{
-	m_DebugGrid.SetEnabled(false);
-	m_DebugGrid.SetDisplayOrder(DISPLAYORDER_DebugGrid);
-	m_DayNight.SetDisplayOrder(DISPLAYORDER_UI);
-	m_Stamina.SetDisplayOrder(DISPLAYORDER_UI);
 }
 
 World::~World()
 {
+	DeleteTiles();
 }
 
-void World::ConstructLevel()
+void World::DeleteTiles()
 {
-	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
-
-	m_Stamina.pos.Set(50.0f, 50.0f);
-
-	m_AreaManager.ResetTiles();
-	m_AreaManager.ConstructLevel1();
-
-	m_DayNight.Start();
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+			delete m_pTileGrid[i][j];
+	}
 }
 
-/*virtual*/ void World::OnUpdate() /*override*/
+void World::Construct()
 {
-	if(m_DayNight.IsCycling())
-		m_Player.HandleInput();
+	DeleteTiles();
 
-	m_AreaManager.UpdatePlayer(m_Player);
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+		{
+			m_pTileGrid[i][j] = HY_NEW Tile(this);
+			m_pTileGrid[i][j]->pos.Set(i * TILE_SIZE, j * TILE_SIZE);
+			m_pTileGrid[i][j]->SetDisplayOrder((WORLD_HEIGHT - j) * DISPLAYORDER_PerRow);
+		}
+	}
 
-	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
-	pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
-	pCam->SetZoom(2.0f);
+	// Setting up each Tiles' neighbor
+	for(int32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(int32 j = 0; j < WORLD_HEIGHT; ++j)
+		{
+			Tile *pNorth = (j + 1) < WORLD_HEIGHT ?	m_pTileGrid[i][j+1] : nullptr;
+			Tile *pEast  = (i + 1) < WORLD_WIDTH ?	m_pTileGrid[i+1][j] : nullptr;
+			Tile *pSouth = (j - 1) >= 0 ?			m_pTileGrid[i][j-1] : nullptr;
+			Tile *pWest  = (i - 1) >= 0 ?			m_pTileGrid[i-1][j] : nullptr;
 
-	//float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
-	//if(pCam->GetZoom() > fZoom)
-	//	pCam->SetZoom(fZoom);
-	//else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
-	//	pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
+			Tile *pNorthEast = ((i+1) < WORLD_WIDTH	&& (j+1) < WORLD_HEIGHT)	?	m_pTileGrid[i+1][j+1] : nullptr;
+			Tile *pSouthEast = ((i+1) < WORLD_WIDTH	&& (j-1) >= 0)			?	m_pTileGrid[i+1][j-1] : nullptr;
+			Tile *pSouthWest = ((i-1) >= 0			&& (j-1) >= 0)			?	m_pTileGrid[i-1][j-1] : nullptr;
+			Tile *pNorthWest = ((i-1) >= 0			&& (j+1) < WORLD_HEIGHT)	?	m_pTileGrid[i-1][j+1] : nullptr;
 
-	m_Stamina.Offset((0.0001f * m_Player.GetMagnitude()) * -Hy_UpdateStep());
+			m_pTileGrid[i][j]->SetNeighbors(pNorth, pEast, pSouth, pWest, pNorthEast, pSouthEast, pSouthWest, pNorthWest);
+		}
+	}
 
-	//if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
-	//{
-	//	IPlant *pNewPlant = new IPlant(&m_PlantManager);
-	//	pNewPlant->SetPos(m_Player.GetPos());
-	//	pNewPlant->Load();
-	//	m_PlantList.push_back(pNewPlant);
-	//}
+	m_CollidePt1.Load();
+	m_CollidePt2.Load();
+}
 
-	if(Hy_App().Input().IsActionReleased(ToggleGrid))
-		m_DebugGrid.SetEnabled(!m_DebugGrid.IsEnabled());
+void World::SetAsLevel1()
+{
+	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
 
-	std::string sDebugText = "Pos ";
-	sDebugText += std::to_string(m_Player.GetPos().x);
-	sDebugText += ",";
-	sDebugText += std::to_string(m_Player.GetPos().y);
-	m_DebugGrid.GetText().TextSet(sDebugText);
+	//      0123456789012345678901234
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("________HHHHHHHHH________");
+	SetRow("________HHWWHHWHH________");
+	SetRow("________HHWWHHHHH________");
+	SetRow("________HHHHHHDHH________");
+	SetRow("________HHHHHHDHH________");
+	SetRow("_________________________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+			m_pTileGrid[i][j]->SetTileState();
+	}
+}
+
+void World::UpdatePlayer(Player &playerRef)
+{
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Display Order
+	int32 iPlayerInRow = WORLD_HEIGHT - static_cast<int32>(playerRef.pos.Y() * TILE_SIZE);
+	playerRef.SetDisplayOrder(((WORLD_HEIGHT - iPlayerInRow) * DISPLAYORDER_PerRow) + DISPLAYORDER_Player);
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Player Tile
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+			m_pTileGrid[i][j]->topColor.Set(1.0f, 1.0f, 1.0f);
+	}
+
+	int32 iX = static_cast<int32>(playerRef.pos.X() / TILE_SIZE);
+	int32 iY = static_cast<int32>(playerRef.pos.Y() / TILE_SIZE);
+	Tile *pPlayerTile = nullptr;
+	if(iX >= 0 && iX < WORLD_WIDTH && iY >= 0 && iY < WORLD_HEIGHT)
+		pPlayerTile = m_pTileGrid[iX][iY];
+
+	if(pPlayerTile)
+		pPlayerTile->topColor.Set(1.0f, 0.0f, 0.0f);
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Collision
+	b2WorldManifold manifold;
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+		{
+			if(m_pTileGrid[i][j]->GetTileType() == House && m_pTileGrid[i][j]->GetCollision().IsColliding(playerRef.GetCollision(), manifold))
+			{
+				m_CollidePt1.pos.Set(manifold.points[0].x, manifold.points[0].y);
+				m_CollidePt2.pos.Set(manifold.points[1].x, manifold.points[1].y);
+
+
+			}
+		}
+	}
+}
+
+void World::SetRow(std::string sRow)
+{
+	HyAssert(sRow.length() == WORLD_WIDTH, "World::SetRow improper sRow length. Not " << WORLD_WIDTH);
+
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		switch(sRow[i])
+		{
+		case '_':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Grass);			break;
+		case 'H':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(House);			break;
+		case 'D':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseDoor);		break;
+		case 'W':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseWindow);		break;
+		case '+':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);			break;
+		}
+	}
+
+	--m_uiSetRowCurrentIndex;
 }

@@ -1,43 +1,32 @@
 #pragma once
 #include "pch.h"
-#include "Player.h"
-#include "DayNight.h"
-#include "Stamina.h"
-#include "AreaManager.h"
 
-class HarvestBoom;
-class IPlant;
+#define WORLD_WIDTH 25
+#define WORLD_HEIGHT 25
+
+class Player;
+class Tile;
 
 class World : public HyEntity2d
 {
-	HarvestBoom &			m_GameRef;
-	
-	Player					m_Player;
-	DayNight				m_DayNight;
-	Stamina					m_Stamina;
+	HyPrimitive2d	m_CollidePt1;
+	HyPrimitive2d	m_CollidePt2;
 
-	AreaManager				m_AreaManager;
-
-	//std::vector<IPlant *>	m_PlantList;
-	//HyEntity2d				m_PlantManager;
-
-	class DebugGrid : public HyEntity2d
-	{
-		HyText2d						m_Text;
-		std::vector<HyPrimitive2d *>	m_DebugGridHorz;
-		std::vector<HyPrimitive2d *>	m_DebugGridVert;
-	public:
-		DebugGrid(HyEntity2d *pParent);
-		HyText2d &GetText() { return m_Text; }
-	};
-	DebugGrid				m_DebugGrid;
+	Tile *			m_pTileGrid[WORLD_WIDTH][WORLD_HEIGHT];
+	uint32			m_uiSetRowCurrentIndex;
 
 public:
-	World(HarvestBoom &gameRef);
+	World(HyEntity2d *pParent);
 	virtual ~World();
 
-	void ConstructLevel();
+	void DeleteTiles();
+	void Construct();
 
-	virtual void OnUpdate() override;
+	void SetAsLevel1();
+
+	void UpdatePlayer(Player &playerRef);
+
+private:
+	void SetRow(std::string sRow);
 };
 

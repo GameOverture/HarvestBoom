@@ -23,7 +23,7 @@
             "textureIndex": 0,
             "type": 2,
             "width": 220,
-            "x": 1134,
+            "x": 1585,
             "y": 0
         },
         {
@@ -59,8 +59,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1754,
-            "y": 0
+            "x": 1851,
+            "y": 45
         },
         {
             "atlasGrpId": 0,
@@ -77,8 +77,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1816,
-            "y": 0
+            "x": 1913,
+            "y": 46
         },
         {
             "atlasGrpId": 0,
@@ -95,8 +95,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1604,
-            "y": 36
+            "x": 1832,
+            "y": 133
         },
         {
             "atlasGrpId": 0,
@@ -113,8 +113,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1836,
-            "y": 39
+            "x": 2026,
+            "y": 132
         },
         {
             "atlasGrpId": 0,
@@ -131,8 +131,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1566,
-            "y": 24
+            "x": 1856,
+            "y": 85
         },
         {
             "atlasGrpId": 0,
@@ -149,8 +149,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1938,
-            "y": 0
+            "x": 1976,
+            "y": 60
         },
         {
             "atlasGrpId": 0,
@@ -167,8 +167,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1686,
-            "y": 46
+            "x": 1856,
+            "y": 107
         },
         {
             "atlasGrpId": 0,
@@ -185,8 +185,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1928,
-            "y": 24
+            "x": 1976,
+            "y": 108
         },
         {
             "atlasGrpId": 0,
@@ -203,7 +203,7 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 2034,
+            "x": 2033,
             "y": 0
         },
         {
@@ -221,8 +221,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1952,
-            "y": 24
+            "x": 1945,
+            "y": 94
         },
         {
             "atlasGrpId": 0,
@@ -239,8 +239,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1626,
-            "y": 36
+            "x": 1810,
+            "y": 137
         },
         {
             "atlasGrpId": 0,
@@ -257,8 +257,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1716,
-            "y": 22
+            "x": 1976,
+            "y": 84
         },
         {
             "atlasGrpId": 0,
@@ -275,8 +275,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1582,
-            "y": 36
+            "x": 2004,
+            "y": 132
         },
         {
             "atlasGrpId": 0,
@@ -293,8 +293,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1838,
-            "y": 10
+            "x": 1873,
+            "y": 73
         },
         {
             "atlasGrpId": 0,
@@ -311,8 +311,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1800,
-            "y": 24
+            "x": 1898,
+            "y": 32
         },
         {
             "atlasGrpId": 0,
@@ -329,8 +329,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1495,
-            "y": 24
+            "x": 1897,
+            "y": 109
         },
         {
             "atlasGrpId": 0,
@@ -347,8 +347,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1858,
-            "y": 34
+            "x": 1982,
+            "y": 132
         },
         {
             "atlasGrpId": 0,
@@ -365,8 +365,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1471,
-            "y": 24
+            "x": 1945,
+            "y": 118
         },
         {
             "atlasGrpId": 0,
@@ -383,8 +383,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1814,
-            "y": 39
+            "x": 1873,
+            "y": 121
         },
         {
             "atlasGrpId": 0,
@@ -401,8 +401,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1668,
-            "y": 22
+            "x": 1897,
+            "y": 85
         },
         {
             "atlasGrpId": 0,
@@ -419,7 +419,7 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1862,
+            "x": 1898,
             "y": 24
         },
         {
@@ -437,8 +437,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1447,
-            "y": 24
+            "x": 2024,
+            "y": 108
         },
         {
             "atlasGrpId": 0,
@@ -455,8 +455,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1986,
-            "y": 0
+            "x": 1808,
+            "y": 91
         },
         {
             "atlasGrpId": 0,
@@ -473,8 +473,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1904,
-            "y": 24
+            "x": 1921,
+            "y": 85
         },
         {
             "atlasGrpId": 0,
@@ -491,8 +491,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 2010,
-            "y": 0
+            "x": 2000,
+            "y": 84
         },
         {
             "atlasGrpId": 0,
@@ -509,8 +509,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1667,
-            "y": 46
+            "x": 1895,
+            "y": 133
         },
         {
             "atlasGrpId": 0,
@@ -527,8 +527,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1976,
-            "y": 24
+            "x": 1832,
+            "y": 109
         },
         {
             "atlasGrpId": 0,
@@ -545,8 +545,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1648,
-            "y": 36
+            "x": 1854,
+            "y": 133
         },
         {
             "atlasGrpId": 0,
@@ -563,8 +563,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 2000,
-            "y": 24
+            "x": 1921,
+            "y": 109
         },
         {
             "atlasGrpId": 0,
@@ -581,8 +581,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1800,
-            "y": 18
+            "x": 2033,
+            "y": 14
         },
         {
             "atlasGrpId": 0,
@@ -599,8 +599,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1890,
-            "y": 0
+            "x": 2024,
+            "y": 60
         },
         {
             "atlasGrpId": 0,
@@ -617,8 +617,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1625,
-            "y": 0
+            "x": 2005,
+            "y": 24
         },
         {
             "atlasGrpId": 0,
@@ -635,7 +635,7 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1357,
+            "x": 1853,
             "y": 0
         },
         {
@@ -653,8 +653,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1582,
-            "y": 0
+            "x": 1962,
+            "y": 24
         },
         {
             "atlasGrpId": 0,
@@ -671,8 +671,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1543,
-            "y": 24
+            "x": 1809,
+            "y": 115
         },
         {
             "atlasGrpId": 0,
@@ -689,7 +689,7 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1402,
+            "x": 1808,
             "y": 0
         },
         {
@@ -707,8 +707,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1692,
-            "y": 22
+            "x": 1832,
+            "y": 85
         },
         {
             "atlasGrpId": 0,
@@ -725,8 +725,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1914,
-            "y": 0
+            "x": 1935,
+            "y": 46
         },
         {
             "atlasGrpId": 0,
@@ -743,8 +743,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1776,
-            "y": 0
+            "x": 1873,
+            "y": 45
         },
         {
             "atlasGrpId": 0,
@@ -761,7 +761,7 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1492,
+            "x": 1988,
             "y": 0
         },
         {
@@ -779,8 +779,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1668,
-            "y": 0
+            "x": 1919,
+            "y": 24
         },
         {
             "atlasGrpId": 0,
@@ -797,8 +797,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1711,
-            "y": 0
+            "x": 1808,
+            "y": 45
         },
         {
             "atlasGrpId": 0,
@@ -815,7 +815,7 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1537,
+            "x": 1943,
             "y": 0
         },
         {
@@ -833,8 +833,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1838,
-            "y": 0
+            "x": 1873,
+            "y": 63
         },
         {
             "atlasGrpId": 0,
@@ -851,7 +851,7 @@
             "textureIndex": 0,
             "type": 1,
             "width": 42,
-            "x": 1447,
+            "x": 1898,
             "y": 0
         },
         {
@@ -869,8 +869,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1880,
-            "y": 24
+            "x": 2000,
+            "y": 108
         },
         {
             "atlasGrpId": 0,
@@ -887,8 +887,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1776,
-            "y": 18
+            "x": 1952,
+            "y": 70
         },
         {
             "atlasGrpId": 0,
@@ -905,8 +905,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1866,
-            "y": 0
+            "x": 2000,
+            "y": 60
         },
         {
             "atlasGrpId": 0,
@@ -923,8 +923,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1962,
-            "y": 0
+            "x": 1808,
+            "y": 67
         },
         {
             "atlasGrpId": 0,
@@ -941,8 +941,8 @@
             "textureIndex": 0,
             "type": 1,
             "width": 21,
-            "x": 1519,
-            "y": 24
+            "x": 1873,
+            "y": 97
         },
         {
             "atlasGrpId": 0,
@@ -960,7 +960,25 @@
             "type": 1,
             "width": 21,
             "x": 2024,
-            "y": 24
+            "y": 84
+        },
+        {
+            "atlasGrpId": 0,
+            "checksum": 662231571,
+            "cropBottom": 447,
+            "cropLeft": 0,
+            "cropRight": 447,
+            "cropTop": 0,
+            "errors": 0,
+            "filter": "",
+            "height": 448,
+            "id": 86,
+            "name": "Small",
+            "textureIndex": 0,
+            "type": 2,
+            "width": 448,
+            "x": 1134,
+            "y": 0
         }
     ],
     "groups": [
@@ -984,5 +1002,5 @@
         }
     ],
     "startAtlasId": 1,
-    "startFrameId": 86
+    "startFrameId": 87
 }

@@ -1,21 +1,25 @@
 #pragma once
 
 #include "pch.h"
-#include "World.h"
+#include "Game.h"
+#include "TitleScreen.h"
 
 class HarvestBoom : public IHyApplication
 {
 	static LtGAudioSndBank *	sm_pSoundBank;
 
-	enum class GameState : uint32
+	enum GameState
 	{
-		Splash = 0,
-		Title,
-		Game
+		GAMESTATE_Splash = 0,
+		GAMESTATE_Title,
+		GAMESTATE_Game
 	};
+	GameState		m_eGameState;
 
 	HyCamera2d *	m_pCamera;
-	World			m_World;
+
+	TitleScreen		m_TitleScrn;
+	Game			m_Game;
 
 public:
 	HarvestBoom(HarmonyInit &initStruct);

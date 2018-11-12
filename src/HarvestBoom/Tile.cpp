@@ -60,6 +60,11 @@ void Tile::SetType(TileType eType)
 		m_Ground.SetEnabled(true);
 		break;
 
+	case HouseWindow:
+		m_Ground.topColor.Set(0.0f, 0.309804f, 1.0f);
+		m_Ground.SetEnabled(true);
+		break;
+
 	case Dirt:
 		delete m_pTexture;
 		m_pTexture = HY_NEW HySprite2d("Tiles", "Dirt", this);
