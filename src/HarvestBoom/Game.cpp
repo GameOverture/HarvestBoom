@@ -10,13 +10,18 @@ Game::Game() :	HyEntity2d(nullptr),
 				m_DayNight(this),
 				m_Stamina(this),
 				m_World(this),
+				m_IntroPanel(this),
 				m_Bills(this),
-				m_DebugGrid(this)
+				m_DebugGrid(this),
+				m_eGameState(GAMESTATE_Init),
+				m_fElapsedTime(0.0f)
 {
 	m_DebugGrid.SetEnabled(false);
 	m_DebugGrid.SetDisplayOrder(DISPLAYORDER_DebugGrid);
 	m_DayNight.SetDisplayOrder(DISPLAYORDER_UI);
 	m_Stamina.SetDisplayOrder(DISPLAYORDER_UI);
+	m_IntroPanel.SetDisplayOrder(DISPLAYORDER_Panel);
+	m_Bills.SetDisplayOrder(DISPLAYORDER_Panel);
 }
 
 Game::~Game()
@@ -31,39 +36,76 @@ void Game::Construct()
 	m_World.Construct();
 	m_World.SetAsLevel1();
 
+	m_IntroPanel.Construct();
 	m_Bills.Construct();
 
-
-
-	m_DayNight.Start();
+	m_Player.SetPos(15, 10);
+	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
+	pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
+	pCam->SetZoom(2.0f);
 }
 
 void Game::GameUpdate()
 {
-	if(m_DayNight.IsCycling())
-		m_Player.HandleInput();
-
-	m_World.UpdatePlayer(m_Player);
-
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
 	pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
 	pCam->SetZoom(2.0f);
-
 	//float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
 	//if(pCam->GetZoom() > fZoom)
 	//	pCam->SetZoom(fZoom);
 	//else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
 	//	pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
 
-	m_Stamina.Offset((0.0001f * m_Player.GetMagnitude()) * -Hy_UpdateStep());
+	switch(m_eGameState)
+	{
+	case GAMESTATE_Init:
+		m_fElapsedTime += Hy_UpdateStep();
+		if(m_fElapsedTime > 1.0f)
+		{
+			m_IntroPanel.Show();
+			m_eGameState = GAMESTATE_Intro;
+		}
+		break;
 
-	//if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
-	//{
-	//	IPlant *pNewPlant = new IPlant(&m_PlantManager);
-	//	pNewPlant->SetPos(m_Player.GetPos());
-	//	pNewPlant->Load();
-	//	m_PlantList.push_back(pNewPlant);
-	//}
+	case GAMESTATE_Intro:
+		if(m_IntroPanel.IsTransition() == false)
+		{
+			if(Hy_App().Input().IsActionReleased(UseEquip))
+			{
+				m_IntroPanel.Hide();
+				m_eGameState = GAMESTATE_IntroHide;
+			}
+		}
+		break;
+
+	case GAMESTATE_IntroHide:
+		if(m_IntroPanel.IsTransition())
+			break;
+		m_DayNight.Start();
+		m_eGameState = GAMESTATE_Playing;
+		break;
+
+	case GAMESTATE_Playing:
+		if(m_DayNight.IsCycling())
+		{
+			m_Player.HandleInput();
+			m_World.UpdatePlayer(m_Player);
+
+			m_Stamina.Offset((0.0001f * m_Player.GetMagnitude()) * -Hy_UpdateStep());
+
+			//if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
+			//{
+			//	IPlant *pNewPlant = new IPlant(&m_PlantManager);
+			//	pNewPlant->SetPos(m_Player.GetPos());
+			//	pNewPlant->Load();
+			//	m_PlantList.push_back(pNewPlant);
+			//}
+		}
+		break;
+		
+	case GAMESTATE_Bills:
+		break;
+	}
 
 	DebugUpdate();
 }

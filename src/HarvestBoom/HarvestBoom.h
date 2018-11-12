@@ -10,7 +10,7 @@ class HarvestBoom : public IHyApplication
 
 	enum GameState
 	{
-		GAMESTATE_Splash = 0,
+		GAMESTATE_Loading = 0,
 		GAMESTATE_Title,
 		GAMESTATE_Game
 	};

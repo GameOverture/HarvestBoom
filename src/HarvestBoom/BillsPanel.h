@@ -1,13 +1,10 @@
 #pragma once
 #include "pch.h"
 
-class BillsScreen : public HyEntity2d
+#include "IPanel.h"
+
+class BillsPanel : public IPanel
 {
-	HyPrimitive2d			m_PanelFill;
-	HyPrimitive2d			m_PanelFrameOutline;
-	HyPrimitive2d			m_PanelFrame;
-
-
 	HyText2d				m_txtHarvest;
 
 	HySprite2d				m_CornStock;
@@ -18,8 +15,8 @@ class BillsScreen : public HyEntity2d
 	HyText2d				m_txtPumpkin;
 
 public:
-	BillsScreen(HyEntity2d *pParent);
-	virtual ~BillsScreen();
+	BillsPanel(HyEntity2d *pParent);
+	virtual ~BillsPanel();
 
-	void Construct();
+	virtual void Construct() override;
 };

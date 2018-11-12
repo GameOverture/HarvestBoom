@@ -174,8 +174,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BillsScreen.cpp" />
+    <ClCompile Include="BillsPanel.cpp" />
     <ClCompile Include="DebugGrid.cpp" />
+    <ClCompile Include="IntroPanel.cpp" />
+    <ClCompile Include="IPanel.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Audio\LtGAudioBanks.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -208,8 +210,10 @@
     <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BillsScreen.h" />
+    <ClInclude Include="BillsPanel.h" />
     <ClInclude Include="DebugGrid.h" />
+    <ClInclude Include="IntroPanel.h" />
+    <ClInclude Include="IPanel.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Audio\LtGAudioBanks.h" />
     <ClInclude Include="Audio\LtGAudioCues.h" />

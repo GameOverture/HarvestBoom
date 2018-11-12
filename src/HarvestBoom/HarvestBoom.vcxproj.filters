@@ -1,18 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Actors">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{b8a75d4c-2ab4-4420-ad82-f6dbbb551a3b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{e370e882-b420-47a8-a788-feebfbd1ba4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Screens">
-      <UniqueIdentifier>{629c887d-95e3-40f2-a935-b0f0eec679b0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{7a6a9df4-7288-42f9-99ec-9cf5086fd9bc}</UniqueIdentifier>
@@ -20,28 +10,41 @@
     <Filter Include="Game\World">
       <UniqueIdentifier>{f2d4096b-63db-4d22-bbea-a71f5614b980}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\UI">
+      <UniqueIdentifier>{b8a75d4c-2ab4-4420-ad82-f6dbbb551a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Panels">
+      <UniqueIdentifier>{be35c7b2-9f0f-49b9-9eb2-02e2a26d1e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Actors">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{629c887d-95e3-40f2-a935-b0f0eec679b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HarvestBoom.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="IPlant.cpp">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClCompile>
     <ClCompile Include="IEnemy.cpp">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClCompile>
     <ClCompile Include="IActor.cpp">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClCompile>
     <ClCompile Include="DayNight.cpp">
-      <Filter>UI</Filter>
+      <Filter>Game\UI</Filter>
     </ClCompile>
     <ClCompile Include="Stamina.cpp">
-      <Filter>UI</Filter>
+      <Filter>Game\UI</Filter>
     </ClCompile>
     <ClCompile Include="Audio\LtGAudioBanks.cpp">
       <Filter>Audio</Filter>
@@ -53,7 +56,7 @@
       <Filter>Game\World</Filter>
     </ClCompile>
     <ClCompile Include="TitleScreen.cpp">
-      <Filter>UI\Screens</Filter>
+      <Filter>Screens</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
@@ -61,27 +64,33 @@
     <ClCompile Include="World.cpp">
       <Filter>Game\World</Filter>
     </ClCompile>
-    <ClCompile Include="DebugGrid.cpp">
-      <Filter>UI\Screens</Filter>
+    <ClCompile Include="IPanel.cpp">
+      <Filter>Game\UI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="BillsScreen.cpp">
-      <Filter>Actors</Filter>
+    <ClCompile Include="DebugGrid.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroPanel.cpp">
+      <Filter>Game\UI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="BillsPanel.cpp">
+      <Filter>Game\UI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
     <ClInclude Include="Player.h">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="IPlant.h">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClInclude>
     <ClInclude Include="DayNight.h">
-      <Filter>UI</Filter>
+      <Filter>Game\UI</Filter>
     </ClInclude>
     <ClInclude Include="Stamina.h">
-      <Filter>UI</Filter>
+      <Filter>Game\UI</Filter>
     </ClInclude>
     <ClInclude Include="Audio\LtGAudioBanks.h">
       <Filter>Audio</Filter>
@@ -99,13 +108,13 @@
       <Filter>Game\World</Filter>
     </ClInclude>
     <ClInclude Include="IActor.h">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClInclude>
     <ClInclude Include="IEnemy.h">
-      <Filter>Actors</Filter>
+      <Filter>Game\Actors</Filter>
     </ClInclude>
     <ClInclude Include="TitleScreen.h">
-      <Filter>UI\Screens</Filter>
+      <Filter>Screens</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
@@ -113,10 +122,18 @@
     <ClInclude Include="World.h">
       <Filter>Game\World</Filter>
     </ClInclude>
-    <ClInclude Include="DebugGrid.h">
-      <Filter>UI\Screens</Filter>
+    <ClInclude Include="IPanel.h">
+      <Filter>Game\UI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="BillsScreen.h" />
+    <ClInclude Include="DebugGrid.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroPanel.h">
+      <Filter>Game\UI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="BillsPanel.h">
+      <Filter>Game\UI\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\BuildAudioLinks.pl">

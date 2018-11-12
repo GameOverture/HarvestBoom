@@ -4,7 +4,8 @@
 #include "DayNight.h"
 #include "Stamina.h"
 #include "World.h"
-#include "BillsScreen.h"
+#include "IntroPanel.h"
+#include "BillsPanel.h"
 #include "DebugGrid.h"
 
 class HarvestBoom;
@@ -17,15 +18,23 @@ class Game : public HyEntity2d
 	Stamina					m_Stamina;
 
 	World					m_World;
-	BillsScreen				m_Bills;
+	IntroPanel				m_IntroPanel;
+	BillsPanel				m_Bills;
 
 	DebugGrid				m_DebugGrid;
 
 	enum GameState
 	{
-		GAMESTATE_Bills = 0,
+		GAMESTATE_Init = 0,
+		GAMESTATE_Intro,
+		GAMESTATE_IntroHide,
+		GAMESTATE_Playing,
+		GAMESTATE_Bills,
+
 	};
 	GameState				m_eGameState;
+
+	float					m_fElapsedTime;
 
 public:
 	Game();
