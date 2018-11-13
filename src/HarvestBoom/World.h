@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include "HousePanel.h"
 
 #define WORLD_WIDTH 25
 #define WORLD_HEIGHT 25
@@ -14,6 +15,8 @@ class World : public HyEntity2d
 
 	Tile *			m_pTileGrid[WORLD_WIDTH][WORLD_HEIGHT];
 	uint32			m_uiSetRowCurrentIndex;
+
+	HousePanel		m_HousePanel;
 
 public:
 	World(HyEntity2d *pParent);

@@ -6,7 +6,8 @@
 World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_CollidePt1(nullptr),
 									m_CollidePt2(nullptr),
-									m_uiSetRowCurrentIndex(0)
+									m_uiSetRowCurrentIndex(0),
+									m_HousePanel(this)
 {
 	m_CollidePt1.GetShape().SetAsCircle(2.0f);
 	m_CollidePt1.topColor.Set(1.0f, 1.0f, 0.0f);
@@ -72,6 +73,8 @@ void World::Construct()
 
 	m_CollidePt1.Load();
 	m_CollidePt2.Load();
+
+	m_HousePanel.Construct();
 }
 
 void World::SetAsLevel1()
@@ -134,7 +137,14 @@ void World::UpdatePlayer(Player &playerRef)
 		pPlayerTile = m_pTileGrid[iX][iY];
 
 	if(pPlayerTile)
+	{
+		if(pPlayerTile->GetTileType() == HouseDoor && m_HousePanel.IsShowing() == false)
+			m_HousePanel.Show();
+		else if(pPlayerTile->GetTileType() != HouseDoor && m_HousePanel.IsShowing())
+			m_HousePanel.Hide();
+		
 		pPlayerTile->topColor.Set(1.0f, 0.0f, 0.0f);
+	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Collision

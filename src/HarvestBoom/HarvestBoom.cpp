@@ -57,8 +57,13 @@ HarvestBoom::~HarvestBoom()
 	case GAMESTATE_Loading:
 		if(m_TitleScrn.IsLoaded() && m_Game.IsLoaded())
 		{
+#ifdef DEV_QUICKMODE
+			m_TitleScrn.SetEnabled(false);
+			m_eGameState = GAMESTATE_Game;
+#else
 			m_TitleScrn.Start();
 			m_eGameState = GAMESTATE_Title;
+#endif
 		}
 		break;
 

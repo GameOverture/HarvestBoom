@@ -176,6 +176,8 @@
   <ItemGroup>
     <ClCompile Include="BillsPanel.cpp" />
     <ClCompile Include="DebugGrid.cpp" />
+    <ClCompile Include="FoodStocks.cpp" />
+    <ClCompile Include="HousePanel.cpp" />
     <ClCompile Include="IntroPanel.cpp" />
     <ClCompile Include="IPanel.cpp" />
     <ClCompile Include="World.cpp" />
@@ -212,6 +214,8 @@
   <ItemGroup>
     <ClInclude Include="BillsPanel.h" />
     <ClInclude Include="DebugGrid.h" />
+    <ClInclude Include="FoodStocks.h" />
+    <ClInclude Include="HousePanel.h" />
     <ClInclude Include="IntroPanel.h" />
     <ClInclude Include="IPanel.h" />
     <ClInclude Include="World.h" />

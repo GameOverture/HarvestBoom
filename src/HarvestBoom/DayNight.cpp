@@ -35,6 +35,9 @@ bool DayNight::IsCycling()
 
 void DayNight::Start()
 {
+#ifdef DEV_QUICKMODE
+	m_eState = STATE_Cycling;
+#else
 	m_MainText.SetEnabled(true);
 	m_MainText.alpha.Set(0.0f);
 	m_MainText.alpha.Tween(1.0f, 0.25f);
@@ -51,6 +54,7 @@ void DayNight::Start()
 	}
 
 	m_eState = STATE_Intro;
+#endif
 }
 
 void DayNight::OffsetTime(float fTimeOffset)

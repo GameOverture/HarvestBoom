@@ -4,6 +4,8 @@
 #include "Game.h"
 #include "TitleScreen.h"
 
+#define DEV_QUICKMODE
+
 class HarvestBoom : public IHyApplication
 {
 	static LtGAudioSndBank *	sm_pSoundBank;

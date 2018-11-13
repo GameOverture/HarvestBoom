@@ -26,5 +26,6 @@ void IntroPanel::Construct()
 	m_txtIntro.SetAsColumn(PanelWidth() - 40.0f, true);
 	m_txtIntro.TextSet("This is intro text. Mike please fill this in");
 
-	UseWindowCoordinates();
+	pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
+	SetEnabled(true);
 }

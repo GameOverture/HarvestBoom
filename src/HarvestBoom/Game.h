@@ -18,8 +18,9 @@ class Game : public HyEntity2d
 	Stamina					m_Stamina;
 
 	World					m_World;
+
 	IntroPanel				m_IntroPanel;
-	BillsPanel				m_Bills;
+	BillsPanel				m_BillsPanel;
 
 	DebugGrid				m_DebugGrid;
 

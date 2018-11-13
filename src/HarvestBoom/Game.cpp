@@ -11,7 +11,7 @@ Game::Game() :	HyEntity2d(nullptr),
 				m_Stamina(this),
 				m_World(this),
 				m_IntroPanel(this),
-				m_Bills(this),
+				m_BillsPanel(this),
 				m_DebugGrid(this),
 				m_eGameState(GAMESTATE_Init),
 				m_fElapsedTime(0.0f)
@@ -20,8 +20,6 @@ Game::Game() :	HyEntity2d(nullptr),
 	m_DebugGrid.SetDisplayOrder(DISPLAYORDER_DebugGrid);
 	m_DayNight.SetDisplayOrder(DISPLAYORDER_UI);
 	m_Stamina.SetDisplayOrder(DISPLAYORDER_UI);
-	m_IntroPanel.SetDisplayOrder(DISPLAYORDER_Panel);
-	m_Bills.SetDisplayOrder(DISPLAYORDER_Panel);
 }
 
 Game::~Game()
@@ -37,7 +35,7 @@ void Game::Construct()
 	m_World.SetAsLevel1();
 
 	m_IntroPanel.Construct();
-	m_Bills.Construct();
+	m_BillsPanel.Construct();
 
 	m_Player.SetPos(15, 10);
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
@@ -59,12 +57,16 @@ void Game::GameUpdate()
 	switch(m_eGameState)
 	{
 	case GAMESTATE_Init:
+#ifdef DEV_QUICKMODE
+		m_eGameState = GAMESTATE_IntroHide;
+#else
 		m_fElapsedTime += Hy_UpdateStep();
 		if(m_fElapsedTime > 1.0f)
 		{
 			m_IntroPanel.Show();
 			m_eGameState = GAMESTATE_Intro;
 		}
+#endif
 		break;
 
 	case GAMESTATE_Intro:
@@ -81,6 +83,7 @@ void Game::GameUpdate()
 	case GAMESTATE_IntroHide:
 		if(m_IntroPanel.IsTransition())
 			break;
+
 		m_DayNight.Start();
 		m_eGameState = GAMESTATE_Playing;
 		break;
@@ -100,6 +103,12 @@ void Game::GameUpdate()
 			//	pNewPlant->Load();
 			//	m_PlantList.push_back(pNewPlant);
 			//}
+
+			if(false)
+			{
+				m_BillsPanel.Show();
+				m_eGameState = GAMESTATE_Bills;
+			}
 		}
 		break;
 		
