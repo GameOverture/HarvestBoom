@@ -40,7 +40,6 @@ void FoodStocks::Construct()
 
 	m_txtPumpkin.TextSetState(1);
 	m_txtPumpkin.pos.Set(60.0f, 10.0f);
-	m_txtPumpkin.TextSet("* 2");
 	m_PumpkinStock.pos.Set(0.0f, m_txtPumpkin.pos.Y());
 	m_PumpkinStock.pos.Offset(10.0f, -5.0f);
 	m_PumpkinStock.scale.Set(0.8f, 0.8f);

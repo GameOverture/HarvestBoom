@@ -29,7 +29,7 @@ float DayNight::GetTime()
 
 bool DayNight::IsCycling()
 {
-	return m_eState == STATE_Cycling;
+	return m_eState == STATE_Cycling || m_eState == STATE_CountDown;
 }
 
 void DayNight::Start()
@@ -38,6 +38,7 @@ void DayNight::Start()
 	m_eState = STATE_Cycling;
 #else
 	m_MainText.SetEnabled(true);
+	m_MainText.pos.Set(vWindowSize.x * 0.5f, vWindowSize.y * 0.5f);
 	m_MainText.alpha.Set(0.0f);
 	m_MainText.alpha.Tween(1.0f, 0.25f);
 	m_MainText.scale.Set(0.001f, 0.001f);
@@ -137,9 +138,30 @@ void DayNight::SetTime(float fTime)
 
 	case STATE_Cycling:
 		OffsetTime(Hy_UpdateStep());
+		if(Values::Get()->m_fDAY_LENGTH - m_fTime < 10.0f)
+		{
+			m_MainText.pos.Y(Hy_App().Window().GetWindowSize().y - 100.0f);
+			m_MainText.SetEnabled(true);
+			m_MainText.alpha.Set(1.0f);
+			m_MainText.scale.Set(1.0f, 1.0f);
+			m_MainText.TextSet("10");
+
+			m_eState = STATE_CountDown;
+		}
 		break;
+
 	case STATE_CountDown:
+		OffsetTime(Hy_UpdateStep());
+		m_MainText.TextSet(std::to_string(1 + static_cast<int32>(Values::Get()->m_fDAY_LENGTH - m_fTime)));
+
+		if(m_fTime == Values::Get()->m_fDAY_LENGTH)
+		{
+			m_MainText.TextSet("Finish!");
+			m_eState = STATE_Night;
+		}
+
 		break;
+
 	case STATE_Night:
 		break;
 	}

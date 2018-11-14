@@ -95,12 +95,11 @@ void Game::GameUpdate()
 		{
 			m_Player.HandleInput();
 			m_World.UpdatePlayer(m_Player, m_Stamina);
-
-			if(false)
-			{
-				m_BillsPanel.Show();
-				m_eGameState = GAMESTATE_Bills;
-			}
+		}
+		else
+		{
+			m_BillsPanel.Show();
+			m_eGameState = GAMESTATE_Bills;
 		}
 		break;
 		
