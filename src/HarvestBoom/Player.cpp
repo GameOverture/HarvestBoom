@@ -5,30 +5,35 @@
 #define PLAYER_ACCEL 300.0f
 #define PLAYER_DECEL 600.0f
 
-#define PLAYER_WIDTH 18.0f
-#define PLAYER_HEIGHT (TILE_SIZE * 2)
+#define PLAYER_WIDTH 10.0f
+#define PLAYER_HEIGHT 5.0f
 
 Player::Player(HyEntity2d *pParent) :	IActor(pParent),
-										m_Body(this),
+										m_Body("Game", "Player", this),
 										m_Tool(this),
-										m_Text("Game", "Main", this),
-										m_Collision(this)
+										m_DebugText(HY_SYSTEM_FONT, this),
+										m_Collision(this),
+										m_Origin(this)
 {
 	m_vVelocity.x = m_vVelocity.y = 0.0f;
 
-	m_Body.GetShape().SetAsBox(PLAYER_WIDTH, PLAYER_HEIGHT);
-	m_Body.pos.X(-PLAYER_WIDTH * 0.5f);	// Center
-	m_Body.topColor.Set(1.0f, 0.0f, 1.0f);
+	m_Body.pos.X(-TILE_SIZE * 0.5f);	// Center
 
 	m_Tool.GetShape().SetAsBox(5.0f, 30.0f);
 	m_Tool.pos.Set(10.0f, 25.0f);
 	m_Tool.rot.Set(30.0f);
 
-	m_Collision.GetShape().SetAsBox(PLAYER_WIDTH, 10.0f);
-	m_Collision.pos.X(-PLAYER_WIDTH * 0.5f);	// Center
+	m_Collision.GetShape().SetAsBox(PLAYER_WIDTH, PLAYER_HEIGHT);
+	m_Collision.pos.Offset(-PLAYER_WIDTH * 0.5f, -PLAYER_HEIGHT * 0.5f);
+	m_Collision.SetWireframe(true);
+	m_Collision.topColor.Set(0.0f, 0.0f, 1.0f);
+	m_Collision.SetEnabled(false);
+
+	m_Origin.GetShape().SetAsCircle(2);
+	m_Origin.SetEnabled(false);
 
 	m_Tool.SetEnabled(false);
-	m_Text.SetEnabled(false);
+	m_DebugText.SetEnabled(false);
 }
 
 Player::~Player()
@@ -38,6 +43,21 @@ Player::~Player()
 float Player::GetMagnitude()
 {
 	return glm::length(m_vVelocity);
+}
+
+void Player::ZeroVelocity()
+{
+	m_vVelocity.x = m_vVelocity.y = 0.0f;
+}
+
+void Player::ZeroVelocityX()
+{
+	m_vVelocity.x = 0.0f;
+}
+
+void Player::ZeroVelocityY()
+{
+	m_vVelocity.y = 0.0f;
 }
 
 HyShape2d &Player::GetCollision()
@@ -83,5 +103,15 @@ void Player::HandleInput()
 
 	pos.Offset(m_vVelocity * Hy_UpdateStep());
 
-	m_Text.TextSet(std::to_string(GetMagnitude()));
+	float fMagnitude = GetMagnitude();
+
+	if(abs(fMagnitude) > 0.0f)
+	{
+		m_Body.AnimSetState(1);
+		m_Body.AnimSetPlayRate(fMagnitude / PLAYER_MAXVELOCITY);
+	}
+	else
+		m_Body.AnimSetState(0);
+
+	m_DebugText.TextSet(std::to_string(fMagnitude));
 }

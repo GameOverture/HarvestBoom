@@ -123,6 +123,17 @@ void Tile::SetTileState()
 		}
 
 		break;
+
+	case House:
+		if(m_pNeighborNorth->GetTileType() == House &&
+		   m_pNeighborEast->GetTileType() == House &&
+		   m_pNeighborWest->GetTileType() != House && m_pNeighborWest->GetTileType() != HouseDoor &&
+		   m_pNeighborSouth->GetTileType() != House)
+		{
+			delete m_pTexture;
+			m_pTexture = HY_NEW HySprite2d("Game", "House", this);
+		}
+		break;
 	}
 }
 

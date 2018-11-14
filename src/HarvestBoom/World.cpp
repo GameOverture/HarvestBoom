@@ -6,22 +6,41 @@
 World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_CollidePt1(nullptr),
 									m_CollidePt2(nullptr),
+									m_CollideNormal(nullptr),
 									m_uiSetRowCurrentIndex(0),
-									m_HousePanel(this)
+									m_pHousePanel(nullptr)
 {
 	m_CollidePt1.GetShape().SetAsCircle(2.0f);
-	m_CollidePt1.topColor.Set(1.0f, 1.0f, 0.0f);
+	m_CollidePt1.topColor.Set(1.0f, 0.0f, 1.0f);
 	m_CollidePt1.SetDisplayOrder(DISPLAYORDER_DebugCollision);
 
 	m_CollidePt2.GetShape().SetAsCircle(2.0f);
-	m_CollidePt2.topColor.Set(1.0f, 1.0f, 0.0f);
+	m_CollidePt2.topColor.Set(1.0f, 0.0f, 1.0f);
 	m_CollidePt2.SetDisplayOrder(DISPLAYORDER_DebugCollision);
+
+	m_CollideNormal.SetLineThickness(2.0f);
+	m_CollideNormal.topColor.Set(1.0f, 0.0f, 1.0f);
+	m_CollideNormal.SetDisplayOrder(DISPLAYORDER_DebugCollision);
 
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
 			m_pTileGrid[i][j] = nullptr;
 	}
+
+	InfoPanelInit equipInfoPanelInit;
+	equipInfoPanelInit.panel_LoadPath.Set("Game", "EquipButton");
+	equipInfoPanelInit.text_LoadPath.Set("Game", "Small");
+	HySetVec(equipInfoPanelInit.text_LocalOffSet, 8, 10);
+	HySetVec(equipInfoPanelInit.text_ScaleBox, 70, 25);
+
+	InfoPanelInit buyInfoPanelInit;
+	buyInfoPanelInit.panel_LoadPath.Set("Game", "BuyButton");
+	buyInfoPanelInit.text_LoadPath.Set(HY_SYSTEM_FONT);// "Game", "Small");
+	HySetVec(buyInfoPanelInit.text_LocalOffSet, 8, 3);
+	HySetVec(buyInfoPanelInit.text_ScaleBox, 65, 30);
+
+	m_pHousePanel = HY_NEW HousePanel(equipInfoPanelInit, buyInfoPanelInit, this);
 }
 
 World::~World()
@@ -73,8 +92,13 @@ void World::Construct()
 
 	m_CollidePt1.Load();
 	m_CollidePt2.Load();
+	m_CollideNormal.Load();
 
-	m_HousePanel.Construct();
+	m_CollidePt1.SetEnabled(false);
+	m_CollidePt2.SetEnabled(false);
+	m_CollideNormal.SetEnabled(false);
+
+	m_pHousePanel->Construct();
 }
 
 void World::SetAsLevel1()
@@ -89,11 +113,11 @@ void World::SetAsLevel1()
 	SetRow("_________________________");
 	SetRow("_________________________");
 	SetRow("_________________________");
-	SetRow("________HHHHHHHHH________");
-	SetRow("________HHWWHHWHH________");
-	SetRow("________HHWWHHHHH________");
-	SetRow("________HHHHHHDHH________");
-	SetRow("________HHHHHHDHH________");
+	SetRow("_________________________");
+	SetRow("_________HHHHHH__________");
+	SetRow("_________HHHHHH__________");
+	SetRow("_________HHHHHH__________");
+	SetRow("_________HHDHHH__________");
 	SetRow("_________________________");
 	SetRow("___________++____________");
 	SetRow("___________++____________");
@@ -138,12 +162,13 @@ void World::UpdatePlayer(Player &playerRef)
 
 	if(pPlayerTile)
 	{
-		if(pPlayerTile->GetTileType() == HouseDoor && m_HousePanel.IsShowing() == false)
-			m_HousePanel.Show();
-		else if(pPlayerTile->GetTileType() != HouseDoor && m_HousePanel.IsShowing())
-			m_HousePanel.Hide();
+		if(pPlayerTile->GetTileType() == HouseDoor && m_pHousePanel->IsShowing() == false)
+			m_pHousePanel->Show();
+		else if(pPlayerTile->GetTileType() != HouseDoor && m_pHousePanel->IsShowing())
+			m_pHousePanel->Hide();
 		
-		pPlayerTile->topColor.Set(1.0f, 0.0f, 0.0f);
+		if(pPlayerTile->GetTileType() == Dirt)
+			pPlayerTile->topColor.Set(1.0f, 0.0f, 0.0f);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,10 +180,24 @@ void World::UpdatePlayer(Player &playerRef)
 		{
 			if(m_pTileGrid[i][j]->GetTileType() == House && m_pTileGrid[i][j]->GetCollision().IsColliding(playerRef.GetCollision(), manifold))
 			{
+				glm::vec2 vNormal;
+				vNormal.x = manifold.normal.x;
+				vNormal.y = manifold.normal.y;
+				vNormal *= (manifold.separations[0] * -1.0f);
+
+				if(abs(vNormal.x) > 0.0f)
+					playerRef.ZeroVelocityX();
+				else
+					playerRef.ZeroVelocityY();
+
+				playerRef.pos.Offset(vNormal);
+
+				glm::vec2 ptMidpoint((manifold.points[0].x + manifold.points[1].x) / 2.0f, (manifold.points[0].y + manifold.points[1].y) / 2.0f);
+				m_CollideNormal.GetShape().SetAsLineSegment(ptMidpoint, ptMidpoint + vNormal);
+				m_CollideNormal.Load();
+
 				m_CollidePt1.pos.Set(manifold.points[0].x, manifold.points[0].y);
 				m_CollidePt2.pos.Set(manifold.points[1].x, manifold.points[1].y);
-
-
 			}
 		}
 	}

@@ -82,6 +82,18 @@
     <ClCompile Include="FoodStocks.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
+    <ClCompile Include="InfoPanel.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Values.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipButton.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BuyButton.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -144,6 +156,18 @@
       <Filter>Game\UI\Panels</Filter>
     </ClInclude>
     <ClInclude Include="FoodStocks.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoPanel.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Values.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipButton.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BuyButton.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>

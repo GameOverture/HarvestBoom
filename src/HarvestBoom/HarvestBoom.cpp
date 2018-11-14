@@ -13,6 +13,9 @@ HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
 	pAudioManager->Init(initStruct);
 	pAudioManager->LinkSoundandWaveInformation((const char ***)szWAVEDEPENDENCIES, (char **)szSOUNDBANKS);
 	sm_pSoundBank = LtGAudioManager::GetInstance()->Load("basegame");
+
+	// TODO: Parse in values from hyproj to tune the game with data driven values
+	Values::Init();
 }
 
 HarvestBoom::~HarvestBoom()

@@ -4,10 +4,10 @@
 #define DEBUG_GRID_SIZE 50
 
 DebugGrid::DebugGrid(HyEntity2d *pParent) :	HyEntity2d(pParent),
-											m_Text(HY_SYSTEM_FONT, this)
+											m_DebugText(HY_SYSTEM_FONT, this)
 {
-	m_Text.UseWindowCoordinates(0);
-	m_Text.TextSetAlignment(HYALIGN_Right);
+	m_DebugText.UseWindowCoordinates(0);
+	m_DebugText.TextSetAlignment(HYALIGN_Right);
 	
 	m_DebugGridHorz.reserve(DEBUG_GRID_SIZE);
 	m_DebugGridVert.reserve(DEBUG_GRID_SIZE);
@@ -41,5 +41,5 @@ DebugGrid::DebugGrid(HyEntity2d *pParent) :	HyEntity2d(pParent),
 
 HyText2d &DebugGrid::GetText()
 {
-	return m_Text;
+	return m_DebugText;
 }

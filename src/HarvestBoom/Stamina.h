@@ -15,4 +15,3 @@ public:
 	void Offset(float fOffset);
 	void Set(float fStaminaAmt);
 };
-

@@ -3,7 +3,7 @@
 
 class DebugGrid : public HyEntity2d
 {
-	HyText2d						m_Text;
+	HyText2d						m_DebugText;
 	std::vector<HyPrimitive2d *>	m_DebugGridHorz;
 	std::vector<HyPrimitive2d *>	m_DebugGridVert;
 

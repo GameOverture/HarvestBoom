@@ -12033,6 +12033,211 @@
     "Spine": {
     },
     "Sprites": {
+        "Game/BuyButton": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 11454083,
+                        "duration": 0.01600000075995922,
+                        "id": 96,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 4051384226,
+                        "duration": 0.01600000075995922,
+                        "id": 98,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 2232276741,
+                        "duration": 0.01600000075995922,
+                        "id": 97,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3553601044,
+                        "duration": 0.01600000075995922,
+                        "id": 99,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "Game/EquipButton": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 245706284,
+                        "duration": 0.01600000075995922,
+                        "id": 92,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 1310719913,
+                        "duration": 0.01600000075995922,
+                        "id": 94,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 940680471,
+                        "duration": 0.01600000075995922,
+                        "id": 93,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 1534944645,
+                        "duration": 0.01600000075995922,
+                        "id": 95,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "Game/House": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3212448199,
+                        "duration": 0.01600000075995922,
+                        "id": 91,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "Game/Player": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 4166111721,
+                        "duration": 0.01600000075995922,
+                        "id": 87,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "Idle",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.20000000298023224,
+                "frames": [
+                    {
+                        "checksum": 4166111721,
+                        "duration": 0.05000000074505806,
+                        "id": 87,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    },
+                    {
+                        "checksum": 669157673,
+                        "duration": 0.05000000074505806,
+                        "id": 88,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    },
+                    {
+                        "checksum": 4166111721,
+                        "duration": 0.05000000074505806,
+                        "id": 89,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    },
+                    {
+                        "checksum": 4092581274,
+                        "duration": 0.05000000074505806,
+                        "id": 90,
+                        "offsetX": 2,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": true,
+                "name": "Run",
+                "reverse": false
+            }
+        ],
         "Plant/Corn": [
             {
                 "bounce": false,
@@ -12133,6 +12338,106 @@
                 "reverse": false
             }
         ],
+        "Plant/Gernaium": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 636706930,
+                        "duration": 0.01600000075995922,
+                        "id": 55,
+                        "offsetX": 3,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3803116531,
+                        "duration": 0.01600000075995922,
+                        "id": 51,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3779170093,
+                        "duration": 0.01600000075995922,
+                        "id": 53,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "Plant/Marigold": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 1422854390,
+                        "duration": 0.01600000075995922,
+                        "id": 64,
+                        "offsetX": 5,
+                        "offsetY": 2
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3528318671,
+                        "duration": 0.01600000075995922,
+                        "id": 60,
+                        "offsetX": 3,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 1635823840,
+                        "duration": 0.01600000075995922,
+                        "id": 62,
+                        "offsetX": 3,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
         "Plant/Pumpkin": [
             {
                 "bounce": false,
@@ -12176,6 +12481,56 @@
                         "id": 68,
                         "offsetX": 1,
                         "offsetY": 3
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "Plant/Vine": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 1564852478,
+                        "duration": 0.01600000075995922,
+                        "id": 78,
+                        "offsetX": 5,
+                        "offsetY": 2
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 2146567050,
+                        "duration": 0.01600000075995922,
+                        "id": 73,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 800308982,
+                        "duration": 0.01600000075995922,
+                        "id": 76,
+                        "offsetX": 1,
+                        "offsetY": 1
                     }
                 ],
                 "loop": false,

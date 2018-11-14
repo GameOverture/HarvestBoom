@@ -12,11 +12,12 @@ class World : public HyEntity2d
 {
 	HyPrimitive2d	m_CollidePt1;
 	HyPrimitive2d	m_CollidePt2;
+	HyPrimitive2d	m_CollideNormal;
 
 	Tile *			m_pTileGrid[WORLD_WIDTH][WORLD_HEIGHT];
 	uint32			m_uiSetRowCurrentIndex;
 
-	HousePanel		m_HousePanel;
+	HousePanel *	m_pHousePanel;
 
 public:
 	World(HyEntity2d *pParent);
