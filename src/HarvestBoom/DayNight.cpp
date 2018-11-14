@@ -42,7 +42,7 @@ void DayNight::Start()
 	m_MainText.alpha.Set(0.0f);
 	m_MainText.alpha.Tween(1.0f, 0.25f);
 	m_MainText.scale.Set(0.001f, 0.001f);
-	m_MainText.scale.Tween(1.25f, 1.25f, 0.5f, HyTween::CubeOut);
+	m_MainText.scale.Tween(0.8f, 0.8f, 0.5f, HyTween::CubeOut);
 
 	switch(m_MainText.GetTag())
 	{
@@ -96,6 +96,7 @@ void DayNight::SetTime(float fTime)
 
 	SetScissor(0, vWindowSize.y - DAYNIGHT_TOPMARGIN - 4, vWindowSize.x, DAYNIGHT_TOPMARGIN);
 	m_DayNight.ClearScissor(false);
+	m_MainText.ClearScissor(false);
 
 	Load();
 }
@@ -109,7 +110,7 @@ void DayNight::SetTime(float fTime)
 	case STATE_Intro:
 		if(m_MainText.scale.IsTweening() == false)
 		{
-			m_MainText.scale.Tween(1.0f, 1.0f, 0.5f, HyTween::QuadIn);
+			m_MainText.scale.Tween(0.6f, 0.6f, 0.5f, HyTween::QuadIn);
 			m_eState = STATE_IntroBounce;
 		}
 		break;
