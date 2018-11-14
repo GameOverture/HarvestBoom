@@ -28,13 +28,13 @@ void FoodStocks::Construct()
 
 	m_txtCorn.TextSetState(1);
 	m_txtCorn.pos.Set(60.0f, 60.0f);
-	m_txtCorn.TextSet("* 5");
+	
 	m_CornStock.AnimSetState(PLANTSTATE_Harvest);
 	m_CornStock.pos.Set(10.0f, m_txtCorn.pos.Y());
 
 	m_txtEggplant.TextSetState(1);
 	m_txtEggplant.pos.Set(60.0f, 35.0f);
-	m_txtEggplant.TextSet("* 10");
+	
 	m_EggplantStock.pos.Set(10.0f, m_txtEggplant.pos.Y());
 	m_EggplantStock.AnimSetState(PLANTSTATE_Harvest);
 
@@ -45,4 +45,21 @@ void FoodStocks::Construct()
 	m_PumpkinStock.pos.Offset(10.0f, -5.0f);
 	m_PumpkinStock.scale.Set(0.8f, 0.8f);
 	m_PumpkinStock.AnimSetState(PLANTSTATE_Harvest);
+
+	Sync();
+}
+
+void FoodStocks::Sync()
+{
+	std::string sText = "* ";
+	sText += std::to_string(Values::Get()->m_uiHarvestCorn);
+	m_txtCorn.TextSet(sText);
+
+	sText = "* ";
+	sText += std::to_string(Values::Get()->m_uiHarvestEggplant);
+	m_txtEggplant.TextSet(sText);
+
+	sText = "* ";
+	sText += std::to_string(Values::Get()->m_uiHarvestPumpkin);
+	m_txtPumpkin.TextSet(sText);
 }

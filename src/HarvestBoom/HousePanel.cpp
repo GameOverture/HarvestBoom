@@ -36,6 +36,8 @@ HousePanel::~HousePanel()
 
 /*virtual*/ void HousePanel::Construct() /*override*/
 {
+	rot_pivot.Set(static_cast<float>(Hy_App().Window().GetWindowSize().x), 0.0f);
+
 	m_bCustomVerts = true;
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
 	HySetVec(m_ptFrameVerts[0], PANEL_SIDEMARGIN + 100.0f, PANEL_TOPMARGIN);
@@ -59,28 +61,36 @@ HousePanel::~HousePanel()
 	const float fButtonOffsetX = 90.0f;
 	const float fButtonOffsetY = 110.0f;
 
-	const float fDecalOffsetX = 12.0f;
+	const float fDecalOffsetX = 20.0f;
 	const float fDecalOffsetY = 20.0f;
 
 	const float fBuyButtonOffsetY = -30.0f;
 
+	ChildAppend(m_BtnHoeEquip);
+	m_BtnHoeEquip.alpha.Set(1.0f);
 	m_BtnHoeEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnHoeEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 2.5f), fButtonBotMargin + (fButtonOffsetY * 1.0f)  + 70.0f);
 	m_BtnHoeEquip.SetTag(EQUIP_Hoe);
 	
+	ChildAppend(m_BtnHarvestEquip);
+	m_BtnHarvestEquip.alpha.Set(1.0f);
 	m_BtnHarvestEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnHarvestEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 1.5f), fButtonBotMargin + (fButtonOffsetY * 1.0f) + 70.0f);
 	m_BtnHarvestEquip.SetTag(EQUIP_Harvest);
 
+	ChildAppend(m_BtnCornEquip);
+	m_BtnCornEquip.alpha.Set(1.0f);
 	m_BtnCornEquip.GetTextPtr()->TextSetState(1);
-	m_BtnCornEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Right);
+	m_BtnCornEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
 	m_BtnCornEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnCornEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 3.0f), fButtonBotMargin + (fButtonOffsetY * 1.0f));
 	m_BtnCornEquip.SetTag(EQUIP_Corn);
 
 	m_BtnCornDecal.AnimSetState(PLANTSTATE_Harvest);
+	m_BtnCornDecal.pos.Set(0.0f, 0.0f);
 	m_BtnCornDecal.pos.Offset(fDecalOffsetX, fDecalOffsetY);
 	m_BtnCornDecal.scale.Set(2.0f, 2.0f);
+	m_BtnCornEquip.GetTextPtr()->SetDisplayOrder(m_BtnCornDecal.GetDisplayOrder() + 1);
 
 	std::string sText = "Buy $";
 	sText += std::to_string(Values::Get()->m_uiCOST_CORNSEEDS);
@@ -92,15 +102,19 @@ HousePanel::~HousePanel()
 	m_BtnCornBuy.SetTag(EQUIP_Corn);
 	m_BtnCornBuy.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
 
+	ChildAppend(m_BtnEggplantEquip);
+	m_BtnEggplantEquip.alpha.Set(1.0f);
 	m_BtnEggplantEquip.GetTextPtr()->TextSetState(1);
-	m_BtnEggplantEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Right);
+	m_BtnEggplantEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
 	m_BtnEggplantEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnEggplantEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 2.0f), fButtonBotMargin + (fButtonOffsetY * 1.0f));
 	m_BtnEggplantEquip.SetTag(EQUIP_Eggplant);
 
 	m_BtnEggplantDecal.AnimSetState(PLANTSTATE_Harvest);
+	m_BtnEggplantDecal.pos.Set(0.0f, 0.0f);
 	m_BtnEggplantDecal.pos.Offset(fDecalOffsetX, fDecalOffsetY);
 	m_BtnEggplantDecal.scale.Set(2.0f, 2.0f);
+	m_BtnEggplantEquip.GetTextPtr()->SetDisplayOrder(m_BtnEggplantDecal.GetDisplayOrder() + 1);
 
 	sText = "Buy $";
 	sText += std::to_string(Values::Get()->m_uiCOST_EGGPLANTSEEDS);
@@ -112,14 +126,18 @@ HousePanel::~HousePanel()
 	m_BtnEggplantBuy.SetTag(EQUIP_Eggplant);
 	m_BtnEggplantBuy.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
 
+	ChildAppend(m_BtnPumpkinEquip);
+	m_BtnPumpkinEquip.alpha.Set(1.0f);
 	m_BtnPumpkinEquip.GetTextPtr()->TextSetState(1);
-	m_BtnPumpkinEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Right);
+	m_BtnPumpkinEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
 	m_BtnPumpkinEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnPumpkinEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 1.0f), fButtonBotMargin + (fButtonOffsetY * 1.0f));
 	m_BtnPumpkinEquip.SetTag(EQUIP_Pumpkin);
 
 	m_BtnPumpkinDecal.AnimSetState(PLANTSTATE_Harvest);
+	m_BtnPumpkinDecal.pos.Set(0.0f, 0.0f);
 	m_BtnPumpkinDecal.pos.Offset(fDecalOffsetX, fDecalOffsetY);
+	m_BtnPumpkinEquip.GetTextPtr()->SetDisplayOrder(m_BtnPumpkinDecal.GetDisplayOrder() + 1);
 
 	sText = "Buy $";
 	sText += std::to_string(Values::Get()->m_uiCOST_PUMPKINSEEDS);
@@ -131,15 +149,19 @@ HousePanel::~HousePanel()
 	m_BtnPumpkinBuy.SetTag(EQUIP_Pumpkin);
 	m_BtnPumpkinBuy.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
 
+	ChildAppend(m_BtnGernaiumEquip);
+	m_BtnGernaiumEquip.alpha.Set(1.0f);
 	m_BtnGernaiumEquip.GetTextPtr()->TextSetState(1);
-	m_BtnGernaiumEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Right);
+	m_BtnGernaiumEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
 	m_BtnGernaiumEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnGernaiumEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 3.0f), fButtonBotMargin);
 	m_BtnGernaiumEquip.SetTag(EQUIP_Gernaium);
 
 	m_BtnGernaiumDecal.AnimSetState(PLANTSTATE_Harvest);
+	m_BtnGernaiumDecal.pos.Set(0.0f, 0.0f);
 	m_BtnGernaiumDecal.pos.Offset(fDecalOffsetX, fDecalOffsetY);
 	m_BtnGernaiumDecal.scale.Set(2.0f, 2.0f);
+	m_BtnGernaiumEquip.GetTextPtr()->SetDisplayOrder(m_BtnGernaiumDecal.GetDisplayOrder() + 1);
 
 	sText = "Buy $";
 	sText += std::to_string(Values::Get()->m_uiCOST_GERNAIUMSEEDS);
@@ -151,15 +173,19 @@ HousePanel::~HousePanel()
 	m_BtnGernaiumBuy.SetTag(EQUIP_Gernaium);
 	m_BtnGernaiumBuy.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
 
+	ChildAppend(m_BtnMarigoldEquip);
+	m_BtnMarigoldEquip.alpha.Set(1.0f);
 	m_BtnMarigoldEquip.GetTextPtr()->TextSetState(1);
-	m_BtnMarigoldEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Right);
+	m_BtnMarigoldEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
 	m_BtnMarigoldEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnMarigoldEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 2.0f), fButtonBotMargin);
 	m_BtnMarigoldEquip.SetTag(EQUIP_Marigold);
 
 	m_BtnMarigoldDecal.AnimSetState(PLANTSTATE_Harvest);
+	m_BtnMarigoldDecal.pos.Set(0.0f, 0.0f);
 	m_BtnMarigoldDecal.pos.Offset(fDecalOffsetX, fDecalOffsetY);
 	m_BtnMarigoldDecal.scale.Set(2.0f, 2.0f);
+	m_BtnMarigoldEquip.GetTextPtr()->SetDisplayOrder(m_BtnMarigoldDecal.GetDisplayOrder() + 1);
 
 	sText = "Buy $";
 	sText += std::to_string(Values::Get()->m_uiCOST_MARIGOLDSEEDS);
@@ -171,14 +197,18 @@ HousePanel::~HousePanel()
 	m_BtnMarigoldBuy.SetTag(EQUIP_Marigold);
 	m_BtnMarigoldBuy.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
 
+	ChildAppend(m_BtnVineEquip);
+	m_BtnVineEquip.alpha.Set(1.0f);
 	m_BtnVineEquip.GetTextPtr()->TextSetState(1);
-	m_BtnVineEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Right);
+	m_BtnVineEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
 	m_BtnVineEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnVineEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 1.0f), fButtonBotMargin);
 	m_BtnVineEquip.SetTag(EQUIP_Vine);
 
 	m_BtnVineDecal.AnimSetState(PLANTSTATE_Harvest);
+	m_BtnVineDecal.pos.Set(0.0f, 0.0f);
 	m_BtnVineDecal.pos.Offset(fDecalOffsetX, fDecalOffsetY);
+	m_BtnVineEquip.GetTextPtr()->SetDisplayOrder(m_BtnVineDecal.GetDisplayOrder() + 1);
 
 	sText = "Buy $";
 	sText += std::to_string(Values::Get()->m_uiCOST_VINESEEDS);
@@ -190,30 +220,99 @@ HousePanel::~HousePanel()
 	m_BtnVineBuy.SetTag(EQUIP_Vine);
 	m_BtnVineBuy.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
 
-	SyncButtons();
+	Sync();
 }
 
 /*virtual*/ void HousePanel::Show() /*override*/
 {
 	SetEnabled(true);
-	m_bIsShowing = true;
+	Construct();
+
+	rot.Set(90.0f);
+	rot.Tween(0.0f, 0.5f, HyTween::QuadOut, [this](IHyNode *) { m_bIsShowing = true; });
 }
 
 /*virtual*/ void HousePanel::Hide() /*override*/
 {
-	SetEnabled(false);
-	m_bIsShowing = false;
+	rot.Set(0.0f);
+	rot.Tween(90.0f, 0.5f, HyTween::QuadOut, [this](IHyNode *) { SetEquipedUI(); SetEnabled(false); m_bIsShowing = false; });
 }
 
 /*virtual*/ bool HousePanel::IsTransition() /*override*/
 {
-	return false;
+	return rot.IsTweening();
+}
+
+void HousePanel::SetEquipedUI()
+{
+	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
+
+	switch(Values::Get()->m_eEquipedItem)
+	{
+	case EQUIP_Hoe:
+		m_BtnHoeEquip.ParentDetach();
+		m_BtnHoeEquip.SetEnabled(true);
+		m_BtnHoeEquip.alpha.Set(0.0f);
+		m_BtnHoeEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnHoeEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	case EQUIP_Harvest:
+		m_BtnHarvestEquip.ParentDetach();
+		m_BtnHarvestEquip.SetEnabled(true);
+		m_BtnHarvestEquip.alpha.Set(0.0f);
+		m_BtnHarvestEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnHarvestEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	case EQUIP_Corn:
+		m_BtnCornEquip.ParentDetach();
+		m_BtnCornEquip.SetEnabled(true);
+		m_BtnCornEquip.alpha.Set(0.0f);
+		m_BtnCornEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnCornEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	case EQUIP_Eggplant:
+		m_BtnEggplantEquip.ParentDetach();
+		m_BtnEggplantEquip.SetEnabled(true);
+		m_BtnEggplantEquip.alpha.Set(0.0f);
+		m_BtnEggplantEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnEggplantEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	case EQUIP_Pumpkin:
+		m_BtnPumpkinEquip.ParentDetach();
+		m_BtnPumpkinEquip.SetEnabled(true);
+		m_BtnPumpkinEquip.alpha.Set(0.0f);
+		m_BtnPumpkinEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnPumpkinEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	case EQUIP_Gernaium:
+		m_BtnGernaiumEquip.ParentDetach();
+		m_BtnGernaiumEquip.SetEnabled(true);
+		m_BtnGernaiumEquip.alpha.Set(0.0f);
+		m_BtnGernaiumEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnGernaiumEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	case EQUIP_Marigold:
+		m_BtnMarigoldEquip.ParentDetach();
+		m_BtnMarigoldEquip.SetEnabled(true);
+		m_BtnMarigoldEquip.alpha.Set(0.0f);
+		m_BtnMarigoldEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnMarigoldEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	case EQUIP_Vine:
+		m_BtnVineEquip.ParentDetach();
+		m_BtnVineEquip.SetEnabled(true);
+		m_BtnVineEquip.alpha.Set(0.0f);
+		m_BtnVineEquip.alpha.Tween(1.0f, 0.5f);
+		m_BtnVineEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	}
 }
 
 #define HIDDEN_BUTTON_TINT 0.1f, 0.1f, 0.1f
-
-void HousePanel::SyncButtons()
+void HousePanel::Sync()
 {
+	m_FoodStocks.Sync();
+
 	EquipedItemType eEquipedItem = Values::Get()->m_eEquipedItem;
 
 	std::string sText = "Savings $";
@@ -235,7 +334,7 @@ void HousePanel::SyncButtons()
 	m_BtnHarvestEquip.EnableMouseInput(this);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	sText = "*";
+	sText = "Seeds *";
 	sText += std::to_string(Values::Get()->m_uiSeedsCorn);
 	m_BtnCornEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Corn)
@@ -266,7 +365,7 @@ void HousePanel::SyncButtons()
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	sText = "*";
+	sText = "Seeds *";
 	sText += std::to_string(Values::Get()->m_uiSeedsEggplant);
 	m_BtnEggplantEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Eggplant)
@@ -297,7 +396,7 @@ void HousePanel::SyncButtons()
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	sText = "*";
+	sText = "Seeds *";
 	sText += std::to_string(Values::Get()->m_uiSeedsPumpkin);
 	m_BtnPumpkinEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Pumpkin)
@@ -328,7 +427,7 @@ void HousePanel::SyncButtons()
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	sText = "*";
+	sText = "Seeds *";
 	sText += std::to_string(Values::Get()->m_uiSeedsGernaium);
 	m_BtnGernaiumEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Gernaium)
@@ -377,7 +476,7 @@ void HousePanel::SyncButtons()
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	sText = "*";
+	sText = "Seeds *";
 	sText += std::to_string(Values::Get()->m_uiSeedsMarigold);
 	m_BtnMarigoldEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Marigold)
@@ -426,7 +525,7 @@ void HousePanel::SyncButtons()
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	sText = "*";
+	sText = "Seeds *";
 	sText += std::to_string(Values::Get()->m_uiSeedsVine);
 	m_BtnVineEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Vine)

@@ -44,5 +44,5 @@ bool EquipButton::IsUsed()
 	Values::Get()->m_eEquipedItem = static_cast<EquipedItemType>(GetTag()); 
 
 	HousePanel *pThis = reinterpret_cast<HousePanel *>(pUserParam);
-	pThis->SyncButtons();
+	pThis->Sync();
 }

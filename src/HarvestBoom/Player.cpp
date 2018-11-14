@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Player.h"
+#include "Tile.h"
 
 #define PLAYER_MAXVELOCITY 200.0f	// pixels per second
 #define PLAYER_ACCEL 300.0f
@@ -102,9 +103,7 @@ void Player::HandleInput()
 	}
 
 	pos.Offset(m_vVelocity * Hy_UpdateStep());
-
 	float fMagnitude = GetMagnitude();
-
 	if(abs(fMagnitude) > 0.0f)
 	{
 		m_Body.AnimSetState(1);
@@ -114,4 +113,13 @@ void Player::HandleInput()
 		m_Body.AnimSetState(0);
 
 	m_DebugText.TextSet(std::to_string(fMagnitude));
+}
+
+void Player::DoAction(Tile &tileRef)
+{
+
+}
+
+void Player::StopAction()
+{
 }

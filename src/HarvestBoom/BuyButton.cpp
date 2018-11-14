@@ -42,26 +42,34 @@ bool BuyButton::IsUsed()
 /*virtual*/ void BuyButton::OnMouseClicked(void *pUserParam) /*override*/
 {
 	HousePanel *pThis = reinterpret_cast<HousePanel *>(pUserParam);
-	//LgParam stateId;
-	//GetTelnet()->GetParamData(CP_N_STATE, stateId);
 
-	//// Bet cannot be changed during a recall replay
-	//if(stateId.GetIntVal() == BCKEND_RECALL_REPLAY)
-	//	return;
-
-	//LgDenom *pDenom = reinterpret_cast<LgDenom *>(pUserParam);
-	//switch(m_eBtnType)
-	//{
-	//case LGDENOM_IncBtn:
-	//	pDenom->OnIncrementDenomBtn();
-	//	break;
-
-	//case LGDENOM_DecBtn:
-	//	pDenom->OnDecrementDenomBtn();
-	//	break;
-	//	
-	//case LGDENOM_SelBtn:
-	//	pDenom->OnSelectDenomBtn(static_cast<uint32>(GetTag()));
-	//	break;
-	//}
+	switch(static_cast<EquipedItemType>(GetTag()))
+	{
+	case EQUIP_Corn:
+		Values::Get()->m_iSavings -= Values::Get()->m_uiCOST_CORNSEEDS;
+		Values::Get()->m_uiSeedsCorn++;
+		break;
+	case EQUIP_Eggplant:
+		Values::Get()->m_iSavings -= Values::Get()->m_uiCOST_EGGPLANTSEEDS;
+		Values::Get()->m_uiSeedsEggplant++;
+		break;
+	case EQUIP_Pumpkin:
+		Values::Get()->m_iSavings -= Values::Get()->m_uiCOST_PUMPKINSEEDS;
+		Values::Get()->m_uiSeedsPumpkin++;
+		break;
+	case EQUIP_Gernaium:
+		Values::Get()->m_iSavings -= Values::Get()->m_uiCOST_GERNAIUMSEEDS;
+		Values::Get()->m_uiSeedsGernaium++;
+		break;
+	case EQUIP_Marigold:
+		Values::Get()->m_iSavings -= Values::Get()->m_uiCOST_MARIGOLDSEEDS;
+		Values::Get()->m_uiSeedsMarigold++;
+		break;
+	case EQUIP_Vine:
+		Values::Get()->m_iSavings -= Values::Get()->m_uiCOST_VINESEEDS;
+		Values::Get()->m_uiSeedsVine++;
+		break;
+	}
+	
+	pThis->Sync();
 }

@@ -31,8 +31,8 @@ World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
 	InfoPanelInit equipInfoPanelInit;
 	equipInfoPanelInit.panel_LoadPath.Set("Game", "EquipButton");
 	equipInfoPanelInit.text_LoadPath.Set("Game", "Small");
-	HySetVec(equipInfoPanelInit.text_LocalOffSet, 8, 10);
-	HySetVec(equipInfoPanelInit.text_ScaleBox, 70, 25);
+	HySetVec(equipInfoPanelInit.text_LocalOffSet, 8, 5);
+	HySetVec(equipInfoPanelInit.text_ScaleBox, 70, 35);
 
 	InfoPanelInit buyInfoPanelInit;
 	buyInfoPanelInit.panel_LoadPath.Set("Game", "BuyButton");
@@ -137,6 +137,10 @@ void World::SetAsLevel1()
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
 			m_pTileGrid[i][j]->SetTileState();
 	}
+
+	// HACK: This gets the equiped item shown on UI initially
+	m_pHousePanel->Show();
+	m_pHousePanel->Hide();
 }
 
 void World::UpdatePlayer(Player &playerRef)
@@ -162,13 +166,20 @@ void World::UpdatePlayer(Player &playerRef)
 
 	if(pPlayerTile)
 	{
-		if(pPlayerTile->GetTileType() == HouseDoor && m_pHousePanel->IsShowing() == false)
+		if(pPlayerTile->GetTileType() == HouseDoor && m_pHousePanel->IsShowing() == false && m_pHousePanel->IsTransition() == false)
 			m_pHousePanel->Show();
-		else if(pPlayerTile->GetTileType() != HouseDoor && m_pHousePanel->IsShowing())
+		else if(pPlayerTile->GetTileType() != HouseDoor && m_pHousePanel->IsShowing() && m_pHousePanel->IsTransition() == false)
 			m_pHousePanel->Hide();
 		
 		if(pPlayerTile->GetTileType() == Dirt)
+		{
 			pPlayerTile->topColor.Set(1.0f, 0.0f, 0.0f);
+
+			if(Hy_App().Input().IsActionDown(UseEquip))
+				playerRef.DoAction(*pPlayerTile);
+			else
+				playerRef.StopAction();
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

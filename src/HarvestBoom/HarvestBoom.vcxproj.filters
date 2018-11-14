@@ -23,6 +23,9 @@
     <Filter Include="Screens">
       <UniqueIdentifier>{629c887d-95e3-40f2-a935-b0f0eec679b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Actors\Attachments">
+      <UniqueIdentifier>{fc500b8d-1746-4a2d-bac8-e4d82b1a3f64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HarvestBoom.cpp" />
@@ -93,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="BuyButton.cpp">
       <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Hoe.cpp">
+      <Filter>Game\Actors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +176,7 @@
     <ClInclude Include="BuyButton.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Hoe.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\BuildAudioLinks.pl">

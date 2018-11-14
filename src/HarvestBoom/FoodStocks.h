@@ -17,5 +17,7 @@ public:
 	virtual ~FoodStocks();
 
 	void Construct();
+
+	void Sync();
 };
 

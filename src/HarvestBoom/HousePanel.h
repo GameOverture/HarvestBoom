@@ -43,5 +43,7 @@ public:
 	virtual void Hide() override;
 	virtual bool IsTransition() override;
 
-	void SyncButtons();
+	void SetEquipedUI();
+
+	void Sync();
 };

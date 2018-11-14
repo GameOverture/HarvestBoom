@@ -1,6 +1,8 @@
 #pragma once
 #include "IActor.h"
 
+class Tile;
+
 class Player : public IActor
 {
 	HySprite2d			m_Body;
@@ -27,4 +29,7 @@ public:
 	bool IsEquipped();
 
 	void HandleInput();
+
+	void DoAction(Tile &tileRef);
+	void StopAction();
 };
