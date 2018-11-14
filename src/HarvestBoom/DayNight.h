@@ -5,8 +5,8 @@ class DayNight : public HyEntity2d
 {
 	float				m_fTime;
 
-	HyPrimitive2d		m_Bar;
-	HyPrimitive2d		m_Emblem;
+	HySprite2d			m_Emblem;
+	HySprite2d			m_Bar;
 
 	HyPrimitive2d		m_DayNight;
 

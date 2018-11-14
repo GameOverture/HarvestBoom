@@ -10,8 +10,8 @@
 
 DayNight::DayNight(HyEntity2d *pParent) :	HyEntity2d(pParent),
 											m_fTime(0.0f),
-											m_Bar(this),
-											m_Emblem(this),
+											m_Emblem("UI", "DayNight", this),
+											m_Bar("UI", "DayNightBar", this),
 											m_DayNight(this),
 											m_MainText("Game", "Main", this),
 											m_eState(STATE_Off)
@@ -70,6 +70,7 @@ void DayNight::SetTime(float fTime)
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
 	float fNormalized = m_fTime / DAYNIGHT_DAYLENGTH;
 	m_Emblem.pos.Set(DAYNIGHT_SIDEMARGIN + (fNormalized * (vWindowSize.x - (DAYNIGHT_SIDEMARGIN * 2.0f))), vWindowSize.y - DAYNIGHT_TOPMARGIN);
+	m_Emblem.rot.Set(fNormalized * 180.0f);
 
 	m_DayNight.alpha.Set(fNormalized * DAYNIGHT_DARKNESSAMT);
 }
@@ -82,18 +83,19 @@ void DayNight::SetTime(float fTime)
 	m_DayNight.topColor.Set(0.0f, 0.0f, 0.0f);
 	m_DayNight.SetDisplayOrder(DISPLAYORDER_DayNight);
 	m_DayNight.alpha.Set(0.0f);
+	
 
-	m_Bar.GetShape().SetAsLineSegment(glm::vec2(DAYNIGHT_SIDEMARGIN, vWindowSize.y - DAYNIGHT_TOPMARGIN), glm::vec2(vWindowSize.x - DAYNIGHT_SIDEMARGIN, vWindowSize.y - DAYNIGHT_TOPMARGIN));
-	m_Bar.SetLineThickness(5.0f);
-	m_Bar.topColor.Set(0.2f, 0.2f, 0.2f);
+	m_Bar.pos.Set(DAYNIGHT_SIDEMARGIN, vWindowSize.y - DAYNIGHT_TOPMARGIN);
+	m_Bar.scale.Set(2.155f, 2.0f);
 
-	m_Emblem.GetShape().SetAsCircle(20.0f);
-	m_Emblem.SetNumCircleSegments(32);
-	m_Emblem.topColor.Set(1.0f, 0.8f, 0.0f);
 	m_Emblem.pos.Set(DAYNIGHT_SIDEMARGIN, vWindowSize.y - DAYNIGHT_TOPMARGIN);
+	m_Emblem.scale.Set(2.0f, 2.0f);
 
 	m_MainText.pos.Set(vWindowSize.x * 0.5f, vWindowSize.y * 0.5f);
 	m_MainText.TextSetAlignment(HYALIGN_Center);
+
+	SetScissor(0, vWindowSize.y - DAYNIGHT_TOPMARGIN - 4, vWindowSize.x, DAYNIGHT_TOPMARGIN);
+	m_DayNight.ClearScissor(false);
 
 	Load();
 }
