@@ -48,6 +48,17 @@ public:
 	const uint32	m_uiBILLS_FOOD;
 	const uint32	m_uiBILLS_AC;
 
+	const float		m_fDURATION_HOEDIRT;
+	const float		m_fDURATION_PLANTCORN;
+	const float		m_fDURATION_PLANTEGGPLANT;
+	const float		m_fDURATION_PLANTPUMPKIN;
+	const float		m_fDURATION_PLANTGERNAIUM;
+	const float		m_fDURATION_PLANTMARIGOLD;
+	const float		m_fDURATION_PLANTVINE;
+	const float		m_fDURATION_HARVESTCORN;
+	const float		m_fDURATION_HARVESTEGGPLANT;
+	const float		m_fDURATION_HARVESTPUMPKIN;
+
 	const uint32	m_uiENABLE_DEFENSE_DAY;
 
 	int32			m_iSavings;

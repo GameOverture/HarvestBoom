@@ -98,7 +98,7 @@
       <Filter>Game\UI</Filter>
     </ClCompile>
     <ClCompile Include="Hoe.cpp">
-      <Filter>Game\Actors</Filter>
+      <Filter>Game\Actors\Attachments</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +176,9 @@
     <ClInclude Include="BuyButton.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Hoe.h" />
+    <ClInclude Include="Hoe.h">
+      <Filter>Game\Actors\Attachments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\BuildAudioLinks.pl">

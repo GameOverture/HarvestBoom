@@ -41,7 +41,7 @@ bool EquipButton::IsUsed()
 
 /*virtual*/ void EquipButton::OnMouseClicked(void *pUserParam) /*override*/
 {
-	Values::Get()->m_eEquipedItem = static_cast<EquipedItemType>(GetTag()); 
+	Values::Get()->m_eEquipedItem = static_cast<EquipedItemType>(GetTag());
 
 	HousePanel *pThis = reinterpret_cast<HousePanel *>(pUserParam);
 	pThis->Sync();

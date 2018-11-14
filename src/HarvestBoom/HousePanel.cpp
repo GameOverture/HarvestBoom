@@ -6,7 +6,7 @@ HousePanel::HousePanel(const InfoPanelInit &equipInfoPanelInitRef, const InfoPan
 																																	m_FoodStocks(this),
 																																	m_SavingsVal("Game", "Small", this),
 																																	m_BtnHoeEquip(equipInfoPanelInitRef, this),
-																																	m_BtnHoeDecal("Game", "Player", &m_BtnHoeEquip),
+																																	m_BtnHoeDecal("Equip", "Hoe", &m_BtnHoeEquip),
 																																	m_BtnHarvestEquip(equipInfoPanelInitRef, this),
 																																	m_BtnHarvestDecal("Game", "Player", &m_BtnHarvestEquip),
 																																	m_BtnCornEquip(equipInfoPanelInitRef, this),
@@ -67,16 +67,30 @@ HousePanel::~HousePanel()
 	const float fBuyButtonOffsetY = -30.0f;
 
 	ChildAppend(m_BtnHoeEquip);
+	m_BtnHoeEquip.GetTextPtr()->TextSet("  Hoe  ");
+	m_BtnHoeEquip.GetTextPtr()->TextSetState(1);
 	m_BtnHoeEquip.alpha.Set(1.0f);
 	m_BtnHoeEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnHoeEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 2.5f), fButtonBotMargin + (fButtonOffsetY * 1.0f)  + 70.0f);
 	m_BtnHoeEquip.SetTag(EQUIP_Hoe);
+
+	m_BtnHoeDecal.pos.Set(0.0f, 0.0f);
+	m_BtnHoeDecal.pos.Offset(fDecalOffsetX + 19.0f, fDecalOffsetY + 15.0f);
+	m_BtnHoeDecal.scale.Set(2.0f, 2.0f);
+	m_BtnHoeEquip.GetTextPtr()->SetDisplayOrder(m_BtnHoeDecal.GetDisplayOrder() + 1);
 	
 	ChildAppend(m_BtnHarvestEquip);
+	m_BtnHarvestEquip.GetTextPtr()->TextSet("Harvest");
+	m_BtnHarvestEquip.GetTextPtr()->TextSetState(1);
 	m_BtnHarvestEquip.alpha.Set(1.0f);
 	m_BtnHarvestEquip.pos.Set(m_ptFrameVerts[3]);
 	m_BtnHarvestEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 1.5f), fButtonBotMargin + (fButtonOffsetY * 1.0f) + 70.0f);
 	m_BtnHarvestEquip.SetTag(EQUIP_Harvest);
+
+	m_BtnHarvestDecal.pos.Set(0.0f, 0.0f);
+	m_BtnHarvestDecal.pos.Offset(28.0f, 15.0f);
+	m_BtnHarvestDecal.scale.Set(1.25f, 1.25f);
+	m_BtnHarvestEquip.GetTextPtr()->SetDisplayOrder(m_BtnHarvestDecal.GetDisplayOrder() + 1);
 
 	ChildAppend(m_BtnCornEquip);
 	m_BtnCornEquip.alpha.Set(1.0f);

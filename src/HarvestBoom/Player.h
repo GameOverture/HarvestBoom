@@ -14,6 +14,8 @@ class Player : public IActor
 	HyPrimitive2d		m_Collision;
 	HyPrimitive2d		m_Origin;
 
+	HySprite2d *		m_pEquipment;
+
 public:
 	Player(HyEntity2d *pParent);
 	virtual ~Player();
@@ -32,4 +34,6 @@ public:
 
 	void DoAction(Tile &tileRef);
 	void StopAction();
+
+	void Sync();
 };

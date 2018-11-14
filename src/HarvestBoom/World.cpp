@@ -167,19 +167,25 @@ void World::UpdatePlayer(Player &playerRef)
 	if(pPlayerTile)
 	{
 		if(pPlayerTile->GetTileType() == HouseDoor && m_pHousePanel->IsShowing() == false && m_pHousePanel->IsTransition() == false)
+		{
 			m_pHousePanel->Show();
+			playerRef.SetEnabled(false);
+		}
 		else if(pPlayerTile->GetTileType() != HouseDoor && m_pHousePanel->IsShowing() && m_pHousePanel->IsTransition() == false)
+		{
 			m_pHousePanel->Hide();
+			playerRef.SetEnabled(true);
+			playerRef.Sync();
+		}
 		
 		if(pPlayerTile->GetTileType() == Dirt)
-		{
 			pPlayerTile->topColor.Set(1.0f, 0.0f, 0.0f);
 
-			if(Hy_App().Input().IsActionDown(UseEquip))
-				playerRef.DoAction(*pPlayerTile);
-			else
-				playerRef.StopAction();
-		}
+		if(Hy_App().Input().IsActionDown(UseEquip) && pPlayerTile->GetTileType() == Dirt)
+			playerRef.DoAction(*pPlayerTile);
+		else
+			playerRef.StopAction();
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,7 +231,6 @@ void World::SetRow(std::string sRow)
 		case '_':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Grass);			break;
 		case 'H':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(House);			break;
 		case 'D':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseDoor);		break;
-		case 'W':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseWindow);		break;
 		case '+':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);			break;
 		}
 	}

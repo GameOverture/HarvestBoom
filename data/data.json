@@ -12026,6 +12026,7 @@
     },
     "Prefabs": {
     },
+    "Prefixes": null,
     "Primitives": {
     },
     "Shaders": {
@@ -12033,6 +12034,24 @@
     "Spine": {
     },
     "Sprites": {
+        "Equip/Hoe": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 2898231366,
+                        "duration": 0.01600000075995922,
+                        "id": 101,
+                        "offsetX": -10,
+                        "offsetY": -5
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
         "Game/BuyButton": [
             {
                 "bounce": false,

@@ -35,7 +35,7 @@ IPanel::~IPanel()
 
 	m_PanelFrameOutline.GetShape().SetAsLineLoop(m_ptFrameVerts, 4);
 	m_PanelFrameOutline.SetLineThickness(8.0f);
-	m_PanelFrameOutline.topColor.Set(0.0f, 1.0f, 0.f);
+	m_PanelFrameOutline.topColor.Set(190.0f / 255.0f, 100.0f / 255.0f, 32.0f / 255.0f);
 
 	m_PanelFrame.GetShape().SetAsLineLoop(m_ptFrameVerts, 4);
 	m_PanelFrame.SetLineThickness(4.0f);

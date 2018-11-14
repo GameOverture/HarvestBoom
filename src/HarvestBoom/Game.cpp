@@ -41,6 +41,8 @@ void Game::Construct()
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
 	pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
 	pCam->SetZoom(2.0f);
+
+	m_Player.Sync();
 }
 
 void Game::GameUpdate()

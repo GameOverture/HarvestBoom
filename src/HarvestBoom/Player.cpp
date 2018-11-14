@@ -14,7 +14,8 @@ Player::Player(HyEntity2d *pParent) :	IActor(pParent),
 										m_Tool(this),
 										m_DebugText(HY_SYSTEM_FONT, this),
 										m_Collision(this),
-										m_Origin(this)
+										m_Origin(this),
+										m_pEquipment(nullptr)
 {
 	m_vVelocity.x = m_vVelocity.y = 0.0f;
 
@@ -117,9 +118,62 @@ void Player::HandleInput()
 
 void Player::DoAction(Tile &tileRef)
 {
+	if(tileRef.IncrementProgress())
+	{
+		ZeroVelocity();
 
+		switch(Values::Get()->m_eEquipedItem)
+		{
+		case EQUIP_Hoe:
+			if(m_pEquipment && m_pEquipment->rot.IsTweening() == false)
+				m_pEquipment->rot.Tween(-80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
+			break;
+
+		case EQUIP_Corn:
+		case EQUIP_Eggplant:
+		case EQUIP_Pumpkin:
+		case EQUIP_Gernaium:
+		case EQUIP_Marigold:
+		case EQUIP_Vine:
+			scale.Set(1.0f, 0.75f);
+			if(rot.IsTweening() == false)
+				rot.Tween(-20.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { rot.Tween(20.0f, 0.25f, HyTween::QuadIn); });
+			break;
+		}
+	}
 }
 
 void Player::StopAction()
 {
+	if(m_pEquipment && Values::Get()->m_eEquipedItem == EQUIP_Hoe)
+		m_pEquipment->rot.Tween(0.0f, 0.5f, HyTween::QuadOut);
+
+	scale.Set(1.0f, 1.0f);
+	rot.Tween(0.0f, 0.25f, HyTween::QuadOut);
+}
+
+void Player::Sync()
+{
+	switch(Values::Get()->m_eEquipedItem)
+	{
+	case EQUIP_Hoe:
+		delete m_pEquipment;
+		m_pEquipment = HY_NEW HySprite2d("Equip", "Hoe", this);
+		m_pEquipment->pos.Set(4.0f, 16.0f);
+		m_pEquipment->Load();
+		break;
+	case EQUIP_Harvest:
+		delete m_pEquipment;
+		m_pEquipment = nullptr;
+		break;
+	case EQUIP_Corn:
+	case EQUIP_Eggplant:
+	case EQUIP_Pumpkin:
+	case EQUIP_Gernaium:
+	case EQUIP_Marigold:
+	case EQUIP_Vine:
+		delete m_pEquipment;
+		m_pEquipment = nullptr;
+		break;
+	}
 }

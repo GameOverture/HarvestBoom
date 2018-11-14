@@ -24,7 +24,6 @@ enum TileType
 	Grass,
 	House,
 	HouseDoor,
-	HouseWindow,
 	Dirt,
 	Impassable
 };
@@ -57,6 +56,7 @@ enum ButtonState
 #define DISPLAYORDER_DayNight		9999998
 #define DISPLAYORDER_DebugCollision	9999997
 #define DISPLAYORDER_DebugGrid		999999
+#define DISPLAYORDER_ProgressBar	99999
 
 #define DISPLAYORDER_Player		1
 
