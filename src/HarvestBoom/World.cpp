@@ -163,10 +163,14 @@ void World::UpdatePlayer(Player &playerRef)
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-		{
 			m_pTileGrid[i][j]->Cleanup();
+	}
+
+	// NOTE: Cannot combine with above
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
 			m_pTileGrid[i][j]->IncrementGrowing();
-		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

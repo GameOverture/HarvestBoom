@@ -50,6 +50,16 @@ enum ButtonState
 	BTNSTATE_Selected
 };
 
+enum PlantType
+{
+	PLANTTYPE_Corn = 0,
+	PLANTTYPE_Eggplant,
+	PLANTTYPE_Pumpkin,
+	PLANTTYPE_Gernaium,
+	PLANTTYPE_Marigold,
+	PLANTTYPE_Vine
+};
+
 #define DISPLAYORDER_Title			999999999
 #define DISPLAYORDER_Panel			99999999
 #define DISPLAYORDER_UI				9999999

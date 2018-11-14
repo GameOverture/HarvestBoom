@@ -110,5 +110,8 @@ public:
 	bool IncrementProgress();
 
 	bool IncrementGrowing();
+
+private:
+	bool IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles = nullptr);
 };
 

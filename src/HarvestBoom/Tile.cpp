@@ -44,6 +44,9 @@ void Tile::Cleanup()
 {
 	m_SelectedRect.SetEnabled(false);
 	m_ProgressBar.SetEnabled(false);
+
+	if(m_pPlant)
+		m_pPlant->SetTag(0);
 }
 
 void Tile::SetNeighbors(Tile *pNorth, Tile *pEast, Tile *pSouth, Tile *pWest, Tile *pNorthEast, Tile *pSouthEast, Tile *pSouthWest, Tile *pNorthWest)
@@ -170,27 +173,31 @@ void Tile::SetAsSelected()
 			m_SelectedRect.SetEnabled(true);
 		break;
 	case EQUIP_Corn:
-		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Corn && m_pPlant->IsPlanted() == false)
+		if(IsPlantable(PLANTTYPE_Corn))
 			m_SelectedRect.SetEnabled(true);
 		break;
 	case EQUIP_Eggplant:
-		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Eggplant && m_pPlant->IsPlanted() == false)
+		if(IsPlantable(PLANTTYPE_Eggplant))
 			m_SelectedRect.SetEnabled(true);
 		break;
-	case EQUIP_Pumpkin:
-		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Pumpkin && m_pPlant->IsPlanted() == false)
-			m_SelectedRect.SetEnabled(true);
-		break;
+	case EQUIP_Pumpkin: {
+		std::vector<Tile *> validTileList;
+		if(IsPlantable(PLANTTYPE_Pumpkin, &validTileList))
+		{
+			for(uint32 i = 0; i < static_cast<uint32>(validTileList.size()); ++i)
+				validTileList[i]->m_SelectedRect.SetEnabled(true);
+		}
+		} break;
 	case EQUIP_Gernaium:
-		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Gernaium && m_pPlant->IsPlanted() == false)
+		if(IsPlantable(PLANTTYPE_Gernaium))
 			m_SelectedRect.SetEnabled(true);
 		break;
 	case EQUIP_Marigold:
-		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Marigold && m_pPlant->IsPlanted() == false)
+		if(IsPlantable(PLANTTYPE_Marigold))
 			m_SelectedRect.SetEnabled(true);
 		break;
 	case EQUIP_Vine:
-		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Vine && m_pPlant->IsPlanted() == false)
+		if(IsPlantable(PLANTTYPE_Vine))
 			m_SelectedRect.SetEnabled(true);
 		break;
 	}
@@ -229,17 +236,17 @@ bool Tile::IncrementProgress()
 				fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_HARVESTCORN;
 				fElapsedTime += Hy_UpdateStep();
 				m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HARVESTCORN);
-				return true;
+				break;
 			case PLANTTYPE_Eggplant:
 				fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_HARVESTEGGPLANT;
 				fElapsedTime += Hy_UpdateStep();
 				m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HARVESTEGGPLANT);
-				return true;
+				break;
 			case PLANTTYPE_Pumpkin:
 				fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_HARVESTPUMPKIN;
 				fElapsedTime += Hy_UpdateStep();
 				m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HARVESTPUMPKIN);
-				return true;
+				break;
 			}
 
 			if(m_ProgressBar.GetPercent() == 1.0f)
@@ -256,11 +263,12 @@ bool Tile::IncrementProgress()
 
 				m_pPlant->AnimSetState(PLANTSTATE_Sprout);
 			}
+			return true;
 		}
 		break;
 
 	case EQUIP_Corn:
-		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Corn && m_pPlant->IsPlanted() == false)))
+		if(IsPlantable(PLANTTYPE_Corn))
 		{
 			if(m_pPlant == nullptr)
 			{
@@ -294,7 +302,7 @@ bool Tile::IncrementProgress()
 		break;
 
 	case EQUIP_Eggplant:
-		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Eggplant && m_pPlant->IsPlanted() == false)))
+		if(IsPlantable(PLANTTYPE_Eggplant))
 		{
 			if(m_pPlant == nullptr)
 			{
@@ -327,20 +335,29 @@ bool Tile::IncrementProgress()
 		}
 		break;
 
-	case EQUIP_Pumpkin:
-		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Pumpkin && m_pPlant->IsPlanted() == false)))
+	case EQUIP_Pumpkin: {
+		std::vector<Tile *> validTileList;
+		if(IsPlantable(PLANTTYPE_Pumpkin, &validTileList))
 		{
-			if(m_pPlant == nullptr)
+			if(validTileList[0]->m_pPlant == nullptr)
 			{
 				if(Values::Get()->m_uiSeedsPumpkin == 0)
 					break;
 
 				Values::Get()->m_uiSeedsPumpkin--;
 
-				m_pPlant = HY_NEW Plant(PLANTTYPE_Pumpkin, "Plant", "Pumpkin", this);
-				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
-				m_pPlant->Load();
+				for(uint32 i = 0; i < static_cast<uint32>(validTileList.size()); ++i)
+				{
+					if(i == 0)
+					{
+						validTileList[i]->m_pPlant = HY_NEW Plant(PLANTTYPE_Pumpkin, "Plant", "Pumpkin", this);
+						validTileList[i]->m_pPlant->alpha.Set(0.0f);
+						validTileList[i]->m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+						validTileList[i]->m_pPlant->Load();
+					}
+					else
+						validTileList[i]->m_pPlant = validTileList[0]->m_pPlant;
+				}
 
 				m_ProgressBar.SetColor_Planting();
 				m_ProgressBar.SetPercent(0.0f);
@@ -349,20 +366,20 @@ bool Tile::IncrementProgress()
 			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTPUMPKIN;
 			fElapsedTime += Hy_UpdateStep();
 			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTPUMPKIN);
-			m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
+			validTileList[0]->m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
 
 			if(m_ProgressBar.GetPercent() == 1.0f)
 			{
-				m_pPlant->SetAsPlanted();
+				validTileList[0]->m_pPlant->SetAsPlanted();
 				m_ProgressBar.SetColor_Growing();
 				m_ProgressBar.SetPercent(0.0f);
 			}
 			return true;
 		}
-		break;
+		} break;
 
 	case EQUIP_Gernaium:
-		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Gernaium && m_pPlant->IsPlanted() == false)))
+		if(IsPlantable(PLANTTYPE_Gernaium))
 		{
 			if(m_pPlant == nullptr)
 			{
@@ -396,7 +413,7 @@ bool Tile::IncrementProgress()
 		break;
 
 	case EQUIP_Marigold:
-		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Marigold && m_pPlant->IsPlanted() == false)))
+		if(IsPlantable(PLANTTYPE_Marigold))
 		{
 			if(m_pPlant == nullptr)
 			{
@@ -430,7 +447,7 @@ bool Tile::IncrementProgress()
 		break;
 
 	case EQUIP_Vine:
-		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Vine && m_pPlant->IsPlanted() == false)))
+		if(IsPlantable(PLANTTYPE_Vine))
 		{
 			if(m_pPlant == nullptr)
 			{
@@ -469,7 +486,7 @@ bool Tile::IncrementProgress()
 
 bool Tile::IncrementGrowing()
 {
-	if(m_pPlant == nullptr || m_pPlant->IsPlanted() == false || m_pPlant->IsFullyGrown())
+	if(m_pPlant == nullptr || m_pPlant->IsPlanted() == false || m_pPlant->IsFullyGrown() || m_pPlant->GetTag() != 0)
 		return false;
 
 	float fGrowTime = 0.0f;
@@ -498,5 +515,62 @@ bool Tile::IncrementGrowing()
 		m_pPlant->AnimSetState(PLANTSTATE_Harvest);	// Indicates fully grown
 	}
 
+	m_pPlant->SetTag(1);	// Indicates it has updated this frame
+
 	return true;
+}
+
+bool Tile::IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles /*= nullptr*/)
+{
+	switch(ePlantType)
+	{
+	case PLANTTYPE_Corn:
+	case PLANTTYPE_Eggplant:
+	case PLANTTYPE_Gernaium:
+	case PLANTTYPE_Marigold:
+		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == ePlantType && m_pPlant->IsPlanted() == false)))
+		{
+			if(pValidTiles)
+				pValidTiles->push_back(this);
+			return true;
+		}
+		break;
+
+	case PLANTTYPE_Pumpkin:
+		if(m_bIsTilled == false || m_pNeighborEast->m_bIsTilled == false || m_pNeighborNorth->m_bIsTilled == false || m_pNeighborNorthEast->m_bIsTilled == false)
+			return false;
+
+		if(m_pPlant == nullptr && m_pNeighborEast->m_pPlant == nullptr && m_pNeighborNorth->m_pPlant == nullptr && m_pNeighborNorthEast->m_pPlant == nullptr)
+		{
+			if(pValidTiles)
+			{
+				pValidTiles->push_back(this);
+				pValidTiles->push_back(m_pNeighborEast);
+				pValidTiles->push_back(m_pNeighborNorth);
+				pValidTiles->push_back(m_pNeighborNorthEast);
+			}
+			return true;
+		}
+
+		if(m_pPlant != m_pNeighborEast->m_pPlant || m_pPlant != m_pNeighborNorth->m_pPlant || m_pPlant != m_pNeighborNorthEast->m_pPlant)
+			return false;
+
+		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Pumpkin && m_pPlant->IsPlanted() == false)
+		{
+			if(pValidTiles)
+			{
+				pValidTiles->push_back(this);
+				pValidTiles->push_back(m_pNeighborEast);
+				pValidTiles->push_back(m_pNeighborNorth);
+				pValidTiles->push_back(m_pNeighborNorthEast);
+			}
+			return true;
+		}
+		break;
+
+	case PLANTTYPE_Vine:
+		break;
+	}
+
+	return false;
 }

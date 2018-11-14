@@ -1,14 +1,5 @@
 #pragma once
-
-enum PlantType
-{
-	PLANTTYPE_Corn = 0,
-	PLANTTYPE_Eggplant,
-	PLANTTYPE_Pumpkin,
-	PLANTTYPE_Gernaium,
-	PLANTTYPE_Marigold,
-	PLANTTYPE_Vine
-};
+#include "pch.h"
 
 class Plant : public HySprite2d
 {
