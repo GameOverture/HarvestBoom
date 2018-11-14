@@ -9,7 +9,7 @@
 #include "DebugGrid.h"
 
 class HarvestBoom;
-class IPlant;
+class Plant;
 
 class Game : public HyEntity2d
 {
@@ -31,7 +31,8 @@ class Game : public HyEntity2d
 		GAMESTATE_IntroHide,
 		GAMESTATE_Playing,
 		GAMESTATE_Bills,
-
+		GAMESTATE_Bugs,
+		GAMESTATE_Sleep,
 	};
 	GameState				m_eGameState;
 

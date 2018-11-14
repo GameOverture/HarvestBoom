@@ -26,6 +26,7 @@ public:
 	void DeleteTiles();
 	void Construct();
 
+	void SetLevel();
 	void SetAsLevel1();
 
 	void UpdatePlayer(Player &playerRef);

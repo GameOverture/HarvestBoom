@@ -101,6 +101,14 @@ void World::Construct()
 	m_pHousePanel->Construct();
 }
 
+void World::SetLevel()
+{
+	switch(Values::Get()->m_uiCurrentDay)
+	{
+	case 1:	SetAsLevel1(); break;
+	}
+}
+
 void World::SetAsLevel1()
 {
 	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
@@ -151,13 +159,18 @@ void World::UpdatePlayer(Player &playerRef)
 	playerRef.SetDisplayOrder(((WORLD_HEIGHT - iPlayerInRow) * DISPLAYORDER_PerRow) + DISPLAYORDER_Player);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Player Tile
+	// Cleanup from last update
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-			m_pTileGrid[i][j]->topColor.Set(1.0f, 1.0f, 1.0f);
+		{
+			m_pTileGrid[i][j]->Cleanup();
+			m_pTileGrid[i][j]->IncrementGrowing();
+		}
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Player Tile
 	int32 iX = static_cast<int32>(playerRef.pos.X() / TILE_SIZE);
 	int32 iY = static_cast<int32>(playerRef.pos.Y() / TILE_SIZE);
 	Tile *pPlayerTile = nullptr;
@@ -178,14 +191,17 @@ void World::UpdatePlayer(Player &playerRef)
 			playerRef.Sync();
 		}
 		
+		// Determine if this tile should be "Selected"
 		if(pPlayerTile->GetTileType() == Dirt)
-			pPlayerTile->topColor.Set(1.0f, 0.0f, 0.0f);
+		{
+			pPlayerTile->SetAsSelected();
+		}
 
+		// Apply or clear Player action / animations
 		if(Hy_App().Input().IsActionDown(UseEquip) && pPlayerTile->GetTileType() == Dirt)
 			playerRef.DoAction(*pPlayerTile);
 		else
 			playerRef.StopAction();
-		
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

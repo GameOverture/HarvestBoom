@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "Tile.h"
-#include "IPlant.h"
+#include "Plant.h"
 
 Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_eTileType(Unknown),
 									m_Ground(this),
 									m_pTexture(nullptr),
+									m_pTilledOverlay(nullptr),
+									m_SelectedRect(this),
 									m_pNeighborNorth(nullptr),
 									m_pNeighborEast(nullptr),
 									m_pNeighborSouth(nullptr),
@@ -15,11 +17,18 @@ Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_pNeighborSouthWest(nullptr),
 									m_pNeighborNorthWest(nullptr),
 									m_pPlant(nullptr),
-									m_ProgressBar(this)
+									m_ProgressBar(this),
+									m_bIsTilled(false)
 {
 	m_Ground.GetShape().SetAsBox(TILE_SIZE, TILE_SIZE);
 	m_ProgressBar.SetEnabled(false);
 	m_ProgressBar.pos.Set(TILE_SIZE * 0.5f + -25.0f, 0.0f);
+
+	m_SelectedRect.GetShape().SetAsBox(TILE_SIZE, TILE_SIZE);
+	m_SelectedRect.topColor.Set(1.0f, 0.0f, 0.0);
+	m_SelectedRect.SetWireframe(true);
+	m_SelectedRect.SetEnabled(false);
+	m_SelectedRect.SetDisplayOrder(DISPLAYORDER_SelectedRect);
 }
 
 Tile::~Tile()
@@ -29,6 +38,12 @@ Tile::~Tile()
 TileType Tile::GetTileType() const
 {
 	return m_eTileType;
+}
+
+void Tile::Cleanup()
+{
+	m_SelectedRect.SetEnabled(false);
+	m_ProgressBar.SetEnabled(false);
 }
 
 void Tile::SetNeighbors(Tile *pNorth, Tile *pEast, Tile *pSouth, Tile *pWest, Tile *pNorthEast, Tile *pSouthEast, Tile *pSouthWest, Tile *pNorthWest)
@@ -68,6 +83,9 @@ void Tile::SetType(TileType eType)
 	case Dirt:
 		delete m_pTexture;
 		m_pTexture = HY_NEW HySprite2d("Tiles", "Dirt", this);
+		m_pTilledOverlay = HY_NEW HySprite2d("Tiles", "Dirt", this);
+		m_pTilledOverlay->AnimSetState(1);
+		m_pTilledOverlay->alpha.Set(0.0f);
 		m_Ground.SetEnabled(false);
 		break;
 
@@ -139,17 +157,68 @@ HyShape2d &Tile::GetCollision()
 	return m_Ground.GetShape();
 }
 
+void Tile::SetAsSelected()
+{
+	switch(Values::Get()->m_eEquipedItem)
+	{
+	case EQUIP_Hoe:
+		if(m_bIsTilled == false)
+			m_SelectedRect.SetEnabled(true);
+		break;
+	case EQUIP_Harvest:
+		if(m_pPlant && m_pPlant->IsFullyGrown())
+			m_SelectedRect.SetEnabled(true);
+		break;
+	case EQUIP_Corn:
+		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Corn && m_pPlant->IsPlanted() == false)
+			m_SelectedRect.SetEnabled(true);
+		break;
+	case EQUIP_Eggplant:
+		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Eggplant && m_pPlant->IsPlanted() == false)
+			m_SelectedRect.SetEnabled(true);
+		break;
+	case EQUIP_Pumpkin:
+		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Pumpkin && m_pPlant->IsPlanted() == false)
+			m_SelectedRect.SetEnabled(true);
+		break;
+	case EQUIP_Gernaium:
+		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Gernaium && m_pPlant->IsPlanted() == false)
+			m_SelectedRect.SetEnabled(true);
+		break;
+	case EQUIP_Marigold:
+		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Marigold && m_pPlant->IsPlanted() == false)
+			m_SelectedRect.SetEnabled(true);
+		break;
+	case EQUIP_Vine:
+		if(m_pPlant && m_pPlant->GetPlantType() == PLANTTYPE_Vine && m_pPlant->IsPlanted() == false)
+			m_SelectedRect.SetEnabled(true);
+		break;
+	}
+
+	if(m_ProgressBar.GetPercent() != 0.0f && m_ProgressBar.GetPercent() != 1.0f)
+		m_ProgressBar.SetEnabled(true);
+}
+
+// Checks whether action is valid
 bool Tile::IncrementProgress()
 {
 	HyAssert(m_eTileType == Dirt, "");
 
 	switch(Values::Get()->m_eEquipedItem)
 	{
-	case EQUIP_Hoe: {
-		float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_HOEDIRT;
-		fElapsedTime += Hy_UpdateStep();
-		m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HOEDIRT);
-		} return true;
+	case EQUIP_Hoe:
+		if(m_bIsTilled == false)
+		{
+			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_HOEDIRT;
+			fElapsedTime += Hy_UpdateStep();
+			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HOEDIRT);
+			m_pTilledOverlay->alpha.Set(m_ProgressBar.GetPercent());
+
+			m_bIsTilled = m_ProgressBar.GetPercent() == 1.0f;
+			return true;
+		}
+		break;
+
 	case EQUIP_Harvest:
 		if(m_pPlant && m_pPlant->IsFullyGrown())
 		{
@@ -174,42 +243,191 @@ bool Tile::IncrementProgress()
 			} 
 		}
 		break;
-	case EQUIP_Corn: {
-		float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTCORN;
-		fElapsedTime += Hy_UpdateStep();
-		m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTCORN);
-		} return true;
-	case EQUIP_Eggplant: {
-		float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTEGGPLANT;
-		fElapsedTime += Hy_UpdateStep();
-		m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTEGGPLANT);
-		} return true;
-	case EQUIP_Pumpkin: {
-		float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTPUMPKIN;
-		fElapsedTime += Hy_UpdateStep();
-		m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTPUMPKIN);
-		} return true;
-	case EQUIP_Gernaium: {
-		float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTGERNAIUM;
-		fElapsedTime += Hy_UpdateStep();
-		m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTGERNAIUM);
-		} return true;
-	case EQUIP_Marigold: {
-		float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTMARIGOLD;
-		fElapsedTime += Hy_UpdateStep();
-		m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTMARIGOLD);
-		} return true;
-	case EQUIP_Vine: {
-		float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTVINE;
-		fElapsedTime += Hy_UpdateStep();
-		m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTVINE);
-		} return true;
+
+	case EQUIP_Corn:
+		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Corn && m_pPlant->IsPlanted() == false)))
+		{
+			if(m_pPlant == nullptr)
+			{
+				m_pPlant = HY_NEW Plant(PLANTTYPE_Corn, "Plant", "Corn", this);
+				m_pPlant->alpha.Set(0.0f);
+				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->Load();
+
+				m_ProgressBar.SetColor_Planting();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+
+			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTCORN;
+			fElapsedTime += Hy_UpdateStep();
+			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTCORN);
+			m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
+
+			if(m_ProgressBar.GetPercent() == 1.0f)
+			{
+				m_pPlant->SetAsPlanted();
+				m_ProgressBar.SetColor_Growing();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+			return true;
+		} 
+		break;
+
+	case EQUIP_Eggplant:
+		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Eggplant && m_pPlant->IsPlanted() == false)))
+		{
+			if(m_pPlant == nullptr)
+			{
+				m_pPlant = HY_NEW Plant(PLANTTYPE_Eggplant, "Plant", "Eggplant", this);
+				m_pPlant->alpha.Set(0.0f);
+				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->Load();
+
+				m_ProgressBar.SetColor_Planting();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+
+			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTEGGPLANT;
+			fElapsedTime += Hy_UpdateStep();
+			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTEGGPLANT);
+			m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
+
+			if(m_ProgressBar.GetPercent() == 1.0f)
+			{
+				m_pPlant->SetAsPlanted();
+				m_ProgressBar.SetColor_Growing();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+			return true;
+		}
+		break;
+
+	case EQUIP_Pumpkin:
+		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Pumpkin && m_pPlant->IsPlanted() == false)))
+		{
+			if(m_pPlant == nullptr)
+			{
+				m_pPlant = HY_NEW Plant(PLANTTYPE_Pumpkin, "Plant", "Pumpkin", this);
+				m_pPlant->alpha.Set(0.0f);
+				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->Load();
+
+				m_ProgressBar.SetColor_Planting();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+
+			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTPUMPKIN;
+			fElapsedTime += Hy_UpdateStep();
+			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTPUMPKIN);
+			m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
+
+			if(m_ProgressBar.GetPercent() == 1.0f)
+			{
+				m_pPlant->SetAsPlanted();
+				m_ProgressBar.SetColor_Growing();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+			return true;
+		}
+		break;
+
+	case EQUIP_Gernaium:
+		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Gernaium && m_pPlant->IsPlanted() == false)))
+		{
+			if(m_pPlant == nullptr)
+			{
+				m_pPlant = HY_NEW Plant(PLANTTYPE_Gernaium, "Plant", "Gernaium", this);
+				m_pPlant->alpha.Set(0.0f);
+				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->Load();
+
+				m_ProgressBar.SetColor_Planting();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+
+			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTGERNAIUM;
+			fElapsedTime += Hy_UpdateStep();
+			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTGERNAIUM);
+			m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
+
+			if(m_ProgressBar.GetPercent() == 1.0f)
+			{
+				m_pPlant->SetAsPlanted();
+				m_ProgressBar.SetColor_Growing();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+			return true;
+		}
+		break;
+
+	case EQUIP_Marigold:
+		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Marigold && m_pPlant->IsPlanted() == false)))
+		{
+			if(m_pPlant == nullptr)
+			{
+				m_pPlant = HY_NEW Plant(PLANTTYPE_Marigold, "Plant", "Marigold", this);
+				m_pPlant->alpha.Set(0.0f);
+				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->Load();
+
+				m_ProgressBar.SetColor_Planting();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+
+			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTMARIGOLD;
+			fElapsedTime += Hy_UpdateStep();
+			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTMARIGOLD);
+			m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
+
+			if(m_ProgressBar.GetPercent() == 1.0f)
+			{
+				m_pPlant->SetAsPlanted();
+				m_ProgressBar.SetColor_Growing();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+			return true;
+		}
+		break;
+
+	case EQUIP_Vine:
+		if(m_bIsTilled && (m_pPlant == nullptr || (m_pPlant->GetPlantType() == PLANTTYPE_Vine && m_pPlant->IsPlanted() == false)))
+		{
+			if(m_pPlant == nullptr)
+			{
+				m_pPlant = HY_NEW Plant(PLANTTYPE_Vine, "Plant", "Vine", this);
+				m_pPlant->alpha.Set(0.0f);
+				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->Load();
+
+				m_ProgressBar.SetColor_Planting();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+
+			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_PLANTVINE;
+			fElapsedTime += Hy_UpdateStep();
+			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_PLANTVINE);
+			m_pPlant->alpha.Set(m_ProgressBar.GetPercent());
+
+			if(m_ProgressBar.GetPercent() == 1.0f)
+			{
+				m_pPlant->SetAsPlanted();
+				m_ProgressBar.SetColor_Growing();
+				m_ProgressBar.SetPercent(0.0f);
+			}
+			return true;
+		}
+		break;
 	}
 
 	return false;
 }
 
-bool Tile::IsProgressComplete()
+bool Tile::IncrementGrowing()
 {
-	return m_ProgressBar.GetPercent() == 1.0f;
+	if(m_pPlant == nullptr || m_pPlant->IsPlanted() == false)
+		return false;
+
+	//m_pPlant->IncrementGrowth();
+
+	return true;
 }

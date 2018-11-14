@@ -118,6 +118,7 @@ void Player::HandleInput()
 
 void Player::DoAction(Tile &tileRef)
 {
+	// Checks whether action is valid
 	if(tileRef.IncrementProgress())
 	{
 		ZeroVelocity();
@@ -141,6 +142,8 @@ void Player::DoAction(Tile &tileRef)
 			break;
 		}
 	}
+	else
+		StopAction();
 }
 
 void Player::StopAction()

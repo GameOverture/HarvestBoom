@@ -12266,8 +12266,8 @@
                         "checksum": 1692607481,
                         "duration": 0.01600000075995922,
                         "id": 43,
-                        "offsetX": 6,
-                        "offsetY": 1
+                        "offsetX": 5,
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12282,8 +12282,8 @@
                         "checksum": 97862499,
                         "duration": 0.01600000075995922,
                         "id": 39,
-                        "offsetX": 4,
-                        "offsetY": 1
+                        "offsetX": 3,
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12298,8 +12298,8 @@
                         "checksum": 1133492362,
                         "duration": 0.01600000075995922,
                         "id": 41,
-                        "offsetX": 4,
-                        "offsetY": 1
+                        "offsetX": 3,
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12317,7 +12317,7 @@
                         "duration": 0.01600000075995922,
                         "id": 49,
                         "offsetX": 5,
-                        "offsetY": 1
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12333,7 +12333,7 @@
                         "duration": 0.01600000075995922,
                         "id": 45,
                         "offsetX": 1,
-                        "offsetY": 1
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12349,7 +12349,7 @@
                         "duration": 0.01600000075995922,
                         "id": 47,
                         "offsetX": 1,
-                        "offsetY": 1
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12367,7 +12367,7 @@
                         "duration": 0.01600000075995922,
                         "id": 55,
                         "offsetX": 3,
-                        "offsetY": 1
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12383,7 +12383,7 @@
                         "duration": 0.01600000075995922,
                         "id": 51,
                         "offsetX": 1,
-                        "offsetY": 1
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12399,7 +12399,7 @@
                         "duration": 0.01600000075995922,
                         "id": 53,
                         "offsetX": 1,
-                        "offsetY": 1
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12417,7 +12417,7 @@
                         "duration": 0.01600000075995922,
                         "id": 64,
                         "offsetX": 5,
-                        "offsetY": 2
+                        "offsetY": 10
                     }
                 ],
                 "loop": false,
@@ -12433,7 +12433,7 @@
                         "duration": 0.01600000075995922,
                         "id": 60,
                         "offsetX": 3,
-                        "offsetY": 1
+                        "offsetY": 9
                     }
                 ],
                 "loop": false,
@@ -12449,7 +12449,7 @@
                         "duration": 0.01600000075995922,
                         "id": 62,
                         "offsetX": 3,
-                        "offsetY": 1
+                        "offsetY": 9
                     }
                 ],
                 "loop": false,
@@ -12517,7 +12517,7 @@
                         "duration": 0.01600000075995922,
                         "id": 78,
                         "offsetX": 5,
-                        "offsetY": 2
+                        "offsetY": 9
                     }
                 ],
                 "loop": false,
@@ -12533,7 +12533,7 @@
                         "duration": 0.01600000075995922,
                         "id": 73,
                         "offsetX": 1,
-                        "offsetY": 1
+                        "offsetY": 8
                     }
                 ],
                 "loop": false,
@@ -12549,7 +12549,7 @@
                         "duration": 0.01600000075995922,
                         "id": 76,
                         "offsetX": 1,
-                        "offsetY": 1
+                        "offsetY": 8
                     }
                 ],
                 "loop": false,

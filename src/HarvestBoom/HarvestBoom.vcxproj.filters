@@ -34,9 +34,6 @@
       <Filter>Game\Actors</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="IPlant.cpp">
-      <Filter>Game\Actors</Filter>
-    </ClCompile>
     <ClCompile Include="IEnemy.cpp">
       <Filter>Game\Actors</Filter>
     </ClCompile>
@@ -100,6 +97,9 @@
     <ClCompile Include="Hoe.cpp">
       <Filter>Game\Actors\Attachments</Filter>
     </ClCompile>
+    <ClCompile Include="Plant.cpp">
+      <Filter>Game\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -107,9 +107,6 @@
       <Filter>Game\Actors</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="IPlant.h">
-      <Filter>Game\Actors</Filter>
-    </ClInclude>
     <ClInclude Include="DayNight.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
@@ -178,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Hoe.h">
       <Filter>Game\Actors\Attachments</Filter>
+    </ClInclude>
+    <ClInclude Include="Plant.h">
+      <Filter>Game\Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

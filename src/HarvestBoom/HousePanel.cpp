@@ -62,7 +62,7 @@ HousePanel::~HousePanel()
 	const float fButtonOffsetY = 110.0f;
 
 	const float fDecalOffsetX = 20.0f;
-	const float fDecalOffsetY = 20.0f;
+	const float fDecalOffsetY = 10.0f;
 
 	const float fBuyButtonOffsetY = -30.0f;
 
@@ -75,7 +75,7 @@ HousePanel::~HousePanel()
 	m_BtnHoeEquip.SetTag(EQUIP_Hoe);
 
 	m_BtnHoeDecal.pos.Set(0.0f, 0.0f);
-	m_BtnHoeDecal.pos.Offset(fDecalOffsetX + 19.0f, fDecalOffsetY + 15.0f);
+	m_BtnHoeDecal.pos.Offset(fDecalOffsetX + 19.0f, fDecalOffsetY + 25.0f);
 	m_BtnHoeDecal.scale.Set(2.0f, 2.0f);
 	m_BtnHoeEquip.GetTextPtr()->SetDisplayOrder(m_BtnHoeDecal.GetDisplayOrder() + 1);
 	
@@ -150,7 +150,8 @@ HousePanel::~HousePanel()
 
 	m_BtnPumpkinDecal.AnimSetState(PLANTSTATE_Harvest);
 	m_BtnPumpkinDecal.pos.Set(0.0f, 0.0f);
-	m_BtnPumpkinDecal.pos.Offset(fDecalOffsetX, fDecalOffsetY);
+	m_BtnPumpkinDecal.pos.Offset(fDecalOffsetX - 4.0f, fDecalOffsetY + 10.0f);
+	m_BtnPumpkinDecal.scale.Set(1.3f, 1.3f);
 	m_BtnPumpkinEquip.GetTextPtr()->SetDisplayOrder(m_BtnPumpkinDecal.GetDisplayOrder() + 1);
 
 	sText = "Buy $";

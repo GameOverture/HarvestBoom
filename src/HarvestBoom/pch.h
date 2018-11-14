@@ -57,6 +57,7 @@ enum ButtonState
 #define DISPLAYORDER_DebugCollision	9999997
 #define DISPLAYORDER_DebugGrid		999999
 #define DISPLAYORDER_ProgressBar	99999
+#define DISPLAYORDER_SelectedRect	9999
 
 #define DISPLAYORDER_Player		1
 

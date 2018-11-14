@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "HarvestBoom.h"
 #include "Player.h"
-#include "IPlant.h"
 #include "IEnemy.h"
 
 Game::Game() :	HyEntity2d(nullptr),
@@ -26,13 +25,14 @@ Game::~Game()
 {
 }
 
+// Invoke only once
 void Game::Construct()
 {
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
 	m_Stamina.pos.Set(50.0f, 50.0f);
 	
 	m_World.Construct();
-	m_World.SetAsLevel1();
+	m_World.SetLevel();
 
 	m_IntroPanel.Construct();
 	m_BillsPanel.Construct();
@@ -115,6 +115,21 @@ void Game::GameUpdate()
 		break;
 		
 	case GAMESTATE_Bills:
+		if(m_BillsPanel.IsShowing() == false && m_BillsPanel.IsTransition() == false)
+		{
+			Values::Get()->m_uiCurrentDay++;
+			if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
+				m_eGameState = GAMESTATE_Sleep;
+			else
+				m_eGameState = GAMESTATE_Bugs;
+		}
+		break;
+
+	case GAMESTATE_Bugs:
+		break;
+
+	case GAMESTATE_Sleep:
+		m_World.SetLevel();
 		break;
 	}
 

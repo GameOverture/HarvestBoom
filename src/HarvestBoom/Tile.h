@@ -2,7 +2,7 @@
 
 #include "pch.h"
 
-class IPlant;
+class Plant;
 
 class Tile : public HyEntity2d
 {
@@ -23,6 +23,9 @@ class Tile : public HyEntity2d
 
 	HyPrimitive2d		m_Ground;
 	HySprite2d *		m_pTexture;
+	HySprite2d *		m_pTilledOverlay;
+
+	HyPrimitive2d		m_SelectedRect;
 
 	Tile *				m_pNeighborNorth;
 	Tile *				m_pNeighborEast;
@@ -48,10 +51,21 @@ class Tile : public HyEntity2d
 			m_ProgressBarOutline.SetDisplayOrder(DISPLAYORDER_ProgressBar);
 
 			m_ProgressBarFill.GetShape().SetAsBox(50.0f, 2.0f);
-			m_ProgressBarFill.SetTint(1.0f, 0.4f, 0.5f);
 			m_ProgressBarFill.SetDisplayOrder(DISPLAYORDER_ProgressBar+1);
 			m_ProgressBarFill.pos.Offset(1.0f, 1.0f);
 			m_ProgressBarFill.scale.Set(0.0f, 1.0f);
+			
+			SetColor_Tilling();
+		}
+		
+		void SetColor_Tilling() {
+			m_ProgressBarFill.SetTint(1.0f, 0.4f, 0.5f);
+		}
+		void SetColor_Planting() {
+			m_ProgressBarFill.SetTint(170.0f / 255.0f, 216.0f / 255.0f, 143.0f / 255.0f);
+		}
+		void SetColor_Growing() {
+			m_ProgressBarFill.SetTint(250.0f / 255.0f, 248.0f / 255.0f, 153.0f / 255.0f);
 		}
 
 		float GetPercent() {
@@ -69,8 +83,9 @@ class Tile : public HyEntity2d
 		}
 	};
 	ProgressBar			m_ProgressBar;
+	bool				m_bIsTilled;
 
-	IPlant *			m_pPlant;
+	Plant *			m_pPlant;
 
 public:
 	Tile(HyEntity2d *pParent);
@@ -78,13 +93,19 @@ public:
 
 	TileType GetTileType() const;
 
+	void Cleanup();
+
 	void SetNeighbors(Tile *pNorth, Tile *pEast, Tile *pSouth, Tile *pWest, Tile *pNorthEast, Tile *pSouthEast, Tile *pSouthWest, Tile *pNorthWest);
 	void SetType(TileType eType);
 
 	void SetTileState();
 	HyShape2d &GetCollision();
 
+	void SetAsSelected();
+
+	// Checks whether action is valid
 	bool IncrementProgress();
-	bool IsProgressComplete();
+
+	bool IncrementGrowing();
 };
 

@@ -1,5 +1,4 @@
 #pragma once
-#include "IActor.h"
 
 enum PlantType
 {
@@ -11,17 +10,20 @@ enum PlantType
 	PLANTTYPE_Vine
 };
 
-class IPlant : public IActor
+class Plant : public HySprite2d
 {
 protected:
 	const PlantType		m_ePLANT_TYPE;
-	HyPrimitive2d		m_Body;
+	bool				m_bIsPlanted;
 
 public:
-	IPlant(PlantType ePlantType, HyEntity2d *pParent);
-	virtual ~IPlant();
+	Plant(PlantType ePlantType, const char *szPrefix, const char *szName, HyEntity2d *pParent);
+	virtual ~Plant();
 
 	PlantType GetPlantType();
+
+	void SetAsPlanted();
+	bool IsPlanted();
 
 	bool IsFullyGrown();
 };

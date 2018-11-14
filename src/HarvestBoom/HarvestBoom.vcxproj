@@ -203,7 +203,7 @@
     <ClCompile Include="IActor.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="IEnemy.cpp" />
-    <ClCompile Include="IPlant.cpp" />
+    <ClCompile Include="Plant.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="pch.cpp">
@@ -238,7 +238,7 @@
     <ClInclude Include="IActor.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="IEnemy.h" />
-    <ClInclude Include="IPlant.h" />
+    <ClInclude Include="Plant.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Stamina.h" />
