@@ -93,7 +93,7 @@ void DayNight::SetTime(float fTime)
 	m_MainText.pos.Set(vWindowSize.x * 0.5f, vWindowSize.y * 0.5f);
 	m_MainText.TextSetAlignment(HYALIGN_Center);
 
-	SetScissor(0, vWindowSize.y - DAYNIGHT_TOPMARGIN - 4, vWindowSize.x, DAYNIGHT_TOPMARGIN);
+	SetScissor(0, vWindowSize.y - static_cast<int32>(DAYNIGHT_TOPMARGIN) - 4, vWindowSize.x, static_cast<uint32>(DAYNIGHT_TOPMARGIN));
 	m_DayNight.ClearScissor(false);
 	m_MainText.ClearScissor(false);
 

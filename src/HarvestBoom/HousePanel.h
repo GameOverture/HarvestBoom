@@ -33,6 +33,8 @@ class HousePanel : public IPanel
 	HySprite2d		m_BtnVineDecal;
 	BuyButton		m_BtnVineBuy;
 
+	HyText2d		m_AirConditionText;
+
 public:
 	HousePanel(const InfoPanelInit &equipInfoPanelInitRef, const InfoPanelInit &buyInfoPanelInitRef, HyEntity2d *pParent);
 	virtual ~HousePanel();
@@ -46,4 +48,6 @@ public:
 	void SetEquipedUI();
 
 	void Sync();
+
+	virtual void OnUpdate() override;
 };

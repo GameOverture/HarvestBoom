@@ -26,7 +26,8 @@ HousePanel::HousePanel(const InfoPanelInit &equipInfoPanelInitRef, const InfoPan
 																																	m_BtnMarigoldBuy(buyInfoPanelInitRef, this),
 																																	m_BtnVineEquip(equipInfoPanelInitRef, this),
 																																	m_BtnVineDecal("Plant", "Vine", &m_BtnVineEquip),
-																																	m_BtnVineBuy(buyInfoPanelInitRef, this)
+																																	m_BtnVineBuy(buyInfoPanelInitRef, this),
+																																	m_AirConditionText("Game", "Small", this)
 {
 }
 
@@ -40,21 +41,21 @@ HousePanel::~HousePanel()
 
 	m_bCustomVerts = true;
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
-	HySetVec(m_ptFrameVerts[0], PANEL_SIDEMARGIN + 100.0f, PANEL_TOPMARGIN);
-	HySetVec(m_ptFrameVerts[1], PANEL_SIDEMARGIN + 100.0f, vWindowSize.y - PANEL_TOPMARGIN - 50.0f);
+	HySetVec(m_ptFrameVerts[0], PANEL_SIDEMARGIN + 75.0f, PANEL_TOPMARGIN);
+	HySetVec(m_ptFrameVerts[1], PANEL_SIDEMARGIN + 75.0f, vWindowSize.y - PANEL_TOPMARGIN - 50.0f);
 	HySetVec(m_ptFrameVerts[2], vWindowSize.x - PANEL_SIDEMARGIN, vWindowSize.y - PANEL_TOPMARGIN - 50.0f);
 	HySetVec(m_ptFrameVerts[3], vWindowSize.x - PANEL_SIDEMARGIN, PANEL_TOPMARGIN);
 
 	IPanel::Construct();
 
 	m_FoodStocks.Construct();
-	m_FoodStocks.pos.Set(m_ptFrameVerts[1].x + 30.0f, m_ptFrameVerts[1].y - 140.0f);
+	m_FoodStocks.pos.Set(m_ptFrameVerts[1].x + 50.0f, m_ptFrameVerts[1].y - 195.0f);
 
 	m_SavingsVal.TextSetState(1);
 	m_SavingsVal.TextSetAlignment(HYALIGN_Center);
 	m_SavingsVal.pos.Set(m_ptFrameVerts[1]);
-	m_SavingsVal.pos.Offset(0.0f, -40.0f);
-	m_SavingsVal.SetAsScaleBox(PanelWidth(), 25.0f);
+	m_SavingsVal.pos.Offset(PanelWidth() * 0.5f, -40.0f);
+	m_SavingsVal.SetAsScaleBox(PanelWidth() * 0.5f, 25.0f);
 
 	const float fButtonSideMargin = 5.0f;
 	const float fButtonBotMargin = 35.0f;
@@ -234,6 +235,14 @@ HousePanel::~HousePanel()
 	m_BtnVineBuy.pos.Offset(0.0f, fBuyButtonOffsetY);
 	m_BtnVineBuy.SetTag(EQUIP_Vine);
 	m_BtnVineBuy.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
+
+	m_AirConditionText.TextSet("< A/C bonus!");
+	m_AirConditionText.TextSetState(1);
+	m_AirConditionText.TextSetLayerColor(0, 1, 145.0f / 255.0f, 176.0f / 255.0f, 219.0f / 255.0f, 0.0f, 111.0f / 255.0f, 1.0f);
+	m_AirConditionText.TextSetAlignment(HYALIGN_Left);
+	m_AirConditionText.pos.Set(m_ptFrameVerts[0]);
+	m_AirConditionText.pos.Offset(0.0f, 75.0f);
+	m_AirConditionText.SetEnabled(Values::Get()->m_bAirConditioning);
 
 	Sync();
 }
@@ -587,4 +596,10 @@ void HousePanel::Sync()
 		m_BtnVineBuy.GetTextPtr()->SetEnabled(true);
 		m_BtnVineBuy.SetTint(1.0f, 1.0f, 1.0f);
 	}
+}
+
+/*virtual*/ void HousePanel::OnUpdate() /*override*/
+{
+	if(m_AirConditionText.IsEnabled() && m_AirConditionText.pos.IsTweening() == false)
+		m_AirConditionText.pos.Tween(m_ptFrameVerts[0].x + 15.0f, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadOut, [this](IHyNode *) { m_AirConditionText.pos.Tween(m_ptFrameVerts[0].x, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadIn); });
 }

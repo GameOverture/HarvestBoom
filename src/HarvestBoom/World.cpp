@@ -2,6 +2,7 @@
 #include "World.h"
 #include "Tile.h"
 #include "Player.h"
+#include "Stamina.h"
 
 World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_CollidePt1(nullptr),
@@ -151,7 +152,7 @@ void World::SetAsLevel1()
 	m_pHousePanel->Hide();
 }
 
-void World::UpdatePlayer(Player &playerRef)
+void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Display Order
@@ -194,6 +195,9 @@ void World::UpdatePlayer(Player &playerRef)
 			playerRef.SetEnabled(true);
 			playerRef.Sync();
 		}
+
+		if(m_pHousePanel->IsShowing() && m_pHousePanel->IsTransition() == false && Values::Get()->m_bAirConditioning)
+			staminaRef.Offset(Values::Get()->m_fSTAMINA_AC * Hy_UpdateStep());
 		
 		// Determine if this tile should be "Selected"
 		if(pPlayerTile->GetTileType() == Dirt)
@@ -203,7 +207,10 @@ void World::UpdatePlayer(Player &playerRef)
 
 		// Apply or clear Player action / animations
 		if(Hy_App().Input().IsActionDown(UseEquip) && pPlayerTile->GetTileType() == Dirt)
-			playerRef.DoAction(*pPlayerTile);
+		{
+			if(playerRef.DoAction(*pPlayerTile))
+				staminaRef.Offset(Values::Get()->m_fSTAMINA_ACTION * -Hy_UpdateStep());
+		}
 		else
 			playerRef.StopAction();
 	}
@@ -238,6 +245,9 @@ void World::UpdatePlayer(Player &playerRef)
 			}
 		}
 	}
+
+	float fRunNormalized = playerRef.GetMagnitude() / Values::Get()->m_fPLAYER_MAXVELOCITY;
+	staminaRef.Offset((Values::Get()->m_fSTAMINA_RUN * fRunNormalized) * -Hy_UpdateStep());
 }
 
 void World::SetRow(std::string sRow)

@@ -32,7 +32,7 @@ public:
 
 	void HandleInput();
 
-	void DoAction(Tile &tileRef);
+	bool DoAction(Tile &tileRef);
 	void StopAction();
 
 	void Sync();

@@ -6,6 +6,7 @@
 #define WORLD_HEIGHT 25
 
 class Player;
+class Stamina;
 class Tile;
 
 class World : public HyEntity2d
@@ -29,7 +30,7 @@ public:
 	void SetLevel();
 	void SetAsLevel1();
 
-	void UpdatePlayer(Player &playerRef);
+	void UpdatePlayer(Player &playerRef, Stamina &staminaRef);
 
 private:
 	void SetRow(std::string sRow);

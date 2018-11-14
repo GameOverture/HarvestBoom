@@ -2,10 +2,6 @@
 #include "Player.h"
 #include "Tile.h"
 
-#define PLAYER_MAXVELOCITY 200.0f	// pixels per second
-#define PLAYER_ACCEL 300.0f
-#define PLAYER_DECEL 600.0f
-
 #define PLAYER_WIDTH 10.0f
 #define PLAYER_HEIGHT 5.0f
 
@@ -80,27 +76,27 @@ bool Player::IsEquipped()
 void Player::HandleInput()
 {
 	if(Hy_App().Input().IsActionDown(MoveUp))
-		m_vVelocity.y = HyClamp(m_vVelocity.y + (Hy_UpdateStep() * (m_vVelocity.y < 0.0f ? PLAYER_DECEL : PLAYER_ACCEL)), m_vVelocity.y, PLAYER_MAXVELOCITY);
+		m_vVelocity.y = HyClamp(m_vVelocity.y + (Hy_UpdateStep() * (m_vVelocity.y < 0.0f ? Values::Get()->m_fPLAYER_DECEL : Values::Get()->m_fPLAYER_ACCEL)), m_vVelocity.y, Values::Get()->m_fPLAYER_MAXVELOCITY);
 	else if(Hy_App().Input().IsActionDown(MoveDown))
-		m_vVelocity.y = HyClamp(m_vVelocity.y - (Hy_UpdateStep() * (m_vVelocity.y > 0.0f ? PLAYER_DECEL : PLAYER_ACCEL)), -PLAYER_MAXVELOCITY, m_vVelocity.y);
+		m_vVelocity.y = HyClamp(m_vVelocity.y - (Hy_UpdateStep() * (m_vVelocity.y > 0.0f ? Values::Get()->m_fPLAYER_DECEL : Values::Get()->m_fPLAYER_ACCEL)), -Values::Get()->m_fPLAYER_MAXVELOCITY, m_vVelocity.y);
 	else
 	{
 		if(m_vVelocity.y > 0.0f)
-			m_vVelocity.y = HyClamp(m_vVelocity.y - (Hy_UpdateStep() * PLAYER_DECEL), 0.0f, m_vVelocity.y);
+			m_vVelocity.y = HyClamp(m_vVelocity.y - (Hy_UpdateStep() * Values::Get()->m_fPLAYER_DECEL), 0.0f, m_vVelocity.y);
 		else if(m_vVelocity.y < 0.0f)
-			m_vVelocity.y = HyClamp(m_vVelocity.y + (Hy_UpdateStep() * PLAYER_DECEL), m_vVelocity.y, 0.0f);
+			m_vVelocity.y = HyClamp(m_vVelocity.y + (Hy_UpdateStep() * Values::Get()->m_fPLAYER_DECEL), m_vVelocity.y, 0.0f);
 	}
 
 	if(Hy_App().Input().IsActionDown(MoveLeft))
-		m_vVelocity.x = HyClamp(m_vVelocity.x - (Hy_UpdateStep() * (m_vVelocity.x > 0.0f ? PLAYER_DECEL : PLAYER_ACCEL)), -PLAYER_MAXVELOCITY, m_vVelocity.x);
+		m_vVelocity.x = HyClamp(m_vVelocity.x - (Hy_UpdateStep() * (m_vVelocity.x > 0.0f ? Values::Get()->m_fPLAYER_DECEL : Values::Get()->m_fPLAYER_ACCEL)), -Values::Get()->m_fPLAYER_MAXVELOCITY, m_vVelocity.x);
 	else if(Hy_App().Input().IsActionDown(MoveRight))
-		m_vVelocity.x = HyClamp(m_vVelocity.x + (Hy_UpdateStep() * (m_vVelocity.x < 0.0f ? PLAYER_DECEL : PLAYER_ACCEL)), m_vVelocity.x, PLAYER_MAXVELOCITY);
+		m_vVelocity.x = HyClamp(m_vVelocity.x + (Hy_UpdateStep() * (m_vVelocity.x < 0.0f ? Values::Get()->m_fPLAYER_DECEL : Values::Get()->m_fPLAYER_ACCEL)), m_vVelocity.x, Values::Get()->m_fPLAYER_MAXVELOCITY);
 	else
 	{
 		if(m_vVelocity.x > 0.0f)
-			m_vVelocity.x = HyClamp(m_vVelocity.x - (Hy_UpdateStep() * PLAYER_DECEL), 0.0f, m_vVelocity.x);
+			m_vVelocity.x = HyClamp(m_vVelocity.x - (Hy_UpdateStep() * Values::Get()->m_fPLAYER_DECEL), 0.0f, m_vVelocity.x);
 		else if(m_vVelocity.x < 0.0f)
-			m_vVelocity.x = HyClamp(m_vVelocity.x + (Hy_UpdateStep() * PLAYER_DECEL), m_vVelocity.x, 0.0f);
+			m_vVelocity.x = HyClamp(m_vVelocity.x + (Hy_UpdateStep() * Values::Get()->m_fPLAYER_DECEL), m_vVelocity.x, 0.0f);
 	}
 
 	pos.Offset(m_vVelocity * Hy_UpdateStep());
@@ -108,7 +104,7 @@ void Player::HandleInput()
 	if(abs(fMagnitude) > 0.0f)
 	{
 		m_Body.AnimSetState(1);
-		m_Body.AnimSetPlayRate(fMagnitude / PLAYER_MAXVELOCITY);
+		m_Body.AnimSetPlayRate(fMagnitude / Values::Get()->m_fPLAYER_MAXVELOCITY);
 	}
 	else
 		m_Body.AnimSetState(0);
@@ -116,7 +112,7 @@ void Player::HandleInput()
 	m_DebugText.TextSet(std::to_string(fMagnitude));
 }
 
-void Player::DoAction(Tile &tileRef)
+bool Player::DoAction(Tile &tileRef)
 {
 	// Checks whether action is valid
 	if(tileRef.IncrementProgress())
@@ -146,9 +142,13 @@ void Player::DoAction(Tile &tileRef)
 				rot.Tween(-20.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { rot.Tween(20.0f, 0.25f, HyTween::QuadIn); });
 			break;
 		}
+
+		return true;
 	}
 	else
 		StopAction();
+
+	return false;
 }
 
 void Player::StopAction()

@@ -2,7 +2,15 @@
 
 Values *Values::sm_pInstance = nullptr;
 
-Values::Values() :	m_uiSTARTING_MONEY(50),
+Values::Values() :	m_fPLAYER_MAXVELOCITY(200.0f),	// pixels per second
+					m_fPLAYER_ACCEL(300.0f),
+					m_fPLAYER_DECEL(600.0f),
+	
+					m_fSTAMINA_RUN(0.02f),
+					m_fSTAMINA_ACTION(0.04f),
+					m_fSTAMINA_AC(0.01f),
+
+					m_uiSTARTING_MONEY(50),
 					m_uiSTARTING_CORNSEEDS(5),
 					m_uiSTARTING_EGGPLANTSEEDS(5),
 					m_uiSTARTING_PUMPKINSEEDS(2),
@@ -59,7 +67,8 @@ Values::Values() :	m_uiSTARTING_MONEY(50),
 					m_uiHarvestEggplant(0),
 					m_uiHarvestPumpkin(0),
 					m_uiCurrentDay(1),
-					m_eEquipedItem(EQUIP_Hoe)
+					m_eEquipedItem(EQUIP_Hoe),
+					m_bAirConditioning(true)
 {
 }
 

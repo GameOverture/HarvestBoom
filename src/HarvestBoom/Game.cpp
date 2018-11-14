@@ -29,7 +29,7 @@ Game::~Game()
 void Game::Construct()
 {
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
-	m_Stamina.pos.Set(50.0f, 50.0f);
+	m_Stamina.pos.Set(20.0f, 50.0f);
 	
 	m_World.Construct();
 	m_World.SetLevel();
@@ -94,17 +94,7 @@ void Game::GameUpdate()
 		if(m_DayNight.IsCycling())
 		{
 			m_Player.HandleInput();
-			m_World.UpdatePlayer(m_Player);
-
-			m_Stamina.Offset((0.0001f * m_Player.GetMagnitude()) * -Hy_UpdateStep());
-
-			//if(Hy_App().Input().IsActionReleased(UseEquip) && m_Player.IsEquipped())
-			//{
-			//	IPlant *pNewPlant = new IPlant(&m_PlantManager);
-			//	pNewPlant->SetPos(m_Player.GetPos());
-			//	pNewPlant->Load();
-			//	m_PlantList.push_back(pNewPlant);
-			//}
+			m_World.UpdatePlayer(m_Player, m_Stamina);
 
 			if(false)
 			{

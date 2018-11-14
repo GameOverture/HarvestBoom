@@ -24,6 +24,14 @@ public:
 	static void Init();
 	static Values *Get();
 
+	const float		m_fPLAYER_MAXVELOCITY;
+	const float		m_fPLAYER_ACCEL;
+	const float		m_fPLAYER_DECEL;
+
+	const float		m_fSTAMINA_RUN;
+	const float		m_fSTAMINA_ACTION;
+	const float		m_fSTAMINA_AC;
+
 	const uint32	m_uiSTARTING_MONEY;
 	const uint32	m_uiSTARTING_CORNSEEDS;
 	const uint32	m_uiSTARTING_EGGPLANTSEEDS;
@@ -86,4 +94,6 @@ public:
 	uint32			m_uiCurrentDay;
 
 	EquipedItemType	m_eEquipedItem;
+
+	bool			m_bAirConditioning;
 };
