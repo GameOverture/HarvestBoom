@@ -5,7 +5,6 @@
 #define DAYNIGHT_SIDEMARGIN 50.0f
 #define DAYNIGHT_TOPMARGIN 50.0f
 
-#define DAYNIGHT_DAYLENGTH 45.0f	// Seconds
 #define DAYNIGHT_DARKNESSAMT 0.7f
 
 DayNight::DayNight(HyEntity2d *pParent) :	HyEntity2d(pParent),
@@ -65,10 +64,10 @@ void DayNight::OffsetTime(float fTimeOffset)
 void DayNight::SetTime(float fTime)
 {
 	m_fTime = fTime;
-	m_fTime = HyClamp(m_fTime, 0.0f, DAYNIGHT_DAYLENGTH);
+	m_fTime = HyClamp(m_fTime, 0.0f, Values::Get()->m_fDAY_LENGTH);
 
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
-	float fNormalized = m_fTime / DAYNIGHT_DAYLENGTH;
+	float fNormalized = m_fTime / Values::Get()->m_fDAY_LENGTH;
 	m_Emblem.pos.Set(DAYNIGHT_SIDEMARGIN + (fNormalized * (vWindowSize.x - (DAYNIGHT_SIDEMARGIN * 2.0f))), vWindowSize.y - DAYNIGHT_TOPMARGIN);
 	m_Emblem.rot.Set(fNormalized * 180.0f);
 

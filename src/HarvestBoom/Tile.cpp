@@ -240,7 +240,22 @@ bool Tile::IncrementProgress()
 				fElapsedTime += Hy_UpdateStep();
 				m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HARVESTPUMPKIN);
 				return true;
-			} 
+			}
+
+			if(m_ProgressBar.GetPercent() == 1.0f)
+			{
+				switch(m_pPlant->GetPlantType())
+				{
+				case PLANTTYPE_Corn:		Values::Get()->m_uiHarvestCorn++; break;
+				case PLANTTYPE_Eggplant:	Values::Get()->m_uiHarvestEggplant++; break;
+				case PLANTTYPE_Pumpkin:		Values::Get()->m_uiHarvestPumpkin++; break;
+				}
+
+				m_ProgressBar.SetPercent(0.0f);
+				m_ProgressBar.SetColor_Growing();
+
+				m_pPlant->AnimSetState(PLANTSTATE_Sprout);
+			}
 		}
 		break;
 
@@ -249,6 +264,11 @@ bool Tile::IncrementProgress()
 		{
 			if(m_pPlant == nullptr)
 			{
+				if(Values::Get()->m_uiSeedsCorn == 0)
+					break;
+
+				Values::Get()->m_uiSeedsCorn--;
+
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Corn, "Plant", "Corn", this);
 				m_pPlant->alpha.Set(0.0f);
 				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
@@ -278,6 +298,11 @@ bool Tile::IncrementProgress()
 		{
 			if(m_pPlant == nullptr)
 			{
+				if(Values::Get()->m_uiSeedsEggplant == 0)
+					break;
+
+				Values::Get()->m_uiSeedsEggplant--;
+
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Eggplant, "Plant", "Eggplant", this);
 				m_pPlant->alpha.Set(0.0f);
 				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
@@ -307,6 +332,11 @@ bool Tile::IncrementProgress()
 		{
 			if(m_pPlant == nullptr)
 			{
+				if(Values::Get()->m_uiSeedsPumpkin == 0)
+					break;
+
+				Values::Get()->m_uiSeedsPumpkin--;
+
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Pumpkin, "Plant", "Pumpkin", this);
 				m_pPlant->alpha.Set(0.0f);
 				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
@@ -336,6 +366,11 @@ bool Tile::IncrementProgress()
 		{
 			if(m_pPlant == nullptr)
 			{
+				if(Values::Get()->m_uiSeedsGernaium == 0)
+					break;
+
+				Values::Get()->m_uiSeedsGernaium--;
+
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Gernaium, "Plant", "Gernaium", this);
 				m_pPlant->alpha.Set(0.0f);
 				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
@@ -365,6 +400,11 @@ bool Tile::IncrementProgress()
 		{
 			if(m_pPlant == nullptr)
 			{
+				if(Values::Get()->m_uiSeedsMarigold == 0)
+					break;
+
+				Values::Get()->m_uiSeedsMarigold--;
+
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Marigold, "Plant", "Marigold", this);
 				m_pPlant->alpha.Set(0.0f);
 				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
@@ -394,6 +434,11 @@ bool Tile::IncrementProgress()
 		{
 			if(m_pPlant == nullptr)
 			{
+				if(Values::Get()->m_uiSeedsVine == 0)
+					break;
+
+				Values::Get()->m_uiSeedsVine--;
+
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Vine, "Plant", "Vine", this);
 				m_pPlant->alpha.Set(0.0f);
 				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
@@ -424,10 +469,34 @@ bool Tile::IncrementProgress()
 
 bool Tile::IncrementGrowing()
 {
-	if(m_pPlant == nullptr || m_pPlant->IsPlanted() == false)
+	if(m_pPlant == nullptr || m_pPlant->IsPlanted() == false || m_pPlant->IsFullyGrown())
 		return false;
 
-	//m_pPlant->IncrementGrowth();
+	float fGrowTime = 0.0f;
+	switch(m_pPlant->GetPlantType())
+	{
+	case PLANTTYPE_Corn:		fGrowTime = Values::Get()->m_fGROW_CORN;		break;
+	case PLANTTYPE_Eggplant:	fGrowTime = Values::Get()->m_fGROW_EGGPLANT;	break;
+	case PLANTTYPE_Pumpkin:		fGrowTime = Values::Get()->m_fGROW_PUMPKIN;		break;
+	case PLANTTYPE_Gernaium:	fGrowTime = Values::Get()->m_fGROW_GERNAIUM;	break;
+	case PLANTTYPE_Marigold:	fGrowTime = Values::Get()->m_fGROW_MARIGOLD;	break;
+	case PLANTTYPE_Vine:		fGrowTime = Values::Get()->m_fGROW_VINE;		break;
+	}
+	float fElapsedTime = m_ProgressBar.GetPercent() * fGrowTime;
+	fElapsedTime += Hy_UpdateStep();
+
+	m_ProgressBar.SetPercent(fElapsedTime / fGrowTime);
+	m_ProgressBar.SetEnabled(false);
+
+	if(m_ProgressBar.GetPercent() >= 0.5f)
+		m_pPlant->AnimSetState(PLANTSTATE_Growing);
+
+	if(m_ProgressBar.GetPercent() == 1.0f)
+	{
+		m_ProgressBar.SetPercent(0.0f);
+		m_ProgressBar.SetColor_Harvesting();
+		m_pPlant->AnimSetState(PLANTSTATE_Harvest);	// Indicates fully grown
+	}
 
 	return true;
 }

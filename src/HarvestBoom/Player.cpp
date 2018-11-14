@@ -130,6 +130,11 @@ void Player::DoAction(Tile &tileRef)
 				m_pEquipment->rot.Tween(-80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
 			break;
 
+		case EQUIP_Harvest:
+			if(rot.IsTweening() == false)
+				rot.Tween(-10.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { rot.Tween(10.0f, 0.25f, HyTween::QuadIn); });
+			break;
+
 		case EQUIP_Corn:
 		case EQUIP_Eggplant:
 		case EQUIP_Pumpkin:

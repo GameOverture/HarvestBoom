@@ -67,6 +67,9 @@ class Tile : public HyEntity2d
 		void SetColor_Growing() {
 			m_ProgressBarFill.SetTint(250.0f / 255.0f, 248.0f / 255.0f, 153.0f / 255.0f);
 		}
+		void SetColor_Harvesting() {
+			m_ProgressBarFill.SetTint(230.0f / 255.0f, 140.0f / 255.0f, 86.0f / 255.0f);
+		}
 
 		float GetPercent() {
 			return m_ProgressBarFill.scale.X();

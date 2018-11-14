@@ -29,5 +29,5 @@ bool Plant::IsPlanted()
 
 bool Plant::IsFullyGrown()
 {
-	return false;
+	return AnimGetState() == PLANTSTATE_Harvest;
 }

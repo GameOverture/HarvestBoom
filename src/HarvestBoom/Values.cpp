@@ -6,21 +6,28 @@ Values::Values() :	m_uiSTARTING_MONEY(50),
 					m_uiSTARTING_CORNSEEDS(5),
 					m_uiSTARTING_EGGPLANTSEEDS(5),
 					m_uiSTARTING_PUMPKINSEEDS(2),
+
 					m_uiGIFTED_GERNAIUMSEEDS(3),
 					m_uiGIFTED_MARIGOLDSEEDS(3),
 					m_uiGIFTED_VINESEEDS(1),
+
 					m_uiHARVEST_CORNVALUE(10),
 					m_uiHARVEST_EGGPLANTVALUE(20),
 					m_uiHARVEST_PUMPKINVALUE(50),
+
 					m_uiCOST_CORNSEEDS(2),
 					m_uiCOST_EGGPLANTSEEDS(4),
 					m_uiCOST_PUMPKINSEEDS(10),
 					m_uiCOST_GERNAIUMSEEDS(1),
 					m_uiCOST_MARIGOLDSEEDS(2),
 					m_uiCOST_VINESEEDS(5),
+
 					m_uiBILLS_RENT(30),
 					m_uiBILLS_FOOD(25),
 					m_uiBILLS_AC(10),
+
+					m_fDAY_LENGTH(30.0f),//90.0f),
+
 					m_fDURATION_HOEDIRT(5.0f),
 					m_fDURATION_PLANTCORN(2.0f),
 					m_fDURATION_PLANTEGGPLANT(5.0f),
@@ -31,7 +38,16 @@ Values::Values() :	m_uiSTARTING_MONEY(50),
 					m_fDURATION_HARVESTCORN(1.0f),
 					m_fDURATION_HARVESTEGGPLANT(2.0f),
 					m_fDURATION_HARVESTPUMPKIN(5.0f),
+
+					m_fGROW_CORN(m_fDAY_LENGTH * 0.75f),
+					m_fGROW_EGGPLANT(m_fDAY_LENGTH * 1.5f),
+					m_fGROW_PUMPKIN(m_fDAY_LENGTH * 3.75f),
+					m_fGROW_GERNAIUM(m_fDAY_LENGTH * 0.5f),
+					m_fGROW_MARIGOLD(m_fDAY_LENGTH * 0.75f),
+					m_fGROW_VINE(m_fDAY_LENGTH * 1.0f),
+
 					m_uiENABLE_DEFENSE_DAY(3),
+
 					m_iSavings(m_uiSTARTING_MONEY),
 					m_uiSeedsCorn(m_uiSTARTING_CORNSEEDS),
 					m_uiSeedsEggplant(m_uiSTARTING_EGGPLANTSEEDS),
