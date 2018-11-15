@@ -107,6 +107,7 @@ void World::SetLevel()
 	switch(Values::Get()->m_uiCurrentDay)
 	{
 	case 1:	SetAsLevel1(); break;
+	case 2:	SetAsLevel2(); break;
 	}
 }
 
@@ -146,11 +147,46 @@ void World::SetAsLevel1()
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
 			m_pTileGrid[i][j]->SetTileState();
 	}
-
-	// HACK: This gets the equiped item shown on UI initially
-	//m_pHousePanel->Show();
-	//m_pHousePanel->Hide();
 }
+
+void World::SetAsLevel2()
+{
+	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
+
+	//      0123456789012345678901234
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________HHHHHH__________");
+	SetRow("_________HHHHHH__________");
+	SetRow("_________HHHHHH__________");
+	SetRow("_________HHDHHH__________");
+	SetRow("_________________________");
+	SetRow("___________++____________");
+	SetRow("_________++++++__________");
+	SetRow("_________++++++__________");
+	SetRow("_________++++++__________");
+	SetRow("_________++++++__________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("___________++____________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+	SetRow("_________________________");
+
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+			m_pTileGrid[i][j]->SetTileState();
+	}
+}
+
 
 void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 {

@@ -108,7 +108,7 @@ void Game::GameUpdate()
 		{
 			pCam->pos.Tween(TILE_SIZE * 12 * 2, TILE_SIZE * 14 * 2, 1.5f, HyTween::QuadInOut);
 
-			m_DayNight.Reset();
+			m_DayNight.HideUI();
 			m_eGameState = GAMESTATE_GoHome;
 		}
 		break;
@@ -116,6 +116,7 @@ void Game::GameUpdate()
 	case GAMESTATE_GoHome:
 		if(pCam->pos.IsTweening() == false)
 		{
+			m_BillsPanel.Construct();
 			m_BillsPanel.Show();
 			m_eGameState = GAMESTATE_Bills;
 		}
@@ -126,7 +127,10 @@ void Game::GameUpdate()
 		{
 			Values::Get()->m_uiCurrentDay++;
 			if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
+			{
+				m_DayNight.FadeToPitchBlack();
 				m_eGameState = GAMESTATE_Sleep;
+			}
 			else
 				m_eGameState = GAMESTATE_Bugs;
 		}
@@ -136,7 +140,12 @@ void Game::GameUpdate()
 		break;
 
 	case GAMESTATE_Sleep:
-		m_World.SetLevel();
+		if(m_DayNight.IsPitchBlack())
+		{
+			m_World.SetLevel();
+			m_DayNight.Start();
+			m_eGameState = GAMESTATE_Playing;
+		}
 		break;
 	}
 

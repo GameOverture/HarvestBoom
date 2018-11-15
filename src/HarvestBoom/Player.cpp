@@ -172,7 +172,9 @@ void Player::Sync()
 		break;
 	case EQUIP_Harvest:
 		delete m_pEquipment;
-		m_pEquipment = nullptr;
+		m_pEquipment = HY_NEW HySprite2d("Equip", "Sythe", this);
+		m_pEquipment->pos.Set(4.0f, 16.0f);
+		m_pEquipment->Load();
 		break;
 	case EQUIP_Corn:
 	case EQUIP_Eggplant:
@@ -181,7 +183,9 @@ void Player::Sync()
 	case EQUIP_Marigold:
 	case EQUIP_Vine:
 		delete m_pEquipment;
-		m_pEquipment = nullptr;
+		m_pEquipment = HY_NEW HySprite2d("Equip", "Seeds", this);
+		m_pEquipment->pos.Set(9.0f, 20.0f);
+		m_pEquipment->Load();
 		break;
 	}
 }

@@ -39,8 +39,11 @@ public:
 	bool IsCycling();
 	bool IsNight();
 
-	void Reset();
+	void HideUI();
 	void Start();
+
+	void FadeToPitchBlack();
+	bool IsPitchBlack();
 
 	void OffsetTime(float fTimeOffset);
 	void SetTime(float fTime);

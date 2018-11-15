@@ -3,6 +3,7 @@
 
 #include "IPanel.h"
 #include "FoodStuffs.h"
+#include "ContinueButton.h"
 
 class BillsPanel : public IPanel
 {
@@ -32,12 +33,15 @@ class BillsPanel : public IPanel
 	HyPrimitive2d	m_BarLine;
 	HyText2d		m_TotalVal;
 
+	ContinueButton *m_pContinueBtn;
+
 public:
 	BillsPanel(HyEntity2d *pParent);
 	virtual ~BillsPanel();
 
 	virtual void Construct() override;
 	virtual void Show() override;
+	virtual void Hide() override;
 
 	virtual void OnUpdate() override;
 

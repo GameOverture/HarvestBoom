@@ -22,8 +22,10 @@ class Tile : public HyEntity2d
 	TileType			m_eTileType;
 
 	HyPrimitive2d		m_Ground;
-	HySprite2d *		m_pTexture;
-	HySprite2d *		m_pTilledOverlay;
+	HySprite2d 			m_Grass;
+	HySprite2d 			m_Dirt;
+	HySprite2d 			m_TilledOverlay;
+	HySprite2d			m_House;
 
 	HyPrimitive2d		m_SelectedRect;
 

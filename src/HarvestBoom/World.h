@@ -29,6 +29,7 @@ public:
 
 	void SetLevel();
 	void SetAsLevel1();
+	void SetAsLevel2();
 
 	void UpdatePlayer(Player &playerRef, Stamina &staminaRef);
 

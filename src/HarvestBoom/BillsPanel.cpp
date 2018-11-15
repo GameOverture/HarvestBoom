@@ -19,12 +19,14 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :	IPanel(pParent),
 												m_AirConditioningVal("Game", "Small", this),
 												m_BarLineOutline(this),
 												m_BarLine(this),
-												m_TotalVal("Game", "Small", this)
+												m_TotalVal("Game", "Small", this),
+												m_pContinueBtn(nullptr)
 {
 }
 
 BillsPanel::~BillsPanel()
 {
+	delete m_pContinueBtn;
 }
 
 #define REVENU_COLORS 58.0f / 255.0f, 221.0f / 255.0f,  32.0f / 255.0f
@@ -50,7 +52,8 @@ void BillsPanel::Construct()
 
 	m_FoodStocks.Construct();
 	m_FoodStocks.SetTitle("Click to sell");
-	m_FoodStocks.pos.Set(400.0f, m_ptFrameVerts[1].y - 140.0f);
+	m_FoodStocks.pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
+	m_FoodStocks.Hide();
 	m_Scroll.SetDisplayOrder(m_FoodStocks.GetDisplayOrder() - 1);
 
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
@@ -133,11 +136,33 @@ void BillsPanel::Construct()
 
 	pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
 	SetEnabled(true);
+
+	if(m_pContinueBtn == nullptr)
+	{
+		InfoPanelInit init = {};
+		init.panel_LoadPath.Set("Game", "EquipButton");
+		init.text_LoadPath.Set("Game", "Small");
+		HySetVec(init.text_LocalOffSet, 4, 20);
+		HySetVec(init.text_ScaleBox, 70, 35);
+		m_pContinueBtn = HY_NEW ContinueButton(init, this);
+		m_pContinueBtn->Load();
+	}
+
+	m_pContinueBtn->pos.Set(vWindowSize.x, 15);
+	m_pContinueBtn->alpha.Set(0.0f);
+	m_pContinueBtn->GetTextPtr()->TextSetState(1);
+	m_pContinueBtn->GetTextPtr()->TextSet("Sleep>");
 }
 
 /*virtual*/ void BillsPanel::Show() /*override*/
 {
+	alpha.Set(1.0f);
 	IPanel::Show();
+}
+
+void BillsPanel::Hide()
+{
+	alpha.Tween(0.0f, 1.0f, HyTween::Linear, [this](IHyNode *pThis) { SetEnabled(false); m_bIsShowing = false; });
 }
 
 /*virtual*/ void BillsPanel::OnUpdate() /*override*/
@@ -175,7 +200,12 @@ void BillsPanel::Construct()
 	if(m_AirConditioning.alpha.Get() == 1.0f && m_TotalVal.alpha.Get() == 0.0f)
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
 	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.IsShowing() == false && m_FoodStocks.IsTransition() == false)
+	{
 		m_FoodStocks.Show();
+		m_pContinueBtn->pos.Tween(Hy_App().Window().GetWindowSize().x - 100, 15, 1.0f, HyTween::QuadOut);
+		m_pContinueBtn->alpha.Set(1.0f);
+		m_pContinueBtn->EnableMouseInput(this);
+	}
 }
 
 void BillsPanel::Sync()

@@ -23,8 +23,8 @@
     <Filter Include="Screens">
       <UniqueIdentifier>{629c887d-95e3-40f2-a935-b0f0eec679b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Actors\Attachments">
-      <UniqueIdentifier>{fc500b8d-1746-4a2d-bac8-e4d82b1a3f64}</UniqueIdentifier>
+    <Filter Include="Game\UI\Buttons">
+      <UniqueIdentifier>{1b5bfdd1-9a12-4e21-aa49-317648f50b55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,20 +85,20 @@
     <ClCompile Include="Values.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="EquipButton.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="BuyButton.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Hoe.cpp">
-      <Filter>Game\Actors\Attachments</Filter>
-    </ClCompile>
     <ClCompile Include="Plant.cpp">
       <Filter>Game\Actors</Filter>
     </ClCompile>
     <ClCompile Include="FoodStuffs.cpp">
       <Filter>Game\UI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="BuyButton.cpp">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipButton.cpp">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueButton.cpp">
+      <Filter>Game\UI\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,20 +164,20 @@
     <ClInclude Include="Values.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="EquipButton.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="BuyButton.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Hoe.h">
-      <Filter>Game\Actors\Attachments</Filter>
-    </ClInclude>
     <ClInclude Include="Plant.h">
       <Filter>Game\Actors</Filter>
     </ClInclude>
     <ClInclude Include="FoodStuffs.h">
       <Filter>Game\UI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="BuyButton.h">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipButton.h">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueButton.h">
+      <Filter>Game\UI\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,8 +5,10 @@
 Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_eTileType(Unknown),
 									m_Ground(this),
-									m_pTexture(nullptr),
-									m_pTilledOverlay(nullptr),
+									m_Grass("Tiles", "Grass", this),
+									m_Dirt("Tiles", "Dirt", this),
+									m_TilledOverlay("Tiles", "Dirt", this),
+									m_House("Game", "House", this),
 									m_SelectedRect(this),
 									m_pNeighborNorth(nullptr),
 									m_pNeighborEast(nullptr),
@@ -64,12 +66,15 @@ void Tile::SetNeighbors(Tile *pNorth, Tile *pEast, Tile *pSouth, Tile *pWest, Ti
 
 void Tile::SetType(TileType eType)
 {
+	if(m_eTileType == eType)
+		return;
+	
 	m_eTileType = eType;
 	switch(m_eTileType)
 	{
 	case Grass:
-		delete m_pTexture;
-		m_pTexture = HY_NEW HySprite2d("Tiles", "Grass", this);
+		m_Dirt.SetEnabled(false);
+		m_TilledOverlay.SetEnabled(false);
 		m_Ground.SetEnabled(false);
 		break;
 
@@ -84,11 +89,11 @@ void Tile::SetType(TileType eType)
 		break;
 
 	case Dirt:
-		delete m_pTexture;
-		m_pTexture = HY_NEW HySprite2d("Tiles", "Dirt", this);
-		m_pTilledOverlay = HY_NEW HySprite2d("Tiles", "Dirt", this);
-		m_pTilledOverlay->AnimSetState(1);
-		m_pTilledOverlay->alpha.Set(0.0f);
+		m_Grass.SetEnabled(false);
+		m_Dirt.SetEnabled(true);
+		m_TilledOverlay.SetEnabled(true);
+		m_TilledOverlay.AnimSetState(1);
+		m_TilledOverlay.alpha.Set(0.0f);
 		m_Ground.SetEnabled(false);
 		break;
 
@@ -96,6 +101,8 @@ void Tile::SetType(TileType eType)
 		m_Ground.topColor.Set(0.6f, 0.8f, 0.196078f);
 		break;
 	}
+
+	m_House.SetEnabled(false);
 }
 
 void Tile::SetTileState()
@@ -104,40 +111,40 @@ void Tile::SetTileState()
 	{
 	case Grass:
 		if(m_pNeighborNorth && m_pNeighborNorth->GetTileType() == Dirt)
-			m_pTexture->AnimSetState(GRASS_South);
+			m_Grass.AnimSetState(GRASS_South);
 		if(m_pNeighborEast && m_pNeighborEast->GetTileType() == Dirt)
-			m_pTexture->AnimSetState(GRASS_West);
+			m_Grass.AnimSetState(GRASS_West);
 		if(m_pNeighborSouth && m_pNeighborSouth->GetTileType() == Dirt)
-			m_pTexture->AnimSetState(GRASS_North);
+			m_Grass.AnimSetState(GRASS_North);
 		if(m_pNeighborWest && m_pNeighborWest->GetTileType() == Dirt)
-			m_pTexture->AnimSetState(GRASS_East);
+			m_Grass.AnimSetState(GRASS_East);
 
 		if(m_pNeighborNorthEast && m_pNeighborNorthEast->GetTileType() == Dirt &&
 		   m_pNeighborNorth && m_pNeighborNorth->GetTileType() == Grass &&
 		   m_pNeighborEast && m_pNeighborEast->GetTileType() == Grass)
 		{
-			m_pTexture->AnimSetState(GRASS_SouthWest);
+			m_Grass.AnimSetState(GRASS_SouthWest);
 		}
 
 		if(m_pNeighborSouthEast && m_pNeighborSouthEast->GetTileType() == Dirt &&
 		   m_pNeighborSouth && m_pNeighborSouth->GetTileType() == Grass &&
 		   m_pNeighborEast && m_pNeighborEast->GetTileType() == Grass)
 		{
-			m_pTexture->AnimSetState(GRASS_NorthWest);
+			m_Grass.AnimSetState(GRASS_NorthWest);
 		}
 
 		if(m_pNeighborSouthWest && m_pNeighborSouthWest->GetTileType() == Dirt &&
 		   m_pNeighborSouth && m_pNeighborSouth->GetTileType() == Grass &&
 		   m_pNeighborWest && m_pNeighborWest->GetTileType() == Grass)
 		{
-			m_pTexture->AnimSetState(GRASS_NorthEast);
+			m_Grass.AnimSetState(GRASS_NorthEast);
 		}
 
 		if(m_pNeighborNorthWest && m_pNeighborNorthWest->GetTileType() == Dirt &&
 		   m_pNeighborNorth && m_pNeighborNorth->GetTileType() == Grass &&
 		   m_pNeighborWest && m_pNeighborWest->GetTileType() == Grass)
 		{
-			m_pTexture->AnimSetState(GRASS_SouthEast);
+			m_Grass.AnimSetState(GRASS_SouthEast);
 		}
 
 		break;
@@ -148,9 +155,10 @@ void Tile::SetTileState()
 		   m_pNeighborWest->GetTileType() != House && m_pNeighborWest->GetTileType() != HouseDoor &&
 		   m_pNeighborSouth->GetTileType() != House)
 		{
-			delete m_pTexture;
-			m_pTexture = HY_NEW HySprite2d("Game", "House", this);
+			m_House.SetEnabled(true);
 		}
+		else
+			m_House.SetEnabled(false);
 		break;
 	}
 }
@@ -219,7 +227,7 @@ bool Tile::IncrementProgress()
 			float fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_HOEDIRT;
 			fElapsedTime += Hy_UpdateStep();
 			m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HOEDIRT);
-			m_pTilledOverlay->alpha.Set(m_ProgressBar.GetPercent());
+			m_TilledOverlay.alpha.Set(m_ProgressBar.GetPercent());
 
 			m_bIsTilled = m_ProgressBar.GetPercent() == 1.0f;
 			return true;
@@ -279,7 +287,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Corn, "Plant", "Corn", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -313,7 +321,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Eggplant, "Plant", "Eggplant", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -352,7 +360,7 @@ bool Tile::IncrementProgress()
 					{
 						validTileList[i]->m_pPlant = HY_NEW Plant(PLANTTYPE_Pumpkin, "Plant", "Pumpkin", this);
 						validTileList[i]->m_pPlant->alpha.Set(0.0f);
-						validTileList[i]->m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+						validTileList[i]->m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
 						validTileList[i]->m_pPlant->Load();
 					}
 					else
@@ -390,7 +398,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Gernaium, "Plant", "Gernaium", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -424,7 +432,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Marigold, "Plant", "Marigold", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -458,7 +466,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Vine, "Plant", "Vine", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_pTilledOverlay->GetDisplayOrder() + 1);
+				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();

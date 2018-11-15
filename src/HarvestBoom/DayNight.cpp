@@ -42,18 +42,21 @@ bool DayNight::IsNight()
 	return m_eState == STATE_Night;
 }
 
-void DayNight::Reset()
+void DayNight::HideUI()
 {
 	m_Emblem.alpha.Tween(0.0f, -1.0f);
 	m_Bar.alpha.Tween(0.0f, -1.0f);
 	m_StaminaRef.pos.Tween(-100.0f, 50.0f, 1.0f);
-
 	m_WorldRef.GetHousePanel()->HideEquipedUI();
 }
 
 void DayNight::Start()
 {
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
+
+	m_fTime = 0.0f;
+
+	m_DayNight.alpha.Tween(0.0f, 1.0f);
 
 	m_MainText.SetEnabled(true);
 	m_MainText.pos.Set(vWindowSize.x * 0.5f, vWindowSize.y * 0.5f);
@@ -64,16 +67,30 @@ void DayNight::Start()
 
 	switch(m_MainText.GetTag())
 	{
-	case 0:	m_MainText.TextSet("Good Morning!");
-#ifndef DEV_QUICKMODE
-		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
-#endif
+	case 0:	m_MainText.TextSet("");
 		break;
-	case 1:	m_MainText.TextSet("Get Set...");	break;
-	case 2:	m_MainText.TextSet("GO!");	break;
+	case 1:	m_MainText.TextSet("Good Morning!");
+		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
+		break;
+	case 2:
+		m_MainText.TextSet("Get Set...");
+		break;
+	case 3:
+		m_MainText.TextSet("GO!");
+		break;
 	}
 
 	m_eState = STATE_Intro;
+}
+
+void DayNight::FadeToPitchBlack()
+{
+	m_DayNight.alpha.Tween(1.0f, 1.0f);
+}
+
+bool DayNight::IsPitchBlack()
+{
+	return m_DayNight.alpha.Get() == 1.0f;
 }
 
 void DayNight::OffsetTime(float fTimeOffset)
@@ -117,7 +134,7 @@ void DayNight::SetTime(float fTime)
 	m_DayNight.ClearScissor(false);
 	m_MainText.ClearScissor(false);
 
-	Reset();
+	HideUI();
 	Load();
 }
 
@@ -146,8 +163,10 @@ void DayNight::SetTime(float fTime)
 		if(m_MainText.scale.IsTweening() == false)
 		{
 			m_MainText.SetTag(m_MainText.GetTag() + 1);
-			if(m_MainText.GetTag() == 3)
+			if(m_MainText.GetTag() == 4)
 			{
+				m_MainText.SetTag(0);
+
 				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_DAYTIME_16BIT);
 
 				m_Bar.alpha.Tween(1.0f, 1.0f);

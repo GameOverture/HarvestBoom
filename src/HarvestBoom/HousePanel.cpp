@@ -8,7 +8,7 @@ HousePanel::HousePanel(const InfoPanelInit &equipInfoPanelInitRef, const InfoPan
 																																	m_BtnHoeEquip(equipInfoPanelInitRef, this),
 																																	m_BtnHoeDecal("Equip", "Hoe", &m_BtnHoeEquip),
 																																	m_BtnHarvestEquip(equipInfoPanelInitRef, this),
-																																	m_BtnHarvestDecal("Game", "Player", &m_BtnHarvestEquip),
+																																	m_BtnHarvestDecal("Equip", "Sythe", &m_BtnHarvestEquip),
 																																	m_BtnCornEquip(equipInfoPanelInitRef, this),
 																																	m_BtnCornDecal("Plant", "Corn", &m_BtnCornEquip),
 																																	m_BtnCornBuy(buyInfoPanelInitRef, this),
@@ -91,8 +91,8 @@ HousePanel::~HousePanel()
 	m_BtnHarvestEquip.SetTag(EQUIP_Harvest);
 
 	m_BtnHarvestDecal.pos.Set(0.0f, 0.0f);
-	m_BtnHarvestDecal.pos.Offset(28.0f, 15.0f);
-	m_BtnHarvestDecal.scale.Set(1.25f, 1.25f);
+	m_BtnHarvestDecal.pos.Offset(fDecalOffsetX + 10.0f, fDecalOffsetY + 25.0f);
+	m_BtnHarvestDecal.scale.Set(2.0f, 2.0f);
 	m_BtnHarvestEquip.GetTextPtr()->SetDisplayOrder(m_BtnHarvestDecal.GetDisplayOrder() + 1);
 
 	ChildAppend(m_BtnCornEquip);
