@@ -17,7 +17,6 @@ protected:
 
 public:
 	IPanel(HyEntity2d *pParent);
-	IPanel(std::vector<glm::vec2> frameVertList, HyEntity2d *pParent);
 	virtual ~IPanel();
 
 	virtual void Construct();

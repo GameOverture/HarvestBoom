@@ -36,8 +36,15 @@ class Game : public HyEntity2d
 		GAMESTATE_Sleep,
 	};
 	GameState				m_eGameState;
-
 	float					m_fElapsedTime;
+
+	enum BugState
+	{
+		BUGSTATE_CreateBugs = 0,
+		BUGSTATE_March,
+
+	};
+	BugState				m_eBugState;
 
 public:
 	Game();
@@ -49,4 +56,3 @@ public:
 	bool BugUpdate();
 	void DebugUpdate();
 };
-

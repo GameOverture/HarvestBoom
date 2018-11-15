@@ -32,6 +32,7 @@ public:
 	void SetAsLevel2();
 	void SetAsLevel3();
 
+	void CleanupTiles();
 	void UpdatePlayer(Player &playerRef, Stamina &staminaRef);
 
 	void Reset();

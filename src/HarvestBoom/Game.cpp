@@ -110,6 +110,7 @@ void Game::GameUpdate()
 		{
 			pCam->pos.Tween(TILE_SIZE * 12 * 2, TILE_SIZE * 14 * 2, 1.5f, HyTween::QuadInOut);
 
+			m_World.CleanupTiles();
 			m_DayNight.HideUI();
 			m_eGameState = GAMESTATE_GoHome;
 		}
@@ -176,6 +177,7 @@ void Game::GameUpdate()
 
 bool Game::BugUpdate()
 {
+
 	return true;
 }
 

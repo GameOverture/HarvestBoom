@@ -225,6 +225,16 @@ void World::SetAsLevel3()
 	}
 }
 
+void World::CleanupTiles()
+{
+	// Cleanup from last update
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+			m_pTileGrid[i][j]->Cleanup();
+	}
+}
+
 
 void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 {
@@ -234,12 +244,7 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 	playerRef.SetDisplayOrder(((WORLD_HEIGHT - iPlayerInRow) * DISPLAYORDER_PerRow) + DISPLAYORDER_Player);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Cleanup from last update
-	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
-	{
-		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-			m_pTileGrid[i][j]->Cleanup();
-	}
+	CleanupTiles();
 
 	// NOTE: Cannot combine with above
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)

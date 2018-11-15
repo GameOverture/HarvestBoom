@@ -12034,6 +12034,56 @@
     "Spine": {
     },
     "Sprites": {
+        "Bugs/Ant": [
+            {
+                "bounce": false,
+                "duration": 0.6000000238418579,
+                "frames": [
+                    {
+                        "checksum": 490839208,
+                        "duration": 0.30000001192092896,
+                        "id": 35,
+                        "offsetX": -9,
+                        "offsetY": -18
+                    },
+                    {
+                        "checksum": 2480154456,
+                        "duration": 0.30000001192092896,
+                        "id": 36,
+                        "offsetX": -9,
+                        "offsetY": -18
+                    }
+                ],
+                "loop": true,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "Bugs/Beetle": [
+            {
+                "bounce": false,
+                "duration": 0.6000000238418579,
+                "frames": [
+                    {
+                        "checksum": 1312516566,
+                        "duration": 0.30000001192092896,
+                        "id": 37,
+                        "offsetX": -9,
+                        "offsetY": -9
+                    },
+                    {
+                        "checksum": 3695746670,
+                        "duration": 0.30000001192092896,
+                        "id": 38,
+                        "offsetX": -9,
+                        "offsetY": -9
+                    }
+                ],
+                "loop": true,
+                "name": "",
+                "reverse": false
+            }
+        ],
         "Equip/Hoe": [
             {
                 "bounce": false,
