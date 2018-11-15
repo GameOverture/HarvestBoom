@@ -5,12 +5,14 @@ class Stamina : public HyEntity2d
 {
 	float				m_fStamina;
 
-	HyPrimitive2d		m_OuterFrame;
-	HyPrimitive2d		m_Fill;
+	HySprite2d			m_OuterFrame;
+	HySprite2d			m_Fill;
 
 public:
 	Stamina(HyEntity2d *pParent);
 	virtual ~Stamina();
+
+	virtual void Stamina::OnLoaded() override;
 
 	void Offset(float fOffset);
 	void Set(float fStaminaAmt);

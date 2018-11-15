@@ -2,17 +2,22 @@
 #include "pch.h"
 
 #include "IPanel.h"
-#include "FoodStocks.h"
+#include "FoodStuffs.h"
 
 class BillsPanel : public IPanel
 {
-	FoodStocks		m_FoodStocks;
+	HySprite2d		m_Scroll;
+	HyText2d		m_BillsText;
+
+	HyPrimitive2d	m_FoodStocksBg;
+	FoodStuffs		m_FoodStocks;
 
 	HyText2d		m_Savings;
 	HyText2d		m_SavingsVal;
 
 	HyText2d		m_Harvest;
 	HyText2d		m_HarvestVal;
+	uint32			m_uiHarvestSoldAmt;
 
 	HyText2d		m_Rent;
 	HyText2d		m_RentVal;
@@ -20,9 +25,10 @@ class BillsPanel : public IPanel
 	HyText2d		m_Food;
 	HyText2d		m_FoodVal;
 
-	HyText2d		m_Heat;
-	HyText2d		m_HeatVal;
+	HyText2d		m_AirConditioning;
+	HyText2d		m_AirConditioningVal;
 
+	HyPrimitive2d	m_BarLineOutline;
 	HyPrimitive2d	m_BarLine;
 	HyText2d		m_TotalVal;
 
@@ -31,6 +37,9 @@ public:
 	virtual ~BillsPanel();
 
 	virtual void Construct() override;
+	virtual void Show() override;
 
 	virtual void OnUpdate() override;
+
+	void Sync();
 };

@@ -6,9 +6,9 @@
 
 Game::Game() :	HyEntity2d(nullptr),
 				m_Player(this),
-				m_DayNight(this),
 				m_Stamina(this),
 				m_World(this),
+				m_DayNight(m_World, m_Stamina, this),
 				m_IntroPanel(this),
 				m_BillsPanel(this),
 				m_DebugGrid(this),
@@ -29,7 +29,7 @@ Game::~Game()
 void Game::Construct()
 {
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
-	m_Stamina.pos.Set(20.0f, 50.0f);
+	m_Stamina.pos.Set(-100.0f, 50.0f);
 	
 	m_World.Construct();
 	m_World.SetLevel();
@@ -48,13 +48,6 @@ void Game::Construct()
 void Game::GameUpdate()
 {
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
-	pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
-	pCam->SetZoom(2.0f);
-	//float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
-	//if(pCam->GetZoom() > fZoom)
-	//	pCam->SetZoom(fZoom);
-	//else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
-	//	pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
 
 	switch(m_eGameState)
 	{
@@ -93,10 +86,35 @@ void Game::GameUpdate()
 	case GAMESTATE_Playing:
 		if(m_DayNight.IsCycling())
 		{
+			pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
+			pCam->SetZoom(2.0f);
+			//float fZoom = 1.0f - (HyClamp(m_Player.GetMagnitude(), 0.0f, 100.0f) * 0.001f);
+			//if(pCam->GetZoom() > fZoom)
+			//	pCam->SetZoom(fZoom);
+			//else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
+			//	pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
+
+
 			m_Player.HandleInput();
 			m_World.UpdatePlayer(m_Player, m_Stamina);
 		}
 		else
+		{
+			m_World.Reset();
+			m_Player.ZeroVelocity();
+		}
+		
+		if(m_DayNight.IsNight())
+		{
+			pCam->pos.Tween(TILE_SIZE * 12 * 2, TILE_SIZE * 14 * 2, 1.5f, HyTween::QuadInOut);
+
+			m_DayNight.Reset();
+			m_eGameState = GAMESTATE_GoHome;
+		}
+		break;
+
+	case GAMESTATE_GoHome:
+		if(pCam->pos.IsTweening() == false)
 		{
 			m_BillsPanel.Show();
 			m_eGameState = GAMESTATE_Bills;

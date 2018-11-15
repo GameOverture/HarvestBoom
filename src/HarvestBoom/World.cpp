@@ -148,8 +148,8 @@ void World::SetAsLevel1()
 	}
 
 	// HACK: This gets the equiped item shown on UI initially
-	m_pHousePanel->Show();
-	m_pHousePanel->Hide();
+	//m_pHousePanel->Show();
+	//m_pHousePanel->Hide();
 }
 
 void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
@@ -209,7 +209,10 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 		if(Hy_App().Input().IsActionDown(UseEquip) && pPlayerTile->GetTileType() == Dirt)
 		{
 			if(playerRef.DoAction(*pPlayerTile))
+			{
 				staminaRef.Offset(Values::Get()->m_fSTAMINA_ACTION * -Hy_UpdateStep());
+				m_pHousePanel->Sync();
+			}
 		}
 		else
 			playerRef.StopAction();
@@ -248,6 +251,17 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 
 	float fRunNormalized = playerRef.GetMagnitude() / Values::Get()->m_fPLAYER_MAXVELOCITY;
 	staminaRef.Offset((Values::Get()->m_fSTAMINA_RUN * fRunNormalized) * -Hy_UpdateStep());
+}
+
+void World::Reset()
+{
+	if(m_pHousePanel->IsShowing() && m_pHousePanel->IsTransition() == false)
+		m_pHousePanel->Hide();
+}
+
+HousePanel *World::GetHousePanel()
+{
+	return m_pHousePanel;
 }
 
 void World::SetRow(std::string sRow)

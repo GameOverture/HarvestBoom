@@ -5,7 +5,8 @@
 LtGAudioSndBank *HarvestBoom::sm_pSoundBank = nullptr;
 
 HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
-													m_eGameState(GAMESTATE_Loading)
+													m_eGameState(GAMESTATE_Loading),
+													m_TitleScrn(initStruct.windowInfo[0].vSize)
 {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Initialize LgEntity's audio bank pointer
@@ -48,7 +49,6 @@ HarvestBoom::~HarvestBoom()
 	m_TitleScrn.Load();
 
 	m_Game.Construct();
-	m_Game.Load();
 
 	return true;
 }
@@ -58,8 +58,9 @@ HarvestBoom::~HarvestBoom()
 	switch(m_eGameState)
 	{
 	case GAMESTATE_Loading:
-		if(m_TitleScrn.IsLoaded() && m_Game.IsLoaded())
+		if(m_TitleScrn.IsLoaded())
 		{
+			m_Game.Load();
 #ifdef DEV_QUICKMODE
 			m_TitleScrn.SetEnabled(false);
 			m_eGameState = GAMESTATE_Game;

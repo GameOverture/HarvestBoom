@@ -1,12 +1,12 @@
 #pragma once
 #include "IPanel.h"
-#include "FoodStocks.h"
+#include "FoodStuffs.h"
 #include "EquipButton.h"
 #include "BuyButton.h"
 
 class HousePanel : public IPanel
 {
-	FoodStocks		m_FoodStocks;
+	FoodStuffs		m_FoodStocks;
 
 	HyText2d		m_SavingsVal;
 
@@ -46,6 +46,7 @@ public:
 	virtual bool IsTransition() override;
 
 	void SetEquipedUI();
+	void HideEquipedUI();
 
 	void Sync();
 

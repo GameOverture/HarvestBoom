@@ -14,10 +14,9 @@ class Plant;
 class Game : public HyEntity2d
 {
 	Player					m_Player;
-	DayNight				m_DayNight;
 	Stamina					m_Stamina;
-
 	World					m_World;
+	DayNight				m_DayNight;
 
 	IntroPanel				m_IntroPanel;
 	BillsPanel				m_BillsPanel;
@@ -30,6 +29,7 @@ class Game : public HyEntity2d
 		GAMESTATE_Intro,
 		GAMESTATE_IntroHide,
 		GAMESTATE_Playing,
+		GAMESTATE_GoHome,
 		GAMESTATE_Bills,
 		GAMESTATE_Bugs,
 		GAMESTATE_Sleep,

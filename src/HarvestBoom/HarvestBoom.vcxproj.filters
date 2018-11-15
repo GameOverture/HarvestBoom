@@ -79,9 +79,6 @@
     <ClCompile Include="HousePanel.cpp">
       <Filter>Game\UI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="FoodStocks.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
     <ClCompile Include="InfoPanel.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
@@ -99,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="Plant.cpp">
       <Filter>Game\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="FoodStuffs.cpp">
+      <Filter>Game\UI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +158,6 @@
     <ClInclude Include="HousePanel.h">
       <Filter>Game\UI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="FoodStocks.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
     <ClInclude Include="InfoPanel.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
@@ -178,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Plant.h">
       <Filter>Game\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="FoodStuffs.h">
+      <Filter>Game\UI\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

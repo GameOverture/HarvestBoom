@@ -1,8 +1,13 @@
 #pragma once
 #include "pch.h"
 
+class Stamina;
+class World;
+
 class DayNight : public HyEntity2d
 {
+	World &				m_WorldRef;
+	Stamina &			m_StaminaRef;
 	float				m_fTime;
 
 	HySprite2d			m_Emblem;
@@ -20,17 +25,21 @@ class DayNight : public HyEntity2d
 		STATE_IntroFade,
 		STATE_Cycling,
 		STATE_CountDown,
+		STATE_Outro,
 		STATE_Night
 	};
 	State				m_eState;
+	float				m_fElapsedTime;
 	
 public:
-	DayNight(HyEntity2d *pParent);
+	DayNight(World &worldRef, Stamina &staminaRef, HyEntity2d *pParent);
 	virtual ~DayNight();
 
 	float GetTime();
 	bool IsCycling();
+	bool IsNight();
 
+	void Reset();
 	void Start();
 
 	void OffsetTime(float fTimeOffset);

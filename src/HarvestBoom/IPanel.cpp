@@ -44,13 +44,14 @@ IPanel::~IPanel()
 
 /*virtual*/ void IPanel::Show()
 {
+	SetEnabled(true);
 	pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
 	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadOut, [this](IHyNode *pThis) { m_bIsShowing = true; });
 }
 
 /*virtual*/ void IPanel::Hide()
 {
-	pos.Tween(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f, 1.0f, HyTween::QuadIn, [this](IHyNode *pThis) { m_bIsShowing = false; });
+	pos.Tween(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f, 1.0f, HyTween::QuadIn, [this](IHyNode *pThis) { SetEnabled(false); m_bIsShowing = false; });
 }
 
 /*virtual*/ bool IPanel::IsTransition()

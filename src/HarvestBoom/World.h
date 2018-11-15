@@ -32,6 +32,9 @@ public:
 
 	void UpdatePlayer(Player &playerRef, Stamina &staminaRef);
 
+	void Reset();
+	HousePanel *GetHousePanel();
+
 private:
 	void SetRow(std::string sRow);
 };

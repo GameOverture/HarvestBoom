@@ -1,14 +1,19 @@
 #include "pch.h"
 #include "TitleScreen.h"
 
-TitleScreen::TitleScreen() :	HyEntity2d(nullptr),
-								m_Panel(this),
-								m_Title("Game", "Main", this),
-								m_txtPlay("Game", "Small", this),
-								m_txtQuit("Game", "Small", this),
-								m_Selector("Game", "Small", this),
-								m_Legal("Game", "Small", this)
+TitleScreen::TitleScreen(glm::ivec2 vResolution) :	HyEntity2d(nullptr),
+													m_Splash(this),
+													m_Panel("UI", "Title", this),
+													m_Title("Game", "Main", this),
+													m_txtPlay("Game", "Small", this),
+													m_txtQuit("Game", "Small", this),
+													m_Selector("Game", "Small", this),
+													m_LegalBg(this),
+													m_Legal("Game", "Small", this)
 {
+	m_LegalBg.GetShape().SetAsBox(vResolution.x, vResolution.y);
+	m_LegalBg.topColor.Set(0.0f, 0.0f, 0.0f);
+	m_LegalBg.topColor.Tween(139.0f / 255.0f, 160.0f / 255.0f, 231.0f / 255.0f, 2.0f);
 }
 
 TitleScreen::~TitleScreen()
@@ -17,8 +22,7 @@ TitleScreen::~TitleScreen()
 
 void TitleScreen::Construct()
 {
-	m_Panel.GetShape().SetAsBox(Hy_App().Window().GetWindowSize().x, Hy_App().Window().GetWindowSize().y);
-	m_Panel.topColor.Set(0.2f, 0.2f, 0.2f);
+	m_Panel.scale.Set(2.0f, 2.0f);
 
 	m_Title.TextSet(Hy_App().GameName());
 	m_Title.SetAsScaleBox(static_cast<float>(Hy_App().Window().GetWindowSize().x) - 50.0f, 100.0f, true);
@@ -28,10 +32,12 @@ void TitleScreen::Construct()
 
 	m_txtPlay.TextSet("Start");
 	m_txtPlay.pos.Set(Hy_App().Window().GetWindowSize().x * 0.5f, Hy_App().Window().GetWindowSize().y * 0.5f);
+	m_txtPlay.pos.Offset(0.0f, 50.0f);
 	m_txtPlay.SetEnabled(false);
 
 	m_txtQuit.TextSet("Quit");
 	m_txtQuit.pos.Set(Hy_App().Window().GetWindowSize().x * 0.5f, Hy_App().Window().GetWindowSize().y * 0.5f - 30.0f);
+	m_txtQuit.pos.Offset(0.0f, 50.0f);
 	m_txtQuit.SetEnabled(false);
 
 	m_Selector.TextSet(">");
@@ -43,6 +49,10 @@ void TitleScreen::Construct()
 	m_Legal.TextSet("A Philly Game Mechanics Game Jam\nLicensed by Pretendo of America Inc.");
 	m_Legal.TextSetAlignment(HYALIGN_Center);
 	m_Legal.pos.Set(Hy_App().Window().GetWindowSize().x * 0.5f, 40.0f);
+
+	m_LegalBg.GetShape().SetAsBox(Hy_App().Window().GetWindowSize().x, 70);
+	m_LegalBg.SetTint(0.0f, 0.0f, 0.0f);
+	m_LegalBg.alpha.Set(0.4f);
 
 	UseWindowCoordinates();
 	SetDisplayOrder(DISPLAYORDER_Title);

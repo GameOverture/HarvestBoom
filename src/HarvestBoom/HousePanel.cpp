@@ -37,6 +37,7 @@ HousePanel::~HousePanel()
 
 /*virtual*/ void HousePanel::Construct() /*override*/
 {
+	pos.Set(0.0f, 0.0f);
 	rot_pivot.Set(static_cast<float>(Hy_App().Window().GetWindowSize().x), 0.0f);
 
 	m_bCustomVerts = true;
@@ -49,6 +50,7 @@ HousePanel::~HousePanel()
 	IPanel::Construct();
 
 	m_FoodStocks.Construct();
+	m_FoodStocks.SetTitle("Click to eat");
 	m_FoodStocks.pos.Set(m_ptFrameVerts[1].x + 50.0f, m_ptFrameVerts[1].y - 195.0f);
 
 	m_SavingsVal.TextSetState(1);
@@ -242,24 +244,25 @@ HousePanel::~HousePanel()
 	m_AirConditionText.TextSetAlignment(HYALIGN_Left);
 	m_AirConditionText.pos.Set(m_ptFrameVerts[0]);
 	m_AirConditionText.pos.Offset(0.0f, 75.0f);
-	m_AirConditionText.SetEnabled(Values::Get()->m_bAirConditioning);
+	m_AirConditionText.alpha.Set(Values::Get()->m_bAirConditioning ? 1.0f : 0.0f);
 
 	Sync();
 }
 
 /*virtual*/ void HousePanel::Show() /*override*/
 {
-	SetEnabled(true);
+	SetEnabled(true, true);
 	Construct();
 
 	rot.Set(90.0f);
 	rot.Tween(0.0f, 0.5f, HyTween::QuadOut, [this](IHyNode *) { m_bIsShowing = true; });
+	alpha.Set(1.0f);
 }
 
 /*virtual*/ void HousePanel::Hide() /*override*/
 {
 	rot.Set(0.0f);
-	rot.Tween(90.0f, 0.5f, HyTween::QuadOut, [this](IHyNode *) { SetEquipedUI(); SetEnabled(false); m_bIsShowing = false; });
+	rot.Tween(90.0f, 0.5f, HyTween::QuadOut, [this](IHyNode *) { SetEquipedUI(); SetEnabled(false, true); m_bIsShowing = false; });
 }
 
 /*virtual*/ bool HousePanel::IsTransition() /*override*/
@@ -328,6 +331,47 @@ void HousePanel::SetEquipedUI()
 		m_BtnVineEquip.alpha.Set(0.0f);
 		m_BtnVineEquip.alpha.Tween(1.0f, 0.5f);
 		m_BtnVineEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
+		break;
+	}
+}
+
+void HousePanel::HideEquipedUI()
+{
+	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
+
+	switch(Values::Get()->m_eEquipedItem)
+	{
+	case EQUIP_Hoe:
+		if(m_BtnHoeEquip.pos.IsTweening() == false)
+			m_BtnHoeEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+	case EQUIP_Harvest:
+		if(m_BtnHarvestEquip.pos.IsTweening() == false)
+			m_BtnHarvestEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+	case EQUIP_Corn:
+		if(m_BtnCornEquip.pos.IsTweening() == false)
+			m_BtnCornEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+	case EQUIP_Eggplant:
+		if(m_BtnEggplantEquip.pos.IsTweening() == false)
+			m_BtnEggplantEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+	case EQUIP_Pumpkin:
+		if(m_BtnPumpkinEquip.pos.IsTweening() == false)
+			m_BtnPumpkinEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+	case EQUIP_Gernaium:
+		if(m_BtnGernaiumEquip.pos.IsTweening() == false)
+			m_BtnGernaiumEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+	case EQUIP_Marigold:
+		if(m_BtnMarigoldEquip.pos.IsTweening() == false)
+			m_BtnMarigoldEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+	case EQUIP_Vine:
+		if(m_BtnVineEquip.pos.IsTweening() == false)
+			m_BtnVineEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
 		break;
 	}
 }
@@ -600,6 +644,6 @@ void HousePanel::Sync()
 
 /*virtual*/ void HousePanel::OnUpdate() /*override*/
 {
-	if(m_AirConditionText.IsEnabled() && m_AirConditionText.pos.IsTweening() == false)
+	if(IsShowing() && m_AirConditionText.IsEnabled() && m_AirConditionText.pos.IsTweening() == false)
 		m_AirConditionText.pos.Tween(m_ptFrameVerts[0].x + 15.0f, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadOut, [this](IHyNode *) { m_AirConditionText.pos.Tween(m_ptFrameVerts[0].x, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadIn); });
 }

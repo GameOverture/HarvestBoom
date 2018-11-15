@@ -20,8 +20,8 @@
     "UseConsole": true,
     "WindowInfoArray": [
         {
-            "LocationX": 1920,
-            "LocationY": 400,
+            "LocationX": 500,
+            "LocationY": 100,
             "Name": "Harvest Boom!",
             "ResolutionX": 640,
             "ResolutionY": 480,

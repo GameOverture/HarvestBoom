@@ -12052,6 +12052,42 @@
                 "reverse": false
             }
         ],
+        "Equip/Seeds": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 708513432,
+                        "duration": 0.01600000075995922,
+                        "id": 108,
+                        "offsetX": -4,
+                        "offsetY": -7
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "Equip/Sythe": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 2687379577,
+                        "duration": 0.01600000075995922,
+                        "id": 107,
+                        "offsetX": -3,
+                        "offsetY": -5
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
         "Game/BuyButton": [
             {
                 "bounce": false,
@@ -12737,6 +12773,24 @@
                 "reverse": false
             }
         ],
+        "UI/Bills": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 2805033821,
+                        "duration": 0.01600000075995922,
+                        "id": 106,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
         "UI/DayNight": [
             {
                 "bounce": false,
@@ -12761,11 +12815,63 @@
                 "duration": 0.01600000075995922,
                 "frames": [
                     {
-                        "checksum": 2502759674,
+                        "checksum": 1923736095,
                         "duration": 0.01600000075995922,
                         "id": 104,
-                        "offsetX": 1,
+                        "offsetX": 2,
                         "offsetY": -2
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "UI/Stamina": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 4260590091,
+                        "duration": 0.01600000075995922,
+                        "id": 109,
+                        "offsetX": 1,
+                        "offsetY": 1
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3243779973,
+                        "duration": 0.01600000075995922,
+                        "id": 110,
+                        "offsetX": 4,
+                        "offsetY": 4
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            }
+        ],
+        "UI/Title": [
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 75419871,
+                        "duration": 0.01600000075995922,
+                        "id": 105,
+                        "offsetX": 0,
+                        "offsetY": 0
                     }
                 ],
                 "loop": false,
