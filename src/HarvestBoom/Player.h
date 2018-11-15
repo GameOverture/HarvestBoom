@@ -15,6 +15,7 @@ class Player : public IActor
 	HyPrimitive2d		m_Origin;
 
 	HySprite2d *		m_pEquipment;
+	float				m_fEquipIdleHeight;
 
 public:
 	Player(HyEntity2d *pParent);

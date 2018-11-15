@@ -12849,11 +12849,11 @@
                 "duration": 0.01600000075995922,
                 "frames": [
                     {
-                        "checksum": 3243779973,
+                        "checksum": 663249992,
                         "duration": 0.01600000075995922,
                         "id": 110,
-                        "offsetX": 4,
-                        "offsetY": 4
+                        "offsetX": 5,
+                        "offsetY": 5
                     }
                 ],
                 "loop": false,

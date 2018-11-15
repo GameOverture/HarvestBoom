@@ -11,7 +11,8 @@ Player::Player(HyEntity2d *pParent) :	IActor(pParent),
 										m_DebugText(HY_SYSTEM_FONT, this),
 										m_Collision(this),
 										m_Origin(this),
-										m_pEquipment(nullptr)
+										m_pEquipment(nullptr),
+										m_fEquipIdleHeight(0.0f)
 {
 	m_vVelocity.x = m_vVelocity.y = 0.0f;
 
@@ -124,6 +125,12 @@ bool Player::DoAction(Tile &tileRef)
 		case EQUIP_Hoe:
 			if(m_pEquipment && m_pEquipment->rot.IsTweening() == false)
 				m_pEquipment->rot.Tween(-80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
+
+			if(m_pEquipment->pos.Y() == m_fEquipIdleHeight)
+				m_pEquipment->pos.Tween(m_pEquipment->pos.X(), 14.0f, 0.25f, HyTween::QuadOut);
+
+			if(rot.IsTweening() == false)
+				rot.Tween(-3.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { rot.Tween(3.0f, 0.25f, HyTween::QuadIn); });
 			break;
 
 		case EQUIP_Harvest:
@@ -155,8 +162,14 @@ bool Player::DoAction(Tile &tileRef)
 
 void Player::StopAction()
 {
-	if(m_pEquipment && m_pEquipment->rot.Get() != 0.0f && m_pEquipment->rot.IsTweening() == false)
-		m_pEquipment->rot.Tween(0.0f, 0.25f, HyTween::QuadOut);
+	if(m_pEquipment)
+	{
+		if(m_pEquipment->rot.Get() != 0.0f && m_pEquipment->rot.IsTweening() == false)
+			m_pEquipment->rot.Tween(0.0f, 0.25f, HyTween::QuadOut);
+
+		if(m_pEquipment->pos.Y() != m_fEquipIdleHeight && m_pEquipment->pos.IsTweening() == false)
+			m_pEquipment->pos.Tween(m_pEquipment->pos.X(), m_fEquipIdleHeight, 0.25f, HyTween::QuadOut);
+	}
 
 	scale.Set(1.0f, 1.0f);
 	rot.Tween(0.0f, 0.25f, HyTween::QuadOut);
@@ -169,13 +182,15 @@ void Player::Sync()
 	case EQUIP_Hoe:
 		delete m_pEquipment;
 		m_pEquipment = HY_NEW HySprite2d("Equip", "Hoe", this);
-		m_pEquipment->pos.Set(4.0f, 10.0f);
+		m_fEquipIdleHeight = 20.0f;
+		m_pEquipment->pos.Set(4.0f, m_fEquipIdleHeight);
 		m_pEquipment->Load();
 		break;
 	case EQUIP_Harvest:
 		delete m_pEquipment;
 		m_pEquipment = HY_NEW HySprite2d("Equip", "Sythe", this);
-		m_pEquipment->pos.Set(-5.0f, 16.0f);
+		m_fEquipIdleHeight = 16.0f;
+		m_pEquipment->pos.Set(-5.0f, m_fEquipIdleHeight);
 		m_pEquipment->Load();
 		break;
 	case EQUIP_Corn:
@@ -186,7 +201,8 @@ void Player::Sync()
 	case EQUIP_Vine:
 		delete m_pEquipment;
 		m_pEquipment = HY_NEW HySprite2d("Equip", "Seeds", this);
-		m_pEquipment->pos.Set(9.0f, 20.0f);
+		m_fEquipIdleHeight = 20.0f;
+		m_pEquipment->pos.Set(9.0f, m_fEquipIdleHeight);
 		m_pEquipment->Load();
 		break;
 	}
