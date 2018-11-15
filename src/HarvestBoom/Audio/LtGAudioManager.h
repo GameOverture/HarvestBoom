@@ -16,6 +16,7 @@
 //#include "LtGafx.h"
 #include "LtGAudioBanks.h"
 #include "Harmony/HyEngine.h"
+#include "Harmony/Scene/Nodes/IHyNode.h"
 //#include "../LgSlotAfx.h"
 
 // Below are auto generated files:
@@ -30,7 +31,7 @@ using std::string;
 #define THEMES_DIR "themes\\"
 #define AUDIO_DIR "\\Sounds\\"
 
-class LtGAudioManager
+class LtGAudioManager : public HyEntity2d
 {
 	friend class LgSlotGame;
 
@@ -53,6 +54,9 @@ class LtGAudioManager
 	std::vector<std::vector<std::string> >	m_WaveDependenciesList;
 	
 	int										m_iNumLinks;
+
+	float						m_fMusicRef;
+	HyTweenFloat				m_fMusicVolume;
 	
 	LtGAudioManager();
 	~LtGAudioManager(void);
@@ -111,7 +115,9 @@ class LtGAudioManager
 	//-----------------------------------------------------------------------------------------
 	// Calls XACT engine's DoWork() function at a throttled rate.
 	//-----------------------------------------------------------------------------------------
-	void Update(/*double dTimeDelta*/);
+	void Update2(/*double dTimeDelta*/);
+
+	virtual void OnUpdate() override;
 
 public:
 
@@ -128,7 +134,9 @@ public:
 	void PauseAllSfxInCategory(const char *szCategoryName, bool bPause);
 
 	void SetVolumeInCategory(const char *szCategoryName, float fVolume);
-	float GetVolumeInCategory(const char *szCategoryName);
+	void FadeMusicOut(float fDuration);
+	void RestoreMusicVol();
+	//float GetVolumeInCategory(const char *szCategoryName);
 
 	//--------------------------------------------------------------------------------------
 	// Read and register the sound bank file with XACT.  Do not use memory mapped file IO because the 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "Tile.h"
+#include "HarvestBoom.h"
 
 #define PLAYER_WIDTH 10.0f
 #define PLAYER_HEIGHT 5.0f
@@ -124,7 +125,7 @@ bool Player::DoAction(Tile &tileRef)
 		{
 		case EQUIP_Hoe:
 			if(m_pEquipment && m_pEquipment->rot.IsTweening() == false)
-				m_pEquipment->rot.Tween(-80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
+				m_pEquipment->rot.Tween(-80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_USEHOE_1); m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
 
 			if(m_pEquipment->pos.Y() == m_fEquipIdleHeight)
 				m_pEquipment->pos.Tween(m_pEquipment->pos.X(), 14.0f, 0.25f, HyTween::QuadOut);
@@ -135,7 +136,7 @@ bool Player::DoAction(Tile &tileRef)
 
 		case EQUIP_Harvest:
 			if(m_pEquipment && m_pEquipment->rot.IsTweening() == false)
-				m_pEquipment->rot.Tween(80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
+				m_pEquipment->rot.Tween(80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_USEHOE_3); m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
 			if(rot.IsTweening() == false)
 				rot.Tween(-10.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { rot.Tween(10.0f, 0.25f, HyTween::QuadIn); });
 			break;
@@ -148,7 +149,7 @@ bool Player::DoAction(Tile &tileRef)
 		case EQUIP_Vine:
 			scale.Set(1.0f, 0.75f);
 			if(rot.IsTweening() == false)
-				rot.Tween(-20.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { rot.Tween(20.0f, 0.25f, HyTween::QuadIn); });
+				rot.Tween(-20.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_USEHOE_1); rot.Tween(20.0f, 0.25f, HyTween::QuadIn); });
 			break;
 		}
 

@@ -9,6 +9,7 @@
 class HarvestBoom : public IHyApplication
 {
 	static LtGAudioSndBank *	sm_pSoundBank;
+	//static LtGAudioSndBank *	sm_pMusicBank;
 
 	enum GameState
 	{
@@ -28,6 +29,7 @@ public:
 	virtual ~HarvestBoom();
 
 	static LtGAudioSndBank *GetSndBank();
+	//static LtGAudioSndBank *GetMusicBank();
 
 	virtual bool Initialize() override;
 	virtual bool Update() override;

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "TitleScreen.h"
+#include "HarvestBoom.h"
 
 TitleScreen::TitleScreen(glm::ivec2 vResolution) :	HyEntity2d(nullptr),
 													m_Splash(this),
@@ -74,11 +75,26 @@ void TitleScreen::Start()
 	m_Selector.SetEnabled(true);
 
 	if(Hy_App().Input().IsActionDown(MoveUp))
-		m_Selector.pos.Y(m_txtPlay.pos.Y());
+	{
+		if(m_Selector.pos.Y() != m_txtPlay.pos.Y())
+		{
+			HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_MENU_CURSOR);
+			m_Selector.pos.Y(m_txtPlay.pos.Y());
+		}
+	}
 	else if(Hy_App().Input().IsActionDown(MoveDown))
-		m_Selector.pos.Y(m_txtQuit.pos.Y());
+	{
+		if(m_Selector.pos.Y() != m_txtQuit.pos.Y())
+		{
+			HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_MENU_CURSOR);
+			m_Selector.pos.Y(m_txtQuit.pos.Y());
+		}
+	}
 	else if(Hy_App().Input().IsActionDown(UseEquip))
+	{
+		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_MENU_CURSOR);
 		return m_Selector.pos.Y() == m_txtPlay.pos.Y() ? TITLE_Play : TITLE_Quit;
+	}
 
 	return TITLE_Nothing;
 }

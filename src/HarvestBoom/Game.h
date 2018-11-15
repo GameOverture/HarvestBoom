@@ -31,6 +31,7 @@ class Game : public HyEntity2d
 		GAMESTATE_Playing,
 		GAMESTATE_GoHome,
 		GAMESTATE_Bills,
+		GAMESTATE_BugCameraPan,
 		GAMESTATE_Bugs,
 		GAMESTATE_Sleep,
 	};
@@ -45,6 +46,7 @@ public:
 	void Construct();
 
 	void GameUpdate();
+	bool BugUpdate();
 	void DebugUpdate();
 };
 

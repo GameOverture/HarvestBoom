@@ -151,7 +151,7 @@ void BillsPanel::Construct()
 	m_pContinueBtn->pos.Set(vWindowSize.x, 15);
 	m_pContinueBtn->alpha.Set(0.0f);
 	m_pContinueBtn->GetTextPtr()->TextSetState(1);
-	m_pContinueBtn->GetTextPtr()->TextSet("Sleep>");
+	m_pContinueBtn->GetTextPtr()->TextSet("Sleep");
 }
 
 /*virtual*/ void BillsPanel::Show() /*override*/

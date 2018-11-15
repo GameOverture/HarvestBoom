@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ContinueButton.h"
 #include "BillsPanel.h"
+#include "HarvestBoom.h"
 
 ContinueButton::ContinueButton(const InfoPanelInit &infoPanelInitRef, HyEntity2d *pParent) :	InfoPanel(infoPanelInitRef, pParent)
 {
@@ -41,6 +42,8 @@ bool ContinueButton::IsUsed()
 
 /*virtual*/ void ContinueButton::OnMouseClicked(void *pUserParam) /*override*/
 {
+	HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_MENU_CURSOR);
+
 	BillsPanel *pThis = reinterpret_cast<BillsPanel *>(pUserParam);
 	pThis->Hide();
 }

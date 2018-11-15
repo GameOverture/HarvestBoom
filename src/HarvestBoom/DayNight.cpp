@@ -57,7 +57,7 @@ void DayNight::Start()
 
 	m_fTime = 0.0f;
 
-	m_DayNight.alpha.Tween(0.0f, 1.0f);
+	
 
 	m_MainText.SetEnabled(true);
 	m_MainText.pos.Set(vWindowSize.x * 0.5f, vWindowSize.y * 0.5f);
@@ -68,7 +68,15 @@ void DayNight::Start()
 
 	switch(m_MainText.GetTag())
 	{
-	case 0:	m_MainText.TextSet("");
+	case 0:
+		{
+			std::string sText = "Day ";
+			sText += std::to_string(Values::Get()->m_uiCurrentDay);
+
+			m_MainText.TextSet(sText);
+			m_DayNight.alpha.Tween(0.0f, 2.5f);
+			m_MainText.scale.Tween(0.8f, 0.8f, 2.5f, HyTween::CubeOut);
+		}
 		break;
 	case 1:	m_MainText.TextSet("Good Morning!");
 		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
@@ -86,7 +94,8 @@ void DayNight::Start()
 
 void DayNight::FadeToPitchBlack()
 {
-	m_DayNight.alpha.Tween(1.0f, 1.0f);
+	HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_NIGHT_TRANSITION);
+	m_DayNight.alpha.Tween(1.0f, 3.0f);
 }
 
 bool DayNight::IsPitchBlack()
@@ -166,7 +175,9 @@ void DayNight::SetTime(float fTime)
 			{
 				m_MainText.SetTag(0);
 
-				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_DAYTIME_16BIT);
+				HarvestBoom::GetSndBank()->Stop(XACT_CUE_BASEGAME_FARM_WIN);
+				LtGAudioManager::GetInstance()->RestoreMusicVol();
+				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_DAY_90SEC);
 
 				m_Bar.alpha.Tween(1.0f, 1.0f);
 				m_EmblemEnt.alpha.Tween(1.0f, 1.0f);
@@ -220,7 +231,10 @@ void DayNight::SetTime(float fTime)
 		}
 		
 		if(m_MainText.alpha.Get() == 0.0f)
+		{
+			HarvestBoom::GetSndBank()->Stop(XACT_CUE_BASEGAME_DAY_90SEC);
 			m_eState = STATE_Night;
+		}
 		break;
 
 	case STATE_Night:

@@ -20,9 +20,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Screens">
-      <UniqueIdentifier>{629c887d-95e3-40f2-a935-b0f0eec679b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\UI\Buttons">
       <UniqueIdentifier>{1b5bfdd1-9a12-4e21-aa49-317648f50b55}</UniqueIdentifier>
     </Filter>
@@ -54,9 +51,6 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Game\World</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScreen.cpp">
-      <Filter>Screens</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
@@ -100,6 +94,9 @@
     <ClCompile Include="ContinueButton.cpp">
       <Filter>Game\UI\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScreen.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -133,9 +130,6 @@
     </ClInclude>
     <ClInclude Include="IEnemy.h">
       <Filter>Game\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScreen.h">
-      <Filter>Screens</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
@@ -178,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="ContinueButton.h">
       <Filter>Game\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScreen.h">
+      <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

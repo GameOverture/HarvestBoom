@@ -3,6 +3,7 @@
 #include "Audio/LtGAudioLinks.h"
 
 LtGAudioSndBank *HarvestBoom::sm_pSoundBank = nullptr;
+//LtGAudioSndBank *HarvestBoom::sm_pMusicBank = nullptr;
 
 HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
 													m_eGameState(GAMESTATE_Loading),
@@ -14,6 +15,7 @@ HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
 	pAudioManager->Init(initStruct);
 	pAudioManager->LinkSoundandWaveInformation((const char ***)szWAVEDEPENDENCIES, (char **)szSOUNDBANKS);
 	sm_pSoundBank = LtGAudioManager::GetInstance()->Load("basegame");
+	//sm_pMusicBank = LtGAudioManager::GetInstance()->Load("music");
 
 	// TODO: Parse in values from hyproj to tune the game with data driven values
 	Values::Init();
@@ -27,6 +29,11 @@ HarvestBoom::~HarvestBoom()
 {
 	return sm_pSoundBank;
 }
+
+///*static*/ LtGAudioSndBank *HarvestBoom::GetMusicBank()
+//{
+//	return sm_pMusicBank;
+//}
 
 /*virtual*/ bool HarvestBoom::Initialize() /*override*/
 {
@@ -60,6 +67,8 @@ HarvestBoom::~HarvestBoom()
 	case GAMESTATE_Loading:
 		if(m_TitleScrn.IsLoaded())
 		{
+			HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_WIN);
+
 			m_Game.Load();
 #ifdef DEV_QUICKMODE
 			m_TitleScrn.SetEnabled(false);

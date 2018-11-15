@@ -34,7 +34,7 @@ Values::Values() :	m_fPLAYER_MAXVELOCITY(200.0f),	// pixels per second
 					m_uiBILLS_FOOD(25),
 					m_uiBILLS_AC(10),
 
-					m_fDAY_LENGTH(20.0f),
+					m_fDAY_LENGTH(5),//30.0f),//90.0f),
 
 					m_fDURATION_HOEDIRT(5.0f),
 					m_fDURATION_PLANTCORN(2.0f),
@@ -54,7 +54,7 @@ Values::Values() :	m_fPLAYER_MAXVELOCITY(200.0f),	// pixels per second
 					m_fGROW_MARIGOLD(m_fDAY_LENGTH * 0.75f),
 					m_fGROW_VINE(m_fDAY_LENGTH * 1.0f),
 
-					m_uiENABLE_DEFENSE_DAY(3),
+					m_uiENABLE_DEFENSE_DAY(3),//3),
 
 					m_iSavings(m_uiSTARTING_MONEY),
 					m_uiSeedsCorn(m_uiSTARTING_CORNSEEDS),

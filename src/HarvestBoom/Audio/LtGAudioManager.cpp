@@ -23,7 +23,9 @@ LtGAudioManager *LtGAudioManager::m_Instance = NULL;
 
 void WINAPI XACTNotificationCallback(const XACT_NOTIFICATION* pNotification);
 
-LtGAudioManager::LtGAudioManager() /*: m_szSOUNDBANKS(NULL), m_szWAVEDEPENDENCIES(NULL)*/
+LtGAudioManager::LtGAudioManager() : HyEntity2d(nullptr),
+										m_fMusicRef(2.0f),
+									m_fMusicVolume(m_fMusicRef, *this, 0) /*: m_szSOUNDBANKS(NULL), m_szWAVEDEPENDENCIES(NULL)*/
 {
 	HRESULT hr;
 
@@ -211,6 +213,8 @@ void LtGAudioManager::Init(HarmonyInit &initStruct)
 	m_pXACTEngine->RegisterNotification(&desc);
 
 	m_dUpdateThrottle = 0.0;
+
+	m_pXACTEngine->SetVolume(m_pXACTEngine->GetCategory("Music"), m_fMusicVolume.Get());
 }
 
 void LtGAudioManager::StopAllSfxInCategory(const char *szCategoryName)
@@ -232,12 +236,23 @@ void LtGAudioManager::SetVolumeInCategory(const char *szCategoryName, float fVol
 	m_pXACTEngine->SetVolume(sCat, fVolume);
 }
 
-float LtGAudioManager::GetVolumeInCategory(const char *szCategoryName)
-{ 
-	return 1.0f;
-	//XACTCATEGORY sCat = m_pXACTEngine->GetCategory(szCategoryName);
-	//return m_pXACTEngine->GetVolume(sCat);
+void LtGAudioManager::FadeMusicOut(float fDuration)
+{
+	m_fMusicVolume.Tween(0.0f, fDuration);
 }
+
+void LtGAudioManager::RestoreMusicVol()
+{
+	m_fMusicVolume = 2.0f;
+	m_pXACTEngine->SetVolume(m_pXACTEngine->GetCategory("Music"), m_fMusicVolume.Get());
+}
+
+//float LtGAudioManager::GetVolumeInCategory(const char *szCategoryName)
+//{ 
+//	return 1.0f;
+//	//XACTCATEGORY sCat = m_pXACTEngine->GetCategory(szCategoryName);
+//	//return m_pXACTEngine->GetVolume(sCat);
+//}
 //--------------------------------------------------------------------------------------
 // Read and register the sound bank file with XACT.  Do not use memory mapped file IO because the 
 // memory needs to be read/write and the working set of sound banks are small.
@@ -747,7 +762,7 @@ void WINAPI LtGAudioManager::XACTNotificationCallback(const XACT_NOTIFICATION* p
 //-----------------------------------------------------------------------------------------
 // Calls XACT engine's DoWork() function at a throttled rate.
 //-----------------------------------------------------------------------------------------
-void LtGAudioManager::Update(/*double dTimeDelta*/)
+void LtGAudioManager::Update2(/*double dTimeDelta*/)
 {
 //	PROFILE("Audio Manager");
 
@@ -758,6 +773,10 @@ void LtGAudioManager::Update(/*double dTimeDelta*/)
 		m_dUpdateThrottle = 0.0f;
 		m_pXACTEngine->DoWork();
 	}
-	
-	
+}
+
+/*virtual*/ void LtGAudioManager::OnUpdate() /*override*/
+{
+	if(m_fMusicVolume.IsTweening())
+		m_pXACTEngine->SetVolume(m_pXACTEngine->GetCategory("Music"), m_fMusicVolume.Get());
 }

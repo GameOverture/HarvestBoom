@@ -69,6 +69,8 @@ void Game::GameUpdate()
 		{
 			if(Hy_App().Input().IsActionReleased(UseEquip))
 			{
+				LtGAudioManager::GetInstance()->FadeMusicOut(1.0f);
+				
 				m_IntroPanel.Hide();
 				m_eGameState = GAMESTATE_IntroHide;
 			}
@@ -118,6 +120,7 @@ void Game::GameUpdate()
 		{
 			m_BillsPanel.Construct();
 			m_BillsPanel.Show();
+			m_Player.SetEnabled(false);
 			m_eGameState = GAMESTATE_Bills;
 		}
 		break;
@@ -132,16 +135,32 @@ void Game::GameUpdate()
 				m_eGameState = GAMESTATE_Sleep;
 			}
 			else
-				m_eGameState = GAMESTATE_Bugs;
+			{
+				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_ATTACK);
+				pCam->pos.Tween(TILE_SIZE * 12 * 2, TILE_SIZE * 6 * 2, 5.0f, HyTween::QuadInOut);
+				m_eGameState = GAMESTATE_BugCameraPan;
+			}
 		}
 		break;
 
+	case GAMESTATE_BugCameraPan:
+		if(pCam->pos.IsTweening() == false)
+			m_eGameState = GAMESTATE_Bugs;
+		break;
+
 	case GAMESTATE_Bugs:
+		if(BugUpdate() == false)
+		{
+			LtGAudioManager::GetInstance()->FadeMusicOut(1.0f);
+			m_DayNight.FadeToPitchBlack();
+			m_eGameState = GAMESTATE_Sleep;
+		}
 		break;
 
 	case GAMESTATE_Sleep:
 		if(m_DayNight.IsPitchBlack())
 		{
+			m_Player.SetEnabled(true);
 			m_Player.SetPos(15, 10);
 			pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
 
@@ -153,6 +172,11 @@ void Game::GameUpdate()
 	}
 
 	DebugUpdate();
+}
+
+bool Game::BugUpdate()
+{
+	return true;
 }
 
 void Game::DebugUpdate()

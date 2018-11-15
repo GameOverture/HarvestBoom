@@ -17,7 +17,7 @@ Stamina::~Stamina()
 {
 	m_OuterFrame.AnimSetState(0);
 	m_Fill.AnimSetState(1);
-	m_Fill.scale_pivot.X(5);
+	m_Fill.pos.Y(1);
 
 	scale.Set(2.0f, 2.0f);
 }
