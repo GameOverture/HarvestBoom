@@ -13,7 +13,7 @@ DayNight::DayNight(World &worldRef, Stamina &staminaRef, HyEntity2d *pParent) :	
 																				m_WorldRef(worldRef),
 																				m_StaminaRef(staminaRef),
 																				m_fTime(0.0f),
-																				m_Emblem("UI", "DayNight", this),
+																				m_EmblemEnt("UI", "DayNight", this),
 																				m_Bar("UI", "DayNightBar", this),
 																				m_DayNight(this),
 																				m_MainText("Game", "Main", this),
@@ -45,7 +45,7 @@ bool DayNight::IsNight()
 
 void DayNight::HideUI()
 {
-	m_Emblem.alpha.Tween(0.0f, -1.0f);
+	m_EmblemEnt.alpha.Tween(0.0f, -1.0f);
 	m_Bar.alpha.Tween(0.0f, -1.0f);
 	m_StaminaRef.pos.Tween(-100.0f, 50.0f, 1.0f);
 	m_WorldRef.GetHousePanel()->HideEquipedUI();
@@ -106,8 +106,8 @@ void DayNight::SetTime(float fTime)
 
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
 	float fNormalized = m_fTime / Values::Get()->m_fDAY_LENGTH;
-	m_Emblem.pos.Set(DAYNIGHT_SIDEMARGIN + (fNormalized * (vWindowSize.x - (DAYNIGHT_SIDEMARGIN * 2.0f))), vWindowSize.y - DAYNIGHT_TOPMARGIN);
-	m_Emblem.rot.Set(fNormalized * 180.0f);
+	m_EmblemEnt.pos.Set(DAYNIGHT_SIDEMARGIN + (fNormalized * (vWindowSize.x - (DAYNIGHT_SIDEMARGIN * 2.0f))), vWindowSize.y - DAYNIGHT_TOPMARGIN);
+	m_EmblemEnt.GetLeaf().rot.Set(fNormalized * 180.0f);
 
 	m_DayNight.alpha.Set(fNormalized * DAYNIGHT_DARKNESSAMT);
 }
@@ -121,19 +121,17 @@ void DayNight::SetTime(float fTime)
 	m_DayNight.SetDisplayOrder(DISPLAYORDER_DayNight);
 	m_DayNight.alpha.Set(0.0f);
 	
-	m_Emblem.pos.Set(DAYNIGHT_SIDEMARGIN, vWindowSize.y - DAYNIGHT_TOPMARGIN);
+	m_EmblemEnt.pos.Set(DAYNIGHT_SIDEMARGIN, vWindowSize.y - DAYNIGHT_TOPMARGIN);
 
 	m_Bar.scale.Y(2.0f);
 	m_Bar.pos.Set(15.0f, vWindowSize.y - DAYNIGHT_TOPMARGIN);
 
-	m_Emblem.scale.Set(2.0f, 2.0f);
+	m_EmblemEnt.scale.Set(2.0f, 2.0f);
 
 	m_MainText.pos.Set(vWindowSize.x * 0.5f, vWindowSize.y * 0.5f);
 	m_MainText.TextSetAlignment(HYALIGN_Center);
 
-	SetScissor(0, vWindowSize.y - static_cast<int32>(DAYNIGHT_TOPMARGIN) - 4, vWindowSize.x, static_cast<uint32>(DAYNIGHT_TOPMARGIN));
-	m_DayNight.ClearScissor(false);
-	m_MainText.ClearScissor(false);
+	m_EmblemEnt.SetScissor(-50, 0, 100, 50);
 
 	HideUI();
 	Load();
@@ -171,7 +169,7 @@ void DayNight::SetTime(float fTime)
 				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_DAYTIME_16BIT);
 
 				m_Bar.alpha.Tween(1.0f, 1.0f);
-				m_Emblem.alpha.Tween(1.0f, 1.0f);
+				m_EmblemEnt.alpha.Tween(1.0f, 1.0f);
 				m_StaminaRef.pos.Tween(20.0f, 50.0f, 1.0f, HyTween::QuadOut);
 
 				m_WorldRef.GetHousePanel()->SetEquipedUI();

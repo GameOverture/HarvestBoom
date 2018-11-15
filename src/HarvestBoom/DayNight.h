@@ -6,16 +6,16 @@ class World;
 
 class DayNight : public HyEntity2d
 {
-	World &				m_WorldRef;
-	Stamina &			m_StaminaRef;
-	float				m_fTime;
+	World &							m_WorldRef;
+	Stamina &						m_StaminaRef;
+	float							m_fTime;
 
-	HySprite2d			m_Emblem;
-	HySprite2d			m_Bar;
+	HyEntityLeaf2d<HySprite2d>		m_EmblemEnt;
+	HySprite2d						m_Bar;
 
-	HyPrimitive2d		m_DayNight;
+	HyPrimitive2d					m_DayNight;
 
-	HyText2d			m_MainText;
+	HyText2d						m_MainText;
 
 	enum State
 	{
