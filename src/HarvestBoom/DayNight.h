@@ -2,12 +2,12 @@
 #include "pch.h"
 
 class Stamina;
-class World;
+class HousePanel;
 
 class DayNight : public HyEntity2d
 {
-	World &							m_WorldRef;
 	Stamina &						m_StaminaRef;
+	HousePanel &					m_HousePanelRef;
 	float							m_fTime;
 
 	HyEntityLeaf2d<HySprite2d>		m_EmblemEnt;
@@ -32,7 +32,7 @@ class DayNight : public HyEntity2d
 	float				m_fElapsedTime;
 	
 public:
-	DayNight(World &worldRef, Stamina &staminaRef, HyEntity2d *pParent);
+	DayNight(Stamina &staminaRef, HousePanel &housePanelRef, HyEntity2d *pParent);
 	virtual ~DayNight();
 
 	float GetTime();

@@ -5,7 +5,7 @@
 class BuyButton : public InfoPanel
 {
 public:
-	BuyButton(const InfoPanelInit &infoPanelInitRef, HyEntity2d *pParent);
+	BuyButton(HyEntity2d *pParent);
 
 	bool IsUsed();
 

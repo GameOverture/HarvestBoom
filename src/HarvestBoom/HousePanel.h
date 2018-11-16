@@ -36,7 +36,7 @@ class HousePanel : public IPanel
 	HyText2d		m_AirConditionText;
 
 public:
-	HousePanel(const InfoPanelInit &equipInfoPanelInitRef, const InfoPanelInit &buyInfoPanelInitRef, HyEntity2d *pParent);
+	HousePanel(HyEntity2d *pParent);
 	virtual ~HousePanel();
 
 	virtual void Construct() override;

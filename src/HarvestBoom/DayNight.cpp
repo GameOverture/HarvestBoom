@@ -9,16 +9,16 @@
 
 #define DAYNIGHT_DARKNESSAMT 0.7f
 
-DayNight::DayNight(World &worldRef, Stamina &staminaRef, HyEntity2d *pParent) :	HyEntity2d(pParent),
-																				m_WorldRef(worldRef),
-																				m_StaminaRef(staminaRef),
-																				m_fTime(0.0f),
-																				m_EmblemEnt("UI", "DayNight", this),
-																				m_Bar("UI", "DayNightBar", this),
-																				m_DayNight(this),
-																				m_MainText("Game", "Main", this),
-																				m_eState(STATE_Off),
-																				m_fElapsedTime(0.0f)
+DayNight::DayNight(Stamina &staminaRef, HousePanel &housePanelRef, HyEntity2d *pParent) :	HyEntity2d(pParent),
+																							m_StaminaRef(staminaRef),
+																							m_HousePanelRef(housePanelRef),
+																							m_fTime(0.0f),
+																							m_EmblemEnt("UI", "DayNight", this),
+																							m_Bar("UI", "DayNightBar", this),
+																							m_DayNight(this),
+																							m_MainText("Game", "Main", this),
+																							m_eState(STATE_Off),
+																							m_fElapsedTime(0.0f)
 {
 	UseWindowCoordinates();
 	SetDisplayOrder(DISPLAYORDER_UI);
@@ -49,7 +49,7 @@ void DayNight::HideUI()
 	m_EmblemEnt.alpha.Tween(0.0f, -1.0f);
 	m_Bar.alpha.Tween(0.0f, -1.0f);
 	m_StaminaRef.pos.Tween(-100.0f, 50.0f, 1.0f);
-	m_WorldRef.GetHousePanel()->HideEquipedUI();
+	m_HousePanelRef.HideEquipedUI();
 }
 
 void DayNight::Start()
@@ -183,8 +183,7 @@ void DayNight::SetTime(float fTime)
 				m_Bar.alpha.Tween(1.0f, 1.0f);
 				m_EmblemEnt.alpha.Tween(1.0f, 1.0f);
 				m_StaminaRef.pos.Tween(20.0f, 50.0f, 1.0f, HyTween::QuadOut);
-
-				m_WorldRef.GetHousePanel()->SetEquipedUI();
+				m_HousePanelRef.SetEquipedUI();
 
 				m_eState = STATE_Cycling;
 			}

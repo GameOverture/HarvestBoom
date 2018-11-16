@@ -23,6 +23,9 @@
     <Filter Include="Game\UI\Buttons">
       <UniqueIdentifier>{1b5bfdd1-9a12-4e21-aa49-317648f50b55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainMenu">
+      <UniqueIdentifier>{3e850500-ca80-46dd-9dd9-ae533e451a9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HarvestBoom.cpp" />
@@ -76,9 +79,6 @@
     <ClCompile Include="InfoPanel.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Values.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Plant.cpp">
       <Filter>Game\Actors</Filter>
     </ClCompile>
@@ -95,8 +95,9 @@
       <Filter>Game\UI\Buttons</Filter>
     </ClCompile>
     <ClCompile Include="TitleScreen.cpp">
-      <Filter>Game\UI</Filter>
+      <Filter>MainMenu</Filter>
     </ClCompile>
+    <ClCompile Include="Values.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -155,9 +156,6 @@
     <ClInclude Include="InfoPanel.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Values.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Plant.h">
       <Filter>Game\Actors</Filter>
     </ClInclude>
@@ -174,8 +172,9 @@
       <Filter>Game\UI\Buttons</Filter>
     </ClInclude>
     <ClInclude Include="TitleScreen.h">
-      <Filter>Game\UI</Filter>
+      <Filter>MainMenu</Filter>
     </ClInclude>
+    <ClInclude Include="Values.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\BuildAudioLinks.pl">

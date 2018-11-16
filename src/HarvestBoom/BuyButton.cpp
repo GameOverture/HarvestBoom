@@ -3,9 +3,8 @@
 #include "HousePanel.h"
 #include "HarvestBoom.h"
 
-BuyButton::BuyButton(const InfoPanelInit &infoPanelInitRef, HyEntity2d *pParent) :	InfoPanel(infoPanelInitRef, pParent)
+BuyButton::BuyButton(HyEntity2d *pParent) :	InfoPanel("Game", "BuyButton", HY_SYSTEM_FONT, 8, 3, 65, 30, pParent)
 {
-
 }
 
 bool BuyButton::IsUsed()

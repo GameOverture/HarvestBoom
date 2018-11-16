@@ -2,8 +2,9 @@
 #include "Harmony/HyEngine.h"
 #include "Audio/LtGAudioManager.h"
 #include "Audio/LtGAudioCues.h"
-
 #include "Values.h"
+
+//#define DEV_QUICKMODE
 
 #define TILE_SIZE 21.0f
 
@@ -60,69 +61,17 @@ enum PlantType
 	PLANTTYPE_Vine
 };
 
-#define DISPLAYORDER_Splash			9999999999
-#define DISPLAYORDER_Title			999999999
-#define DISPLAYORDER_Panel			99999999
-#define DISPLAYORDER_UI				9999999
-#define DISPLAYORDER_DayNight		9999998
-#define DISPLAYORDER_DebugCollision	9999997
-#define DISPLAYORDER_DebugGrid		999999
-#define DISPLAYORDER_ProgressBar	99999
-#define DISPLAYORDER_SelectedRect	9999
+#define DISPLAYORDER_Splash			999999999
+#define DISPLAYORDER_Title			99999999
+#define DISPLAYORDER_Panel			9999999
+#define DISPLAYORDER_UI				999999
+#define DISPLAYORDER_DayNight		999998
+#define DISPLAYORDER_DebugCollision	999997
+#define DISPLAYORDER_DebugGrid		99999
+#define DISPLAYORDER_ProgressBar	9999
+#define DISPLAYORDER_SelectedRect	999
 
 #define DISPLAYORDER_Player		1
 #define DISPLAYORDER_PerRow		10
 
 #define PLAYER_STARTPOS 15, 10
-
-struct LoadPath
-{
-	const char *	szPrefix;
-	const char *	szName;
-
-	LoadPath() :	szPrefix(nullptr),
-					szName(nullptr)
-	{ }
-
-	bool IsUsed() const {
-		return szName != nullptr;
-	}
-
-	void Set(const char *szPre, const char *szNam) {
-		szPrefix = szPre;
-		szName = szNam;
-	}
-};
-
-struct InfoPanelInit
-{
-	// HySprite2d
-	LoadPath		panel_LoadPath;
-	glm::ivec2		panel_Pos;
-
-	// HyText2d
-	LoadPath		text_LoadPath;
-	glm::ivec2		text_LocalOffSet;
-	glm::ivec2		text_ScaleBox;
-
-	InfoPanelInit()
-	{ }
-
-	InfoPanelInit(const char *szPanelPrefix,
-				  const char *szPanelName,
-				  const char *szTextPrefix,
-				  const char *szTextName,
-				  int32 iPanelPosX,
-				  int32 iPanelPosY,
-				  int32 iTextOffsetX,
-				  int32 iTextOffsetY,
-				  int32 iTextDimensionsX,
-				  int32 iTextDimensionsY)
-	{
-		panel_LoadPath.Set(szPanelPrefix, szPanelName);
-		text_LoadPath.Set(szTextPrefix, szTextName);
-		HySetVec(panel_Pos, iPanelPosX, iPanelPosY);
-		HySetVec(text_LocalOffSet, iTextOffsetX, iTextOffsetY);
-		HySetVec(text_ScaleBox, iTextDimensionsX, iTextDimensionsY);
-	}
-};

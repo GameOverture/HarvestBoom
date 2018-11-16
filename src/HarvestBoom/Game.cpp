@@ -1,24 +1,23 @@
 #include "pch.h"
 #include "Game.h"
 #include "HarvestBoom.h"
-#include "Player.h"
-#include "IEnemy.h"
 
 Game::Game() :	HyEntity2d(nullptr),
 				m_Player(this),
 				m_Stamina(this),
 				m_World(this),
-				m_DayNight(m_World, m_Stamina, this),
 				m_IntroPanel(this),
+				m_HousePanel(this),
 				m_BillsPanel(this),
+				m_DayNight(m_Stamina, m_HousePanel, this),
 				m_DebugGrid(this),
 				m_eGameState(GAMESTATE_Init),
 				m_fElapsedTime(0.0f)
 {
-	m_World.Construct();
-	m_World.SetLevel();
+	m_World.Sync();
 
 	m_IntroPanel.Construct();
+	m_HousePanel.Construct();
 	m_BillsPanel.Construct();
 	
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
@@ -88,11 +87,13 @@ void Game::GameUpdate()
 
 
 			m_Player.HandleInput();
-			m_World.UpdatePlayer(m_Player, m_Stamina);
+			m_World.UpdatePlayer(m_Player, m_Stamina, m_HousePanel);
 		}
 		else
 		{
-			m_World.Reset();
+			if(m_HousePanel.IsShowing() && m_HousePanel.IsTransition() == false)
+				m_HousePanel.Hide();
+
 			m_Player.ZeroVelocity();
 		}
 		
@@ -100,7 +101,7 @@ void Game::GameUpdate()
 		{
 			pCam->pos.Tween(TILE_SIZE * 12 * 2, TILE_SIZE * 14 * 2, 1.5f, HyTween::QuadInOut);
 
-			m_World.CleanupTiles();
+			m_World.ResetTiles();
 			m_DayNight.HideUI();
 			m_eGameState = GAMESTATE_GoHome;
 		}
@@ -155,7 +156,7 @@ void Game::GameUpdate()
 			m_Player.SetPos(PLAYER_STARTPOS);
 			pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
 
-			m_World.SetLevel();
+			m_World.Sync();
 			m_DayNight.Start();
 			m_eGameState = GAMESTATE_Playing;
 		}

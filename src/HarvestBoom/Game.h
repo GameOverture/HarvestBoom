@@ -1,24 +1,23 @@
 #pragma once
 #include "pch.h"
 #include "Player.h"
-#include "DayNight.h"
 #include "Stamina.h"
 #include "World.h"
+#include "DayNight.h"
 #include "IntroPanel.h"
+#include "HousePanel.h"
 #include "BillsPanel.h"
 #include "DebugGrid.h"
-
-class HarvestBoom;
-class Plant;
 
 class Game : public HyEntity2d
 {
 	Player					m_Player;
 	Stamina					m_Stamina;
 	World					m_World;
-	DayNight				m_DayNight;
 	IntroPanel				m_IntroPanel;
+	HousePanel				m_HousePanel;
 	BillsPanel				m_BillsPanel;
+	DayNight				m_DayNight;
 
 	DebugGrid				m_DebugGrid;
 

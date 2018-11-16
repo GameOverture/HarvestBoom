@@ -5,7 +5,7 @@
 class EquipButton : public InfoPanel
 {
 public:
-	EquipButton(const InfoPanelInit &infoPanelInitRef, HyEntity2d *pParent);
+	EquipButton(HyEntity2d *pParent);
 
 	bool IsUsed();
 

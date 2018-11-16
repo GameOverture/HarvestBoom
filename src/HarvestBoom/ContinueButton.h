@@ -5,7 +5,7 @@
 class ContinueButton : public InfoPanel
 {
 public:
-	ContinueButton(const InfoPanelInit &infoPanelInitRef, HyEntity2d *pParent);
+	ContinueButton(HyEntity2d *pParent);
 
 	bool IsUsed();
 

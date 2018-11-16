@@ -5,63 +5,11 @@
 #include "Stamina.h"
 
 World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
-									m_CollidePt1(nullptr),
-									m_CollidePt2(nullptr),
-									m_CollideNormal(nullptr),
 									m_uiSetRowCurrentIndex(0),
-									m_pHousePanel(nullptr)
+									m_DebugCollidePt1(nullptr),
+									m_DebugCollidePt2(nullptr),
+									m_DebugCollideNormal(nullptr)
 {
-	m_CollidePt1.GetShape().SetAsCircle(2.0f);
-	m_CollidePt1.topColor.Set(1.0f, 0.0f, 1.0f);
-	m_CollidePt1.SetDisplayOrder(DISPLAYORDER_DebugCollision);
-
-	m_CollidePt2.GetShape().SetAsCircle(2.0f);
-	m_CollidePt2.topColor.Set(1.0f, 0.0f, 1.0f);
-	m_CollidePt2.SetDisplayOrder(DISPLAYORDER_DebugCollision);
-
-	m_CollideNormal.SetLineThickness(2.0f);
-	m_CollideNormal.topColor.Set(1.0f, 0.0f, 1.0f);
-	m_CollideNormal.SetDisplayOrder(DISPLAYORDER_DebugCollision);
-
-	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
-	{
-		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-			m_pTileGrid[i][j] = nullptr;
-	}
-
-	InfoPanelInit equipInfoPanelInit;
-	equipInfoPanelInit.panel_LoadPath.Set("Game", "EquipButton");
-	equipInfoPanelInit.text_LoadPath.Set("Game", "Small");
-	HySetVec(equipInfoPanelInit.text_LocalOffSet, 8, 5);
-	HySetVec(equipInfoPanelInit.text_ScaleBox, 70, 35);
-
-	InfoPanelInit buyInfoPanelInit;
-	buyInfoPanelInit.panel_LoadPath.Set("Game", "BuyButton");
-	buyInfoPanelInit.text_LoadPath.Set(HY_SYSTEM_FONT);// "Game", "Small");
-	HySetVec(buyInfoPanelInit.text_LocalOffSet, 8, 3);
-	HySetVec(buyInfoPanelInit.text_ScaleBox, 65, 30);
-
-	m_pHousePanel = HY_NEW HousePanel(equipInfoPanelInit, buyInfoPanelInit, this);
-}
-
-World::~World()
-{
-	DeleteTiles();
-}
-
-void World::DeleteTiles()
-{
-	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
-	{
-		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-			delete m_pTileGrid[i][j];
-	}
-}
-
-void World::Construct()
-{
-	DeleteTiles();
-
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
@@ -91,56 +39,124 @@ void World::Construct()
 		}
 	}
 
-	m_CollidePt1.Load();
-	m_CollidePt2.Load();
-	m_CollideNormal.Load();
+	m_DebugCollidePt1.GetShape().SetAsCircle(2.0f);
+	m_DebugCollidePt1.topColor.Set(1.0f, 0.0f, 1.0f);
+	m_DebugCollidePt1.SetDisplayOrder(DISPLAYORDER_DebugCollision);
+	m_DebugCollidePt1.SetEnabled(false);
+	m_DebugCollidePt1.Load();
 
-	m_CollidePt1.SetEnabled(false);
-	m_CollidePt2.SetEnabled(false);
-	m_CollideNormal.SetEnabled(false);
+	m_DebugCollidePt2.GetShape().SetAsCircle(2.0f);
+	m_DebugCollidePt2.topColor.Set(1.0f, 0.0f, 1.0f);
+	m_DebugCollidePt2.SetDisplayOrder(DISPLAYORDER_DebugCollision);
+	m_DebugCollidePt2.SetEnabled(false);
+	m_DebugCollidePt2.Load();
 
-	m_pHousePanel->Construct();
+	m_DebugCollideNormal.SetLineThickness(2.0f);
+	m_DebugCollideNormal.topColor.Set(1.0f, 0.0f, 1.0f);
+	m_DebugCollideNormal.SetDisplayOrder(DISPLAYORDER_DebugCollision);
+	m_DebugCollideNormal.SetEnabled(false);
+	m_DebugCollideNormal.Load();
 }
 
-void World::SetLevel()
+World::~World()
 {
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+			delete m_pTileGrid[i][j];
+	}
+}
+
+void World::Sync()
+{
+	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
+
 	switch(Values::Get()->m_uiCurrentDay)
 	{
-	case 1:	SetAsLevel1(); break;
-	case 2:	SetAsLevel2(); break;
+	case 1:
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHDHHH__________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		break;
+
+	case 2:
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHDHHH__________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("__________++++___________");
+		SetRow("__________++++___________");
+		SetRow("__________++++___________");
+		SetRow("__________++++___________");
+		SetRow("__________++++___________");
+		SetRow("__________++++___________");
+		SetRow("__________++++___________");
+		SetRow("__________++++___________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		break;
+
+	case 3:
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHDHHH__________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________________________");
+		break;
 	}
-}
-
-void World::SetAsLevel1()
-{
-	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
-
-	//      0123456789012345678901234
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHDHHH__________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("___________++____________");
-	SetRow("___________++____________");
-	SetRow("___________++____________");
-	SetRow("___________++____________");
-	SetRow("___________++____________");
-	SetRow("___________++____________");
-	SetRow("___________++____________");
-	SetRow("___________++____________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
 
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
@@ -149,94 +165,17 @@ void World::SetAsLevel1()
 	}
 }
 
-void World::SetAsLevel2()
+void World::ResetTiles()
 {
-	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
-
-	//      0123456789012345678901234
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHDHHH__________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("__________++++___________");
-	SetRow("__________++++___________");
-	SetRow("__________++++___________");
-	SetRow("__________++++___________");
-	SetRow("__________++++___________");
-	SetRow("__________++++___________");
-	SetRow("__________++++___________");
-	SetRow("__________++++___________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-			m_pTileGrid[i][j]->SetTileState();
-	}
-}
-
-void World::SetAsLevel3()
-{
-	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
-
-	//      0123456789012345678901234
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHHHHH__________");
-	SetRow("_________HHDHHH__________");
-	SetRow("_________________________");
-	SetRow("_________________________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________++++++__________");
-	SetRow("_________________________");
-
-	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
-	{
-		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-			m_pTileGrid[i][j]->SetTileState();
-	}
-}
-
-void World::CleanupTiles()
-{
-	// Cleanup from last update
-	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
-	{
-		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-			m_pTileGrid[i][j]->Cleanup();
+			m_pTileGrid[i][j]->Reset();
 	}
 }
 
 
-void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
+void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &housePanelRef)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Display Order
@@ -244,7 +183,7 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 	playerRef.SetDisplayOrder(((WORLD_HEIGHT - iPlayerInRow) * DISPLAYORDER_PerRow) + DISPLAYORDER_Player);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	CleanupTiles();
+	ResetTiles();
 
 	// NOTE: Cannot combine with above
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
@@ -263,19 +202,19 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 
 	if(pPlayerTile)
 	{
-		if(pPlayerTile->GetTileType() == HouseDoor && m_pHousePanel->IsShowing() == false && m_pHousePanel->IsTransition() == false)
+		if(pPlayerTile->GetTileType() == HouseDoor && housePanelRef.IsShowing() == false && housePanelRef.IsTransition() == false)
 		{
-			m_pHousePanel->Show();
+			housePanelRef.Show();
 			playerRef.SetEnabled(false);
 		}
-		else if(pPlayerTile->GetTileType() != HouseDoor && m_pHousePanel->IsShowing() && m_pHousePanel->IsTransition() == false)
+		else if(pPlayerTile->GetTileType() != HouseDoor && housePanelRef.IsShowing() && housePanelRef.IsTransition() == false)
 		{
-			m_pHousePanel->Hide();
+			housePanelRef.Hide();
 			playerRef.SetEnabled(true);
 			playerRef.Sync();
 		}
 
-		if(m_pHousePanel->IsShowing() && m_pHousePanel->IsTransition() == false && Values::Get()->m_bAirConditioning)
+		if(housePanelRef.IsShowing() && housePanelRef.IsTransition() == false && Values::Get()->m_bAirConditioning)
 			staminaRef.Offset(Values::Get()->m_fSTAMINA_AC * Hy_UpdateStep());
 		
 		// Determine if this tile should be "Selected"
@@ -290,7 +229,7 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 			if(playerRef.DoAction(*pPlayerTile))
 			{
 				staminaRef.Offset(Values::Get()->m_fSTAMINA_ACTION * -Hy_UpdateStep());
-				m_pHousePanel->Sync();
+				housePanelRef.Sync();
 			}
 		}
 		else
@@ -319,28 +258,17 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef)
 				playerRef.pos.Offset(vNormal);
 
 				glm::vec2 ptMidpoint((manifold.points[0].x + manifold.points[1].x) / 2.0f, (manifold.points[0].y + manifold.points[1].y) / 2.0f);
-				m_CollideNormal.GetShape().SetAsLineSegment(ptMidpoint, ptMidpoint + vNormal);
-				m_CollideNormal.Load();
+				m_DebugCollideNormal.GetShape().SetAsLineSegment(ptMidpoint, ptMidpoint + vNormal);
+				m_DebugCollideNormal.Load();
 
-				m_CollidePt1.pos.Set(manifold.points[0].x, manifold.points[0].y);
-				m_CollidePt2.pos.Set(manifold.points[1].x, manifold.points[1].y);
+				m_DebugCollidePt1.pos.Set(manifold.points[0].x, manifold.points[0].y);
+				m_DebugCollidePt2.pos.Set(manifold.points[1].x, manifold.points[1].y);
 			}
 		}
 	}
 
 	float fRunNormalized = playerRef.GetMagnitude() / Values::Get()->m_fPLAYER_MAXVELOCITY;
 	staminaRef.Offset((Values::Get()->m_fSTAMINA_RUN * fRunNormalized) * -Hy_UpdateStep());
-}
-
-void World::Reset()
-{
-	if(m_pHousePanel->IsShowing() && m_pHousePanel->IsTransition() == false)
-		m_pHousePanel->Hide();
-}
-
-HousePanel *World::GetHousePanel()
-{
-	return m_pHousePanel;
 }
 
 void World::SetRow(std::string sRow)

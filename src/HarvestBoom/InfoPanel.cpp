@@ -1,33 +1,39 @@
 #include "pch.h"
 #include "InfoPanel.h"
 
-InfoPanel::InfoPanel(const InfoPanelInit &infoPanelInitRef, HyEntity2d *pParent) :	HyEntity2d(pParent),
-																						m_pPanel(infoPanelInitRef.panel_LoadPath.IsUsed() ? HY_NEW HySprite2d(infoPanelInitRef.panel_LoadPath.szPrefix, infoPanelInitRef.panel_LoadPath.szName, this) : nullptr),
-																						m_pText(infoPanelInitRef.text_LoadPath.IsUsed() ? HY_NEW HyText2d(infoPanelInitRef.text_LoadPath.szPrefix, infoPanelInitRef.text_LoadPath.szName, this) : nullptr)
-#ifdef LG_DEBUG_BOXES
-																						, m_pDebugTextBox(infoPanelInitRef.text_LoadPath.IsUsed() ? HY_NEW HyPrimitive2d(this) : nullptr)
+InfoPanel::InfoPanel(const char *szPanelPrefix,
+					 const char *szPanelName,
+					 const char *szTextPrefix,
+					 const char *szTextName,
+					 int32 iTextOffsetX,
+					 int32 iTextOffsetY,
+					 int32 iTextDimensionsX,
+					 int32 iTextDimensionsY,
+					 HyEntity2d *pParent) :	HyEntity2d(pParent),
+											m_pPanel(szPanelName != nullptr ? HY_NEW HySprite2d(szPanelPrefix, szPanelName, this) : nullptr),
+											m_pText(szTextName != nullptr ? HY_NEW HyText2d(szTextPrefix, szTextName, this) : nullptr)
+#ifdef DEV_QUICKMODE
+											, m_pDebugTextBox(infoPanelInitRef.text_LoadPath.IsUsed() ? HY_NEW HyPrimitive2d(this) : nullptr)
 #endif
 {
 	if(m_pText)
 	{
 		m_pText->TextSetAlignment(HYALIGN_Center);
-		SetTextLocation(infoPanelInitRef.text_LocalOffSet.x, infoPanelInitRef.text_LocalOffSet.y, infoPanelInitRef.text_ScaleBox.x, infoPanelInitRef.text_ScaleBox.y);
+		SetTextLocation(iTextOffsetX, iTextOffsetY, iTextDimensionsX, iTextDimensionsY);
 
-#ifdef LG_DEBUG_BOXES
+#ifdef DEV_QUICKMODE
 		m_pDebugTextBox->SetTint(1.0f, 0.0f, 0.0f);
 #endif
 	}
 
 	UseWindowCoordinates();
-	
-	pos.Set(infoPanelInitRef.panel_Pos);
 }
 
 InfoPanel::~InfoPanel()
 {
 	delete m_pPanel;
 	delete m_pText;
-#ifdef LG_DEBUG_BOXES
+#ifdef DEV_QUICKMODE
 	delete m_pDebugTextBox;
 #endif
 }
@@ -105,7 +111,7 @@ float InfoPanel::GetPanelHeight()
 	m_pText->pos.Set(m_vTextOffset.x + vPanelOffset.x, m_vTextOffset.y + vPanelOffset.y);
 	m_pText->SetAsScaleBox(static_cast<float>(iWidth), static_cast<float>(iHeight), true);
 
-#ifdef LG_DEBUG_BOXES
+#ifdef DEV_QUICKMODE
 	if(m_pDebugTextBox)
 	{
 		m_pDebugTextBox->pos.Set(m_pText->pos);

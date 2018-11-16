@@ -42,7 +42,7 @@ TileType Tile::GetTileType() const
 	return m_eTileType;
 }
 
-void Tile::Cleanup()
+void Tile::Reset()
 {
 	m_SelectedRect.SetEnabled(false);
 	m_ProgressBar.SetEnabled(false);

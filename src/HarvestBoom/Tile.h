@@ -98,7 +98,7 @@ public:
 
 	TileType GetTileType() const;
 
-	void Cleanup();
+	void Reset();
 
 	void SetNeighbors(Tile *pNorth, Tile *pEast, Tile *pSouth, Tile *pWest, Tile *pNorthEast, Tile *pSouthEast, Tile *pSouthWest, Tile *pNorthWest);
 	void SetType(TileType eType);

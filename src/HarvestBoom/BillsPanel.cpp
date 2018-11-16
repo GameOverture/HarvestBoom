@@ -139,12 +139,7 @@ void BillsPanel::Construct()
 
 	if(m_pContinueBtn == nullptr)
 	{
-		InfoPanelInit init = {};
-		init.panel_LoadPath.Set("Game", "EquipButton");
-		init.text_LoadPath.Set("Game", "Small");
-		HySetVec(init.text_LocalOffSet, 4, 20);
-		HySetVec(init.text_ScaleBox, 70, 35);
-		m_pContinueBtn = HY_NEW ContinueButton(init, this);
+		m_pContinueBtn = HY_NEW ContinueButton(this);
 		m_pContinueBtn->Load();
 	}
 

@@ -4,8 +4,6 @@
 #include "Game.h"
 #include "TitleScreen.h"
 
-//#define DEV_QUICKMODE
-
 class HarvestBoom : public IHyApplication
 {
 	HyPrimitive2d				m_Splash;

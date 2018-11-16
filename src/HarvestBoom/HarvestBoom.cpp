@@ -20,6 +20,8 @@ HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
 
 HarvestBoom::~HarvestBoom()
 {
+	delete m_pTitleScrn;
+	delete m_pGame;
 }
 
 /*static*/ LtGAudioSndBank *HarvestBoom::GetSndBank()
