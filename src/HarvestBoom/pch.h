@@ -60,6 +60,7 @@ enum PlantType
 	PLANTTYPE_Vine
 };
 
+#define DISPLAYORDER_Splash			9999999999
 #define DISPLAYORDER_Title			999999999
 #define DISPLAYORDER_Panel			99999999
 #define DISPLAYORDER_UI				9999999
@@ -70,8 +71,9 @@ enum PlantType
 #define DISPLAYORDER_SelectedRect	9999
 
 #define DISPLAYORDER_Player		1
-
 #define DISPLAYORDER_PerRow		10
+
+#define PLAYER_STARTPOS 15, 10
 
 struct LoadPath
 {

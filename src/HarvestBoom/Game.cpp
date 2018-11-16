@@ -15,34 +15,24 @@ Game::Game() :	HyEntity2d(nullptr),
 				m_eGameState(GAMESTATE_Init),
 				m_fElapsedTime(0.0f)
 {
-	m_DebugGrid.SetEnabled(false);
-	m_DebugGrid.SetDisplayOrder(DISPLAYORDER_DebugGrid);
-	m_DayNight.SetDisplayOrder(DISPLAYORDER_UI);
-	m_Stamina.SetDisplayOrder(DISPLAYORDER_UI);
-}
-
-Game::~Game()
-{
-}
-
-// Invoke only once
-void Game::Construct()
-{
-	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
-	m_Stamina.pos.Set(-100.0f, 50.0f);
-	
 	m_World.Construct();
 	m_World.SetLevel();
 
 	m_IntroPanel.Construct();
 	m_BillsPanel.Construct();
+	
+	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
+	m_DebugGrid.SetEnabled(false);
+	m_DebugGrid.SetDisplayOrder(DISPLAYORDER_DebugGrid);
+	
 
-	m_Player.SetPos(15, 10);
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
 	pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
 	pCam->SetZoom(2.0f);
+}
 
-	m_Player.Sync();
+Game::~Game()
+{
 }
 
 void Game::GameUpdate()
@@ -162,7 +152,7 @@ void Game::GameUpdate()
 		if(m_DayNight.IsPitchBlack())
 		{
 			m_Player.SetEnabled(true);
-			m_Player.SetPos(15, 10);
+			m_Player.SetPos(PLAYER_STARTPOS);
 			pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
 
 			m_World.SetLevel();

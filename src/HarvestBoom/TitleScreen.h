@@ -3,25 +3,21 @@
 
 class TitleScreen : public HyEntity2d
 {
-	HyPrimitive2d		m_Splash;
-
 	HySprite2d			m_Panel;
-	HyText2d			m_Title;
+	HyText2d			m_TitleText;
 
-	HyText2d			m_txtPlay;
-	HyText2d			m_txtQuit;
+	HyText2d			m_PlayText;
+	HyText2d			m_QuitText;
 	HyText2d			m_Selector;
 
 	HyPrimitive2d		m_LegalBg;
-	HyText2d			m_Legal;
+	HyText2d			m_LegalText;
 
 public:
-	TitleScreen(glm::ivec2 vResolution);
+	TitleScreen();
 	virtual ~TitleScreen();
 
-	void Construct();
 	void Start();
-
 	TitleScreenValue GameUpdate();
 };
 

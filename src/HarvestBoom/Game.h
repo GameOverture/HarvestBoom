@@ -17,7 +17,6 @@ class Game : public HyEntity2d
 	Stamina					m_Stamina;
 	World					m_World;
 	DayNight				m_DayNight;
-
 	IntroPanel				m_IntroPanel;
 	BillsPanel				m_BillsPanel;
 
@@ -49,8 +48,6 @@ class Game : public HyEntity2d
 public:
 	Game();
 	virtual ~Game();
-
-	void Construct();
 
 	void GameUpdate();
 	bool BugUpdate();

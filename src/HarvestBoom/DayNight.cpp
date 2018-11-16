@@ -21,6 +21,7 @@ DayNight::DayNight(World &worldRef, Stamina &staminaRef, HyEntity2d *pParent) :	
 																				m_fElapsedTime(0.0f)
 {
 	UseWindowCoordinates();
+	SetDisplayOrder(DISPLAYORDER_UI);
 	m_MainText.SetTag(1); // Skips the fake pause initially, but not on any consecutive day
 }
 

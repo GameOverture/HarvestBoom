@@ -3,21 +3,18 @@
 #include "Audio/LtGAudioLinks.h"
 
 LtGAudioSndBank *HarvestBoom::sm_pSoundBank = nullptr;
-//LtGAudioSndBank *HarvestBoom::sm_pMusicBank = nullptr;
 
 HarvestBoom::HarvestBoom(HarmonyInit &initStruct) : IHyApplication(initStruct),
-													m_eGameState(GAMESTATE_Loading),
-													m_TitleScrn(initStruct.windowInfo[0].vSize)
+													m_Splash(nullptr),
+													m_pTitleScrn(nullptr),
+													m_pGame(nullptr),
+													m_eGameState(GAMESTATE_Loading)
 {
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Initialize LgEntity's audio bank pointer
 	LtGAudioManager *pAudioManager = LtGAudioManager::GetInstance();
 	pAudioManager->Init(initStruct);
 	pAudioManager->LinkSoundandWaveInformation((const char ***)szWAVEDEPENDENCIES, (char **)szSOUNDBANKS);
 	sm_pSoundBank = LtGAudioManager::GetInstance()->Load("basegame");
-	//sm_pMusicBank = LtGAudioManager::GetInstance()->Load("music");
 
-	// TODO: Parse in values from hyproj to tune the game with data driven values
 	Values::Init();
 }
 
@@ -30,14 +27,15 @@ HarvestBoom::~HarvestBoom()
 	return sm_pSoundBank;
 }
 
-///*static*/ LtGAudioSndBank *HarvestBoom::GetMusicBank()
-//{
-//	return sm_pMusicBank;
-//}
-
 /*virtual*/ bool HarvestBoom::Initialize() /*override*/
 {
-	m_pCamera = Window().CreateCamera2d();
+	Window().CreateCamera2d();
+
+	m_Splash.GetShape().SetAsBox(Window().GetWidth(), Window().GetHeight());
+	m_Splash.Load();
+	m_Splash.topColor.Set(0.0f, 0.0f, 0.0f);
+	m_Splash.topColor.Tween(139.0f / 255.0f, 160.0f / 255.0f, 231.0f / 255.0f, 2.0f);
+	m_Splash.SetDisplayOrder(DISPLAYORDER_Splash);
 
 	Input().MapBtn(ToggleFPS, HYKEY_F);
 	Input().MapBtn(ToggleGrid, HYKEY_G);
@@ -52,10 +50,11 @@ HarvestBoom::~HarvestBoom()
 	Input().MapBtn(UseEquip, HYKEY_Space);
 	Input().MapAlternativeBtn(UseEquip, HYKEY_Enter);
 
-	m_TitleScrn.Construct();
-	m_TitleScrn.Load();
+	m_pTitleScrn = HY_NEW TitleScreen();
+	m_pTitleScrn->Load();
 
-	m_Game.Construct();
+	m_pGame = HY_NEW Game();
+	m_pGame->Load();
 
 	return true;
 }
@@ -65,36 +64,36 @@ HarvestBoom::~HarvestBoom()
 	switch(m_eGameState)
 	{
 	case GAMESTATE_Loading:
-		if(m_TitleScrn.IsLoaded())
+		if(m_pTitleScrn->IsLoaded())
 		{
+			m_pTitleScrn->Start();
+			m_Splash.SetEnabled(false);
 			HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_WIN);
 
-			m_Game.Load();
-#ifdef DEV_QUICKMODE
-			m_TitleScrn.SetEnabled(false);
-			m_eGameState = GAMESTATE_Game;
-#else
-			m_TitleScrn.Start();
 			m_eGameState = GAMESTATE_Title;
-#endif
 		}
 		break;
 
-	case GAMESTATE_Title: {
-		TitleScreenValue eValue = m_TitleScrn.GameUpdate();
-		if(TITLE_Play == eValue)
+	case GAMESTATE_Title:
+		switch(m_pTitleScrn->GameUpdate())
 		{
-			m_TitleScrn.alpha.Tween(0.0f, 1.0f);
+		case TITLE_Play:
+			m_pTitleScrn->alpha.Tween(0.0f, 1.0f);
 			m_eGameState = GAMESTATE_Game;
-		}
-		else if(TITLE_Quit == eValue)
+			break;
+
+		case TITLE_Quit:
 			return false;
-		} break;
+		}
+		break;
+
+	case GAMESTATE_TitleFade:
+		if(m_pTitleScrn->alpha.IsTweening() == false && m_pGame->IsLoaded())
+			m_eGameState = GAMESTATE_Game;
+		break;
 
 	case GAMESTATE_Game:
-		if(m_TitleScrn.alpha.IsTweening())
-			break;
-		m_Game.GameUpdate();
+		m_pGame->GameUpdate();
 		break;
 	}
 

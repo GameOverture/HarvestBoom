@@ -8,28 +8,27 @@
 
 class HarvestBoom : public IHyApplication
 {
+	HyPrimitive2d				m_Splash;
+
+	TitleScreen *				m_pTitleScrn;
+	Game *						m_pGame;
+
 	static LtGAudioSndBank *	sm_pSoundBank;
-	//static LtGAudioSndBank *	sm_pMusicBank;
 
 	enum GameState
 	{
 		GAMESTATE_Loading = 0,
 		GAMESTATE_Title,
+		GAMESTATE_TitleFade,
 		GAMESTATE_Game
 	};
-	GameState		m_eGameState;
-
-	HyCamera2d *	m_pCamera;
-
-	TitleScreen		m_TitleScrn;
-	Game			m_Game;
+	GameState					m_eGameState;
 
 public:
 	HarvestBoom(HarmonyInit &initStruct);
 	virtual ~HarvestBoom();
 
 	static LtGAudioSndBank *GetSndBank();
-	//static LtGAudioSndBank *GetMusicBank();
 
 	virtual bool Initialize() override;
 	virtual bool Update() override;

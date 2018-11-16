@@ -7,6 +7,8 @@ Stamina::Stamina(HyEntity2d *pParent) :	HyEntity2d(pParent),
 										m_Fill("UI", "Stamina", this)
 {
 	UseWindowCoordinates();
+	SetDisplayOrder(DISPLAYORDER_UI);
+	pos.Set(-100.0f, 50.0f);
 }
 
 Stamina::~Stamina()

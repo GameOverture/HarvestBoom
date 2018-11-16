@@ -34,6 +34,9 @@ Player::Player(HyEntity2d *pParent) :	IActor(pParent),
 
 	m_Tool.SetEnabled(false);
 	m_DebugText.SetEnabled(false);
+
+	SetPos(PLAYER_STARTPOS);
+	Sync();
 }
 
 Player::~Player()
