@@ -91,8 +91,7 @@ void Game::GameUpdate()
 		}
 		else
 		{
-			if(m_HousePanel.IsShowing() && m_HousePanel.IsTransition() == false)
-				m_HousePanel.Hide();
+			m_HousePanel.Hide();
 
 			m_Player.ZeroVelocity();
 		}

@@ -1,32 +1,25 @@
 #pragma once
 #include "pch.h"
 
-#define PANEL_SIDEMARGIN 20.0f
-#define PANEL_TOPMARGIN 50.0f
-
 class IPanel : public HyEntity2d
 {
 protected:
+	glm::vec2				m_vDimensions;
+
 	HyPrimitive2d			m_PanelFill;
 	HyPrimitive2d			m_PanelFrameOutline;
 	HyPrimitive2d			m_PanelFrame;
 
-	glm::vec2				m_ptFrameVerts[4];
-	bool					m_bCustomVerts;
-	bool					m_bIsShowing;
-
 public:
-	IPanel(HyEntity2d *pParent);
+	IPanel(glm::vec2 vDimensions, HyEntity2d *pParent);
 	virtual ~IPanel();
 
-	virtual void Construct();
+	void Show();
+	void Hide();
 
-	virtual void Show();
-	virtual void Hide();
-	virtual bool IsTransition();
-	bool IsShowing();
-
-	float PanelWidth();
-	float PanelHeight();
+	virtual void OnShow() = 0;
+	virtual void OnHide() = 0;
+	virtual bool IsTransition() = 0;
+	virtual bool IsShowing() = 0;
 };
 

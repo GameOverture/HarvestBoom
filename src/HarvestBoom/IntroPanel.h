@@ -1,12 +1,11 @@
 #pragma once
 #include "pch.h"
-
 #include "IPanel.h"
 
 class IntroPanel : public IPanel
 {
-	HyText2d				m_txtHeader;
-	HyText2d				m_txtIntro;
+	HyText2d				m_HeaderText;
+	HyText2d				m_BodyText;
 
 public:
 	IntroPanel(HyEntity2d *pParent);
