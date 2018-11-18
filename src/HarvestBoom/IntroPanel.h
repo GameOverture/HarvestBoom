@@ -8,8 +8,11 @@ class IntroPanel : public IPanel
 	HyText2d				m_BodyText;
 
 public:
-	IntroPanel(HyEntity2d *pParent);
+	IntroPanel(glm::vec2 vDimensions, HyEntity2d *pParent);
 	virtual ~IntroPanel();
 
-	virtual void Construct() override;
+	virtual float OnShow() override;
+	virtual void OnShown() override;
+	virtual float OnHide() override;
+	virtual void OnHidden() override;
 };

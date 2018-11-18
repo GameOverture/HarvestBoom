@@ -644,6 +644,6 @@ void HousePanel::Sync()
 
 /*virtual*/ void HousePanel::OnUpdate() /*override*/
 {
-	if(IsShowing() && m_AirConditionText.IsEnabled() && m_AirConditionText.pos.IsTweening() == false)
+	if(IsShown() && m_AirConditionText.IsEnabled() && m_AirConditionText.pos.IsTweening() == false)
 		m_AirConditionText.pos.Tween(m_ptFrameVerts[0].x + 15.0f, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadOut, [this](IHyNode *) { m_AirConditionText.pos.Tween(m_ptFrameVerts[0].x, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadIn); });
 }

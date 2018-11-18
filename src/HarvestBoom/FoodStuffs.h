@@ -1,8 +1,7 @@
 #pragma once
 #include "pch.h"
-#include "IPanel.h"
 
-class FoodStuffs : public IPanel
+class FoodStuffs : public IHy9Slice
 {
 	HyText2d				m_txtTitle;
 
@@ -19,9 +18,12 @@ public:
 	FoodStuffs(HyEntity2d *pParent);
 	virtual ~FoodStuffs();
 
-	void Construct();
-
 	void SetTitle(std::string sTitle);
 
 	void Sync();
+
+	virtual float OnShow() override;
+	virtual void OnShown() override;
+	virtual float OnHide() override;
+	virtual void OnHidden() override;
 };

@@ -1,17 +1,20 @@
 #include "pch.h"
 #include "IPanel.h"
 
-IPanel::IPanel(glm::vec2 vDimensions, HyEntity2d *pParent) :	HyEntity2d(pParent),
-																m_vDimensions(vDimensions),
-																m_PanelFill(this),
-																m_PanelFrameOutline(this),
-																m_PanelFrame(this)
+IPanel::IPanel(glm::vec2 vDimensions, HyEntity2d *pParent) :
+	HyEntity2d(pParent),
+	m_vDIMENSIONS(vDimensions),
+	m_fElapsedTime(0.0f),
+	m_ePanelState(PANELSTATE_Hidden),
+	m_PanelFill(this),
+	m_PanelFrameOutline(this),
+	m_PanelFrame(this)
 {
 	glm::vec2 ptFrameVerts[4];
 	HySetVec(ptFrameVerts[0], 0.0f, 0.0f);
-	HySetVec(ptFrameVerts[1], 0.0f, m_vDimensions.y);
-	HySetVec(ptFrameVerts[2], m_vDimensions.x, m_vDimensions.y);
-	HySetVec(ptFrameVerts[3], m_vDimensions.x, 0.0f);
+	HySetVec(ptFrameVerts[1], 0.0f, m_vDIMENSIONS.y);
+	HySetVec(ptFrameVerts[2], m_vDIMENSIONS.x, m_vDIMENSIONS.y);
+	HySetVec(ptFrameVerts[3], m_vDIMENSIONS.x, 0.0f);
 
 	m_PanelFill.GetShape().SetAsBox(ptFrameVerts[3].x - ptFrameVerts[0].x, ptFrameVerts[1].y - ptFrameVerts[0].y);
 	m_PanelFill.pos.Set(ptFrameVerts[0]);
@@ -35,22 +38,66 @@ IPanel::~IPanel()
 {
 }
 
+float IPanel::GetWidth()
+{
+	return m_vDIMENSIONS.x;
+}
+
+float IPanel::GetHeight()
+{
+	return m_vDIMENSIONS.y;
+}
+
 /*virtual*/ void IPanel::Show()
 {
+	if(IsShown() || IsTransition())
+		return;
+
 	SetEnabled(true);
-	pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
-	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadOut, [this](IHyNode *pThis) { m_bIsShowing = true; });
+	m_fElapsedTime = OnShow();
+	m_ePanelState = PANELSTATE_Showing;
 }
 
 /*virtual*/ void IPanel::Hide()
 {
-	if(IsShowing() == false || IsTransition())
+	if(IsShown() == false || IsTransition())
 		return;
 
-	pos.Tween(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f, 1.0f, HyTween::QuadIn, [this](IHyNode *pThis) { SetEnabled(false); m_bIsShowing = false; });
+	m_fElapsedTime = OnHide();
+	m_ePanelState = PANELSTATE_Hiding;
 }
 
-/*virtual*/ bool IPanel::IsTransition()
+bool IPanel::IsTransition()
 {
-	return pos.IsTweening();
+	return m_ePanelState == PANELSTATE_Showing || m_ePanelState == PANELSTATE_Hiding;
+}
+
+bool IPanel::IsShown()
+{
+	return m_ePanelState == PANELSTATE_Shown;
+}
+
+/*virtual*/ void IPanel::OnUpdate() /*override*/
+{
+	if(m_fElapsedTime > 0.0f)
+	{
+		m_fElapsedTime -= Hy_UpdateStep();
+		return;
+	}
+
+	switch(m_ePanelState)
+	{
+	case PANELSTATE_Showing:
+		m_ePanelState = PANELSTATE_Shown;
+		OnShown();
+		break;
+
+	case PANELSTATE_Hiding:
+		m_ePanelState = PANELSTATE_Hidden;
+		SetEnabled(false);
+		OnHidden();
+		break;
+	}
+
+	m_fElapsedTime = 0.0f;
 }

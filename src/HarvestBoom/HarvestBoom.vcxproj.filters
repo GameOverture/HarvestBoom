@@ -98,6 +98,9 @@
       <Filter>MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="Values.cpp" />
+    <ClCompile Include="IButton.cpp">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -175,6 +178,9 @@
       <Filter>MainMenu</Filter>
     </ClInclude>
     <ClInclude Include="Values.h" />
+    <ClInclude Include="IButton.h">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\BuildAudioLinks.pl">

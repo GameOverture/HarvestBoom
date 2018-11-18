@@ -2,6 +2,16 @@
 #include "Game.h"
 #include "HarvestBoom.h"
 
+
+#define PANEL_SIDEMARGIN 20.0f
+#define PANEL_TOPMARGIN 50.0f
+
+	HySetVec(m_ptFrameVerts[0], PANEL_SIDEMARGIN, PANEL_TOPMARGIN);
+	HySetVec(m_ptFrameVerts[1], PANEL_SIDEMARGIN, vWindowSize.y - PANEL_TOPMARGIN);
+	HySetVec(m_ptFrameVerts[2], vWindowSize.x - PANEL_SIDEMARGIN, vWindowSize.y - PANEL_TOPMARGIN);
+	HySetVec(m_ptFrameVerts[3], vWindowSize.x - PANEL_SIDEMARGIN, PANEL_TOPMARGIN);
+
+
 Game::Game() :	HyEntity2d(nullptr),
 				m_Player(this),
 				m_Stamina(this),
@@ -117,7 +127,7 @@ void Game::GameUpdate()
 		break;
 		
 	case GAMESTATE_Bills:
-		if(m_BillsPanel.IsShowing() == false && m_BillsPanel.IsTransition() == false)
+		if(m_BillsPanel.IsShown() == false && m_BillsPanel.IsTransition() == false)
 		{
 			Values::Get()->m_uiCurrentDay++;
 			if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)

@@ -1,45 +1,31 @@
 #include "pch.h"
 #include "BillsPanel.h"
 
-BillsPanel::BillsPanel(HyEntity2d *pParent) :	IPanel(pParent),
-												m_Scroll("UI", "Bills", this),
-												m_BillsText("Game", "Main", this),
-												m_FoodStocksBg(this),
-												m_FoodStocks(this),
-												m_Savings("Game", "Small", this),
-												m_SavingsVal("Game", "Small", this),
-												m_Harvest("Game", "Small", this),
-												m_HarvestVal("Game", "Small", this),
-												m_uiHarvestSoldAmt(0),
-												m_Rent("Game", "Small", this),
-												m_RentVal("Game", "Small", this),
-												m_Food("Game", "Small", this),
-												m_FoodVal("Game", "Small", this),
-												m_AirConditioning("Game", "Small", this),
-												m_AirConditioningVal("Game", "Small", this),
-												m_BarLineOutline(this),
-												m_BarLine(this),
-												m_TotalVal("Game", "Small", this),
-												m_pContinueBtn(nullptr)
-{
-}
-
-BillsPanel::~BillsPanel()
-{
-	delete m_pContinueBtn;
-}
-
 #define REVENU_COLORS 58.0f / 255.0f, 221.0f / 255.0f,  32.0f / 255.0f
 #define PAY_COLORS 223.0f / 255.0f, 32.0f / 255.0f,  32.0f / 255.0f
 
-void BillsPanel::Construct()
+BillsPanel::BillsPanel(HyEntity2d *pParent) :
+	IHy9Slice(glm::vec2(20, 20), 10, pParent),
+	m_Scroll("UI", "Bills", this),
+	m_BillsText("Game", "Main", this),
+	m_FoodStocksBg(this),
+	m_FoodStocks(this),
+	m_Savings("Game", "Small", this),
+	m_SavingsVal("Game", "Small", this),
+	m_Harvest("Game", "Small", this),
+	m_HarvestVal("Game", "Small", this),
+	m_uiHarvestSoldAmt(0),
+	m_Rent("Game", "Small", this),
+	m_RentVal("Game", "Small", this),
+	m_Food("Game", "Small", this),
+	m_FoodVal("Game", "Small", this),
+	m_AirConditioning("Game", "Small", this),
+	m_AirConditioningVal("Game", "Small", this),
+	m_BarLineOutline(this),
+	m_BarLine(this),
+	m_TotalVal("Game", "Small", this),
+	m_pContinueBtn(nullptr)
 {
-	IPanel::Construct();
-
-	m_PanelFill.SetEnabled(false);
-	m_PanelFrameOutline.SetEnabled(false);
-	m_PanelFrame.SetEnabled(false);
-
 	m_Scroll.scale.Set(2.0f, 2.25f);
 	m_Scroll.pos.Set(80.0f, 90.0f);
 
@@ -50,7 +36,6 @@ void BillsPanel::Construct()
 	m_BillsText.pos.Set(fTextX, 320.0f);
 	m_BillsText.SetAsScaleBox(150.0f, 65.0f);
 
-	m_FoodStocks.Construct();
 	m_FoodStocks.SetTitle("Click to sell");
 	m_FoodStocks.pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
 	m_FoodStocks.Hide();
@@ -134,7 +119,7 @@ void BillsPanel::Construct()
 
 	Sync();
 
-	pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
+	
 	SetEnabled(true);
 
 	if(m_pContinueBtn == nullptr)
@@ -149,20 +134,37 @@ void BillsPanel::Construct()
 	m_pContinueBtn->GetTextPtr()->TextSet("Sleep");
 }
 
-/*virtual*/ void BillsPanel::Show() /*override*/
+BillsPanel::~BillsPanel()
 {
-	alpha.Set(1.0f);
-	IPanel::Show();
+	delete m_pContinueBtn;
 }
 
-void BillsPanel::Hide()
+/*virtual*/ float BillsPanel::OnShow() /*override*/
 {
-	alpha.Tween(0.0f, 1.0f, HyTween::Linear, [this](IHyNode *pThis) { SetEnabled(false); m_bIsShowing = false; });
+	alpha.Set(1.0f);
+	pos.Set(-GetWidth(true), 0.0f);
+}
+
+/*virtual*/ void BillsPanel::OnShown() /*override*/
+{
+}
+
+/*virtual*/ float BillsPanel::OnHide() /*override*/
+{
+	alpha.Tween(0.0f, 1.0f, HyTween::Linear);
+
+	return 1.0f;
+}
+
+/*virtual*/ void BillsPanel::OnHidden() /*override*/
+{
 }
 
 /*virtual*/ void BillsPanel::OnUpdate() /*override*/
 {
-	if(m_bIsShowing == false)
+	IHy9Slice::OnUpdate();
+
+	if(IsShown() == false)
 		return;
 
 	const float fFADEIN_DUR = 0.5f;
@@ -194,7 +196,7 @@ void BillsPanel::Hide()
 	}
 	if(m_AirConditioning.alpha.Get() == 1.0f && m_TotalVal.alpha.Get() == 0.0f)
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
-	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.IsShowing() == false && m_FoodStocks.IsTransition() == false)
+	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.IsShown() == false && m_FoodStocks.IsTransition() == false)
 	{
 		m_FoodStocks.Show();
 		m_pContinueBtn->pos.Tween(Hy_App().Window().GetWindowSize().x - 100, 15, 1.0f, HyTween::QuadOut);

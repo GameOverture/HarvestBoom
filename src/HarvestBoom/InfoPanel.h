@@ -17,6 +17,7 @@ protected:
 
 public:
 	InfoPanel(const char *szPanelPrefix, const char *szPanelName, const char *szTextPrefix, const char *szTextName, int32 iTextOffsetX, int32 iTextOffsetY, int32 iTextDimensionsX, int32 iTextDimensionsY, HyEntity2d *pParent);
+	InfoPanel(const char *szPanelPrefix, const char *szPanelName, HyEntity2d *pParent);
 	virtual ~InfoPanel();
 
 	HySprite2d *GetPanelPtr();

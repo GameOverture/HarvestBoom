@@ -1,11 +1,9 @@
 #pragma once
 #include "pch.h"
-
-#include "IPanel.h"
 #include "FoodStuffs.h"
 #include "ContinueButton.h"
 
-class BillsPanel : public IPanel
+class BillsPanel : public IHy9Slice
 {
 	HySprite2d		m_Scroll;
 	HyText2d		m_BillsText;
@@ -39,9 +37,10 @@ public:
 	BillsPanel(HyEntity2d *pParent);
 	virtual ~BillsPanel();
 
-	virtual void Construct() override;
-	virtual void Show() override;
-	virtual void Hide() override;
+	virtual float OnShow() override;
+	virtual void OnShown() override;
+	virtual float OnHide() override;
+	virtual void OnHidden() override;
 
 	virtual void OnUpdate() override;
 
