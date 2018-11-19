@@ -181,7 +181,6 @@
     <ClCompile Include="DebugGrid.cpp" />
     <ClCompile Include="FoodStuffs.cpp" />
     <ClCompile Include="HousePanel.cpp" />
-    <ClCompile Include="IButton.cpp" />
     <ClCompile Include="InfoPanel.cpp" />
     <ClCompile Include="IntroPanel.cpp" />
     <ClCompile Include="IPanel.cpp" />
@@ -225,7 +224,6 @@
     <ClInclude Include="DebugGrid.h" />
     <ClInclude Include="FoodStuffs.h" />
     <ClInclude Include="HousePanel.h" />
-    <ClInclude Include="IButton.h" />
     <ClInclude Include="InfoPanel.h" />
     <ClInclude Include="IntroPanel.h" />
     <ClInclude Include="IPanel.h" />

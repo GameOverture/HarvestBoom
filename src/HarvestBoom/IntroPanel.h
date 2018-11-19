@@ -1,14 +1,13 @@
 #pragma once
 #include "pch.h"
-#include "IPanel.h"
 
-class IntroPanel : public IPanel
+class IntroPanel : public IHy9Slice
 {
 	HyText2d				m_HeaderText;
 	HyText2d				m_BodyText;
 
 public:
-	IntroPanel(glm::vec2 vDimensions, HyEntity2d *pParent);
+	IntroPanel(HyEntity2d *pParent);
 	virtual ~IntroPanel();
 
 	virtual float OnShow() override;

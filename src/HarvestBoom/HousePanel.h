@@ -1,10 +1,9 @@
 #pragma once
-#include "IPanel.h"
 #include "FoodStuffs.h"
 #include "EquipButton.h"
 #include "BuyButton.h"
 
-class HousePanel : public IPanel
+class HousePanel : public IHy9Slice
 {
 	FoodStuffs		m_FoodStocks;
 
@@ -39,16 +38,15 @@ public:
 	HousePanel(HyEntity2d *pParent);
 	virtual ~HousePanel();
 
-	virtual void Construct() override;
-
-	virtual void Show() override;
-	virtual void Hide() override;
-	virtual bool IsTransition() override;
-
 	void SetEquipedUI();
 	void HideEquipedUI();
 
 	void Sync();
 
 	virtual void OnUpdate() override;
+
+	virtual float OnShow() override;
+	virtual void OnShown() override;
+	virtual float OnHide() override;
+	virtual void OnHidden() override;
 };

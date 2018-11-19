@@ -68,6 +68,7 @@ void FoodStuffs::Sync()
 
 /*virtual*/ float FoodStuffs::OnShow() /*override*/
 {
+	return 0.0f;
 }
 
 /*virtual*/ void FoodStuffs::OnShown() /*override*/
@@ -76,6 +77,7 @@ void FoodStuffs::Sync()
 
 /*virtual*/ float FoodStuffs::OnHide() /*override*/
 {
+	return 0.0f;
 }
 
 /*virtual*/ void FoodStuffs::OnHidden() /*override*/

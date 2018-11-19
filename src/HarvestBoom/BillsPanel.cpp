@@ -143,6 +143,8 @@ BillsPanel::~BillsPanel()
 {
 	alpha.Set(1.0f);
 	pos.Set(-GetWidth(true), 0.0f);
+	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadIn);
+	return 1.0f;
 }
 
 /*virtual*/ void BillsPanel::OnShown() /*override*/
@@ -152,7 +154,6 @@ BillsPanel::~BillsPanel()
 /*virtual*/ float BillsPanel::OnHide() /*override*/
 {
 	alpha.Tween(0.0f, 1.0f, HyTween::Linear);
-
 	return 1.0f;
 }
 

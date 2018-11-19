@@ -2,16 +2,6 @@
 #include "Game.h"
 #include "HarvestBoom.h"
 
-
-#define PANEL_SIDEMARGIN 20.0f
-#define PANEL_TOPMARGIN 50.0f
-
-	HySetVec(m_ptFrameVerts[0], PANEL_SIDEMARGIN, PANEL_TOPMARGIN);
-	HySetVec(m_ptFrameVerts[1], PANEL_SIDEMARGIN, vWindowSize.y - PANEL_TOPMARGIN);
-	HySetVec(m_ptFrameVerts[2], vWindowSize.x - PANEL_SIDEMARGIN, vWindowSize.y - PANEL_TOPMARGIN);
-	HySetVec(m_ptFrameVerts[3], vWindowSize.x - PANEL_SIDEMARGIN, PANEL_TOPMARGIN);
-
-
 Game::Game() :	HyEntity2d(nullptr),
 				m_Player(this),
 				m_Stamina(this),
@@ -25,10 +15,6 @@ Game::Game() :	HyEntity2d(nullptr),
 				m_fElapsedTime(0.0f)
 {
 	m_World.Sync();
-
-	m_IntroPanel.Construct();
-	m_HousePanel.Construct();
-	m_BillsPanel.Construct();
 	
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
 	m_DebugGrid.SetEnabled(false);
@@ -119,7 +105,6 @@ void Game::GameUpdate()
 	case GAMESTATE_GoHome:
 		if(pCam->pos.IsTweening() == false)
 		{
-			m_BillsPanel.Construct();
 			m_BillsPanel.Show();
 			m_Player.SetEnabled(false);
 			m_eGameState = GAMESTATE_Bills;
