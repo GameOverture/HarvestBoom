@@ -11,12 +11,13 @@ IntroPanel::IntroPanel(HyEntity2d *pParent) :
 	m_HeaderText.TextSet("Welcome!");
 	m_HeaderText.TextSetAlignment(HYALIGN_Center);
 
-	m_BodyText.pos.Set(GetWidth(false) + 20.0f, GetHeight(false) - 128.0f);
+	m_BodyText.pos.Set(20.0f, GetHeight(false) - 128.0f);
 	m_BodyText.TextSetState(1);
-	m_BodyText.SetAsColumn(GetWidth(false) - 40.0f, true);
+	m_BodyText.SetAsColumn(GetWidth(false) - 40.0f);
 	m_BodyText.TextSet("You're a single tasking farming extraordinaire. With the grass in the front yard strangely receding away, you decide to exploit the situation and grow some crops to pay the bills.\n\nYou got all the tools to get started, so let's get to it!");
 
-
+	GetFill().alpha.Set(0.5f);
+	SetDisplayOrder(DISPLAYORDER_Panel);
 }
 
 IntroPanel::~IntroPanel()
@@ -25,7 +26,8 @@ IntroPanel::~IntroPanel()
 
 /*virtual*/ float IntroPanel::OnShow() /*override*/
 {
-	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadIn);
+	pos.Set(-GetWidth(true), 20.0f);
+	pos.Tween(20.0f, 20.0f, 1.0f, HyTween::QuadIn);
 	return 1.0f;
 }
 
@@ -35,12 +37,11 @@ IntroPanel::~IntroPanel()
 
 /*virtual*/ float IntroPanel::OnHide() /*override*/
 {
-	pos.Tween(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f, 1.0f, HyTween::QuadIn);
+	pos.Tween(-GetWidth(true), 20.0f, 1.0f, HyTween::QuadIn);
 	return 1.0f;
 }
 
 /*virtual*/ void IntroPanel::OnHidden() /*override*/
 {
-	pos.Set(-GetWidth(true), 0.0f);
 }
 

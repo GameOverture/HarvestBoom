@@ -28,6 +28,7 @@ HousePanel::HousePanel(HyEntity2d *pParent) :	IHy9Slice(glm::vec2(400.0f, 300.0f
 												m_BtnVineBuy(this),
 												m_AirConditionText("Game", "Small", this)
 {
+	SetDisplayOrder(DISPLAYORDER_Panel);
 }
 
 HousePanel::~HousePanel()

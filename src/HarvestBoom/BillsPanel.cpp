@@ -132,6 +132,8 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_pContinueBtn->alpha.Set(0.0f);
 	m_pContinueBtn->GetTextPtr()->TextSetState(1);
 	m_pContinueBtn->GetTextPtr()->TextSet("Sleep");
+
+	SetDisplayOrder(DISPLAYORDER_Panel);
 }
 
 BillsPanel::~BillsPanel()
