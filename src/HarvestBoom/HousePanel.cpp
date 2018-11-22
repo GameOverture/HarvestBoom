@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "HousePanel.h"
 
-HousePanel::HousePanel(HyEntity2d *pParent) :	IHy9Slice(glm::vec2(400.0f, 300.0f), 10.0f, pParent),
+HousePanel::HousePanel(HyEntity2d *pParent) :	IHy9Slice(glm::vec2(550.0f, 340.0f), 4.0f, pParent),
 												m_FoodStocks(this),
 												m_SavingsVal("Game", "Small", this),
 												m_BtnHoeEquip(this),
@@ -28,6 +28,9 @@ HousePanel::HousePanel(HyEntity2d *pParent) :	IHy9Slice(glm::vec2(400.0f, 300.0f
 												m_BtnVineBuy(this),
 												m_AirConditionText("Game", "Small", this)
 {
+	GetFill().SetTint(219.0f / 255.0f, 164.0f / 255.0f, 99.0f / 255.0f);
+	GetBorder().SetTint(219.0f / 255.0f, 164.0f / 255.0f, 99.0f / 255.0f);//SetTint(254.0f / 255.0f, 243.0f / 255.0f, 192.0f / 255.0f);
+	GetFill().alpha.Set(0.6f);
 	SetDisplayOrder(DISPLAYORDER_Panel);
 }
 
@@ -409,7 +412,8 @@ void HousePanel::Sync()
 
 /*virtual*/ void HousePanel::OnUpdate() /*override*/
 {
-	if(IsShown() && m_AirConditionText.IsEnabled() && m_AirConditionText.pos.IsTweening() == false)
+	IHy9Slice::OnUpdate();
+	if(m_AirConditionText.IsEnabled() && m_AirConditionText.pos.IsTweening() == false)
 		m_AirConditionText.pos.Tween(15.0f, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadOut, [this](IHyNode *) { m_AirConditionText.pos.Tween(0.0f, m_AirConditionText.pos.Y(), 0.5f, HyTween::QuadIn); });
 }
 
@@ -421,7 +425,7 @@ void HousePanel::Sync()
 	rot.Tween(0.0f, fTransitionDur, HyTween::QuadOut);
 	alpha.Set(1.0f);
 
-	pos.Set(0.0f, 0.0f);
+	pos.Set(static_cast<float>(Hy_App().Window().GetWidth()) - GetWidth(false), 0.0f);
 	rot_pivot.Set(static_cast<float>(Hy_App().Window().GetWindowSize().x), 0.0f);
 
 	m_FoodStocks.Show();
@@ -448,7 +452,7 @@ void HousePanel::Sync()
 	m_BtnHoeEquip.GetTextPtr()->TextSet("  Hoe  ");
 	m_BtnHoeEquip.GetTextPtr()->TextSetState(1);
 	m_BtnHoeEquip.alpha.Set(1.0f);
-	m_BtnHoeEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnHoeEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnHoeEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 2.5f), fButtonBotMargin + (fButtonOffsetY * 1.0f)  + 70.0f);
 	m_BtnHoeEquip.SetTag(EQUIP_Hoe);
 
@@ -461,7 +465,7 @@ void HousePanel::Sync()
 	m_BtnHarvestEquip.GetTextPtr()->TextSet("Harvest");
 	m_BtnHarvestEquip.GetTextPtr()->TextSetState(1);
 	m_BtnHarvestEquip.alpha.Set(1.0f);
-	m_BtnHarvestEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnHarvestEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnHarvestEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 1.5f), fButtonBotMargin + (fButtonOffsetY * 1.0f) + 70.0f);
 	m_BtnHarvestEquip.SetTag(EQUIP_Harvest);
 
@@ -474,7 +478,7 @@ void HousePanel::Sync()
 	m_BtnCornEquip.alpha.Set(1.0f);
 	m_BtnCornEquip.GetTextPtr()->TextSetState(1);
 	m_BtnCornEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
-	m_BtnCornEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnCornEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnCornEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 3.0f), fButtonBotMargin + (fButtonOffsetY * 1.0f));
 	m_BtnCornEquip.SetTag(EQUIP_Corn);
 
@@ -498,7 +502,7 @@ void HousePanel::Sync()
 	m_BtnEggplantEquip.alpha.Set(1.0f);
 	m_BtnEggplantEquip.GetTextPtr()->TextSetState(1);
 	m_BtnEggplantEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
-	m_BtnEggplantEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnEggplantEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnEggplantEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 2.0f), fButtonBotMargin + (fButtonOffsetY * 1.0f));
 	m_BtnEggplantEquip.SetTag(EQUIP_Eggplant);
 
@@ -522,7 +526,7 @@ void HousePanel::Sync()
 	m_BtnPumpkinEquip.alpha.Set(1.0f);
 	m_BtnPumpkinEquip.GetTextPtr()->TextSetState(1);
 	m_BtnPumpkinEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
-	m_BtnPumpkinEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnPumpkinEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnPumpkinEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 1.0f), fButtonBotMargin + (fButtonOffsetY * 1.0f));
 	m_BtnPumpkinEquip.SetTag(EQUIP_Pumpkin);
 
@@ -546,7 +550,7 @@ void HousePanel::Sync()
 	m_BtnGernaiumEquip.alpha.Set(1.0f);
 	m_BtnGernaiumEquip.GetTextPtr()->TextSetState(1);
 	m_BtnGernaiumEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
-	m_BtnGernaiumEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnGernaiumEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnGernaiumEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 3.0f), fButtonBotMargin);
 	m_BtnGernaiumEquip.SetTag(EQUIP_Gernaium);
 
@@ -570,7 +574,7 @@ void HousePanel::Sync()
 	m_BtnMarigoldEquip.alpha.Set(1.0f);
 	m_BtnMarigoldEquip.GetTextPtr()->TextSetState(1);
 	m_BtnMarigoldEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
-	m_BtnMarigoldEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnMarigoldEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnMarigoldEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 2.0f), fButtonBotMargin);
 	m_BtnMarigoldEquip.SetTag(EQUIP_Marigold);
 
@@ -594,7 +598,7 @@ void HousePanel::Sync()
 	m_BtnVineEquip.alpha.Set(1.0f);
 	m_BtnVineEquip.GetTextPtr()->TextSetState(1);
 	m_BtnVineEquip.GetTextPtr()->TextSetAlignment(HYALIGN_Center);
-	m_BtnVineEquip.pos.Set(GetWidth(false), GetHeight(false));
+	m_BtnVineEquip.pos.Set(GetWidth(false), 0.0f);
 	m_BtnVineEquip.pos.Offset(-fButtonSideMargin - (fButtonOffsetX * 1.0f), fButtonBotMargin);
 	m_BtnVineEquip.SetTag(EQUIP_Vine);
 
@@ -633,10 +637,10 @@ void HousePanel::Sync()
 /*virtual*/ float HousePanel::OnHide() /*override*/
 {
 	rot.Tween(90.0f, 0.5f, HyTween::QuadOut);
-
 	return 0.5f;
 }
 
 /*virtual*/ void HousePanel::OnHidden() /*override*/
 {
+	SetEquipedUI();
 }

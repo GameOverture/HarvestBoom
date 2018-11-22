@@ -27,7 +27,7 @@ IntroPanel::~IntroPanel()
 /*virtual*/ float IntroPanel::OnShow() /*override*/
 {
 	pos.Set(-GetWidth(true), 20.0f);
-	pos.Tween(20.0f, 20.0f, 1.0f, HyTween::QuadIn);
+	pos.Tween(20.0f, 20.0f, 1.0f, HyTween::QuadOut);
 	return 1.0f;
 }
 

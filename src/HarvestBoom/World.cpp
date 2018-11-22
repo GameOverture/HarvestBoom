@@ -202,12 +202,12 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 
 	if(pPlayerTile)
 	{
-		if(pPlayerTile->GetTileType() == HouseDoor && housePanelRef.IsShown() == false && housePanelRef.IsTransition() == false)
+		if(pPlayerTile->GetTileType() == HouseDoor)
 		{
 			housePanelRef.Show();
 			playerRef.SetEnabled(false);
 		}
-		else if(pPlayerTile->GetTileType() != HouseDoor && housePanelRef.IsShown() && housePanelRef.IsTransition() == false)
+		else if(pPlayerTile->GetTileType() != HouseDoor)
 		{
 			housePanelRef.Hide();
 			playerRef.SetEnabled(true);

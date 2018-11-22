@@ -39,7 +39,7 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_FoodStocks.SetTitle("Click to sell");
 	m_FoodStocks.pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
 	m_FoodStocks.Hide();
-	m_Scroll.SetDisplayOrder(m_FoodStocks.GetDisplayOrder() - 1);
+	//m_Scroll.SetDisplayOrder(m_FoodStocks.GetDisplayOrder() - 1);
 
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
 
@@ -118,9 +118,6 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_TotalVal.alpha.Set(0.0f);
 
 	Sync();
-
-	
-	SetEnabled(true);
 
 	if(m_pContinueBtn == nullptr)
 	{
