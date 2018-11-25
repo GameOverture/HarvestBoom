@@ -61,9 +61,6 @@
     <ClCompile Include="World.cpp">
       <Filter>Game\World</Filter>
     </ClCompile>
-    <ClCompile Include="IPanel.cpp">
-      <Filter>Game\UI\Panels</Filter>
-    </ClCompile>
     <ClCompile Include="DebugGrid.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
@@ -98,6 +95,9 @@
       <Filter>MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="Values.cpp" />
+    <ClCompile Include="FoodButton.cpp">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -138,9 +138,6 @@
     <ClInclude Include="World.h">
       <Filter>Game\World</Filter>
     </ClInclude>
-    <ClInclude Include="IPanel.h">
-      <Filter>Game\UI\Panels</Filter>
-    </ClInclude>
     <ClInclude Include="DebugGrid.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
@@ -175,6 +172,9 @@
       <Filter>MainMenu</Filter>
     </ClInclude>
     <ClInclude Include="Values.h" />
+    <ClInclude Include="FoodButton.h">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\BuildAudioLinks.pl">

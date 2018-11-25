@@ -2,7 +2,7 @@
 #include "HousePanel.h"
 
 HousePanel::HousePanel(HyEntity2d *pParent) :	IHy9Slice(glm::vec2(550.0f, 340.0f), 4.0f, pParent),
-												m_FoodStocks(this),
+												m_FoodStocks(false, this),
 												m_SavingsVal("Game", "Small", this),
 												m_BtnHoeEquip(this),
 												m_BtnHoeDecal("Equip", "Hoe", &m_BtnHoeEquip),

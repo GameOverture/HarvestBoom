@@ -13,6 +13,7 @@ enum EquipedItemType
 	EQUIP_Vine
 };
 
+
 class Values
 {
 	static Values *	sm_pInstance;
@@ -31,6 +32,9 @@ public:
 	const float		m_fSTAMINA_RUN;
 	const float		m_fSTAMINA_ACTION;
 	const float		m_fSTAMINA_AC;
+	const float		m_fSTAMINA_EATCORNMODIFIER;
+	const float		m_fSTAMINA_EATEGGPLANTMODIFIER;
+	const float		m_fSTAMINA_EATPUMPKINMODIFIER;
 
 	const uint32	m_uiSTARTING_MONEY;
 	const uint32	m_uiSTARTING_CORNSEEDS;
@@ -79,6 +83,7 @@ public:
 	const uint32	m_uiENABLE_DEFENSE_DAY;
 
 	int32			m_iSavings;
+	float			m_fStamina;
 
 	uint32			m_uiSeedsCorn;
 	uint32			m_uiSeedsEggplant;
@@ -90,6 +95,7 @@ public:
 	uint32			m_uiHarvestCorn;
 	uint32			m_uiHarvestEggplant;
 	uint32			m_uiHarvestPumpkin;
+	uint32			m_uiHarvestSoldAmt;
 
 	uint32			m_uiCurrentDay;
 

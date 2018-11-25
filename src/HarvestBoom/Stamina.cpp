@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "Stamina.h"
 
-Stamina::Stamina(HyEntity2d *pParent) :	HyEntity2d(pParent),
-										m_fStamina(1.0f),
-										m_OuterFrame("UI", "Stamina", this),
-										m_Fill("UI", "Stamina", this)
+Stamina::Stamina(HyEntity2d *pParent) :
+	HyEntity2d(pParent),
+	m_OuterFrame("UI", "Stamina", this),
+	m_Fill("UI", "Stamina", this)
 {
 	UseWindowCoordinates();
 	SetDisplayOrder(DISPLAYORDER_UI);
@@ -19,19 +19,17 @@ Stamina::~Stamina()
 {
 	m_OuterFrame.AnimSetState(0);
 	m_Fill.AnimSetState(1);
-	m_Fill.pos.Y(1);
-
-	scale.Set(2.0f, 2.0f);
+	m_Fill.pos.Set(2.0f, 9.0f);
 }
 
 void Stamina::Offset(float fOffset)
 {
-	Set(m_fStamina + fOffset);
+	Set(Values::Get()->m_fStamina + fOffset);
 }
 
 void Stamina::Set(float fStaminaAmt)
 {
-	m_fStamina = fStaminaAmt;
-	m_fStamina = HyClamp(m_fStamina, 0.0f, 1.0f);
-	m_Fill.scale.Y(m_fStamina);
+	Values::Get()->m_fStamina = fStaminaAmt;
+	Values::Get()->m_fStamina = HyClamp(Values::Get()->m_fStamina, 0.0f, 1.0f);
+	m_Fill.scale.Y(Values::Get()->m_fStamina);
 }

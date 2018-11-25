@@ -41,8 +41,6 @@ bool BuyButton::IsUsed()
 
 /*virtual*/ void BuyButton::OnMouseClicked(void *pUserParam) /*override*/
 {
-	HousePanel *pThis = reinterpret_cast<HousePanel *>(pUserParam);
-
 	HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_BUYSTUFF);
 
 	switch(static_cast<EquipedItemType>(GetTag()))
@@ -73,5 +71,6 @@ bool BuyButton::IsUsed()
 		break;
 	}
 	
+	HousePanel *pThis = reinterpret_cast<HousePanel *>(pUserParam);
 	pThis->Sync();
 }

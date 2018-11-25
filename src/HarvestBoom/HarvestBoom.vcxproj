@@ -179,11 +179,11 @@
     <ClCompile Include="ContinueButton.cpp" />
     <ClCompile Include="EquipButton.cpp" />
     <ClCompile Include="DebugGrid.cpp" />
+    <ClCompile Include="FoodButton.cpp" />
     <ClCompile Include="FoodStuffs.cpp" />
     <ClCompile Include="HousePanel.cpp" />
     <ClCompile Include="InfoPanel.cpp" />
     <ClCompile Include="IntroPanel.cpp" />
-    <ClCompile Include="IPanel.cpp" />
     <ClCompile Include="Values.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Audio\LtGAudioBanks.cpp">
@@ -222,11 +222,11 @@
     <ClInclude Include="ContinueButton.h" />
     <ClInclude Include="EquipButton.h" />
     <ClInclude Include="DebugGrid.h" />
+    <ClInclude Include="FoodButton.h" />
     <ClInclude Include="FoodStuffs.h" />
     <ClInclude Include="HousePanel.h" />
     <ClInclude Include="InfoPanel.h" />
     <ClInclude Include="IntroPanel.h" />
-    <ClInclude Include="IPanel.h" />
     <ClInclude Include="Values.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Audio\LtGAudioBanks.h" />

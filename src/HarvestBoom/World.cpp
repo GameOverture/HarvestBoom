@@ -209,9 +209,11 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 		}
 		else if(pPlayerTile->GetTileType() != HouseDoor)
 		{
-			housePanelRef.Hide();
-			playerRef.SetEnabled(true);
-			playerRef.Sync();
+			if(housePanelRef.Hide())
+			{
+				playerRef.SetEnabled(true);
+				playerRef.Sync();
+			}
 		}
 
 		if(housePanelRef.IsShown() && housePanelRef.IsTransition() == false && Values::Get()->m_bAirConditioning)

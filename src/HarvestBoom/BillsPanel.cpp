@@ -9,12 +9,11 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_Scroll("UI", "Bills", this),
 	m_BillsText("Game", "Main", this),
 	m_FoodStocksBg(this),
-	m_FoodStocks(this),
+	m_FoodStocks(true, this),
 	m_Savings("Game", "Small", this),
 	m_SavingsVal("Game", "Small", this),
 	m_Harvest("Game", "Small", this),
 	m_HarvestVal("Game", "Small", this),
-	m_uiHarvestSoldAmt(0),
 	m_Rent("Game", "Small", this),
 	m_RentVal("Game", "Small", this),
 	m_Food("Game", "Small", this),
@@ -158,6 +157,8 @@ BillsPanel::~BillsPanel()
 
 /*virtual*/ void BillsPanel::OnHidden() /*override*/
 {
+	Values::Get()->m_iSavings = CalculateMoney();
+	Values::Get()->m_uiHarvestSoldAmt = 0;
 }
 
 /*virtual*/ void BillsPanel::OnUpdate() /*override*/
@@ -196,13 +197,23 @@ BillsPanel::~BillsPanel()
 	}
 	if(m_AirConditioning.alpha.Get() == 1.0f && m_TotalVal.alpha.Get() == 0.0f)
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
-	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.IsShown() == false && m_FoodStocks.IsTransition() == false)
+	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.Show())
 	{
-		m_FoodStocks.Show();
 		m_pContinueBtn->pos.Tween(Hy_App().Window().GetWindowSize().x - 100, 15, 1.0f, HyTween::QuadOut);
 		m_pContinueBtn->alpha.Set(1.0f);
 		m_pContinueBtn->EnableMouseInput(this);
 	}
+}
+
+int32 BillsPanel::CalculateMoney()
+{
+	int32 iTotal = Values::Get()->m_iSavings;
+	iTotal += Values::Get()->m_uiHarvestSoldAmt;
+	iTotal -= Values::Get()->m_uiBILLS_RENT;
+	iTotal -= Values::Get()->m_uiBILLS_FOOD;
+	iTotal -= Values::Get()->m_uiBILLS_AC;
+
+	return iTotal;
 }
 
 void BillsPanel::Sync()
@@ -210,15 +221,10 @@ void BillsPanel::Sync()
 	m_FoodStocks.Sync();
 
 	m_SavingsVal.TextSet("$" + std::to_string(Values::Get()->m_iSavings));
-	m_HarvestVal.TextSet("$" + std::to_string(m_uiHarvestSoldAmt));
+	m_HarvestVal.TextSet("$" + std::to_string(Values::Get()->m_uiHarvestSoldAmt));
 	m_RentVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_RENT));
 	m_FoodVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_FOOD));
 	m_AirConditioningVal.TextSet("$" + (Values::Get()->m_bAirConditioning ? std::to_string(Values::Get()->m_uiBILLS_AC) : std::to_string(0)));
 
-	int32 iTotal = Values::Get()->m_iSavings;
-	iTotal += m_uiHarvestSoldAmt;
-	iTotal -= Values::Get()->m_uiBILLS_RENT;
-	iTotal -= Values::Get()->m_uiBILLS_FOOD;
-	iTotal -= Values::Get()->m_uiBILLS_AC;
-	m_TotalVal.TextSet("$" + std::to_string(iTotal));
+	m_TotalVal.TextSet("$" + std::to_string(CalculateMoney()));
 }

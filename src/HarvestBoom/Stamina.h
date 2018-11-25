@@ -3,8 +3,6 @@
 
 class Stamina : public HyEntity2d
 {
-	float				m_fStamina;
-
 	HySprite2d			m_OuterFrame;
 	HySprite2d			m_Fill;
 

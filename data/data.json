@@ -12883,11 +12883,11 @@
                 "duration": 0.01600000075995922,
                 "frames": [
                     {
-                        "checksum": 4260590091,
+                        "checksum": 208934920,
                         "duration": 0.01600000075995922,
                         "id": 109,
-                        "offsetX": 1,
-                        "offsetY": 1
+                        "offsetX": 2,
+                        "offsetY": 2
                     }
                 ],
                 "loop": false,
@@ -12899,11 +12899,11 @@
                 "duration": 0.01600000075995922,
                 "frames": [
                     {
-                        "checksum": 663249992,
+                        "checksum": 1705824426,
                         "duration": 0.01600000075995922,
                         "id": 110,
-                        "offsetX": 4,
-                        "offsetY": 5
+                        "offsetX": 6,
+                        "offsetY": 0
                     }
                 ],
                 "loop": false,

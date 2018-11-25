@@ -1,21 +1,22 @@
 #pragma once
 #include "pch.h"
+#include "FoodButton.h"
 
 class FoodStuffs : public IHy9Slice
 {
 	HyText2d				m_txtTitle;
 
-	HySprite2d				m_CornIcon;
+	FoodButton				m_CornIcon;
 	HyText2d				m_CornQuantity;
 
-	HySprite2d				m_EggplantIcon;
+	FoodButton				m_EggplantIcon;
 	HyText2d				m_EggplantQuantity;
 
-	HySprite2d				m_PumpkinIcon;
+	FoodButton				m_PumpkinIcon;
 	HyText2d				m_PumpkinQuantity;
 
 public:
-	FoodStuffs(HyEntity2d *pParent);
+	FoodStuffs(bool bIsSelling, HyEntity2d *pParent);
 	virtual ~FoodStuffs();
 
 	void SetTitle(std::string sTitle);
@@ -26,4 +27,6 @@ public:
 	virtual void OnShown() override;
 	virtual float OnHide() override;
 	virtual void OnHidden() override;
+
+
 };

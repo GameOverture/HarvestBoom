@@ -16,7 +16,6 @@ class BillsPanel : public IHy9Slice
 
 	HyText2d		m_Harvest;
 	HyText2d		m_HarvestVal;
-	uint32			m_uiHarvestSoldAmt;
 
 	HyText2d		m_Rent;
 	HyText2d		m_RentVal;
@@ -44,5 +43,6 @@ public:
 
 	virtual void OnUpdate() override;
 
+	int32 CalculateMoney();
 	void Sync();
 };
