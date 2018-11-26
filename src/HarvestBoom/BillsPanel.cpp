@@ -5,10 +5,9 @@
 #define PAY_COLORS 223.0f / 255.0f, 32.0f / 255.0f,  32.0f / 255.0f
 
 BillsPanel::BillsPanel(HyEntity2d *pParent) :
-	IHy9Slice(glm::vec2(20, 20), 10, pParent),
+	IHy9Slice(glm::vec2(Hy_App().Window().GetWidth(), Hy_App().Window().GetHeight()), 10, pParent),
 	m_Scroll("UI", "Bills", this),
 	m_BillsText("Game", "Main", this),
-	m_FoodStocksBg(this),
 	m_FoodStocks(true, this),
 	m_Savings("Game", "Small", this),
 	m_SavingsVal("Game", "Small", this),
@@ -18,8 +17,10 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_RentVal("Game", "Small", this),
 	m_Food("Game", "Small", this),
 	m_FoodVal("Game", "Small", this),
+	m_FoodCheckBox(true, this),
 	m_AirConditioning("Game", "Small", this),
 	m_AirConditioningVal("Game", "Small", this),
+	m_AirConditioningCheckBox(false, this),
 	m_BarLineOutline(this),
 	m_BarLine(this),
 	m_TotalVal("Game", "Small", this),
@@ -35,10 +36,8 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_BillsText.pos.Set(fTextX, 320.0f);
 	m_BillsText.SetAsScaleBox(150.0f, 65.0f);
 
-	m_FoodStocks.SetTitle("Click to sell");
-	m_FoodStocks.pos.Set(static_cast<float>(-Hy_App().Window().GetWindowSize().x), 0.0f);
+	m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
 	m_FoodStocks.Hide();
-	//m_Scroll.SetDisplayOrder(m_FoodStocks.GetDisplayOrder() - 1);
 
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
 
@@ -90,6 +89,8 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_FoodVal.pos.Set(vWindowSize.x - fTextX, fTextY - 75.0f);
 	m_FoodVal.alpha.Set(0.0f);
 
+	m_FoodCheckBox.pos.Set(vWindowSize.x - (fTextX * 0.5f), fTextY - 75.0f);
+
 	m_AirConditioning.TextSet("A/C");
 	m_AirConditioning.TextSetLayerColor(0, 1, PAY_COLORS);
 	m_AirConditioning.TextSetState(1);
@@ -102,6 +103,8 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_AirConditioningVal.TextSetAlignment(HYALIGN_Right);
 	m_AirConditioningVal.pos.Set(vWindowSize.x - fTextX, fTextY - 100.0f);
 	m_AirConditioningVal.alpha.Set(0.0f);
+
+	m_AirConditioningCheckBox.pos.Set(vWindowSize.x - (fTextX * 0.5f), fTextY - 100.0f);
 
 	m_BarLineOutline.GetShape().SetAsLineSegment(glm::vec2(fTextX, fTextY - 110.0f), glm::vec2(vWindowSize.x - fTextX, fTextY - 110.0f));
 	m_BarLineOutline.SetLineThickness(7.0f);
@@ -129,6 +132,9 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_pContinueBtn->GetTextPtr()->TextSetState(1);
 	m_pContinueBtn->GetTextPtr()->TextSet("Sleep");
 
+	GetBorder().SetEnabled(false);
+	GetFill().SetEnabled(false);
+
 	SetDisplayOrder(DISPLAYORDER_Panel);
 }
 
@@ -141,7 +147,10 @@ BillsPanel::~BillsPanel()
 {
 	alpha.Set(1.0f);
 	pos.Set(-GetWidth(true), 0.0f);
-	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadIn);
+	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadOut);
+
+	m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
+	m_FoodStocks.Hide();
 	return 1.0f;
 }
 
@@ -199,6 +208,8 @@ BillsPanel::~BillsPanel()
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
 	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.Show())
 	{
+		m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
+		m_FoodStocks.pos.Tween(10.0f, 10.0f, 1.0f, HyTween::QuadOut);
 		m_pContinueBtn->pos.Tween(Hy_App().Window().GetWindowSize().x - 100, 15, 1.0f, HyTween::QuadOut);
 		m_pContinueBtn->alpha.Set(1.0f);
 		m_pContinueBtn->EnableMouseInput(this);
@@ -219,6 +230,9 @@ int32 BillsPanel::CalculateMoney()
 void BillsPanel::Sync()
 {
 	m_FoodStocks.Sync();
+
+	m_FoodCheckBox.Sync();
+	m_AirConditioningCheckBox.Sync();
 
 	m_SavingsVal.TextSet("$" + std::to_string(Values::Get()->m_iSavings));
 	m_HarvestVal.TextSet("$" + std::to_string(Values::Get()->m_uiHarvestSoldAmt));

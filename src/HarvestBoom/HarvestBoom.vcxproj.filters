@@ -98,6 +98,9 @@
     <ClCompile Include="FoodButton.cpp">
       <Filter>Game\UI\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="Values.h" />
     <ClInclude Include="FoodButton.h">
+      <Filter>Game\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
       <Filter>Game\UI\Buttons</Filter>
     </ClInclude>
   </ItemGroup>

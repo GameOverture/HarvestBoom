@@ -67,7 +67,7 @@ World::~World()
 	}
 }
 
-void World::Sync()
+void World::SetupNewDay()
 {
 	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
 
@@ -90,9 +90,9 @@ void World::Sync()
 		SetRow("_________________________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
-		SetRow("___________++____________");
-		SetRow("___________++____________");
-		SetRow("___________++____________");
+		SetRow("___________++++++________");
+		SetRow("___________++++++________");
+		SetRow("___________++++++________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
@@ -165,7 +165,7 @@ void World::Sync()
 	}
 }
 
-void World::ResetTiles()
+void World::CleanupTiles()
 {
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
@@ -183,7 +183,7 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 	playerRef.SetDisplayOrder(((WORLD_HEIGHT - iPlayerInRow) * DISPLAYORDER_PerRow) + DISPLAYORDER_Player);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	ResetTiles();
+	CleanupTiles();
 
 	// NOTE: Cannot combine with above
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
@@ -212,7 +212,7 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 			if(housePanelRef.Hide())
 			{
 				playerRef.SetEnabled(true);
-				playerRef.Sync();
+				Values::Get()->Sync();
 			}
 		}
 
@@ -231,7 +231,7 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 			if(playerRef.DoAction(*pPlayerTile))
 			{
 				staminaRef.Offset(Values::Get()->m_fSTAMINA_ACTION * -Hy_UpdateStep());
-				housePanelRef.Sync();
+				Values::Get()->Sync();
 			}
 		}
 		else

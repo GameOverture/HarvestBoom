@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "HarvestBoom.h"
 
 Values *Values::sm_pInstance = nullptr;
 
@@ -18,6 +19,9 @@ Values::Values() :
 	m_uiSTARTING_CORNSEEDS(5),
 	m_uiSTARTING_EGGPLANTSEEDS(5),
 	m_uiSTARTING_PUMPKINSEEDS(2),
+	m_uiSTARTING_CORNHARVEST(2),
+	m_uiSTARTING_EGGPLANTHARVEST(2),
+	m_uiSTARTING_PUMPKINHARVEST(2),
 
 	m_uiGIFTED_GERNAIUMSEEDS(3),
 	m_uiGIFTED_MARIGOLDSEEDS(3),
@@ -38,7 +42,7 @@ Values::Values() :
 	m_uiBILLS_FOOD(25),
 	m_uiBILLS_AC(10),
 
-	m_fDAY_LENGTH(90.0f),
+	m_fDAY_LENGTH(10.0f),
 
 	m_fDURATION_HOEDIRT(5.0f),
 	m_fDURATION_PLANTCORN(2.0f),
@@ -70,10 +74,13 @@ Values::Values() :
 	m_uiSeedsMarigold(0),
 	m_uiSeedsVine(0),
 	
-	m_uiHarvestCorn(0),
-	m_uiHarvestEggplant(0),
-	m_uiHarvestPumpkin(0),
+	m_uiHarvestCorn(m_uiSTARTING_CORNHARVEST),
+	m_uiHarvestEggplant(m_uiSTARTING_EGGPLANTHARVEST),
+	m_uiHarvestPumpkin(m_uiSTARTING_PUMPKINHARVEST),
+
 	m_uiHarvestSoldAmt(0),
+	m_bPayingFood(true),
+	m_bPayingAC(true),
 
 	m_uiCurrentDay(1),
 	m_eEquipedItem(EQUIP_Hoe),
@@ -95,4 +102,9 @@ Values::~Values()
 {
 	HyAssert(sm_pInstance, "");
 	return sm_pInstance;
+}
+
+void Values::Sync()
+{
+	static_cast<HarvestBoom &>(Hy_App()).GetGame()->Sync();
 }

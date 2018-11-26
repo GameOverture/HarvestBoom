@@ -18,8 +18,8 @@ bool ContinueButton::IsUsed()
 	if(IsUsed() == false)
 		return;
 
-	if(m_pPanel->AnimGetState() != BTNSTATE_Selected)
-		m_pPanel->AnimSetState(BTNSTATE_Down);
+	if(m_pPanel->AnimGetState() != HYBUTTONSTATE_Selected)
+		m_pPanel->AnimSetState(HYBUTTONSTATE_Down);
 }
 
 /*virtual*/ void ContinueButton::OnMouseUp(void *pUserParam) /*override*/
@@ -27,8 +27,8 @@ bool ContinueButton::IsUsed()
 	if(IsUsed() == false)
 		return;
 
-	if(m_pPanel->AnimGetState() != BTNSTATE_Selected)
-		m_pPanel->AnimSetState(BTNSTATE_Pressable);
+	if(m_pPanel->AnimGetState() != HYBUTTONSTATE_Selected)
+		m_pPanel->AnimSetState(HYBUTTONSTATE_Pressable);
 }
 
 /*virtual*/ void ContinueButton::OnMouseLeave(void *pUserParam) /*override*/
@@ -36,8 +36,8 @@ bool ContinueButton::IsUsed()
 	if(IsUsed() == false)
 		return;
 
-	if(m_pPanel->AnimGetState() != BTNSTATE_Selected)
-		m_pPanel->AnimSetState(BTNSTATE_Pressable);
+	if(m_pPanel->AnimGetState() != HYBUTTONSTATE_Selected)
+		m_pPanel->AnimSetState(HYBUTTONSTATE_Pressable);
 }
 
 /*virtual*/ void ContinueButton::OnMouseClicked(void *pUserParam) /*override*/

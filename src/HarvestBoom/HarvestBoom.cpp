@@ -29,6 +29,11 @@ HarvestBoom::~HarvestBoom()
 	return sm_pSoundBank;
 }
 
+Game *HarvestBoom::GetGame()
+{
+	return m_pGame;
+}
+
 /*virtual*/ bool HarvestBoom::Initialize() /*override*/
 {
 	Window().CreateCamera2d();

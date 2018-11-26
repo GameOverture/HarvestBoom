@@ -157,16 +157,16 @@ void HousePanel::Sync()
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if(eEquipedItem == EQUIP_Hoe)
-		m_BtnHoeEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnHoeEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
-		m_BtnHoeEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnHoeEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	m_BtnHoeEquip.EnableMouseInput(this);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if(eEquipedItem == EQUIP_Harvest)
-		m_BtnHarvestEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnHarvestEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
-		m_BtnHarvestEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnHarvestEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	m_BtnHarvestEquip.EnableMouseInput(this);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,30 +174,30 @@ void HousePanel::Sync()
 	sText += std::to_string(Values::Get()->m_uiSeedsCorn);
 	m_BtnCornEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Corn)
-		m_BtnCornEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnCornEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
 	{
 		if(Values::Get()->m_uiSeedsCorn > 0)
 		{
 			m_BtnCornEquip.EnableMouseInput(this);
-			m_BtnCornEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+			m_BtnCornEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 		}
 		else
 		{
 			m_BtnCornEquip.DisableMouseInput();
-			m_BtnCornEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+			m_BtnCornEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 		}
 	}
 
 	if(Values::Get()->m_iSavings >= static_cast<int32>(Values::Get()->m_uiCOST_CORNSEEDS))
 	{
 		m_BtnCornBuy.EnableMouseInput(this);
-		m_BtnCornBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnCornBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	}
 	else
 	{
 		m_BtnCornBuy.DisableMouseInput();
-		m_BtnCornBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+		m_BtnCornBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,30 +205,30 @@ void HousePanel::Sync()
 	sText += std::to_string(Values::Get()->m_uiSeedsEggplant);
 	m_BtnEggplantEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Eggplant)
-		m_BtnEggplantEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnEggplantEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
 	{
 		if(Values::Get()->m_uiSeedsEggplant > 0)
 		{
 			m_BtnEggplantEquip.EnableMouseInput(this);
-			m_BtnEggplantEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+			m_BtnEggplantEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 		}
 		else
 		{
 			m_BtnEggplantEquip.DisableMouseInput();
-			m_BtnEggplantEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+			m_BtnEggplantEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 		}
 	}
 
 	if(Values::Get()->m_iSavings >= static_cast<int32>(Values::Get()->m_uiCOST_EGGPLANTSEEDS))
 	{
 		m_BtnEggplantBuy.EnableMouseInput(this);
-		m_BtnEggplantBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnEggplantBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	}
 	else
 	{
 		m_BtnEggplantBuy.DisableMouseInput();
-		m_BtnEggplantBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+		m_BtnEggplantBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -236,30 +236,30 @@ void HousePanel::Sync()
 	sText += std::to_string(Values::Get()->m_uiSeedsPumpkin);
 	m_BtnPumpkinEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Pumpkin)
-		m_BtnPumpkinEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnPumpkinEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
 	{
 		if(Values::Get()->m_uiSeedsPumpkin > 0)
 		{
 			m_BtnPumpkinEquip.EnableMouseInput(this);
-			m_BtnPumpkinEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+			m_BtnPumpkinEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 		}
 		else
 		{
 			m_BtnPumpkinEquip.DisableMouseInput();
-			m_BtnPumpkinEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+			m_BtnPumpkinEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 		}
 	}
 
 	if(Values::Get()->m_iSavings >= static_cast<int32>(Values::Get()->m_uiCOST_PUMPKINSEEDS))
 	{
 		m_BtnPumpkinBuy.EnableMouseInput(this);
-		m_BtnPumpkinBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnPumpkinBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	}
 	else
 	{
 		m_BtnPumpkinBuy.DisableMouseInput();
-		m_BtnPumpkinBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+		m_BtnPumpkinBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -267,30 +267,30 @@ void HousePanel::Sync()
 	sText += std::to_string(Values::Get()->m_uiSeedsGernaium);
 	m_BtnGernaiumEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Gernaium)
-		m_BtnGernaiumEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnGernaiumEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
 	{
 		if(Values::Get()->m_uiSeedsGernaium > 0)
 		{
 			m_BtnGernaiumEquip.EnableMouseInput(this);
-			m_BtnGernaiumEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+			m_BtnGernaiumEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 		}
 		else
 		{
 			m_BtnGernaiumEquip.DisableMouseInput();
-			m_BtnGernaiumEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+			m_BtnGernaiumEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 		}
 	}
 
 	if(Values::Get()->m_iSavings >= static_cast<int32>(Values::Get()->m_uiCOST_GERNAIUMSEEDS))
 	{
 		m_BtnGernaiumBuy.EnableMouseInput(this);
-		m_BtnGernaiumBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnGernaiumBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	}
 	else
 	{
 		m_BtnGernaiumBuy.DisableMouseInput();
-		m_BtnGernaiumBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+		m_BtnGernaiumBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
 	if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
@@ -316,30 +316,30 @@ void HousePanel::Sync()
 	sText += std::to_string(Values::Get()->m_uiSeedsMarigold);
 	m_BtnMarigoldEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Marigold)
-		m_BtnMarigoldEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnMarigoldEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
 	{
 		if(Values::Get()->m_uiSeedsMarigold > 0)
 		{
 			m_BtnMarigoldEquip.EnableMouseInput(this);
-			m_BtnMarigoldEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+			m_BtnMarigoldEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 		}
 		else
 		{
 			m_BtnMarigoldEquip.DisableMouseInput();
-			m_BtnMarigoldEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+			m_BtnMarigoldEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 		}
 	}
 
 	if(Values::Get()->m_iSavings >= static_cast<int32>(Values::Get()->m_uiCOST_MARIGOLDSEEDS))
 	{
 		m_BtnMarigoldBuy.EnableMouseInput(this);
-		m_BtnMarigoldBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnMarigoldBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	}
 	else
 	{
 		m_BtnMarigoldBuy.DisableMouseInput();
-		m_BtnMarigoldBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+		m_BtnMarigoldBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
 	if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
@@ -365,30 +365,30 @@ void HousePanel::Sync()
 	sText += std::to_string(Values::Get()->m_uiSeedsVine);
 	m_BtnVineEquip.GetTextPtr()->TextSet(sText);
 	if(eEquipedItem == EQUIP_Vine)
-		m_BtnVineEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Selected);
+		m_BtnVineEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Selected);
 	else
 	{
 		if(Values::Get()->m_uiSeedsVine > 0)
 		{
 			m_BtnVineEquip.EnableMouseInput(this);
-			m_BtnVineEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+			m_BtnVineEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 		}
 		else
 		{
 			m_BtnVineEquip.DisableMouseInput();
-			m_BtnVineEquip.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+			m_BtnVineEquip.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 		}
 	}
 
 	if(Values::Get()->m_iSavings >= static_cast<int32>(Values::Get()->m_uiCOST_VINESEEDS))
 	{
 		m_BtnVineBuy.EnableMouseInput(this);
-		m_BtnVineBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Pressable);
+		m_BtnVineBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Pressable);
 	}
 	else
 	{
 		m_BtnVineBuy.DisableMouseInput();
-		m_BtnVineBuy.GetPanelPtr()->AnimSetState(BTNSTATE_Disabled);
+		m_BtnVineBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
 	if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
@@ -429,13 +429,11 @@ void HousePanel::Sync()
 	rot_pivot.Set(static_cast<float>(Hy_App().Window().GetWindowSize().x), 0.0f);
 
 	m_FoodStocks.Show();
-	m_FoodStocks.SetTitle("Click to eat");
 	m_FoodStocks.pos.Set(0.0f + 50.0f, GetHeight(false) - 195.0f);
 
 	m_SavingsVal.TextSetState(1);
 	m_SavingsVal.TextSetAlignment(HYALIGN_Center);
-	m_SavingsVal.pos.Set(0.0f, 0.0f);
-	m_SavingsVal.pos.Offset(GetWidth(false) * 0.5f, -40.0f);
+	m_SavingsVal.pos.Set(GetWidth(false) - GetWidth(false) * 0.5f, GetHeight(false) - 25.0f);
 	m_SavingsVal.SetAsScaleBox(GetWidth(false) * 0.5f, 25.0f);
 
 	const float fButtonSideMargin = 5.0f;

@@ -15,6 +15,11 @@ Stamina::~Stamina()
 {
 }
 
+void Stamina::Sync()
+{
+	Set(Values::Get()->m_fStamina);
+}
+
 /*virtual*/ void Stamina::OnLoaded() /*override*/
 {
 	m_OuterFrame.AnimSetState(0);

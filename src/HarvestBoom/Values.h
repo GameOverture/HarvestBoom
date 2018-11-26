@@ -3,7 +3,8 @@
 
 enum EquipedItemType
 {
-	EQUIP_Hoe = 0,
+	EQUIP_Nothing = 0,
+	EQUIP_Hoe,
 	EQUIP_Harvest,
 	EQUIP_Corn,
 	EQUIP_Eggplant,
@@ -40,6 +41,9 @@ public:
 	const uint32	m_uiSTARTING_CORNSEEDS;
 	const uint32	m_uiSTARTING_EGGPLANTSEEDS;
 	const uint32	m_uiSTARTING_PUMPKINSEEDS;
+	const uint32	m_uiSTARTING_CORNHARVEST;
+	const uint32	m_uiSTARTING_EGGPLANTHARVEST;
+	const uint32	m_uiSTARTING_PUMPKINHARVEST;
 
 	const uint32	m_uiGIFTED_GERNAIUMSEEDS;
 	const uint32	m_uiGIFTED_MARIGOLDSEEDS;
@@ -95,11 +99,16 @@ public:
 	uint32			m_uiHarvestCorn;
 	uint32			m_uiHarvestEggplant;
 	uint32			m_uiHarvestPumpkin;
+
 	uint32			m_uiHarvestSoldAmt;
+	bool			m_bPayingFood;
+	bool			m_bPayingAC;
 
 	uint32			m_uiCurrentDay;
 
 	EquipedItemType	m_eEquipedItem;
 
 	bool			m_bAirConditioning;
+
+	void Sync();
 };

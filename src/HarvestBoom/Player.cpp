@@ -6,14 +6,16 @@
 #define PLAYER_WIDTH 10.0f
 #define PLAYER_HEIGHT 5.0f
 
-Player::Player(HyEntity2d *pParent) :	IActor(pParent),
-										m_Body("Game", "Player", this),
-										m_Tool(this),
-										m_DebugText(HY_SYSTEM_FONT, this),
-										m_Collision(this),
-										m_Origin(this),
-										m_pEquipment(nullptr),
-										m_fEquipIdleHeight(0.0f)
+Player::Player(HyEntity2d *pParent) :
+	IActor(pParent),
+	m_Body("Game", "Player", this),
+	m_Tool(this),
+	m_DebugText(HY_SYSTEM_FONT, this),
+	m_Collision(this),
+	m_Origin(this),
+	m_ePrevEquipedItem(EQUIP_Nothing),
+	m_pEquipment(nullptr),
+	m_fEquipIdleHeight(0.0f)
 {
 	m_vVelocity.x = m_vVelocity.y = 0.0f;
 
@@ -130,7 +132,7 @@ bool Player::DoAction(Tile &tileRef)
 			if(m_pEquipment && m_pEquipment->rot.IsTweening() == false)
 				m_pEquipment->rot.Tween(-80.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_USEHOE_1); m_pEquipment->rot.Tween(-50.0f, 0.25f, HyTween::QuadIn); });
 
-			if(m_pEquipment->pos.Y() == m_fEquipIdleHeight)
+			if(m_pEquipment && m_pEquipment->pos.Y() == m_fEquipIdleHeight)
 				m_pEquipment->pos.Tween(m_pEquipment->pos.X(), 14.0f, 0.25f, HyTween::QuadOut);
 
 			if(rot.IsTweening() == false)
@@ -181,6 +183,9 @@ void Player::StopAction()
 
 void Player::Sync()
 {
+	if(m_ePrevEquipedItem == Values::Get()->m_eEquipedItem)
+		return;
+
 	switch(Values::Get()->m_eEquipedItem)
 	{
 	case EQUIP_Hoe:
@@ -210,4 +215,6 @@ void Player::Sync()
 		m_pEquipment->Load();
 		break;
 	}
+
+	m_ePrevEquipedItem = Values::Get()->m_eEquipedItem;
 }

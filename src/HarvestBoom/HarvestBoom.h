@@ -27,6 +27,7 @@ public:
 	virtual ~HarvestBoom();
 
 	static LtGAudioSndBank *GetSndBank();
+	Game *GetGame();
 
 	virtual bool Initialize() override;
 	virtual bool Update() override;

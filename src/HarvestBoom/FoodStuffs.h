@@ -4,22 +4,16 @@
 
 class FoodStuffs : public IHy9Slice
 {
+	bool					m_bIS_SELLING;
 	HyText2d				m_txtTitle;
 
-	FoodButton				m_CornIcon;
-	HyText2d				m_CornQuantity;
-
-	FoodButton				m_EggplantIcon;
-	HyText2d				m_EggplantQuantity;
-
-	FoodButton				m_PumpkinIcon;
-	HyText2d				m_PumpkinQuantity;
+	FoodButton				m_CornBtn;
+	FoodButton				m_EggplantBtn;
+	FoodButton				m_PumpkinBtn;
 
 public:
 	FoodStuffs(bool bIsSelling, HyEntity2d *pParent);
 	virtual ~FoodStuffs();
-
-	void SetTitle(std::string sTitle);
 
 	void Sync();
 

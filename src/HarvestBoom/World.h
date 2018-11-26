@@ -23,9 +23,9 @@ public:
 	World(HyEntity2d *pParent);
 	virtual ~World();
 
-	void Sync();
+	void SetupNewDay();
 
-	void ResetTiles();
+	void CleanupTiles();
 	void UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &housePanelRef);
 
 private:

@@ -2,13 +2,13 @@
 #include "pch.h"
 #include "FoodStuffs.h"
 #include "ContinueButton.h"
+#include "CheckBox.h"
 
 class BillsPanel : public IHy9Slice
 {
 	HySprite2d		m_Scroll;
 	HyText2d		m_BillsText;
 
-	HyPrimitive2d	m_FoodStocksBg;
 	FoodStuffs		m_FoodStocks;
 
 	HyText2d		m_Savings;
@@ -22,9 +22,11 @@ class BillsPanel : public IHy9Slice
 
 	HyText2d		m_Food;
 	HyText2d		m_FoodVal;
+	CheckBox		m_FoodCheckBox;
 
 	HyText2d		m_AirConditioning;
 	HyText2d		m_AirConditioningVal;
+	CheckBox		m_AirConditioningCheckBox;
 
 	HyPrimitive2d	m_BarLineOutline;
 	HyPrimitive2d	m_BarLine;

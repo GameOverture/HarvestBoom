@@ -14,6 +14,7 @@ class Player : public IActor
 	HyPrimitive2d		m_Collision;
 	HyPrimitive2d		m_Origin;
 
+	EquipedItemType		m_ePrevEquipedItem;
 	HySprite2d *		m_pEquipment;
 	float				m_fEquipIdleHeight;
 

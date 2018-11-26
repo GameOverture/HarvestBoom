@@ -17,8 +17,8 @@ bool BuyButton::IsUsed()
 	if(IsUsed() == false)
 		return;
 
-	if(m_pPanel->AnimGetState() != BTNSTATE_Selected)
-		m_pPanel->AnimSetState(BTNSTATE_Down);
+	if(m_pPanel->AnimGetState() != HYBUTTONSTATE_Selected)
+		m_pPanel->AnimSetState(HYBUTTONSTATE_Down);
 }
 
 /*virtual*/ void BuyButton::OnMouseUp(void *pUserParam) /*override*/
@@ -26,8 +26,8 @@ bool BuyButton::IsUsed()
 	if(IsUsed() == false)
 		return;
 
-	if(m_pPanel->AnimGetState() != BTNSTATE_Selected)
-		m_pPanel->AnimSetState(BTNSTATE_Pressable);
+	if(m_pPanel->AnimGetState() != HYBUTTONSTATE_Selected)
+		m_pPanel->AnimSetState(HYBUTTONSTATE_Pressable);
 }
 
 /*virtual*/ void BuyButton::OnMouseLeave(void *pUserParam) /*override*/
@@ -35,8 +35,8 @@ bool BuyButton::IsUsed()
 	if(IsUsed() == false)
 		return;
 
-	if(m_pPanel->AnimGetState() != BTNSTATE_Selected)
-		m_pPanel->AnimSetState(BTNSTATE_Pressable);
+	if(m_pPanel->AnimGetState() != HYBUTTONSTATE_Selected)
+		m_pPanel->AnimSetState(HYBUTTONSTATE_Pressable);
 }
 
 /*virtual*/ void BuyButton::OnMouseClicked(void *pUserParam) /*override*/
@@ -71,6 +71,5 @@ bool BuyButton::IsUsed()
 		break;
 	}
 	
-	HousePanel *pThis = reinterpret_cast<HousePanel *>(pUserParam);
-	pThis->Sync();
+	Values::Get()->Sync();
 }

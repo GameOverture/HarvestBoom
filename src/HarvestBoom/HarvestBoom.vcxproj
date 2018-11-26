@@ -176,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="BillsPanel.cpp" />
     <ClCompile Include="BuyButton.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="ContinueButton.cpp" />
     <ClCompile Include="EquipButton.cpp" />
     <ClCompile Include="DebugGrid.cpp" />
@@ -219,6 +220,7 @@
   <ItemGroup>
     <ClInclude Include="BillsPanel.h" />
     <ClInclude Include="BuyButton.h" />
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="ContinueButton.h" />
     <ClInclude Include="EquipButton.h" />
     <ClInclude Include="DebugGrid.h" />

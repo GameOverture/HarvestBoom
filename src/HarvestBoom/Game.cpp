@@ -14,7 +14,7 @@ Game::Game() :	HyEntity2d(nullptr),
 				m_eGameState(GAMESTATE_Init),
 				m_fElapsedTime(0.0f)
 {
-	m_World.Sync();
+	m_World.SetupNewDay();
 	
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
 	m_DebugGrid.SetEnabled(false);
@@ -31,6 +31,14 @@ Game::Game() :	HyEntity2d(nullptr),
 
 Game::~Game()
 {
+}
+
+void Game::Sync()
+{
+	m_Player.Sync();
+	m_Stamina.Sync();
+	m_HousePanel.Sync();
+	m_BillsPanel.Sync();
 }
 
 void Game::GameUpdate()
@@ -99,7 +107,7 @@ void Game::GameUpdate()
 		{
 			pCam->pos.Tween(TILE_SIZE * 12 * 2, TILE_SIZE * 14 * 2, 1.5f, HyTween::QuadInOut);
 
-			m_World.ResetTiles();
+			m_World.CleanupTiles();
 			m_DayNight.HideUI();
 			m_eGameState = GAMESTATE_GoHome;
 		}
@@ -153,7 +161,7 @@ void Game::GameUpdate()
 			m_Player.SetPos(PLAYER_STARTPOS);
 			pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));
 
-			m_World.Sync();
+			m_World.SetupNewDay();
 			m_DayNight.Start();
 			m_eGameState = GAMESTATE_Playing;
 		}

@@ -10,6 +10,8 @@ public:
 	Stamina(HyEntity2d *pParent);
 	virtual ~Stamina();
 
+	void Sync();
+
 	virtual void Stamina::OnLoaded() override;
 
 	void Offset(float fOffset);

@@ -1,43 +1,29 @@
 #include "pch.h"
 #include "FoodStuffs.h"
+#include "BillsPanel.h"
 
 FoodStuffs::FoodStuffs(bool bIsSelling, HyEntity2d *pParent) :
-	IHy9Slice(glm::vec2(175.0f, 125.0f), 10.0f, pParent),
+	IHy9Slice(glm::vec2(160.0f, 150.0f), 10.0f, pParent),
+	m_bIS_SELLING(bIsSelling),
 	m_txtTitle("Game", "Small", this),
-	m_CornIcon(PLANTTYPE_Corn, bIsSelling, "Plant", "Corn", this),
-	m_CornQuantity("Game", "Small", this),
-	m_EggplantIcon(PLANTTYPE_Eggplant, bIsSelling, "Plant", "Eggplant", this),
-	m_EggplantQuantity("Game", "Small", this),
-	m_PumpkinIcon(PLANTTYPE_Pumpkin, bIsSelling, "Plant", "Pumpkin", this),
-	m_PumpkinQuantity("Game", "Small", this)
+	m_CornBtn(PLANTTYPE_Corn, m_bIS_SELLING, "Plant", "Corn", this),
+	m_EggplantBtn(PLANTTYPE_Eggplant, m_bIS_SELLING, "Plant", "Eggplant", this),
+	m_PumpkinBtn(PLANTTYPE_Pumpkin, m_bIS_SELLING, "Plant", "Pumpkin", this)
 {
+	m_txtTitle.TextSet(m_bIS_SELLING ? "Click to sell" : "Click to eat");
+	m_txtTitle.pos.Set(0.0f, 120.0f);
 	m_txtTitle.TextSetState(1);
-	m_txtTitle.SetAsScaleBox(GetWidth(false), 64.0f, true);
+	m_txtTitle.SetAsScaleBox(GetWidth(false), GetHeight(false) - m_txtTitle.pos.Y(), true);
 	m_txtTitle.TextSetAlignment(HYALIGN_Center);
-	m_txtTitle.pos.Set(15.0f, 75.0f);
-
-	m_CornQuantity.TextSetState(1);
-	m_CornQuantity.pos.Set(GetWidth(false), 60.0f);
-	m_CornQuantity.TextSetAlignment(HYALIGN_Right);
 	
-	m_CornIcon.GetPanelPtr()->AnimSetState(PLANTSTATE_Harvest);
-	m_CornIcon.pos.Set(10.0f, m_CornQuantity.pos.Y());
-
-	m_EggplantQuantity.TextSetState(1);
-	m_EggplantQuantity.pos.Set(GetWidth(false), 35.0f);
-	m_EggplantQuantity.TextSetAlignment(HYALIGN_Right);
+	m_CornBtn.pos.Set(10.0f, 80.0f);
+	m_CornBtn.GetPanelPtr()->AnimSetState(PLANTSTATE_Harvest);
 	
-	m_EggplantIcon.pos.Set(10.0f, m_EggplantQuantity.pos.Y());
-	m_EggplantIcon.GetPanelPtr()->AnimSetState(PLANTSTATE_Harvest);
+	m_EggplantBtn.pos.Set(10.0f, 40.0f);
+	m_EggplantBtn.GetPanelPtr()->AnimSetState(PLANTSTATE_Harvest);
 
-	m_PumpkinQuantity.TextSetState(1);
-	m_PumpkinQuantity.pos.Set(GetWidth(false), 10.0f);
-	m_PumpkinQuantity.TextSetAlignment(HYALIGN_Right);
-
-	m_PumpkinIcon.pos.Set(0.0f, m_PumpkinQuantity.pos.Y());
-	m_PumpkinIcon.pos.Offset(10.0f, -5.0f);
-	m_PumpkinIcon.scale.Set(0.8f, 0.8f);
-	m_PumpkinIcon.GetPanelPtr()->AnimSetState(PLANTSTATE_Harvest);
+	m_PumpkinBtn.pos.Set(10.0f, 0.0f);
+	m_PumpkinBtn.GetPanelPtr()->AnimSetState(PLANTSTATE_Harvest);
 
 	Sync();
 }
@@ -46,28 +32,11 @@ FoodStuffs::~FoodStuffs()
 {
 }
 
-void FoodStuffs::SetTitle(std::string sTitle)
-{
-	m_txtTitle.TextSet(sTitle);
-}
-
 void FoodStuffs::Sync()
 {
-	m_CornIcon.Sync(*this);
-	m_EggplantIcon.Sync(*this);
-	m_PumpkinIcon.Sync(*this);
-
-	std::string sText = "* ";
-	sText += std::to_string(Values::Get()->m_uiHarvestCorn);
-	m_CornQuantity.TextSet(sText);
-
-	sText = "* ";
-	sText += std::to_string(Values::Get()->m_uiHarvestEggplant);
-	m_EggplantQuantity.TextSet(sText);
-
-	sText = "* ";
-	sText += std::to_string(Values::Get()->m_uiHarvestPumpkin);
-	m_PumpkinQuantity.TextSet(sText);
+	m_CornBtn.Sync();
+	m_EggplantBtn.Sync();
+	m_PumpkinBtn.Sync();
 }
 
 /*virtual*/ float FoodStuffs::OnShow() /*override*/

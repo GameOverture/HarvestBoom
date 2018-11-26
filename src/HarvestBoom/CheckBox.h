@@ -2,21 +2,20 @@
 #include "pch.h"
 #include "InfoPanel.h"
 
-class FoodStuffs;
-
-class FoodButton : public InfoPanel
+class CheckBox : public InfoPanel
 {
-	const PlantType		m_ePLANT_TYPE;
-	bool				m_bIS_SELL_BTN;
+	bool			m_bIS_FOR_FOOD;
 
-	HyPrimitive2d		m_HoverRect;
+	HyPrimitive2d	m_Check;
+	HyPrimitive2d	m_Box;
+	HyPrimitive2d	m_BoxHighlight;
 
 public:
-	FoodButton(PlantType ePlantType, bool bIsSellBtn, const char *szPanelPrefix, const char *szPanelName, HyEntity2d *pParent);
+	CheckBox(bool bIsForFood, HyEntity2d *pParent);
 
 	void Sync();
 
-private:
+protected:
 	virtual void OnMouseEnter(void *pUserParam) override;
 	virtual void OnMouseLeave(void *pUserParam) override;
 	virtual void OnMouseDown(void *pUserParam) override;

@@ -48,6 +48,8 @@ public:
 	Game();
 	virtual ~Game();
 
+	void Sync();
+
 	void GameUpdate();
 	bool BugUpdate();
 	void DebugUpdate();

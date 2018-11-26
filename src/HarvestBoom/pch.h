@@ -43,14 +43,6 @@ enum PlantState
 	PLANTSTATE_Harvest
 };
 
-enum ButtonState
-{
-	BTNSTATE_Pressable = 0,
-	BTNSTATE_Down,
-	BTNSTATE_Disabled,
-	BTNSTATE_Selected
-};
-
 enum PlantType
 {
 	PLANTTYPE_Corn = 0,
