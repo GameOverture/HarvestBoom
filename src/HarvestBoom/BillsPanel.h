@@ -7,6 +7,8 @@
 #define REVENU_COLORS 58.0f / 255.0f, 221.0f / 255.0f,  32.0f / 255.0f
 #define PAY_COLORS 223.0f / 255.0f, 32.0f / 255.0f,  32.0f / 255.0f
 
+#define MINUS_WIDTH 18.0f
+
 class MinusSymbol : public HyEntity2d
 {
 	HyPrimitive2d	m_Outline;
@@ -15,11 +17,11 @@ class MinusSymbol : public HyEntity2d
 public:
 	MinusSymbol(HyEntity2d *pParent) : HyEntity2d(pParent), m_Outline(this), m_Fill(this)
 	{
-		m_Outline.GetShape().SetAsLineSegment(glm::vec2(0.0f, 0.0f), glm::vec2(25.0f, 0.0f));
+		m_Outline.GetShape().SetAsLineSegment(glm::vec2(0.0f, 0.0f), glm::vec2(MINUS_WIDTH, 0.0f));
 		m_Outline.SetLineThickness(7.0f);
 		m_Outline.SetTint(0.0f, 0.0f, 0.0f);
 
-		m_Fill.GetShape().SetAsLineSegment(glm::vec2(3.0f, 0.0f), glm::vec2(19.0f, 0.0f));
+		m_Fill.GetShape().SetAsLineSegment(glm::vec2(2.0f, 0.0f), glm::vec2(MINUS_WIDTH - 2.0f, 0.0f));
 		m_Fill.SetLineThickness(3.0f);
 		m_Fill.SetTint(PAY_COLORS);
 	}

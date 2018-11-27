@@ -108,7 +108,7 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_TotalVal.TextSetAlignment(HYALIGN_Right);
 	m_TotalVal.pos.Set(vWindowSize.x - fTextX, fTextY - 135.0f);
 	
-	m_TotalValMinus.pos.Y(fTextY - 135.0f);
+	m_TotalValMinus.pos.Y(fTextY - 130.0f);
 
 	m_ContinueBtn.GetTextPtr()->TextSetState(1);
 
@@ -218,7 +218,9 @@ BillsPanel::~BillsPanel()
 	if(m_AirConditioning.alpha.Get() == 1.0f && m_TotalVal.alpha.Get() == 0.0f)
 	{
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
-		m_TotalValMinus.alpha.Tween(1.0f, fFADEIN_DUR);
+
+		if(CalculateMoney() < 0);
+			m_TotalValMinus.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
 	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.Show())
 	{
@@ -259,16 +261,21 @@ void BillsPanel::Sync()
 	m_AirConditioningVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_AC));
 
 	int32 iTotalMonies = CalculateMoney();
-	m_TotalValMinus.SetEnabled(iTotalMonies < 0);
 	m_TotalVal.TextSet("$" + std::to_string(abs(iTotalMonies)));
+	m_TotalValMinus.pos.X(m_TotalVal.pos.X() - m_TotalVal.TextGetPixelWidth() - MINUS_WIDTH - 2.0f);
+
+	if(IsShown())
+		m_TotalValMinus.alpha.Set((iTotalMonies < 0) ? 1.0f : 0.0f);
 
 	if(iTotalMonies < 0)
 	{
+		m_TotalVal.TextSetLayerColor(0, 1, PAY_COLORS);
 		m_ContinueBtn.GetTextPtr()->TextSet("Go\nBankrupt");
 		m_ContinueBtn.GetPanelPtr()->SetTint(1.0f, 0.0f, 0.0f);
 	}
 	else
 	{
+		m_TotalVal.TextSetLayerColor(0, 1, 1.0f, 1.0f, 1.0f);
 		m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
 		m_ContinueBtn.GetPanelPtr()->SetTint(1.0f, 1.0f, 1.0f);
 	}

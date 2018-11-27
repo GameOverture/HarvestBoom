@@ -15,6 +15,7 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 	m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
 	m_Check.pos.Set(CHECKBOX_SIZE * 0.5f, CHECKBOX_SIZE * 0.5f);
 	m_Check.SetTint(1.0f, 0.0f, 0.0f);
+	m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
 	m_Box.GetShape().SetAsBox(CHECKBOX_SIZE, CHECKBOX_SIZE);
 	m_Box.SetWireframe(true);
 	m_Box.SetLineThickness(4.0f);
@@ -35,9 +36,9 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 void CheckBox::Sync()
 {
 	if(m_bIsChecked)
-		m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
+		m_Check.alpha.Set(1.0f);
 	else
-		m_Check.GetShape().SetAsNothing();
+		m_Check.alpha.Set(0.0f);
 }
 
 bool CheckBox::IsChecked()
