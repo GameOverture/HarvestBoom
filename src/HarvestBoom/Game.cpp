@@ -165,6 +165,8 @@ void Game::GameUpdate()
 	case GAMESTATE_Sleep:
 		if(m_DayNight.IsPitchBlack())
 		{
+			m_Stamina.Reset();
+
 			m_Player.SetEnabled(true);
 			m_Player.SetPos(PLAYER_STARTPOS);
 			pCam->pos.Set(static_cast<int>(m_Player.pos.X() * 2.0f), static_cast<int>(m_Player.pos.Y() * 2.0f));

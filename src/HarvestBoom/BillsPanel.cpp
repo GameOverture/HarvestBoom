@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "BillsPanel.h"
 
-#define REVENU_COLORS 58.0f / 255.0f, 221.0f / 255.0f,  32.0f / 255.0f
-#define PAY_COLORS 223.0f / 255.0f, 32.0f / 255.0f,  32.0f / 255.0f
-
 BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	IHy9Slice(glm::vec2(Hy_App().Window().GetWidth(), Hy_App().Window().GetHeight()), 10, pParent),
 	m_Scroll("UI", "Bills", this),
@@ -15,100 +12,89 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_HarvestVal("Game", "Small", this),
 	m_Rent("Game", "Small", this),
 	m_RentVal("Game", "Small", this),
-	m_Food("Game", "Small", this),
-	m_FoodVal("Game", "Small", this),
-	m_FoodCheckBox(true, this),
+	m_Vitamins("Game", "Small", this),
+	m_VitaminsVal("Game", "Small", this),
+	m_VitaminsCheckBox(true, this),
 	m_AirConditioning("Game", "Small", this),
 	m_AirConditioningVal("Game", "Small", this),
 	m_AirConditioningCheckBox(false, this),
 	m_BarLineOutline(this),
 	m_BarLine(this),
 	m_TotalVal("Game", "Small", this),
+	m_TotalValMinus(this),
 	m_ContinueBtn(this)
 {
 	m_Scroll.scale.Set(2.0f, 2.25f);
 	m_Scroll.pos.Set(80.0f, 90.0f);
 
+	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
 	const float fTextX = 175.0f;
 	const float fTextY = 275.0f;
 
 	m_BillsText.TextSet("Bills");
+	m_BillsText.TextSetAlignment(HYALIGN_Center);
 	m_BillsText.pos.Set(fTextX, 320.0f);
-	m_BillsText.SetAsScaleBox(150.0f, 65.0f);
+	m_BillsText.SetAsScaleBox(vWindowSize.x - (fTextX * 2), 65.0f);
 
 	m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
 	m_FoodStocks.Hide();
-
-	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
-
+	
 	m_Savings.TextSet("Savings");
 	m_Savings.TextSetState(1);
 	m_Savings.TextSetAlignment(HYALIGN_Left);
 	m_Savings.pos.Set(fTextX, fTextY);
-	m_Savings.alpha.Set(0.0f);
 
 	m_SavingsVal.TextSetState(1);
 	m_SavingsVal.TextSetAlignment(HYALIGN_Right);
 	m_SavingsVal.pos.Set(vWindowSize.x - fTextX, fTextY);
-	m_SavingsVal.alpha.Set(0.0f);
 
 	m_Harvest.TextSet("Harvest");
 	m_Harvest.TextSetState(1);
 	m_Harvest.TextSetAlignment(HYALIGN_Left);
 	m_Harvest.pos.Set(fTextX, fTextY - 25.0f);
-	m_Harvest.alpha.Set(0.0f);
 	
 	m_HarvestVal.TextSetState(1);
 	m_HarvestVal.TextSetAlignment(HYALIGN_Right);
 	m_HarvestVal.pos.Set(vWindowSize.x - fTextX, fTextY - 25.0f);
-	m_HarvestVal.alpha.Set(0.0f);
 
 	m_Rent.TextSet("Rent");
 	m_Rent.TextSetLayerColor(0, 1, PAY_COLORS);
 	m_Rent.TextSetState(1);
 	m_Rent.TextSetAlignment(HYALIGN_Left);
 	m_Rent.pos.Set(fTextX, fTextY - 50.0f);
-	m_Rent.alpha.Set(0.0f);
 
 	m_RentVal.TextSetLayerColor(0, 1, PAY_COLORS);
 	m_RentVal.TextSetState(1);
 	m_RentVal.TextSetAlignment(HYALIGN_Right);
 	m_RentVal.pos.Set(vWindowSize.x - fTextX, fTextY - 50.0f);
-	m_RentVal.alpha.Set(0.0f);
 
-	m_Food.TextSet("Food");
-	m_Food.TextSetLayerColor(0, 1, PAY_COLORS);
-	m_Food.TextSetState(1);
-	m_Food.TextSetAlignment(HYALIGN_Left);
-	m_Food.pos.Set(fTextX, fTextY - 75.0f);
-	m_Food.alpha.Set(0.0f);
+	m_Vitamins.TextSet("Vitamins");
+	m_Vitamins.TextSetLayerColor(0, 1, PAY_COLORS);
+	m_Vitamins.TextSetState(1);
+	m_Vitamins.TextSetAlignment(HYALIGN_Left);
+	m_Vitamins.pos.Set(fTextX, fTextY - 75.0f);
 
-	m_FoodVal.TextSetLayerColor(0, 1, PAY_COLORS);
-	m_FoodVal.TextSetState(1);
-	m_FoodVal.TextSetAlignment(HYALIGN_Right);
-	m_FoodVal.pos.Set(vWindowSize.x - fTextX, fTextY - 75.0f);
-	m_FoodVal.alpha.Set(0.0f);
+	m_VitaminsVal.TextSetLayerColor(0, 1, PAY_COLORS);
+	m_VitaminsVal.TextSetState(1);
+	m_VitaminsVal.TextSetAlignment(HYALIGN_Right);
+	m_VitaminsVal.pos.Set(vWindowSize.x - fTextX, fTextY - 75.0f);
 
-	m_FoodCheckBox.pos.Set(m_FoodVal.pos.X(), fTextY - 75.0f);
-	m_FoodCheckBox.pos.Offset(5.0f, -2.0f);
-	m_FoodCheckBox.alpha.Set(0.0f);
+	m_VitaminsCheckBox.pos.Set(m_VitaminsVal.pos.X(), fTextY - 75.0f);
+	m_VitaminsCheckBox.pos.Offset(5.0f, -2.0f);
 
 	m_AirConditioning.TextSet("A/C");
 	m_AirConditioning.TextSetLayerColor(0, 1, PAY_COLORS);
 	m_AirConditioning.TextSetState(1);
 	m_AirConditioning.TextSetAlignment(HYALIGN_Left);
 	m_AirConditioning.pos.Set(fTextX, fTextY - 100.0f);
-	m_AirConditioning.alpha.Set(0.0f);
 
 	m_AirConditioningVal.TextSetState(1);
 	m_AirConditioningVal.TextSetLayerColor(0, 1, PAY_COLORS);
 	m_AirConditioningVal.TextSetAlignment(HYALIGN_Right);
 	m_AirConditioningVal.pos.Set(vWindowSize.x - fTextX, fTextY - 100.0f);
-	m_AirConditioningVal.alpha.Set(0.0f);
 
 	m_AirConditioningCheckBox.pos.Set(m_AirConditioningVal.pos.X(), fTextY - 100.0f);
 	m_AirConditioningCheckBox.pos.Offset(5.0f, -2.0f);
-	m_AirConditioningCheckBox.alpha.Set(0.0f);
 
 	m_BarLineOutline.GetShape().SetAsLineSegment(glm::vec2(fTextX, fTextY - 110.0f), glm::vec2(vWindowSize.x - fTextX, fTextY - 110.0f));
 	m_BarLineOutline.SetLineThickness(7.0f);
@@ -121,7 +107,8 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_TotalVal.TextSetState(1);
 	m_TotalVal.TextSetAlignment(HYALIGN_Right);
 	m_TotalVal.pos.Set(vWindowSize.x - fTextX, fTextY - 135.0f);
-	m_TotalVal.alpha.Set(0.0f);
+	
+	m_TotalValMinus.pos.Y(fTextY - 135.0f);
 
 	m_ContinueBtn.GetTextPtr()->TextSetState(1);
 
@@ -140,6 +127,21 @@ BillsPanel::~BillsPanel()
 /*virtual*/ float BillsPanel::OnShow() /*override*/
 {
 	alpha.Set(1.0f);
+	m_Savings.alpha.Set(0.0f);
+	m_SavingsVal.alpha.Set(0.0f);
+	m_Harvest.alpha.Set(0.0f);
+	m_HarvestVal.alpha.Set(0.0f);
+	m_Rent.alpha.Set(0.0f);
+	m_RentVal.alpha.Set(0.0f);
+	m_Vitamins.alpha.Set(0.0f);
+	m_VitaminsVal.alpha.Set(0.0f);
+	m_VitaminsCheckBox.alpha.Set(0.0f);
+	m_AirConditioning.alpha.Set(0.0f);
+	m_AirConditioningVal.alpha.Set(0.0f);
+	m_AirConditioningCheckBox.alpha.Set(0.0f);
+	m_TotalVal.alpha.Set(0.0f);
+	m_TotalValMinus.alpha.Set(0.0f);
+
 	pos.Set(-GetWidth(true), 0.0f);
 	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadOut);
 
@@ -155,14 +157,17 @@ BillsPanel::~BillsPanel()
 
 /*virtual*/ void BillsPanel::OnShown() /*override*/
 {
-	m_FoodCheckBox.EnableMouseInput();
+	m_VitaminsCheckBox.EnableMouseInput();
 	m_AirConditioningCheckBox.EnableMouseInput();
 }
 
 /*virtual*/ float BillsPanel::OnHide() /*override*/
 {
-	m_FoodCheckBox.DisableMouseInput();
+	m_VitaminsCheckBox.DisableMouseInput();
+	Values::Get()->m_bVitaminStrength = m_VitaminsCheckBox.IsChecked();
+
 	m_AirConditioningCheckBox.DisableMouseInput();
+	Values::Get()->m_bAirConditioning = m_AirConditioningCheckBox.IsChecked();
 
 	alpha.Tween(0.0f, 1.0f, HyTween::Linear);
 	return 1.0f;
@@ -198,20 +203,23 @@ BillsPanel::~BillsPanel()
 		m_Rent.alpha.Tween(1.0f, fFADEIN_DUR);
 		m_RentVal.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
-	if(m_Rent.alpha.Get() == 1.0f && m_Food.alpha.Get() == 0.0f)
+	if(m_Rent.alpha.Get() == 1.0f && m_Vitamins.alpha.Get() == 0.0f)
 	{
-		m_Food.alpha.Tween(1.0f, fFADEIN_DUR);
-		m_FoodVal.alpha.Tween(1.0f, fFADEIN_DUR);
-		m_FoodCheckBox.alpha.Tween(1.0f, fFADEIN_DUR);
+		m_Vitamins.alpha.Tween(1.0f, fFADEIN_DUR);
+		m_VitaminsVal.alpha.Tween(1.0f, fFADEIN_DUR);
+		m_VitaminsCheckBox.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
-	if(m_Food.alpha.Get() == 1.0f && m_AirConditioning.alpha.Get() == 0.0f)
+	if(m_Vitamins.alpha.Get() == 1.0f && m_AirConditioning.alpha.Get() == 0.0f)
 	{
 		m_AirConditioning.alpha.Tween(1.0f, fFADEIN_DUR);
 		m_AirConditioningVal.alpha.Tween(1.0f, fFADEIN_DUR);
 		m_AirConditioningCheckBox.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
 	if(m_AirConditioning.alpha.Get() == 1.0f && m_TotalVal.alpha.Get() == 0.0f)
+	{
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
+		m_TotalValMinus.alpha.Tween(1.0f, fFADEIN_DUR);
+	}
 	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.Show())
 	{
 		m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
@@ -228,10 +236,10 @@ int32 BillsPanel::CalculateMoney()
 	iTotal += Values::Get()->m_uiHarvestSoldAmt;
 	iTotal -= Values::Get()->m_uiBILLS_RENT;
 	
-	if(Values::Get()->m_bPayingFood)
-		iTotal -= Values::Get()->m_uiBILLS_FOOD;
+	if(m_VitaminsCheckBox.IsChecked())
+		iTotal -= Values::Get()->m_uiBILLS_VITAMINS;
 
-	if(Values::Get()->m_bPayingAC)
+	if(m_AirConditioningCheckBox.IsChecked())
 		iTotal -= Values::Get()->m_uiBILLS_AC;
 
 	return iTotal;
@@ -241,20 +249,27 @@ void BillsPanel::Sync()
 {
 	m_FoodStocks.Sync();
 
-	m_FoodCheckBox.Sync();
+	m_VitaminsCheckBox.Sync();
 	m_AirConditioningCheckBox.Sync();
 
 	m_SavingsVal.TextSet("$" + std::to_string(Values::Get()->m_iSavings));
 	m_HarvestVal.TextSet("$" + std::to_string(Values::Get()->m_uiHarvestSoldAmt));
 	m_RentVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_RENT));
-	m_FoodVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_FOOD));
-	m_AirConditioningVal.TextSet("$" + (Values::Get()->m_bAirConditioning ? std::to_string(Values::Get()->m_uiBILLS_AC) : std::to_string(0)));
+	m_VitaminsVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_VITAMINS));
+	m_AirConditioningVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_AC));
 
 	int32 iTotalMonies = CalculateMoney();
-	m_TotalVal.TextSet("$" + std::to_string(iTotalMonies));
+	m_TotalValMinus.SetEnabled(iTotalMonies < 0);
+	m_TotalVal.TextSet("$" + std::to_string(abs(iTotalMonies)));
 
 	if(iTotalMonies < 0)
-		m_ContinueBtn.GetTextPtr()->TextSet("Bankrupt");
+	{
+		m_ContinueBtn.GetTextPtr()->TextSet("Go\nBankrupt");
+		m_ContinueBtn.GetPanelPtr()->SetTint(1.0f, 0.0f, 0.0f);
+	}
 	else
+	{
 		m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
+		m_ContinueBtn.GetPanelPtr()->SetTint(1.0f, 1.0f, 1.0f);
+	}
 }

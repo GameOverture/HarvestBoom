@@ -9,6 +9,8 @@ Stamina::Stamina(HyEntity2d *pParent) :
 	UseWindowCoordinates();
 	SetDisplayOrder(DISPLAYORDER_UI);
 	pos.Set(-100.0f, 50.0f);
+
+	Reset();
 }
 
 Stamina::~Stamina()
@@ -17,6 +19,11 @@ Stamina::~Stamina()
 
 void Stamina::Sync()
 {
+	if(Values::Get()->m_bVitaminStrength)
+		m_Fill.SetTint(1.0f, 1.0f, 1.0f);
+	else
+		m_Fill.SetTint(1.0f, 0.0f, 0.0f);
+
 	Set(Values::Get()->m_fStamina);
 }
 
@@ -30,6 +37,12 @@ void Stamina::Sync()
 void Stamina::Offset(float fOffset)
 {
 	Set(Values::Get()->m_fStamina + fOffset);
+}
+
+void Stamina::Reset()
+{
+	Set(1.0f);
+	Sync();
 }
 
 void Stamina::Set(float fStaminaAmt)

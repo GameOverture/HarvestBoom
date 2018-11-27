@@ -7,7 +7,7 @@
 
 CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 	HyEntity2d(pParent),
-	m_bIS_FOR_FOOD(bIsForFood),
+	m_bIsChecked(true),
 	m_Check(this),
 	m_Box(this),
 	m_BoxHighlight(this)
@@ -34,20 +34,15 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 
 void CheckBox::Sync()
 {
-	if(m_bIS_FOR_FOOD)
-	{
-		if(Values::Get()->m_bPayingFood)
-			m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
-		else
-			m_Check.GetShape().SetAsNothing();
-	}
+	if(m_bIsChecked)
+		m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
 	else
-	{
-		if(Values::Get()->m_bPayingAC)
-			m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
-		else
-			m_Check.GetShape().SetAsNothing();
-	}
+		m_Check.GetShape().SetAsNothing();
+}
+
+bool CheckBox::IsChecked()
+{
+	return m_bIsChecked;
 }
 
 /*virtual*/ void CheckBox::OnMouseEnter(void *pUserParam) /*override*/
@@ -73,10 +68,7 @@ void CheckBox::Sync()
 /*virtual*/ void CheckBox::OnMouseClicked(void *pUserParam) /*override*/
 {
 	HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_BUYSTUFF);
-	if(m_bIS_FOR_FOOD)
-		Values::Get()->m_bPayingFood = !Values::Get()->m_bPayingFood;
-	else
-		Values::Get()->m_bPayingAC = !Values::Get()->m_bPayingAC;
+	m_bIsChecked = !m_bIsChecked;
 	
 	Values::Get()->Sync();
 }

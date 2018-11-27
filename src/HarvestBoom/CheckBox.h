@@ -3,7 +3,7 @@
 
 class CheckBox : public HyEntity2d
 {
-	bool			m_bIS_FOR_FOOD;
+	bool			m_bIsChecked;
 
 	HyPrimitive2d	m_Check;
 	HyPrimitive2d	m_Box;
@@ -13,6 +13,8 @@ public:
 	CheckBox(bool bIsForFood, HyEntity2d *pParent);
 
 	void Sync();
+
+	bool IsChecked();
 
 protected:
 	virtual void OnMouseEnter(void *pUserParam) override;

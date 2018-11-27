@@ -37,14 +37,6 @@ public:
 	const float		m_fSTAMINA_EATEGGPLANTMODIFIER;
 	const float		m_fSTAMINA_EATPUMPKINMODIFIER;
 
-	const uint32	m_uiSTARTING_MONEY;
-	const uint32	m_uiSTARTING_CORNSEEDS;
-	const uint32	m_uiSTARTING_EGGPLANTSEEDS;
-	const uint32	m_uiSTARTING_PUMPKINSEEDS;
-	const uint32	m_uiSTARTING_CORNHARVEST;
-	const uint32	m_uiSTARTING_EGGPLANTHARVEST;
-	const uint32	m_uiSTARTING_PUMPKINHARVEST;
-
 	const uint32	m_uiGIFTED_GERNAIUMSEEDS;
 	const uint32	m_uiGIFTED_MARIGOLDSEEDS;
 	const uint32	m_uiGIFTED_VINESEEDS;
@@ -61,8 +53,16 @@ public:
 	const uint32	m_uiCOST_VINESEEDS;
 
 	const uint32	m_uiBILLS_RENT;
-	const uint32	m_uiBILLS_FOOD;
+	const uint32	m_uiBILLS_VITAMINS;
 	const uint32	m_uiBILLS_AC;
+
+	const uint32	m_uiSTARTING_MONEY;
+	const uint32	m_uiSTARTING_CORNSEEDS;
+	const uint32	m_uiSTARTING_EGGPLANTSEEDS;
+	const uint32	m_uiSTARTING_PUMPKINSEEDS;
+	const uint32	m_uiSTARTING_CORNHARVEST;
+	const uint32	m_uiSTARTING_EGGPLANTHARVEST;
+	const uint32	m_uiSTARTING_PUMPKINHARVEST;
 
 	const float		m_fDAY_LENGTH;
 
@@ -101,13 +101,12 @@ public:
 	uint32			m_uiHarvestPumpkin;
 
 	uint32			m_uiHarvestSoldAmt;
-	bool			m_bPayingFood;
-	bool			m_bPayingAC;
 
 	uint32			m_uiCurrentDay;
 
 	EquipedItemType	m_eEquipedItem;
 
+	bool			m_bVitaminStrength;
 	bool			m_bAirConditioning;
 
 	void Sync();

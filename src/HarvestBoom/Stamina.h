@@ -15,5 +15,8 @@ public:
 	virtual void Stamina::OnLoaded() override;
 
 	void Offset(float fOffset);
+	void Reset();
+
+private:
 	void Set(float fStaminaAmt);
 };
