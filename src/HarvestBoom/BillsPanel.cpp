@@ -24,7 +24,7 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_BarLineOutline(this),
 	m_BarLine(this),
 	m_TotalVal("Game", "Small", this),
-	m_pContinueBtn(nullptr)
+	m_ContinueBtn(this)
 {
 	m_Scroll.scale.Set(2.0f, 2.25f);
 	m_Scroll.pos.Set(80.0f, 90.0f);
@@ -90,7 +90,7 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_FoodVal.alpha.Set(0.0f);
 
 	m_FoodCheckBox.pos.Set(m_FoodVal.pos.X(), fTextY - 75.0f);
-	m_FoodCheckBox.pos.Offset(5.0f, -3.0f);
+	m_FoodCheckBox.pos.Offset(5.0f, -2.0f);
 	m_FoodCheckBox.alpha.Set(0.0f);
 
 	m_AirConditioning.TextSet("A/C");
@@ -107,7 +107,7 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_AirConditioningVal.alpha.Set(0.0f);
 
 	m_AirConditioningCheckBox.pos.Set(m_AirConditioningVal.pos.X(), fTextY - 100.0f);
-	m_AirConditioningCheckBox.pos.Offset(5.0f, -3.0f);
+	m_AirConditioningCheckBox.pos.Offset(5.0f, -2.0f);
 	m_AirConditioningCheckBox.alpha.Set(0.0f);
 
 	m_BarLineOutline.GetShape().SetAsLineSegment(glm::vec2(fTextX, fTextY - 110.0f), glm::vec2(vWindowSize.x - fTextX, fTextY - 110.0f));
@@ -125,16 +125,10 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 
 	Sync();
 
-	if(m_pContinueBtn == nullptr)
-	{
-		m_pContinueBtn = HY_NEW ContinueButton(this);
-		m_pContinueBtn->Load();
-	}
-
-	m_pContinueBtn->pos.Set(vWindowSize.x, 15);
-	m_pContinueBtn->alpha.Set(0.0f);
-	m_pContinueBtn->GetTextPtr()->TextSetState(1);
-	m_pContinueBtn->GetTextPtr()->TextSet("Sleep");
+	m_ContinueBtn.pos.Set(vWindowSize.x, 15);
+	m_ContinueBtn.alpha.Set(0.0f);
+	m_ContinueBtn.GetTextPtr()->TextSetState(1);
+	m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
 
 	GetBorder().SetEnabled(false);
 	GetFill().SetEnabled(false);
@@ -144,7 +138,6 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 
 BillsPanel::~BillsPanel()
 {
-	delete m_pContinueBtn;
 }
 
 /*virtual*/ float BillsPanel::OnShow() /*override*/
@@ -221,9 +214,9 @@ BillsPanel::~BillsPanel()
 	{
 		m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
 		m_FoodStocks.pos.Tween(10.0f, 10.0f, 1.0f, HyTween::QuadOut);
-		m_pContinueBtn->pos.Tween(Hy_App().Window().GetWindowSize().x - 100, 15, 1.0f, HyTween::QuadOut);
-		m_pContinueBtn->alpha.Set(1.0f);
-		m_pContinueBtn->EnableMouseInput(this);
+		m_ContinueBtn.pos.Tween(Hy_App().Window().GetWindowSize().x - 100, 15, 1.0f, HyTween::QuadOut);
+		m_ContinueBtn.alpha.Set(1.0f);
+		m_ContinueBtn.EnableMouseInput(this);
 	}
 }
 
@@ -232,8 +225,12 @@ int32 BillsPanel::CalculateMoney()
 	int32 iTotal = Values::Get()->m_iSavings;
 	iTotal += Values::Get()->m_uiHarvestSoldAmt;
 	iTotal -= Values::Get()->m_uiBILLS_RENT;
-	iTotal -= Values::Get()->m_uiBILLS_FOOD;
-	iTotal -= Values::Get()->m_uiBILLS_AC;
+	
+	if(Values::Get()->m_bPayingFood)
+		iTotal -= Values::Get()->m_uiBILLS_FOOD;
+
+	if(Values::Get()->m_bPayingAC)
+		iTotal -= Values::Get()->m_uiBILLS_AC;
 
 	return iTotal;
 }
@@ -251,5 +248,11 @@ void BillsPanel::Sync()
 	m_FoodVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_FOOD));
 	m_AirConditioningVal.TextSet("$" + (Values::Get()->m_bAirConditioning ? std::to_string(Values::Get()->m_uiBILLS_AC) : std::to_string(0)));
 
-	m_TotalVal.TextSet("$" + std::to_string(CalculateMoney()));
+	int32 iTotalMonies = CalculateMoney();
+	m_TotalVal.TextSet("$" + std::to_string(iTotalMonies));
+
+	if(iTotalMonies < 0)
+		m_ContinueBtn.GetTextPtr()->TextSet("Bankruptcy");
+	else
+		m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
 }

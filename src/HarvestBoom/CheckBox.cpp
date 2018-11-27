@@ -3,7 +3,7 @@
 #include "HousePanel.h"
 #include "HarvestBoom.h"
 
-#define CHECKBOX_SIZE 20.0f
+#define CHECKBOX_SIZE 18.0f
 
 CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 	HyEntity2d(pParent),
@@ -17,6 +17,7 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 	m_Check.SetTint(1.0f, 0.0f, 0.0f);
 	m_Box.GetShape().SetAsBox(CHECKBOX_SIZE, CHECKBOX_SIZE);
 	m_Box.SetWireframe(true);
+	m_Box.SetLineThickness(4.0f);
 	m_Box.SetTint(0.0f, 0.0f, 0.0f);
 
 	std::vector<glm::vec2> ptVecList;
@@ -26,6 +27,7 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 	ptVecList.push_back(glm::vec2(CHECKBOX_SIZE, 0.0f));
 	m_BoxHighlight.GetShape().SetAsLineLoop(&ptVecList[0], ptVecList.size());
 	m_BoxHighlight.SetTint(0.0f, 0.0f, 0.0f);
+	m_BoxHighlight.SetLineThickness(2.0f);
 
 	Sync();
 }

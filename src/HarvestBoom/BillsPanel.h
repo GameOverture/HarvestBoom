@@ -32,7 +32,7 @@ class BillsPanel : public IHy9Slice
 	HyPrimitive2d	m_BarLine;
 	HyText2d		m_TotalVal;
 
-	ContinueButton *m_pContinueBtn;
+	ContinueButton	m_ContinueBtn;
 
 public:
 	BillsPanel(HyEntity2d *pParent);
