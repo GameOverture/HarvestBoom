@@ -3,6 +3,7 @@
 #include "Tile.h"
 #include "Player.h"
 #include "Stamina.h"
+#include "Plant.h"
 
 World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_uiSetRowCurrentIndex(0),
@@ -90,12 +91,12 @@ void World::SetupNewDay()
 		SetRow("_________________________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
-		SetRow("___________++++++________");
-		SetRow("___________++++++________");
-		SetRow("___________++++++________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("_________________________");
 		SetRow("_________________________");
 		SetRow("_________________________");
 		SetRow("_________________________");
@@ -120,12 +121,12 @@ void World::SetupNewDay()
 		SetRow("__________++++___________");
 		SetRow("__________++++___________");
 		SetRow("__________++++___________");
-		SetRow("__________++++___________");
-		SetRow("__________++++___________");
-		SetRow("__________++++___________");
-		SetRow("__________++++___________");
-		SetRow("_________________________");
-		SetRow("_________________________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
+		SetRow("___________++____________");
 		SetRow("_________________________");
 		break;
 
@@ -177,12 +178,6 @@ void World::CleanupTiles()
 
 void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &housePanelRef)
 {
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Display Order
-	int32 iPlayerInRow = WORLD_HEIGHT - static_cast<int32>(playerRef.pos.Y() * TILE_SIZE);
-	playerRef.SetDisplayOrder(((WORLD_HEIGHT - iPlayerInRow) * DISPLAYORDER_PerRow) + DISPLAYORDER_Player);
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	CleanupTiles();
 
 	// NOTE: Cannot combine with above
@@ -202,6 +197,11 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 
 	if(pPlayerTile)
 	{
+		if(pPlayerTile->GetPlant() && playerRef.pos.Y() < pPlayerTile->pos.Y() + (TILE_SIZE * 0.5f))
+			playerRef.SetDisplayOrder(pPlayerTile->GetPlant()->GetDisplayOrder() + 1);
+		else
+			playerRef.SetDisplayOrder(pPlayerTile->GetDisplayOrder() + DISPLAYORDER_TILE_SelectRect);
+
 		if(pPlayerTile->GetTileType() == HouseDoor)
 		{
 			housePanelRef.Show();
@@ -239,7 +239,10 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Collision
+	// Player movement and Collision
+	playerRef.HandleInput(pPlayerTile);
+
+
 	b2WorldManifold manifold;
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{

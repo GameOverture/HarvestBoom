@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "Tile.h"
+#include "Plant.h"
 #include "HarvestBoom.h"
 
 #define PLAYER_WIDTH 10.0f
@@ -80,7 +81,7 @@ bool Player::IsEquipped()
 	return m_Tool.IsEnabled();
 }
 
-void Player::HandleInput()
+void Player::HandleInput(Tile *pPlayerTile)
 {
 	if(Hy_App().Input().IsActionDown(MoveUp))
 		m_vVelocity.y = HyClamp(m_vVelocity.y + (Hy_UpdateStep() * (m_vVelocity.y < 0.0f ? Values::Get()->m_fPLAYER_DECEL : Values::Get()->m_fPLAYER_ACCEL)), m_vVelocity.y, Values::Get()->m_fPLAYER_MAXVELOCITY);
@@ -106,6 +107,30 @@ void Player::HandleInput()
 			m_vVelocity.x = HyClamp(m_vVelocity.x + (Hy_UpdateStep() * Values::Get()->m_fPLAYER_DECEL), m_vVelocity.x, 0.0f);
 	}
 
+
+	// Shuffle crops around as passing through (and modify player velocity)
+	if(pPlayerTile && pPlayerTile->GetTileType() == Dirt && pPlayerTile->GetPlant())
+	{
+		float fRunNormalized = GetMagnitude() / Values::Get()->m_fPLAYER_MAXVELOCITY;
+		m_vVelocity *= 0.7f;
+
+		if(pPlayerTile->GetPlant()->rot.IsTweening() == false && fRunNormalized != 0.0f)
+		{
+			if(m_vVelocity.x > 0)
+				pPlayerTile->GetPlant()->rot.Tween(-15.0f, 0.25f, HyTween::QuadOut, [](IHyNode *pPlant) { static_cast<IHyNode2d *>(pPlant)->rot.Tween(15.0f, 0.25f, HyTween::QuadIn); });
+			else if(m_vVelocity.x < 0)
+				pPlayerTile->GetPlant()->rot.Tween(15.0f, 0.25f, HyTween::QuadOut, [](IHyNode *pPlant) { static_cast<IHyNode2d *>(pPlant)->rot.Tween(-15.0f, 0.25f, HyTween::QuadIn); });
+			else // Zero X velocity, so sway crop based on player position to plant
+			{
+				if(pos.X() < pPlayerTile->pos.X() + (TILE_SIZE * 0.5f))
+					pPlayerTile->GetPlant()->rot.Tween(-15.0f, 0.25f, HyTween::QuadOut, [](IHyNode *pPlant) { static_cast<IHyNode2d *>(pPlant)->rot.Tween(15.0f, 0.25f, HyTween::QuadIn); });
+				else
+					pPlayerTile->GetPlant()->rot.Tween(15.0f, 0.25f, HyTween::QuadOut, [](IHyNode *pPlant) { static_cast<IHyNode2d *>(pPlant)->rot.Tween(-15.0f, 0.25f, HyTween::QuadIn); });
+			}
+		}
+	}
+
+
 	pos.Offset(m_vVelocity * Hy_UpdateStep());
 	float fMagnitude = GetMagnitude();
 	if(abs(fMagnitude) > 0.0f)
@@ -116,7 +141,8 @@ void Player::HandleInput()
 	else
 		m_Body.AnimSetState(0);
 
-	m_DebugText.TextSet(std::to_string(fMagnitude));
+	//m_DebugText.TextSet(std::to_string(fMagnitude));
+	m_DebugText.TextSet(std::to_string(m_iDisplayOrder));
 }
 
 bool Player::DoAction(Tile &tileRef)

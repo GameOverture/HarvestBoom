@@ -30,7 +30,7 @@ Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 	m_SelectedRect.topColor.Set(1.0f, 0.0f, 0.0);
 	m_SelectedRect.SetWireframe(true);
 	m_SelectedRect.SetEnabled(false);
-	m_SelectedRect.SetDisplayOrder(DISPLAYORDER_SelectedRect);
+	//m_SelectedRect.SetDisplayOrder(DISPLAYORDER_SelectedRect);
 }
 
 Tile::~Tile()
@@ -42,13 +42,22 @@ TileType Tile::GetTileType() const
 	return m_eTileType;
 }
 
+Plant *Tile::GetPlant()
+{
+	return m_pPlant;
+}
+
 void Tile::Reset()
 {
 	m_SelectedRect.SetEnabled(false);
 	m_ProgressBar.SetEnabled(false);
 
 	if(m_pPlant)
+	{
 		m_pPlant->SetTag(0);
+		if(m_pPlant->rot.Get() != 0.0f && m_pPlant->rot.IsTweening() == false)
+			m_pPlant->rot.Tween(0.0f, 0.75f, HyTween::QuadInOut);
+	}
 }
 
 void Tile::SetNeighbors(Tile *pNorth, Tile *pEast, Tile *pSouth, Tile *pWest, Tile *pNorthEast, Tile *pSouthEast, Tile *pSouthWest, Tile *pNorthWest)
@@ -256,6 +265,14 @@ bool Tile::IncrementProgress()
 				m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HARVESTEGGPLANT);
 				break;
 			case PLANTTYPE_Pumpkin:
+				// Must be bottom left corner of Pumpkin
+				if((m_pNeighborNorth->m_pPlant && m_pNeighborNorth->m_pPlant == m_pPlant &&
+				   m_pNeighborNorthEast->m_pPlant && m_pNeighborNorthEast->m_pPlant == m_pPlant &&
+				   m_pNeighborEast->m_pPlant && m_pNeighborEast->m_pPlant == m_pPlant) == false)
+				{
+					return false;
+				}
+
 				fElapsedTime = m_ProgressBar.GetPercent() * Values::Get()->m_fDURATION_HARVESTPUMPKIN;
 				fElapsedTime += Hy_UpdateStep();
 				m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HARVESTPUMPKIN);
@@ -292,7 +309,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Corn, "Plant", "Corn", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
+				m_pPlant->rot_pivot.Set(static_cast<const HySprite2dData *>(m_pPlant->AcquireData())->GetFrame(0, 0).vOFFSET);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -326,7 +343,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Eggplant, "Plant", "Eggplant", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
+				m_pPlant->rot_pivot.Set(static_cast<const HySprite2dData *>(m_pPlant->AcquireData())->GetFrame(0, 0).vOFFSET);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -365,15 +382,20 @@ bool Tile::IncrementProgress()
 					{
 						validTileList[i]->m_pPlant = HY_NEW Plant(PLANTTYPE_Pumpkin, "Plant", "Pumpkin", this);
 						validTileList[i]->m_pPlant->alpha.Set(0.0f);
-						validTileList[i]->m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
+						validTileList[i]->m_pPlant->rot_pivot.Set(static_cast<const HySprite2dData *>(m_pPlant->AcquireData())->GetFrame(0, 0).vOFFSET);
 						validTileList[i]->m_pPlant->Load();
 
 						validTileList[i]->m_TilledOverlay.scale.Set(2.0f, 2.0f);
+						validTileList[i]->m_TilledOverlay.SetDisplayOrder(validTileList[i]->m_pNeighborNorth->m_TilledOverlay.GetDisplayOrder());
+						validTileList[i]->m_Dirt.SetDisplayOrder(validTileList[i]->m_pNeighborNorth->m_Dirt.GetDisplayOrder());
+						validTileList[i]->m_SelectedRect.scale.Set(2.0f, 2.0f);
 					}
 					else
 					{
 						validTileList[i]->m_pPlant = validTileList[0]->m_pPlant;
 						validTileList[i]->m_TilledOverlay.SetEnabled(false);
+						validTileList[i]->m_Dirt.SetDisplayOrder(validTileList[0]->m_Dirt.GetDisplayOrder());
+						validTileList[i]->m_SelectedRect.alpha.Set(0.0f);
 					}
 				}
 
@@ -408,7 +430,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Gernaium, "Plant", "Gernaium", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
+				m_pPlant->rot_pivot.Set(static_cast<const HySprite2dData *>(m_pPlant->AcquireData())->GetFrame(0, 0).vOFFSET);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -442,7 +464,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Marigold, "Plant", "Marigold", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
+				m_pPlant->rot_pivot.Set(static_cast<const HySprite2dData *>(m_pPlant->AcquireData())->GetFrame(0, 0).vOFFSET);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();
@@ -476,7 +498,7 @@ bool Tile::IncrementProgress()
 
 				m_pPlant = HY_NEW Plant(PLANTTYPE_Vine, "Plant", "Vine", this);
 				m_pPlant->alpha.Set(0.0f);
-				m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
+				m_pPlant->rot_pivot.Set(static_cast<const HySprite2dData *>(m_pPlant->AcquireData())->GetFrame(0, 0).vOFFSET);
 				m_pPlant->Load();
 
 				m_ProgressBar.SetColor_Planting();

@@ -32,7 +32,7 @@ public:
 	void Equip();
 	bool IsEquipped();
 
-	void HandleInput();
+	void HandleInput(Tile *pPlayerTile);
 
 	bool DoAction(Tile &tileRef);
 	void StopAction();

@@ -96,8 +96,6 @@ void Game::GameUpdate()
 			//else if(m_Player.GetMagnitude() == 0.0f && pCam->scale.IsTweening() == false)
 			//	pCam->scale.Tween(1.0f, 1.0f, 1.75f, HyTween::QuadInOut);
 
-
-			m_Player.HandleInput();
 			m_World.UpdatePlayer(m_Player, m_Stamina, m_HousePanel);
 		}
 		else
