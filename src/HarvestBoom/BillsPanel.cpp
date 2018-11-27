@@ -89,7 +89,9 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_FoodVal.pos.Set(vWindowSize.x - fTextX, fTextY - 75.0f);
 	m_FoodVal.alpha.Set(0.0f);
 
-	m_FoodCheckBox.pos.Set(vWindowSize.x - (fTextX * 0.5f), fTextY - 75.0f);
+	m_FoodCheckBox.pos.Set(m_FoodVal.pos.X(), fTextY - 75.0f);
+	m_FoodCheckBox.pos.Offset(5.0f, -3.0f);
+	m_FoodCheckBox.alpha.Set(0.0f);
 
 	m_AirConditioning.TextSet("A/C");
 	m_AirConditioning.TextSetLayerColor(0, 1, PAY_COLORS);
@@ -104,7 +106,9 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_AirConditioningVal.pos.Set(vWindowSize.x - fTextX, fTextY - 100.0f);
 	m_AirConditioningVal.alpha.Set(0.0f);
 
-	m_AirConditioningCheckBox.pos.Set(vWindowSize.x - (fTextX * 0.5f), fTextY - 100.0f);
+	m_AirConditioningCheckBox.pos.Set(m_AirConditioningVal.pos.X(), fTextY - 100.0f);
+	m_AirConditioningCheckBox.pos.Offset(5.0f, -3.0f);
+	m_AirConditioningCheckBox.alpha.Set(0.0f);
 
 	m_BarLineOutline.GetShape().SetAsLineSegment(glm::vec2(fTextX, fTextY - 110.0f), glm::vec2(vWindowSize.x - fTextX, fTextY - 110.0f));
 	m_BarLineOutline.SetLineThickness(7.0f);
@@ -156,10 +160,15 @@ BillsPanel::~BillsPanel()
 
 /*virtual*/ void BillsPanel::OnShown() /*override*/
 {
+	m_FoodCheckBox.EnableMouseInput();
+	m_AirConditioningCheckBox.EnableMouseInput();
 }
 
 /*virtual*/ float BillsPanel::OnHide() /*override*/
 {
+	m_FoodCheckBox.DisableMouseInput();
+	m_AirConditioningCheckBox.DisableMouseInput();
+
 	alpha.Tween(0.0f, 1.0f, HyTween::Linear);
 	return 1.0f;
 }
@@ -198,11 +207,13 @@ BillsPanel::~BillsPanel()
 	{
 		m_Food.alpha.Tween(1.0f, fFADEIN_DUR);
 		m_FoodVal.alpha.Tween(1.0f, fFADEIN_DUR);
+		m_FoodCheckBox.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
 	if(m_Food.alpha.Get() == 1.0f && m_AirConditioning.alpha.Get() == 0.0f)
 	{
 		m_AirConditioning.alpha.Tween(1.0f, fFADEIN_DUR);
 		m_AirConditioningVal.alpha.Tween(1.0f, fFADEIN_DUR);
+		m_AirConditioningCheckBox.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
 	if(m_AirConditioning.alpha.Get() == 1.0f && m_TotalVal.alpha.Get() == 0.0f)
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);

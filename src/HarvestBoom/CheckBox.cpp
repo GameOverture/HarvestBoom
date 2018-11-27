@@ -3,10 +3,10 @@
 #include "HousePanel.h"
 #include "HarvestBoom.h"
 
-#define CHECKBOX_SIZE 30.0f
+#define CHECKBOX_SIZE 20.0f
 
 CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
-	InfoPanel("Game", "CheckBox", HY_SYSTEM_FONT, 8, 3, 65, 30, pParent),
+	HyEntity2d(pParent),
 	m_bIS_FOR_FOOD(bIsForFood),
 	m_Check(this),
 	m_Box(this),
@@ -25,8 +25,7 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 	ptVecList.push_back(glm::vec2(CHECKBOX_SIZE, CHECKBOX_SIZE));
 	ptVecList.push_back(glm::vec2(CHECKBOX_SIZE, 0.0f));
 	m_BoxHighlight.GetShape().SetAsLineLoop(&ptVecList[0], ptVecList.size());
-	m_BoxHighlight.SetTint(1.0f, 0.0f, 0.0f);
-	m_BoxHighlight.SetEnabled(false);
+	m_BoxHighlight.SetTint(0.0f, 0.0f, 0.0f);
 
 	Sync();
 }
@@ -34,20 +33,29 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 void CheckBox::Sync()
 {
 	if(m_bIS_FOR_FOOD)
-		m_Check.SetEnabled(Values::Get()->m_bPayingFood);
+	{
+		if(Values::Get()->m_bPayingFood)
+			m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
+		else
+			m_Check.GetShape().SetAsNothing();
+	}
 	else
-		m_Check.SetEnabled(Values::Get()->m_bPayingAC);
+	{
+		if(Values::Get()->m_bPayingAC)
+			m_Check.GetShape().SetAsCircle(CHECKBOX_SIZE * 0.5f);
+		else
+			m_Check.GetShape().SetAsNothing();
+	}
 }
 
 /*virtual*/ void CheckBox::OnMouseEnter(void *pUserParam) /*override*/
 {
-	m_BoxHighlight.SetEnabled(true);
+	m_BoxHighlight.SetTint(1.0f, 0.0f, 0.0f);
 }
 
 /*virtual*/ void CheckBox::OnMouseLeave(void *pUserParam) /*override*/
 {
-	m_BoxHighlight.SetEnabled(false);
-	m_BoxHighlight.SetTint(1.0f, 0.0f, 0.0f);
+	m_BoxHighlight.SetTint(0.0f, 0.0f, 0.0f);
 }
 
 /*virtual*/ void CheckBox::OnMouseDown(void *pUserParam) /*override*/

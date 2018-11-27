@@ -1,8 +1,7 @@
 #pragma once
 #include "pch.h"
-#include "InfoPanel.h"
 
-class CheckBox : public InfoPanel
+class CheckBox : public HyEntity2d
 {
 	bool			m_bIS_FOR_FOOD;
 

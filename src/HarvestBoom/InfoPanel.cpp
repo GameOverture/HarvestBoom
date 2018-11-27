@@ -121,7 +121,7 @@ float InfoPanel::GetPanelHeight()
 #endif
 }
 
-/*virtual*/ void InfoPanel::SetTextAlignment(HyAlign eAlignment)
+/*virtual*/ void InfoPanel::SetTextAlignment(HyTextAlign eAlignment)
 {
 	if(m_pText)
 		m_pText->TextSetAlignment(eAlignment);
