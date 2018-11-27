@@ -12138,6 +12138,77 @@
                 "reverse": false
             }
         ],
+        "Game/Bug": [
+            {
+                "bounce": false,
+                "duration": 1,
+                "frames": [
+                    {
+                        "checksum": 1312516566,
+                        "duration": 0.5,
+                        "id": 37,
+                        "offsetX": -9,
+                        "offsetY": -9
+                    },
+                    {
+                        "checksum": 3695746670,
+                        "duration": 0.5,
+                        "id": 38,
+                        "offsetX": -9,
+                        "offsetY": -9
+                    }
+                ],
+                "loop": true,
+                "name": "Beetle",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 1,
+                "frames": [
+                    {
+                        "checksum": 490839208,
+                        "duration": 0.5,
+                        "id": 35,
+                        "offsetX": -9,
+                        "offsetY": -18
+                    },
+                    {
+                        "checksum": 2480154456,
+                        "duration": 0.5,
+                        "id": 36,
+                        "offsetX": -9,
+                        "offsetY": -18
+                    }
+                ],
+                "loop": true,
+                "name": "Ant",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.800000011920929,
+                "frames": [
+                    {
+                        "checksum": 2387229335,
+                        "duration": 0.4000000059604645,
+                        "id": 112,
+                        "offsetX": -20,
+                        "offsetY": -20
+                    },
+                    {
+                        "checksum": 3094826076,
+                        "duration": 0.4000000059604645,
+                        "id": 113,
+                        "offsetX": -20,
+                        "offsetY": -20
+                    }
+                ],
+                "loop": true,
+                "name": "Spider",
+                "reverse": false
+            }
+        ],
         "Game/BuyButton": [
             {
                 "bounce": false,
@@ -12814,6 +12885,70 @@
                         "checksum": 4059091461,
                         "duration": 0.01600000075995922,
                         "id": 82,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3944846654,
+                        "duration": 0.01600000075995922,
+                        "id": 115,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3948409439,
+                        "duration": 0.01600000075995922,
+                        "id": 114,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 3065284644,
+                        "duration": 0.01600000075995922,
+                        "id": 116,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 4094492847,
+                        "duration": 0.01600000075995922,
+                        "id": 117,
                         "offsetX": 0,
                         "offsetY": 0
                     }

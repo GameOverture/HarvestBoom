@@ -4,6 +4,7 @@
 #include "Stamina.h"
 #include "World.h"
 #include "DayNight.h"
+#include "BugAttack.h"
 #include "IntroPanel.h"
 #include "HousePanel.h"
 #include "BillsPanel.h"
@@ -18,6 +19,7 @@ class Game : public HyEntity2d
 	HousePanel				m_HousePanel;
 	BillsPanel				m_BillsPanel;
 	DayNight				m_DayNight;
+	BugAttack				m_BugAttack;
 
 	DebugGrid				m_DebugGrid;
 
@@ -36,14 +38,6 @@ class Game : public HyEntity2d
 	GameState				m_eGameState;
 	float					m_fElapsedTime;
 
-	enum BugState
-	{
-		BUGSTATE_CreateBugs = 0,
-		BUGSTATE_March,
-
-	};
-	BugState				m_eBugState;
-
 public:
 	Game();
 	virtual ~Game();
@@ -51,6 +45,5 @@ public:
 	void Sync();
 
 	void GameUpdate();
-	bool BugUpdate();
 	void DebugUpdate();
 };

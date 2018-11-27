@@ -175,6 +175,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BillsPanel.cpp" />
+    <ClCompile Include="BugAttack.cpp" />
     <ClCompile Include="BuyButton.cpp" />
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="ContinueButton.cpp" />
@@ -203,7 +204,7 @@
     <ClCompile Include="HarvestBoom.cpp" />
     <ClCompile Include="IActor.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="IEnemy.cpp" />
+    <ClCompile Include="Bug.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -219,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BillsPanel.h" />
+    <ClInclude Include="BugAttack.h" />
     <ClInclude Include="BuyButton.h" />
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="ContinueButton.h" />
@@ -239,7 +241,7 @@
     <ClInclude Include="HarvestBoom.h" />
     <ClInclude Include="IActor.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="IEnemy.h" />
+    <ClInclude Include="Bug.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="pch.h" />

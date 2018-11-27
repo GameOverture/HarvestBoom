@@ -16,7 +16,11 @@ class Tile : public HyEntity2d
 		GRASS_NorthWest,
 		GRASS_NorthEast,
 		GRASS_SouthEast,
-		GRASS_SouthWest
+		GRASS_SouthWest,
+		GRASS_InnerCorner_NW,
+		GRASS_InnerCorner_NE,
+		GRASS_InnerCorner_SE,
+		GRASS_InnerCorner_SW
 	};
 
 	TileType			m_eTileType;

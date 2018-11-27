@@ -123,12 +123,9 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_TotalVal.pos.Set(vWindowSize.x - fTextX, fTextY - 135.0f);
 	m_TotalVal.alpha.Set(0.0f);
 
-	Sync();
-
-	m_ContinueBtn.pos.Set(vWindowSize.x, 15);
-	m_ContinueBtn.alpha.Set(0.0f);
 	m_ContinueBtn.GetTextPtr()->TextSetState(1);
-	m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
+
+	Sync();
 
 	GetBorder().SetEnabled(false);
 	GetFill().SetEnabled(false);
@@ -148,6 +145,11 @@ BillsPanel::~BillsPanel()
 
 	m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
 	m_FoodStocks.Hide();
+	Sync();
+
+	m_ContinueBtn.pos.Set(Hy_App().Window().GetWidth(), 15);
+	m_ContinueBtn.alpha.Set(0.0f);
+
 	return 1.0f;
 }
 
@@ -252,7 +254,7 @@ void BillsPanel::Sync()
 	m_TotalVal.TextSet("$" + std::to_string(iTotalMonies));
 
 	if(iTotalMonies < 0)
-		m_ContinueBtn.GetTextPtr()->TextSet("Bankruptcy");
+		m_ContinueBtn.GetTextPtr()->TextSet("Bankrupt");
 	else
 		m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
 }

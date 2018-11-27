@@ -2,19 +2,23 @@
 #include "Game.h"
 #include "HarvestBoom.h"
 
-Game::Game() :	HyEntity2d(nullptr),
-				m_Player(this),
-				m_Stamina(this),
-				m_World(this),
-				m_IntroPanel(this),
-				m_HousePanel(this),
-				m_BillsPanel(this),
-				m_DayNight(m_Stamina, m_HousePanel, this),
-				m_DebugGrid(this),
-				m_eGameState(GAMESTATE_Init),
-				m_fElapsedTime(0.0f)
+Game::Game() :
+	HyEntity2d(nullptr),
+	m_Player(this),
+	m_Stamina(this),
+	m_World(this),
+	m_IntroPanel(this),
+	m_HousePanel(this),
+	m_BillsPanel(this),
+	m_DayNight(m_Stamina, m_HousePanel, this),
+	m_BugAttack(this),
+	m_DebugGrid(this),
+	m_eGameState(GAMESTATE_Init),
+	m_fElapsedTime(0.0f)
 {
 	m_World.SetupNewDay();
+
+	m_BugAttack.SetEnabled(false);
 	
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
 	m_DebugGrid.SetEnabled(false);
@@ -142,11 +146,15 @@ void Game::GameUpdate()
 
 	case GAMESTATE_BugCameraPan:
 		if(pCam->pos.IsTweening() == false)
+		{
+			m_BugAttack.SetEnabled(true);
+			m_BugAttack.Sync();
 			m_eGameState = GAMESTATE_Bugs;
+		}
 		break;
 
 	case GAMESTATE_Bugs:
-		if(BugUpdate() == false)
+		if(m_BugAttack.BugUpdate() == false)
 		{
 			LtGAudioManager::GetInstance()->FadeMusicOut(1.0f);
 			m_DayNight.FadeToPitchBlack();
@@ -169,12 +177,6 @@ void Game::GameUpdate()
 	}
 
 	DebugUpdate();
-}
-
-bool Game::BugUpdate()
-{
-
-	return true;
 }
 
 void Game::DebugUpdate()

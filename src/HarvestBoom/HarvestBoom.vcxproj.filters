@@ -34,9 +34,6 @@
       <Filter>Game\Actors</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="IEnemy.cpp">
-      <Filter>Game\Actors</Filter>
-    </ClCompile>
     <ClCompile Include="IActor.cpp">
       <Filter>Game\Actors</Filter>
     </ClCompile>
@@ -101,6 +98,12 @@
     <ClCompile Include="CheckBox.cpp">
       <Filter>Game\UI\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="Bug.cpp">
+      <Filter>Game\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="BugAttack.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HarvestBoom.h" />
@@ -130,9 +133,6 @@
       <Filter>Game\World</Filter>
     </ClInclude>
     <ClInclude Include="IActor.h">
-      <Filter>Game\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="IEnemy.h">
       <Filter>Game\Actors</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -180,6 +180,12 @@
     </ClInclude>
     <ClInclude Include="CheckBox.h">
       <Filter>Game\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Bug.h">
+      <Filter>Game\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="BugAttack.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

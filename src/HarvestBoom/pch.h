@@ -53,6 +53,13 @@ enum PlantType
 	PLANTTYPE_Vine
 };
 
+enum BugType
+{
+	BUGTYPE_Beetle = 0,
+	BUGTYPE_Ant,
+	BUGTYPE_Spider
+};
+
 #define DISPLAYORDER_Splash			999999999
 #define DISPLAYORDER_Title			99999999
 #define DISPLAYORDER_Panel			9999999

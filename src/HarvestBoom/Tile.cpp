@@ -147,6 +147,11 @@ void Tile::SetTileState()
 			m_Grass.AnimSetState(GRASS_SouthEast);
 		}
 
+		//GRASS_InnerCorner_NW,
+		//GRASS_InnerCorner_NE,
+		//GRASS_InnerCorner_SE,
+		//GRASS_InnerCorner_SW
+
 		break;
 
 	case House:
