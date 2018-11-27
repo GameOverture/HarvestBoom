@@ -225,7 +225,9 @@ BillsPanel::~BillsPanel()
 	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.Show())
 	{
 		m_FoodStocks.pos.Set(-m_FoodStocks.GetWidth(true), 10.0f);
-		m_FoodStocks.pos.Tween(10.0f, 10.0f, 1.0f, HyTween::QuadOut);
+		if(Values::Get()->m_uiHarvestCorn > 0 || Values::Get()->m_uiHarvestEggplant > 0 || Values::Get()->m_uiHarvestPumpkin > 0)
+			m_FoodStocks.pos.Tween(10.0f, 10.0f, 1.0f, HyTween::QuadOut);
+
 		m_ContinueBtn.pos.Tween(Hy_App().Window().GetWindowSize().x - 100, 15, 1.0f, HyTween::QuadOut);
 		m_ContinueBtn.alpha.Set(1.0f);
 		m_ContinueBtn.EnableMouseInput(this);

@@ -367,9 +367,14 @@ bool Tile::IncrementProgress()
 						validTileList[i]->m_pPlant->alpha.Set(0.0f);
 						validTileList[i]->m_pPlant->SetDisplayOrder(m_TilledOverlay.GetDisplayOrder() + 1);
 						validTileList[i]->m_pPlant->Load();
+
+						validTileList[i]->m_TilledOverlay.scale.Set(2.0f, 2.0f);
 					}
 					else
+					{
 						validTileList[i]->m_pPlant = validTileList[0]->m_pPlant;
+						validTileList[i]->m_TilledOverlay.SetEnabled(false);
+					}
 				}
 
 				m_ProgressBar.SetColor_Planting();
@@ -558,9 +563,9 @@ bool Tile::IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles /*
 			if(pValidTiles)
 			{
 				pValidTiles->push_back(this);
-				pValidTiles->push_back(m_pNeighborEast);
 				pValidTiles->push_back(m_pNeighborNorth);
 				pValidTiles->push_back(m_pNeighborNorthEast);
+				pValidTiles->push_back(m_pNeighborEast);
 			}
 			return true;
 		}
@@ -573,9 +578,9 @@ bool Tile::IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles /*
 			if(pValidTiles)
 			{
 				pValidTiles->push_back(this);
-				pValidTiles->push_back(m_pNeighborEast);
 				pValidTiles->push_back(m_pNeighborNorth);
 				pValidTiles->push_back(m_pNeighborNorthEast);
+				pValidTiles->push_back(m_pNeighborEast);
 			}
 			return true;
 		}
