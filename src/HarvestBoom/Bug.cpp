@@ -2,10 +2,12 @@
 #include "Bug.h"
 #include "Plant.h"
 #include "World.h"
+#include "Tile.h"
 
-Bug::Bug(BugType eBugType, HyEntity2d *pParent) :
+Bug::Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent) :
 	HyEntityLeaf2d<HySprite2d>("Game", "Bug", pParent),
 	m_eBUG_TYPE(eBugType),
+	m_WorldRef(worldRef),
 	m_fDeferTimer(0.0f),
 	m_bEating(false)
 {
@@ -61,6 +63,7 @@ void Bug::SetPos(glm::ivec2 ptPos)
 void Bug::SetPos(int32 iX, int32 iY)
 {
 	pos.Set(iX * TILE_SIZE, iY * TILE_SIZE);
+	m_ptVirtualPos = GetPos();
 	//m_DeferFuncQueue.push(BugDeferFunc([=](Bug *pThis) { pThis->pos.Set(iX * TILE_SIZE, iY * TILE_SIZE); }, 0.0f));
 }
 
@@ -71,10 +74,10 @@ void Bug::Wait(float fDuration)
 
 void Bug::WalkTo(int32 iX, int32 iY)
 {
-	glm::vec2 ptPos(static_cast<float>(GetPos().x), static_cast<float>(GetPos().y));
-	float fDuration = glm::distance(ptPos, glm::vec2(iX, iY));
-
+	float fDuration = glm::distance(m_ptVirtualPos, glm::vec2(iX, iY));
 	m_DeferFuncQueue.push(BugDeferFunc([=](Bug *pThis) { pThis->pos.Tween(iX * TILE_SIZE + (TILE_SIZE * 0.5f), iY * TILE_SIZE + (TILE_SIZE * 0.5f), fDuration, HyTween::QuadInOut); }, fDuration));
+
+	m_ptVirtualPos = glm::vec2(iX, iY);
 }
 
 void Bug::Eat()
@@ -82,7 +85,7 @@ void Bug::Eat()
 	m_DeferFuncQueue.push(BugDeferFunc([](Bug *pThis) { pThis->m_bEating = true; }, 0.0f));
 }
 
-void Bug::BugUpdate(World &worldRef)
+void Bug::BugUpdate()
 {
 	m_fDeferTimer = HyMax(m_fDeferTimer - Hy_UpdateStep(), 0.0f);
 	if(m_bEating == false && m_fDeferTimer == 0.0f && m_DeferFuncQueue.empty() == false)
@@ -95,13 +98,11 @@ void Bug::BugUpdate(World &worldRef)
 
 	if(m_bEating)
 	{
-		m_Leaf.AnimSetPlayRate(3.0f);
+		m_Leaf.AnimSetPlayRate(5.0f);
 		m_Leaf.AnimSetPause(false);
-		if(m_Leaf.rot.IsTweening() == false)
-			m_Leaf.rot.Tween(-3.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { m_Leaf.rot.Tween(3.0f, 0.25f, HyTween::QuadIn); });
 
-		if(rot.IsTweening() == false)
-			rot.Tween(-20.0f, 1.25f, HyTween::QuadOut, [this](IHyNode *) { rot.Tween(3.0f, 0.25f, HyTween::QuadIn); });
+		if(m_Leaf.rot.IsTweening() == false)
+			m_Leaf.rot.Tween(-20.0f, 1.25f, HyTween::QuadOut, [this](IHyNode *) { m_Leaf.rot.Tween(3.0f, 0.25f, HyTween::QuadIn); TakeBite(); });
 	}
 	else
 	{
@@ -123,7 +124,21 @@ void Bug::BugUpdate(World &worldRef)
 	}
 }
 
+bool Bug::IsEating()
+{
+	return m_bEating;
+}
+
 void Bug::StopEating()
 {
 	m_bEating = false;
+}
+
+void Bug::TakeBite()
+{
+	Tile *pTile = m_WorldRef.FindTile(pos.Get());
+	if(pTile == nullptr || pTile->GetPlant() == nullptr)
+		return;
+
+	pTile->DamagePlant(*this);
 }

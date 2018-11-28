@@ -85,7 +85,7 @@ Values::Values() :
 
 	m_uiHarvestSoldAmt(0),
 
-	m_uiCurrentDay(1),
+	m_uiCurrentDay(2),//1),
 	m_eEquipedItem(EQUIP_Hoe),
 	m_bVitaminStrength(true),
 	m_bAirConditioning(true),

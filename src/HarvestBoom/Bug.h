@@ -7,15 +7,18 @@ class World;
 class Bug : public HyEntityLeaf2d<HySprite2d>
 {
 	const BugType				m_eBUG_TYPE;
+	World &						m_WorldRef;
 
 	typedef std::pair<std::function<void(Bug *pSelf)>, float> BugDeferFunc;
 	std::queue<BugDeferFunc>	m_DeferFuncQueue;
 	float						m_fDeferTimer;
 
+	glm::vec2					m_ptVirtualPos;
+
 	bool						m_bEating;
 
 public:
-	Bug(BugType eBugType, HyEntity2d *pParent);
+	Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent);
 	virtual ~Bug();
 
 	BugType GetBugType() const;
@@ -32,7 +35,10 @@ public:
 	void WalkTo(int32 iX, int32 iY);
 	void Eat();
 
-	void BugUpdate(World &worldRef);
+	void BugUpdate();
 
+	bool IsEating();
 	void StopEating();
+
+	void TakeBite();
 };

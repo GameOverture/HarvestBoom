@@ -37,16 +37,16 @@ void BugAttack::Setup()
 	switch(Values::Get()->m_uiCurrentDay)
 	{
 	case 3:
-		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, this));
-		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, this));
-		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, this));
+		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
+		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
+		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, m_WorldRef, this));
 		break;
 
 	case 4:
 		for(uint32 i = 0; i < 3; ++i)
-			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, this));
+			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
 		for(uint32 i = 0; i < 2; ++i)
-			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, this));
+			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, m_WorldRef, this));
 		break;
 	}
 
@@ -82,10 +82,10 @@ void BugAttack::Setup()
 			{
 				if(tilesOnPathList[j]->GetPlant())
 				{
-					for(uint32 j = 0; j < static_cast<uint32>(m_BugList.size()); ++j)
+					for(uint32 k = 0; k < static_cast<uint32>(m_BugList.size()); ++k)
 					{
-						m_BugList[j]->WalkTo(tilesOnPathList[j]->GetPos().x, tilesOnPathList[j]->GetPos().y);
-						m_BugList[j]->Eat();
+						m_BugList[k]->WalkTo(tilesOnPathList[j]->GetPos().x, tilesOnPathList[j]->GetPos().y);
+						m_BugList[k]->Eat();
 					}
 				}
 			}
@@ -105,7 +105,7 @@ bool BugAttack::BugUpdate()
 		Tile *pTile = m_WorldRef.FindTile((*iter)->pos.Get());
 		if(pTile)
 		{
-			if(pTile->GetPlant() == nullptr)
+			if((*iter)->IsEating() && pTile->GetPlant() == nullptr)
 				(*iter)->StopEating();
 
 			if(pTile->GetTileType() == HouseDoor)
@@ -138,7 +138,7 @@ bool BugAttack::BugUpdate()
 			continue;
 		}
 
-		(*iter)->BugUpdate(m_WorldRef);
+		(*iter)->BugUpdate();
 		++iter;
 	}
 

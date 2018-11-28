@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Tile.h"
 #include "Plant.h"
+#include "Bug.h"
 
 Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_eTileType(Unknown),
@@ -569,6 +570,27 @@ bool Tile::IncrementGrowing()
 	m_pPlant->SetTag(1);	// Indicates it has updated this frame
 
 	return true;
+}
+
+void Tile::DamagePlant(Bug &bugRef)
+{
+	switch(bugRef.GetBugType())
+	{
+	case BUGTYPE_Beetle:
+		bugRef.OffsetHealth(-1.0f);
+		break;
+
+	case BUGTYPE_Ant:
+		bugRef.OffsetHealth(-0.5f);
+		break;
+
+	case BUGTYPE_Spider:
+		bugRef.OffsetHealth(-0.25f);
+		break;
+	}
+
+	delete m_pPlant;
+	m_pPlant = nullptr;
 }
 
 bool Tile::IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles /*= nullptr*/)

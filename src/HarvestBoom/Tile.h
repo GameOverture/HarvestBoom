@@ -3,6 +3,7 @@
 #include "pch.h"
 
 class Plant;
+class Bug;
 
 class Tile : public HyEntity2d
 {
@@ -119,6 +120,8 @@ public:
 	bool IncrementProgress();
 
 	bool IncrementGrowing();
+
+	void DamagePlant(Bug &bugRef);
 
 private:
 	bool IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles = nullptr);
