@@ -37,6 +37,17 @@ Tile::~Tile()
 {
 }
 
+glm::ivec2 Tile::GetPos()
+{
+	glm::ivec2 ptPos(pos.X() / TILE_SIZE, pos.Y() / TILE_SIZE);
+	if(pos.X() < 0.0f)
+		ptPos.x -= 1;
+	if(pos.Y() < 0.0f)
+		ptPos.y -= 1;
+
+	return ptPos;
+}
+
 TileType Tile::GetTileType() const
 {
 	return m_eTileType;

@@ -68,9 +68,25 @@ World::~World()
 	}
 }
 
+Tile *World::GetTile(uint32 uiX, uint32 uiY)
+{
+	return m_pTileGrid[uiX][uiY];
+}
+
+uint32 World::GetNumWaypoints()
+{
+	return static_cast<uint32>(m_PheromoneWaypointList.size());
+}
+
+glm::ivec2 World::GetWaypoint(uint32 uiIndex)
+{
+	return m_PheromoneWaypointList[uiIndex].second->GetPos();
+}
+
 void World::SetupNewDay()
 {
 	m_uiSetRowCurrentIndex = WORLD_HEIGHT -1;
+	m_PheromoneWaypointList.clear();
 
 	switch(Values::Get()->m_uiCurrentDay)
 	{
@@ -102,7 +118,7 @@ void World::SetupNewDay()
 		SetRow("_________________________");
 		break;
 
-	case 2:
+	case 2: // First bug attack night
 		SetRow("_________________________");
 		SetRow("_________________________");
 		SetRow("_________________________");
@@ -117,16 +133,16 @@ void World::SetupNewDay()
 		SetRow("_________HHDHHH__________");
 		SetRow("_________________________");
 		SetRow("_________________________");
+		SetRow("__________+2++___________");
 		SetRow("__________++++___________");
 		SetRow("__________++++___________");
-		SetRow("__________++++___________");
-		SetRow("__________++++___________");
+		SetRow("__________++1+___________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
 		SetRow("___________++____________");
-		SetRow("___________++____________");
+		SetRow("___________+0____________");
 		SetRow("_________________________");
 		break;
 
@@ -145,19 +161,21 @@ void World::SetupNewDay()
 		SetRow("_________HHDHHH__________");
 		SetRow("_________________________");
 		SetRow("_________________________");
+		SetRow("_________++3+++__________");
+		SetRow("_________++++++__________");
+		SetRow("_________++2+++__________");
 		SetRow("_________++++++__________");
 		SetRow("_________++++++__________");
 		SetRow("_________++++++__________");
+		SetRow("_________+1++++__________");
 		SetRow("_________++++++__________");
 		SetRow("_________++++++__________");
-		SetRow("_________++++++__________");
-		SetRow("_________++++++__________");
-		SetRow("_________++++++__________");
-		SetRow("_________++++++__________");
-		SetRow("_________++++++__________");
+		SetRow("_________+0++++__________");
 		SetRow("_________________________");
 		break;
 	}
+
+	std::sort(m_PheromoneWaypointList.begin(), m_PheromoneWaypointList.end(), &PheromoneWaypointSortPredicate);
 
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
@@ -284,12 +302,69 @@ void World::SetRow(std::string sRow)
 	{
 		switch(sRow[i])
 		{
-		case '_':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Grass);			break;
-		case 'H':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(House);			break;
-		case 'D':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseDoor);		break;
-		case '+':	m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);			break;
+		case '_':
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Grass);
+			break;
+		case 'H':
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(House);
+			break;
+		case 'D':
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseDoor);
+			break;
+
+		case '0':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(0, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '1':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(1, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '2':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(2, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '3':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(3, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '4':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(4, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '5':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(5, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '6':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(6, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '7':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(7, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '8':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(8, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '9':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(9, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+		case '+':
+			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(Dirt);
+			break;
+
+		default:
+			HyError("World::SetRow bad character");
 		}
 	}
 
 	--m_uiSetRowCurrentIndex;
+}
+
+/*static*/ bool World::PheromoneWaypointSortPredicate(const PheromoneWaypoint wayPt1, const PheromoneWaypoint wayPt2)
+{
+	return wayPt1.first < wayPt2.first;
 }

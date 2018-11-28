@@ -11,7 +11,7 @@ Game::Game() :
 	m_HousePanel(this),
 	m_BillsPanel(this),
 	m_DayNight(m_Stamina, m_HousePanel, this),
-	m_BugAttack(this),
+	m_BugAttack(m_World, this),
 	m_DebugGrid(this),
 	m_eGameState(GAMESTATE_Init),
 	m_fElapsedTime(0.0f)

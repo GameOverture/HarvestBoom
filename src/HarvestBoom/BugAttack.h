@@ -2,9 +2,13 @@
 #include "pch.h"
 #include "Bug.h"
 
+class World;
+
 class BugAttack : public HyEntity2d
 {
 	typedef std::vector<glm::ivec2> Path;
+
+	World &					m_WorldRef;
 
 	std::vector<Path>		m_PathList;
 	std::vector<Bug *>		m_BugList;
@@ -12,12 +16,13 @@ class BugAttack : public HyEntity2d
 	enum BugState
 	{
 		BUGSTATE_CreateBugs = 0,
+		BUGSTATE_Setup,
 		BUGSTATE_March,
 	};
 	BugState				m_eBugState;
 
 public:
-	BugAttack(HyEntity2d *pParent);
+	BugAttack(World &worldRef, HyEntity2d *pParent);
 	virtual ~BugAttack();
 
 	void Sync();

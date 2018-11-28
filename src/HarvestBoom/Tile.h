@@ -100,6 +100,8 @@ public:
 	Tile(HyEntity2d *pParent);
 	virtual ~Tile();
 
+	glm::ivec2 GetPos();
+
 	TileType GetTileType() const;
 	Plant *GetPlant();
 
@@ -121,4 +123,3 @@ public:
 private:
 	bool IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles = nullptr);
 };
-

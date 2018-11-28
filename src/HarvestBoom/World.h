@@ -12,8 +12,11 @@ class HousePanel;
 
 class World : public HyEntity2d
 {
-	Tile *			m_pTileGrid[WORLD_WIDTH][WORLD_HEIGHT];
-	uint32			m_uiSetRowCurrentIndex;
+	Tile *				m_pTileGrid[WORLD_WIDTH][WORLD_HEIGHT];
+	uint32				m_uiSetRowCurrentIndex;
+
+	typedef std::pair<uint32, Tile *> PheromoneWaypoint;
+	std::vector<PheromoneWaypoint>	m_PheromoneWaypointList;
 
 	HyPrimitive2d	m_DebugCollidePt1;
 	HyPrimitive2d	m_DebugCollidePt2;
@@ -23,6 +26,10 @@ public:
 	World(HyEntity2d *pParent);
 	virtual ~World();
 
+	Tile *GetTile(uint32 uiX, uint32 uiY);
+	uint32 GetNumWaypoints();
+	glm::ivec2 GetWaypoint(uint32 uiIndex);
+
 	void SetupNewDay();
 
 	void CleanupTiles();
@@ -30,5 +37,6 @@ public:
 
 private:
 	void SetRow(std::string sRow);
-};
 
+	static bool PheromoneWaypointSortPredicate(const PheromoneWaypoint wayPt1, const PheromoneWaypoint wayPt2);
+};
