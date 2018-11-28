@@ -17,8 +17,6 @@ Game::Game() :
 	m_fElapsedTime(0.0f)
 {
 	m_World.SetupNewDay();
-
-	m_BugAttack.SetEnabled(false);
 	
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
 	m_DebugGrid.SetEnabled(false);
@@ -145,8 +143,7 @@ void Game::GameUpdate()
 	case GAMESTATE_BugCameraPan:
 		if(pCam->pos.IsTweening() == false)
 		{
-			m_BugAttack.SetEnabled(true);
-			m_BugAttack.Sync();
+			m_BugAttack.Setup();
 			m_eGameState = GAMESTATE_Bugs;
 		}
 		break;
@@ -158,6 +155,21 @@ void Game::GameUpdate()
 			m_DayNight.FadeToPitchBlack();
 			m_eGameState = GAMESTATE_Sleep;
 		}
+
+		{
+			const float fCameraPanSpeed = (TILE_SIZE * 2); // per second
+
+			if(Hy_App().Input().IsActionDown(MoveUp))
+				pCam->pos.Offset(0.0f, fCameraPanSpeed * Hy_UpdateStep());
+			else if(Hy_App().Input().IsActionDown(MoveDown))
+				pCam->pos.Offset(0.0f, -fCameraPanSpeed * Hy_UpdateStep());
+
+			if(Hy_App().Input().IsActionDown(MoveLeft))
+				pCam->pos.Offset(-fCameraPanSpeed * Hy_UpdateStep(), 0.0f);
+			else if(Hy_App().Input().IsActionDown(MoveRight))
+				pCam->pos.Offset(fCameraPanSpeed * Hy_UpdateStep(), 0.0f);
+		}
+
 		break;
 
 	case GAMESTATE_Sleep:

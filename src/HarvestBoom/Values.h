@@ -86,6 +86,10 @@ public:
 
 	const uint32	m_uiENABLE_DEFENSE_DAY;
 
+	const uint32	m_uiDAMAGE_BEETLE;
+	const uint32	m_uiDAMAGE_ANT;
+	const uint32	m_uiDAMAGE_SPIDER;
+
 	int32			m_iSavings;
 	float			m_fStamina;
 
@@ -108,6 +112,8 @@ public:
 
 	bool			m_bVitaminStrength;
 	bool			m_bAirConditioning;
+
+	uint32			m_uiDamageCost;
 
 	void Sync();
 };

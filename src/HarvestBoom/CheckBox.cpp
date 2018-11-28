@@ -26,7 +26,7 @@ CheckBox::CheckBox(bool bIsForFood, HyEntity2d *pParent) :
 	ptVecList.push_back(glm::vec2(0.0f, CHECKBOX_SIZE));
 	ptVecList.push_back(glm::vec2(CHECKBOX_SIZE, CHECKBOX_SIZE));
 	ptVecList.push_back(glm::vec2(CHECKBOX_SIZE, 0.0f));
-	m_BoxHighlight.GetShape().SetAsLineLoop(&ptVecList[0], ptVecList.size());
+	m_BoxHighlight.GetShape().SetAsLineLoop(&ptVecList[0], static_cast<uint32>(ptVecList.size()));
 	m_BoxHighlight.SetTint(0.0f, 0.0f, 0.0f);
 	m_BoxHighlight.SetLineThickness(2.0f);
 

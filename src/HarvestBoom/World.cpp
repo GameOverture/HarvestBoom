@@ -70,7 +70,21 @@ World::~World()
 
 Tile *World::GetTile(uint32 uiX, uint32 uiY)
 {
-	return m_pTileGrid[uiX][uiY];
+	if(uiX >= 0 && uiX < WORLD_WIDTH && uiY >= 0 && uiY < WORLD_HEIGHT)
+		return m_pTileGrid[uiX][uiY];
+	
+	return nullptr;
+}
+
+Tile *World::FindTile(glm::vec2 ptWorldCoordinate)
+{
+	int32 iX = static_cast<int32>(ptWorldCoordinate.x / TILE_SIZE);
+	int32 iY = static_cast<int32>(ptWorldCoordinate.y / TILE_SIZE);
+	
+	if(iX >= 0 && iX < WORLD_WIDTH && iY >= 0 && iY < WORLD_HEIGHT)
+		return m_pTileGrid[iX][iY];
+
+	return nullptr;
 }
 
 uint32 World::GetNumWaypoints()
@@ -78,9 +92,14 @@ uint32 World::GetNumWaypoints()
 	return static_cast<uint32>(m_PheromoneWaypointList.size());
 }
 
-glm::ivec2 World::GetWaypoint(uint32 uiIndex)
+glm::ivec2 World::GetTileWaypoint(uint32 uiIndex)
 {
 	return m_PheromoneWaypointList[uiIndex].second->GetPos();
+}
+
+glm::vec2 World::GetPixelWaypoint(uint32 uiIndex)
+{
+	return glm::vec2((m_PheromoneWaypointList[uiIndex].second->GetPos().x * TILE_SIZE) + (TILE_SIZE * 0.5f), (m_PheromoneWaypointList[uiIndex].second->GetPos().y * TILE_SIZE) + (TILE_SIZE * 0.5f));
 }
 
 void World::SetupNewDay()
@@ -309,6 +328,7 @@ void World::SetRow(std::string sRow)
 			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(House);
 			break;
 		case 'D':
+			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(10, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
 			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseDoor);
 			break;
 

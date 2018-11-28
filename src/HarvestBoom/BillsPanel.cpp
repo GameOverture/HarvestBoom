@@ -219,7 +219,7 @@ BillsPanel::~BillsPanel()
 	{
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
 
-		if(CalculateMoney() < 0);
+		if(CalculateMoney() < 0)
 			m_TotalValMinus.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
 	if(m_TotalVal.alpha.Get() == 1.0f && m_FoodStocks.Show())

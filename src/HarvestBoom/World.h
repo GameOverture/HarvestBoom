@@ -27,8 +27,11 @@ public:
 	virtual ~World();
 
 	Tile *GetTile(uint32 uiX, uint32 uiY);
+	Tile *FindTile(glm::vec2 ptWorldCoordinate);
+
 	uint32 GetNumWaypoints();
-	glm::ivec2 GetWaypoint(uint32 uiIndex);
+	glm::ivec2 GetTileWaypoint(uint32 uiIndex);
+	glm::vec2 GetPixelWaypoint(uint32 uiIndex);
 
 	void SetupNewDay();
 

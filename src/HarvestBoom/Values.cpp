@@ -43,7 +43,7 @@ Values::Values() :
 	m_uiSTARTING_EGGPLANTHARVEST(0),
 	m_uiSTARTING_PUMPKINHARVEST(0),
 
-	m_fDAY_LENGTH(4.0f),//90.0f),
+	m_fDAY_LENGTH(14.0f),//90.0f),
 
 	m_fDURATION_HOEDIRT(0.1f),//5.0f),
 	m_fDURATION_PLANTCORN(2.0f),
@@ -65,6 +65,10 @@ Values::Values() :
 
 	m_uiENABLE_DEFENSE_DAY(3),
 
+	m_uiDAMAGE_BEETLE(5),
+	m_uiDAMAGE_ANT(10),
+	m_uiDAMAGE_SPIDER(25),
+
 	m_iSavings(m_uiSTARTING_MONEY),
 	m_fStamina(1.0f),
 	
@@ -84,7 +88,9 @@ Values::Values() :
 	m_uiCurrentDay(1),
 	m_eEquipedItem(EQUIP_Hoe),
 	m_bVitaminStrength(true),
-	m_bAirConditioning(true)
+	m_bAirConditioning(true),
+
+	m_uiDamageCost(0)
 {
 }
 
