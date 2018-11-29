@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "HousePanel.h"
+#include "BillsPanel.h"
 
 HousePanel::HousePanel(HyEntity2d *pParent) :	IHy9Slice(glm::vec2(550.0f, 340.0f), 4.0f, pParent),
 												m_FoodStocks(false, this),
 												m_SavingsVal("Game", "Small", this),
+												m_DamagesVal("Game", "Small", this),
 												m_BtnHoeEquip(this),
 												m_BtnHoeDecal("Equip", "Hoe", &m_BtnHoeEquip),
 												m_BtnHarvestEquip(this),
@@ -154,6 +156,16 @@ void HousePanel::Sync()
 	std::string sText = "Savings $";
 	sText += std::to_string(Values::Get()->m_iSavings);
 	m_SavingsVal.TextSet(sText);
+
+	if(Values::Get()->m_uiDamageCost > 0)
+	{
+		m_DamagesVal.alpha.Set(1.0f);
+		sText = "Bug Damages $";
+		sText += std::to_string(Values::Get()->m_uiDamageCost);
+		m_DamagesVal.TextSet(sText);
+	}
+	else
+		m_DamagesVal.alpha.Set(0.0f);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if(eEquipedItem == EQUIP_Hoe)
@@ -432,9 +444,13 @@ void HousePanel::Sync()
 	m_FoodStocks.pos.Set(0.0f + 50.0f, GetHeight(false) - 195.0f);
 
 	m_SavingsVal.TextSetState(1);
-	m_SavingsVal.TextSetAlignment(HYALIGN_Center);
-	m_SavingsVal.pos.Set(GetWidth(false) - GetWidth(false) * 0.5f, GetHeight(false) - 50.0f);
-	m_SavingsVal.SetAsScaleBox(GetWidth(false) * 0.5f, 30.0f);
+	m_SavingsVal.TextSetAlignment(HYALIGN_Right);
+	m_SavingsVal.pos.Set(GetWidth(false) - 10.0f, GetHeight(false) - 19.0f);
+
+	m_DamagesVal.TextSetState(1);
+	m_DamagesVal.TextSetAlignment(HYALIGN_Right);
+	m_DamagesVal.pos.Set(GetWidth(false) - 10.0f, GetHeight(false) - 44.0f);
+	m_DamagesVal.TextSetLayerColor(0, 1, PAY_COLORS);
 
 	const float fButtonSideMargin = 5.0f;
 	const float fButtonBotMargin = 35.0f;

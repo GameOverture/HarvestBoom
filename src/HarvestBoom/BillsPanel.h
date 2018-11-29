@@ -43,6 +43,9 @@ class BillsPanel : public IHy9Slice
 	HyText2d		m_Rent;
 	HyText2d		m_RentVal;
 
+	HyText2d		m_Damage;
+	HyText2d		m_DamageVal;
+
 	HyText2d		m_Vitamins;
 	HyText2d		m_VitaminsVal;
 	CheckBox		m_VitaminsCheckBox;

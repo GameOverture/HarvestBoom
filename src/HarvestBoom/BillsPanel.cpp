@@ -13,6 +13,8 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_HarvestVal("Game", "Small", this),
 	m_Rent("Game", "Small", this),
 	m_RentVal("Game", "Small", this),
+	m_Damage("Game", "Small", this),
+	m_DamageVal("Game", "Small", this),
 	m_Vitamins("Game", "Small", this),
 	m_VitaminsVal("Game", "Small", this),
 	m_VitaminsCheckBox(true, this),
@@ -30,7 +32,7 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 
 	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
 	const float fTextX = 175.0f;
-	const float fTextY = 275.0f;
+	const float fTextY = 287.0f;
 
 	m_BillsText.TextSet("Bills");
 	m_BillsText.TextSetAlignment(HYALIGN_Center);
@@ -97,6 +99,17 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	m_AirConditioningCheckBox.pos.Set(m_AirConditioningVal.pos.X(), fTextY - 100.0f);
 	m_AirConditioningCheckBox.pos.Offset(5.0f, -2.0f);
 
+	m_Damage.TextSet("Bug Damages");
+	m_Damage.TextSetLayerColor(0, 1, PAY_COLORS);
+	m_Damage.TextSetState(1);
+	m_Damage.TextSetAlignment(HYALIGN_Left);
+	m_Damage.pos.Set(fTextX, fTextY - 125.0f);
+
+	m_DamageVal.TextSetLayerColor(0, 1, PAY_COLORS);
+	m_DamageVal.TextSetState(1);
+	m_DamageVal.TextSetAlignment(HYALIGN_Right);
+	m_DamageVal.pos.Set(vWindowSize.x - fTextX, fTextY - 125.0f);
+
 	m_BarLineOutline.GetShape().SetAsLineSegment(glm::vec2(fTextX, fTextY - 110.0f), glm::vec2(vWindowSize.x - fTextX, fTextY - 110.0f));
 	m_BarLineOutline.SetLineThickness(7.0f);
 	m_BarLineOutline.SetTint(0.0f, 0.0f, 0.0f);
@@ -107,9 +120,6 @@ BillsPanel::BillsPanel(HyEntity2d *pParent) :
 
 	m_TotalVal.TextSetState(1);
 	m_TotalVal.TextSetAlignment(HYALIGN_Right);
-	m_TotalVal.pos.Set(vWindowSize.x - fTextX, fTextY - 135.0f);
-	
-	m_TotalValMinus.pos.Y(fTextY - 130.0f);
 
 	m_ContinueBtn.GetTextPtr()->TextSetState(1);
 
@@ -140,8 +150,34 @@ BillsPanel::~BillsPanel()
 	m_AirConditioning.alpha.Set(0.0f);
 	m_AirConditioningVal.alpha.Set(0.0f);
 	m_AirConditioningCheckBox.alpha.Set(0.0f);
+	m_Damage.alpha.Set(0.0f);
+	m_DamageVal.alpha.Set(0.0f);
 	m_TotalVal.alpha.Set(0.0f);
 	m_TotalValMinus.alpha.Set(0.0f);
+
+#define BARLINE_YPOS_NODMG 110.0f
+#define BARLINE_YPOS_YESDMG 135.0f
+
+#define TOTALVAL_YPOS_NODMG 135.0f
+#define TOTALVAL_YPOS_YESDMG 160.0f
+
+	glm::ivec2 vWindowSize = Hy_App().Window().GetWindowSize();
+	const float fTextX = 175.0f;
+	const float fTextY = 287.0f;
+
+	if(Values::Get()->m_uiDamageCost != 0.0f)
+	{
+		m_BarLineOutline.pos.Y(-25.0f);
+		m_BarLine.pos.Y(-25.0f);
+	}
+	else
+	{
+		m_BarLineOutline.pos.Y(0.0f);
+		m_BarLine.pos.Y(0.0f);
+	}
+
+	m_TotalVal.pos.Set(vWindowSize.x - fTextX, fTextY - (Values::Get()->m_uiDamageCost == 0.0f ? TOTALVAL_YPOS_NODMG : TOTALVAL_YPOS_YESDMG));
+	m_TotalValMinus.pos.Y(m_TotalVal.pos.Y() + 5.0f);
 
 	pos.Set(-GetWidth(true), 0.0f);
 	pos.Tween(0.0f, 0.0f, 1.0f, HyTween::QuadOut);
@@ -178,6 +214,7 @@ BillsPanel::~BillsPanel()
 {
 	Values::Get()->m_iSavings = CalculateMoney();
 	Values::Get()->m_uiHarvestSoldAmt = 0;
+	Values::Get()->m_uiDamageCost = 0;
 }
 
 /*virtual*/ void BillsPanel::OnUpdate() /*override*/
@@ -219,6 +256,12 @@ BillsPanel::~BillsPanel()
 	}
 	if(m_AirConditioning.alpha.Get() == 1.0f && m_TotalVal.alpha.Get() == 0.0f)
 	{
+		if(Values::Get()->m_uiDamageCost != 0.0f)
+		{
+			m_Damage.alpha.Tween(1.0f, fFADEIN_DUR);
+			m_DamageVal.alpha.Tween(1.0f, fFADEIN_DUR);
+		}
+
 		m_TotalVal.alpha.Tween(1.0f, fFADEIN_DUR);
 
 		if(CalculateMoney() < 0)
@@ -248,6 +291,8 @@ int32 BillsPanel::CalculateMoney()
 	if(m_AirConditioningCheckBox.IsChecked())
 		iTotal -= Values::Get()->m_uiBILLS_AC;
 
+	iTotal -= Values::Get()->m_uiDamageCost;
+
 	return iTotal;
 }
 
@@ -263,6 +308,7 @@ void BillsPanel::Sync()
 	m_RentVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_RENT));
 	m_VitaminsVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_VITAMINS));
 	m_AirConditioningVal.TextSet("$" + std::to_string(Values::Get()->m_uiBILLS_AC));
+	m_DamageVal.TextSet("$" + std::to_string(Values::Get()->m_uiDamageCost));
 
 	int32 iTotalMonies = CalculateMoney();
 	m_TotalVal.TextSet("$" + std::to_string(abs(iTotalMonies)));

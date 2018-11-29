@@ -8,6 +8,7 @@ class HousePanel : public IHy9Slice
 	FoodStuffs		m_FoodStocks;
 
 	HyText2d		m_SavingsVal;
+	HyText2d		m_DamagesVal;
 
 	EquipButton		m_BtnHoeEquip;
 	HySprite2d		m_BtnHoeDecal;
