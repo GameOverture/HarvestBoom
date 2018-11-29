@@ -337,7 +337,8 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 		{
 			if(playerRef.DoAction(*pPlayerTile))
 			{
-				staminaRef.Offset(Values::Get()->m_fSTAMINA_ACTION * -Hy_UpdateStep());
+				float fStaminaCost = Values::Get()->m_fSTAMINA_ACTION * (1.0f + (Values::Get()->m_bVitaminStrength ? 0.0f : Values::Get()->m_fSTAMINA_NO_VITAMIN_PENALTY));
+				staminaRef.Offset(fStaminaCost * -Hy_UpdateStep());
 				Values::Get()->Sync();
 			}
 		}

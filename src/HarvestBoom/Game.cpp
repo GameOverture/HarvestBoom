@@ -136,7 +136,7 @@ void Game::GameUpdate()
 				m_eGameState = GAMESTATE_GameOver;
 			else
 			{
-				if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
+				if(Values::Get()->m_uiCurrentDay < (Values::Get()->m_uiENABLE_DEFENSE_DAY - 1)) // Minus 1 because bugs attack the night before you can plant defenses
 				{
 					m_DayNight.FadeToPitchBlack();
 					m_eGameState = GAMESTATE_Sleep;

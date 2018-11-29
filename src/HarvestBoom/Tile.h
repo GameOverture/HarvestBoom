@@ -89,7 +89,7 @@ class Tile : public HyEntity2d
 
 		void SetPercent(float fPercent) {
 			m_ProgressBarFill.scale.X(HyClamp(fPercent, 0.0f, 1.0f));
-			SetEnabled(m_ProgressBarFill.scale.X() < 1.0f && m_ProgressBarFill.scale.X() != 0.0f);
+			//SetEnabled(m_ProgressBarFill.scale.X() < 1.0f && m_ProgressBarFill.scale.X() != 0.0f);
 		}
 	};
 	ProgressBar			m_ProgressBar;

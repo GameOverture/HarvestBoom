@@ -621,9 +621,9 @@ void Tile::DamagePlant(Bug &bugRef)
 	case PLANTTYPE_Pumpkin: {
 		switch(bugRef.GetBugType())
 		{
-		case BUGTYPE_Beetle:	bugRef.OffsetStomach(0.5f);		break;
-		case BUGTYPE_Ant:		bugRef.OffsetStomach(0.25f);	break;
-		case BUGTYPE_Spider:	bugRef.OffsetStomach(0.1f);	break;
+		case BUGTYPE_Beetle:	bugRef.OffsetStomach(1.0f / Values::Get()->m_uiNUMBITES_BEETLE);	break;
+		case BUGTYPE_Ant:		bugRef.OffsetStomach(1.0f / Values::Get()->m_uiNUMBITES_ANT);		break;
+		case BUGTYPE_Spider:	bugRef.OffsetStomach(1.0f / Values::Get()->m_uiNUMBITES_SPIDER);	break;
 		}
 
 		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_EAT);
@@ -632,14 +632,14 @@ void Tile::DamagePlant(Bug &bugRef)
 		if(m_pPlant->IsFullyGrown())
 		{
 			m_ProgressBar.SetColor_Growing();
-			m_ProgressBar.SetPercent(50.0f);
+			m_ProgressBar.SetPercent(0.5f);
 			m_pPlant->AnimSetState(PLANTSTATE_Growing);
 		}
 		else if(m_pPlant->IsPlanted())
 		{
-			if(m_ProgressBar.GetPercent() >= 50.0f)
+			if(m_ProgressBar.GetPercent() >= 0.5f)
 			{
-				m_ProgressBar.SetPercent(1.0f);
+				m_ProgressBar.SetPercent(0.1f);
 				m_pPlant->AnimSetState(PLANTSTATE_Sprout);
 			}
 			else
@@ -710,6 +710,7 @@ void Tile::DamagePlant(Bug &bugRef)
 				}
 			}
 
+			m_ProgressBar.SetPercent(0.0f);
 			delete m_pPlant;
 			m_pPlant = nullptr;
 		}

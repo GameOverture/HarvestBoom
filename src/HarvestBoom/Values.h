@@ -34,6 +34,7 @@ public:
 	const float		m_fSTAMINA_RUN;
 	const float		m_fSTAMINA_ACTION;
 	const float		m_fSTAMINA_AC;
+	const float		m_fSTAMINA_NO_VITAMIN_PENALTY;
 	const float		m_fSTAMINA_EATCORNMODIFIER;
 	const float		m_fSTAMINA_EATEGGPLANTMODIFIER;
 	const float		m_fSTAMINA_EATPUMPKINMODIFIER;
@@ -88,6 +89,10 @@ public:
 	const float		m_fGROW_VINE;
 
 	const uint32	m_uiENABLE_DEFENSE_DAY;
+
+	const uint32	m_uiNUMBITES_BEETLE;
+	const uint32	m_uiNUMBITES_ANT;
+	const uint32	m_uiNUMBITES_SPIDER;
 
 	const uint32	m_uiDAMAGE_BEETLE;
 	const uint32	m_uiDAMAGE_ANT;
