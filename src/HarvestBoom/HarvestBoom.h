@@ -29,6 +29,8 @@ public:
 	static LtGAudioSndBank *GetSndBank();
 	Game *GetGame();
 
+	void SetTitleScreen(TitleScreenType eTitleType);
+
 	virtual bool Initialize() override;
 	virtual bool Update() override;
 	virtual void Shutdown() override;

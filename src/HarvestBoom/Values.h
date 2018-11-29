@@ -25,6 +25,7 @@ class Values
 public:
 	static void Init();
 	static Values *Get();
+	void Reset();
 
 	const float		m_fPLAYER_MAXVELOCITY;
 	const float		m_fPLAYER_ACCEL;

@@ -43,9 +43,9 @@ Values::Values() :
 	m_uiSTARTING_EGGPLANTHARVEST(0),
 	m_uiSTARTING_PUMPKINHARVEST(0),
 
-	m_fDAY_LENGTH(14.0f),//90.0f),
+	m_fDAY_LENGTH(90.0f),
 
-	m_fDURATION_HOEDIRT(0.1f),//5.0f),
+	m_fDURATION_HOEDIRT(5.0f),
 	m_fDURATION_PLANTCORN(2.0f),
 	m_fDURATION_PLANTEGGPLANT(5.0f),
 	m_fDURATION_PLANTPUMPKIN(10.0f),
@@ -56,9 +56,9 @@ Values::Values() :
 	m_fDURATION_HARVESTEGGPLANT(2.0f),
 	m_fDURATION_HARVESTPUMPKIN(5.0f),
 
-	m_fGROW_CORN(m_fDAY_LENGTH * 0.1f),//0.75f),
-	m_fGROW_EGGPLANT(m_fDAY_LENGTH * 0.1f),//1.5f),
-	m_fGROW_PUMPKIN(m_fDAY_LENGTH * 0.1f),//3.75f),
+	m_fGROW_CORN(m_fDAY_LENGTH * 0.75f),
+	m_fGROW_EGGPLANT(m_fDAY_LENGTH * 1.5f),
+	m_fGROW_PUMPKIN(m_fDAY_LENGTH * 3.75f),
 	m_fGROW_GERNAIUM(m_fDAY_LENGTH * 0.5f),
 	m_fGROW_MARIGOLD(m_fDAY_LENGTH * 0.75f),
 	m_fGROW_VINE(m_fDAY_LENGTH * 1.0f),
@@ -67,31 +67,9 @@ Values::Values() :
 
 	m_uiDAMAGE_BEETLE(5),
 	m_uiDAMAGE_ANT(10),
-	m_uiDAMAGE_SPIDER(25),
-
-	m_iSavings(m_uiSTARTING_MONEY),
-	m_fStamina(1.0f),
-	
-	m_uiSeedsCorn(m_uiSTARTING_CORNSEEDS),
-	m_uiSeedsEggplant(m_uiSTARTING_EGGPLANTSEEDS),
-	m_uiSeedsPumpkin(m_uiSTARTING_PUMPKINSEEDS),
-	m_uiSeedsGernaium(0),
-	m_uiSeedsMarigold(0),
-	m_uiSeedsVine(0),
-	
-	m_uiHarvestCorn(m_uiSTARTING_CORNHARVEST),
-	m_uiHarvestEggplant(m_uiSTARTING_EGGPLANTHARVEST),
-	m_uiHarvestPumpkin(m_uiSTARTING_PUMPKINHARVEST),
-
-	m_uiHarvestSoldAmt(0),
-
-	m_uiCurrentDay(2),//1),
-	m_eEquipedItem(EQUIP_Hoe),
-	m_bVitaminStrength(true),
-	m_bAirConditioning(true),
-
-	m_uiDamageCost(0)
+	m_uiDAMAGE_SPIDER(25)
 {
+	Reset();
 }
 
 Values::~Values()
@@ -108,6 +86,32 @@ Values::~Values()
 {
 	HyAssert(sm_pInstance, "");
 	return sm_pInstance;
+}
+
+void Values::Reset()
+{
+	m_iSavings = m_uiSTARTING_MONEY;
+	m_fStamina = 1.0f;
+	
+	m_uiSeedsCorn = m_uiSTARTING_CORNSEEDS;
+	m_uiSeedsEggplant = m_uiSTARTING_EGGPLANTSEEDS;
+	m_uiSeedsPumpkin = m_uiSTARTING_PUMPKINSEEDS;
+	m_uiSeedsGernaium = 0;
+	m_uiSeedsMarigold = 0;
+	m_uiSeedsVine = 0;
+	
+	m_uiHarvestCorn = m_uiSTARTING_CORNHARVEST;
+	m_uiHarvestEggplant = m_uiSTARTING_EGGPLANTHARVEST;
+	m_uiHarvestPumpkin = m_uiSTARTING_PUMPKINHARVEST;
+
+	m_uiHarvestSoldAmt = 0;
+
+	m_uiCurrentDay = 1;
+	m_eEquipedItem = EQUIP_Hoe;
+	m_bVitaminStrength = true;
+	m_bAirConditioning = true;
+
+	m_uiDamageCost = 0;
 }
 
 void Values::Sync()

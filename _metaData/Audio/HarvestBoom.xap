@@ -17,8 +17,8 @@ Global Settings
     Header File = HarvestBoom.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 2830947185;
-    Last Modified High = 30702858;
+    Last Modified Low = 3734528253;
+    Last Modified High = 30705565;
 
     Category
     {
@@ -228,10 +228,10 @@ Wave Bank
     Compression Preset Name = <none>;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 3296979663;
-    PC Bank Last Modified High = 30702861;
-    Bank Last Revised Low = 3149654875;
-    Bank Last Revised High = 30702861;
+    PC Bank Last Modified Low = 2118947841;
+    PC Bank Last Modified High = 30705566;
+    Bank Last Revised Low = 2047021966;
+    Bank Last Revised High = 30705566;
 
     Wave
     {
@@ -512,9 +512,9 @@ Wave Bank
     Wave
     {
         Name = footstep_2;
-        File = C:\Users\Lappy486\Pictures\Harvest Boom\sfx\footstep_2.wav;
-        Build Settings Last Modified Low = 3659242261;
-        Build Settings Last Modified High = 30702849;
+        File = Raw\SFX\footstep_2.wav;
+        Build Settings Last Modified Low = 1912601536;
+        Build Settings Last Modified High = 30705566;
 
         Cache
         {
@@ -527,17 +527,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 871605087;
-            Last Modified High = 30702724;
+            Last Modified Low = 252152180;
+            Last Modified High = 30705566;
         }
     }
 
     Wave
     {
         Name = footstep_3;
-        File = C:\Users\Lappy486\Pictures\Harvest Boom\sfx\footstep_3.wav;
-        Build Settings Last Modified Low = 3659242261;
-        Build Settings Last Modified High = 30702849;
+        File = Raw\SFX\footstep_3.wav;
+        Build Settings Last Modified Low = 1995584639;
+        Build Settings Last Modified High = 30705566;
 
         Cache
         {
@@ -550,17 +550,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 870258692;
-            Last Modified High = 30702724;
+            Last Modified Low = 248833358;
+            Last Modified High = 30705566;
         }
     }
 
     Wave
     {
         Name = footstep_1;
-        File = C:\Users\Lappy486\Pictures\Harvest Boom\sfx\footstep_1.wav;
-        Build Settings Last Modified Low = 3659252233;
-        Build Settings Last Modified High = 30702849;
+        File = Raw\SFX\footstep_1.wav;
+        Build Settings Last Modified Low = 2047021966;
+        Build Settings Last Modified High = 30705566;
 
         Cache
         {
@@ -573,8 +573,8 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 871405712;
-            Last Modified High = 30702724;
+            Last Modified Low = 249062731;
+            Last Modified High = 30705566;
         }
     }
 
@@ -600,6 +600,167 @@ Wave Bank
             Last Modified High = 30702861;
         }
     }
+
+    Wave
+    {
+        Name = door_close;
+        File = Raw\SFX\door_close.wav;
+        Build Settings Last Modified Low = 1425144081;
+        Build Settings Last Modified High = 30705564;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 124;
+            Play Region Length = 114912;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1315582328;
+            Last Modified High = 30705564;
+        }
+    }
+
+    Wave
+    {
+        Name = door_open;
+        File = Raw\SFX\door_open.wav;
+        Build Settings Last Modified Low = 1425154057;
+        Build Settings Last Modified High = 30705564;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 124;
+            Play Region Length = 132300;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1318843825;
+            Last Modified High = 30705564;
+        }
+    }
+
+    Wave
+    {
+        Name = smallbug_cry_short;
+        File = Raw\SFX\smallbug_cry_short.wav;
+        Build Settings Last Modified Low = 1425154057;
+        Build Settings Last Modified High = 30705564;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 124;
+            Play Region Length = 25508;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1321127470;
+            Last Modified High = 30705564;
+        }
+    }
+
+    Wave
+    {
+        Name = bigbug_cry;
+        File = Raw\SFX\bigbug_cry.wav;
+        Build Settings Last Modified Low = 1425154057;
+        Build Settings Last Modified High = 30705564;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 124;
+            Play Region Length = 40404;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1311503213;
+            Last Modified High = 30705564;
+        }
+    }
+
+    Wave
+    {
+        Name = eat;
+        File = Raw\SFX\eat.wav;
+        Build Settings Last Modified Low = 2603621013;
+        Build Settings Last Modified High = 30705564;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 124;
+            Play Region Length = 124820;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 2497853113;
+            Last Modified High = 30705564;
+        }
+    }
+
+    Wave
+    {
+        Name = scribble_short;
+        File = Raw\SFX\scribble_short.wav;
+        Build Settings Last Modified Low = 2603621013;
+        Build Settings Last Modified High = 30705564;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 124;
+            Play Region Length = 135060;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 2497304582;
+            Last Modified High = 30705564;
+        }
+    }
+
+    Wave
+    {
+        Name = srcibble_long;
+        File = Raw\SFX\srcibble_long.wav;
+        Build Settings Last Modified Low = 2603621013;
+        Build Settings Last Modified High = 30705564;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 124;
+            Play Region Length = 606376;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 2497643657;
+            Last Modified High = 30705564;
+        }
+    }
 }
 
 Sound Bank
@@ -609,15 +770,15 @@ Sound Bank
     Windows File = ..\..\data\Sounds\basegame.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 1;
-    Bank Last Modified Low = 3955429900;
-    Bank Last Modified High = 30702861;
+    Bank Last Modified Low = 1520035841;
+    Bank Last Modified High = 30705566;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
     Sound
     {
         Name = Rooster_crowing;
-        Volume = -1200;
+        Volume = -2140;
         Pitch = 0;
         Priority = 0;
 
@@ -1367,6 +1528,335 @@ Sound Bank
         }
     }
 
+    Sound
+    {
+        Name = door_close;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = basegame;
+                    Bank Index = 0;
+                    Entry Name = door_close;
+                    Entry Index = 16;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = door_open;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = basegame;
+                    Bank Index = 0;
+                    Entry Name = door_open;
+                    Entry Index = 17;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = smallbug_cry_short;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = basegame;
+                    Bank Index = 0;
+                    Entry Name = smallbug_cry_short;
+                    Entry Index = 18;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = bigbug_cry;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = basegame;
+                    Bank Index = 0;
+                    Entry Name = bigbug_cry;
+                    Entry Index = 19;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = eat;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = basegame;
+                    Bank Index = 0;
+                    Entry Name = eat;
+                    Entry Index = 20;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = srcibble_long;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = basegame;
+                    Bank Index = 0;
+                    Entry Name = srcibble_long;
+                    Entry Index = 22;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = scribble_short;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = basegame;
+                    Bank Index = 0;
+                    Entry Name = scribble_short;
+                    Entry Index = 21;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
     Cue
     {
         Name = Rooster_crowing;
@@ -1646,6 +2136,146 @@ Sound Bank
         {
             Name = NIght Transition;
             Index = 15;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = door_close;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = door_close;
+            Index = 16;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = door_open;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = door_open;
+            Index = 17;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = smallbug_cry_short;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = smallbug_cry_short;
+            Index = 18;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = bigbug_cry;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = bigbug_cry;
+            Index = 19;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = eat;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = eat;
+            Index = 20;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = srcibble_long;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = srcibble_long;
+            Index = 21;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = scribble_short;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = scribble_short;
+            Index = 22;
             Weight Min = 0;
             Weight Max = 255;
         }

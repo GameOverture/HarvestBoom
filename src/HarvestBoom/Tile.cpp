@@ -2,6 +2,7 @@
 #include "Tile.h"
 #include "Plant.h"
 #include "Bug.h"
+#include "HarvestBoom.h"
 
 Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_eTileType(Unknown),
@@ -574,23 +575,64 @@ bool Tile::IncrementGrowing()
 
 void Tile::DamagePlant(Bug &bugRef)
 {
-	switch(bugRef.GetBugType())
+	if(m_pPlant == nullptr)
+		return;
+
+	switch(m_pPlant->GetPlantType())
 	{
-	case BUGTYPE_Beetle:
-		bugRef.OffsetHealth(-1.0f);
+	case PLANTTYPE_Corn:
+	case PLANTTYPE_Eggplant:
+	case PLANTTYPE_Pumpkin:
+		switch(bugRef.GetBugType())
+		{
+		case BUGTYPE_Beetle:	bugRef.OffsetStomach(0.5f);		break;
+		case BUGTYPE_Ant:		bugRef.OffsetStomach(0.25f);	break;
+		case BUGTYPE_Spider:	bugRef.OffsetStomach(0.1f);	break;
+		}
+
+		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_EAT);
+		
+		if(m_pPlant->IsFullyGrown())
+		{
+			m_ProgressBar.SetColor_Growing();
+			m_ProgressBar.SetPercent(50.0f);
+			m_pPlant->AnimSetState(PLANTSTATE_Growing);
+		}
+		else if(m_pPlant->IsPlanted())
+		{
+			if(m_ProgressBar.GetPercent() >= 50.0f)
+			{
+				m_ProgressBar.SetPercent(1.0f);
+				m_pPlant->AnimSetState(PLANTSTATE_Sprout);
+			}
+			else
+			{
+				delete m_pPlant;
+				m_pPlant = nullptr;
+			}
+		}
+		else
+		{
+			delete m_pPlant;
+			m_pPlant = nullptr;
+		}
 		break;
 
-	case BUGTYPE_Ant:
-		bugRef.OffsetHealth(-0.5f);
-		break;
+	case PLANTTYPE_Gernaium:
+	case PLANTTYPE_Marigold:
+	case PLANTTYPE_Vine:
+		switch(bugRef.GetBugType())
+		{
+		case BUGTYPE_Beetle:	bugRef.OffsetHealth(-0.5f);	break;
+		case BUGTYPE_Ant:		bugRef.OffsetHealth(-0.5f);	break;
+		case BUGTYPE_Spider:	bugRef.OffsetHealth(-0.25f);break;
+		}
 
-	case BUGTYPE_Spider:
-		bugRef.OffsetHealth(-0.25f);
+		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_USEHOE_3);
+
+		bugRef.StopEating();
 		break;
 	}
-
-	delete m_pPlant;
-	m_pPlant = nullptr;
 }
 
 bool Tile::IsPlantable(PlantType ePlantType, std::vector<Tile *> *pValidTiles /*= nullptr*/)

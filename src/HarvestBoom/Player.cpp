@@ -109,10 +109,11 @@ void Player::HandleInput(Tile *pPlayerTile)
 
 
 	// Shuffle crops around as passing through (and modify player velocity)
+	float fMaxClamp = 1.0f;
 	if(pPlayerTile && pPlayerTile->GetTileType() == Dirt && pPlayerTile->GetPlant())
 	{
 		float fRunNormalized = GetMagnitude() / Values::Get()->m_fPLAYER_MAXVELOCITY;
-		m_vVelocity *= 0.7f;
+		fMaxClamp = 0.25f;
 
 		if(pPlayerTile->GetPlant()->rot.IsTweening() == false && fRunNormalized != 0.0f)
 		{
@@ -130,6 +131,8 @@ void Player::HandleInput(Tile *pPlayerTile)
 		}
 	}
 
+	m_vVelocity.x = HyClamp(m_vVelocity.x, -fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY, fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY);
+	m_vVelocity.y = HyClamp(m_vVelocity.y, -fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY, fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY);
 
 	pos.Offset(m_vVelocity * Hy_UpdateStep());
 	float fMagnitude = GetMagnitude();
@@ -142,7 +145,7 @@ void Player::HandleInput(Tile *pPlayerTile)
 		m_Body.AnimSetState(0);
 
 	//m_DebugText.TextSet(std::to_string(fMagnitude));
-	m_DebugText.TextSet(std::to_string(m_iDisplayOrder));
+	//m_DebugText.TextSet(std::to_string(Hy_App().Window().GetCamera2d(0)->pos.Y()));
 }
 
 bool Player::DoAction(Tile &tileRef)

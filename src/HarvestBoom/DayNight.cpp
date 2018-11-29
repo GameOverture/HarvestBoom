@@ -29,6 +29,11 @@ DayNight::~DayNight()
 {
 }
 
+void DayNight::Reset()
+{
+	m_DayNight.alpha.Tween(0.0f, 2.5f);
+}
+
 float DayNight::GetTime()
 {
 	return m_fTime;
@@ -80,7 +85,7 @@ void DayNight::Start()
 		}
 		break;
 	case 1:	m_MainText.TextSet("Good Morning!");
-		//HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
+		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
 		break;
 	case 2:
 		m_MainText.TextSet("Get Set...");

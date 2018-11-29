@@ -25,6 +25,9 @@ class Bug : public HyEntityLeaf2d<HySprite2d>
 		BUGACTION_Eating
 	};
 	BugAction					m_eBugAction;
+
+	float						m_fStomach;
+	bool						m_bIsGoingHome;
 	
 public:
 	Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent);
@@ -36,6 +39,10 @@ public:
 	void OffsetHealth(float fOffset);
 	void SetHealth(float fHealth);
 
+	float GetStomach();
+	void OffsetStomach(float fOffset);
+	void SetStomach(float fStomach);
+
 	glm::ivec2 GetPos();
 	void SetPos(glm::ivec2 ptPos);
 	void SetPos(int32 iX, int32 iY);
@@ -43,6 +50,10 @@ public:
 	void InterruptWalkTo(float fDuration);
 	void WalkTo(int32 iX, int32 iY);
 	void Eat();
+
+	bool IsGoingHome();
+
+	void GoHome();
 
 	void BugUpdate();
 

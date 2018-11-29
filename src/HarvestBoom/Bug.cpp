@@ -3,13 +3,16 @@
 #include "Plant.h"
 #include "World.h"
 #include "Tile.h"
+#include "HarvestBoom.h"
 
 Bug::Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent) :
 	HyEntityLeaf2d<HySprite2d>("Game", "Bug", pParent),
 	m_eBUG_TYPE(eBugType),
 	m_WorldRef(worldRef),
 	m_fDeferTimer(0.0f),
-	m_eBugAction(BUGACTION_Nothing)
+	m_eBugAction(BUGACTION_Nothing),
+	m_fStomach(0.0f),
+	m_bIsGoingHome(false)
 {
 	m_Leaf.AnimSetState(m_eBUG_TYPE);
 }
@@ -37,6 +40,21 @@ void Bug::SetHealth(float fHealth)
 {
 	fHealth = HyClamp(fHealth, 0.0f, 1.0f);
 	SetTint(1.0f, fHealth, fHealth);
+}
+
+float Bug::GetStomach()
+{
+	return m_fStomach;
+}
+
+void Bug::OffsetStomach(float fOffset)
+{
+	SetStomach(GetStomach() + fOffset);
+}
+
+void Bug::SetStomach(float fStomach)
+{
+	m_fStomach = HyClamp(fStomach, 0.0f, 1.0f);
 }
 
 glm::ivec2 Bug::GetPos()
@@ -91,7 +109,24 @@ void Bug::WalkTo(int32 iX, int32 iY)
 
 void Bug::Eat()
 {
-	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Eating; }, 0.0f));
+	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Eating; HarvestBoom::GetSndBank()->Play(pThis->GetBugType() == BUGTYPE_Beetle ? XACT_CUE_BASEGAME_SMALLBUG_CRY_SHORT : XACT_CUE_BASEGAME_BIGBUG_CRY); }, 0.0f));
+}
+
+bool Bug::IsGoingHome()
+{
+	return m_bIsGoingHome;
+}
+
+void Bug::GoHome()
+{
+	StopEating();
+	m_DeferFuncDeque.clear();
+	m_fDeferTimer = 0.0f;
+	pos.StopTween();
+	float fDuration = glm::distance(glm::vec2(GetPos().x, GetPos().y), glm::vec2(m_WorldRef.GetTileWaypoint(0).x, m_WorldRef.GetTileWaypoint(0).y));
+	pos.Tween(m_WorldRef.GetPixelWaypoint(0).x, m_WorldRef.GetPixelWaypoint(0).y, fDuration, HyTween::Linear);
+
+	m_bIsGoingHome = true;
 }
 
 void Bug::BugUpdate()

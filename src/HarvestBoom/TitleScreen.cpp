@@ -13,13 +13,11 @@ TitleScreen::TitleScreen() :	HyEntity2d(nullptr),
 {
 	m_Panel.scale.Set(2.0f, 2.0f);
 
-	m_TitleText.TextSet(Hy_App().GameName());
 	m_TitleText.SetAsScaleBox(static_cast<float>(Hy_App().Window().GetWindowSize().x) - 50.0f, 100.0f, true);
 	m_TitleText.pos.Set(25.0f, Hy_App().Window().GetWindowSize().y - 150.0f);
 	m_TitleText.scale_pivot.Set(m_TitleText.TextGetBox().x * 0.5f, m_TitleText.TextGetBox().y * 0.5f);
 	m_TitleText.scale.Set(0.001f, 0.001f);
 
-	m_PlayText.TextSet("Start");
 	m_PlayText.pos.Set(Hy_App().Window().GetWindowSize().x * 0.5f, Hy_App().Window().GetWindowSize().y * 0.5f);
 	m_PlayText.pos.Offset(0.0f, 50.0f);
 	m_PlayText.SetEnabled(false);
@@ -51,10 +49,32 @@ TitleScreen::TitleScreen() :	HyEntity2d(nullptr),
 {
 }
 
-void TitleScreen::Start()
+void TitleScreen::Start(TitleScreenType eTitleType)
 {
+	if(eTitleType == TITLETYPE_Start)
+	{
+		m_TitleText.TextSet(Hy_App().GameName());
+		m_PlayText.TextSet("Start");
+		m_Panel.AnimSetState(0);
+
+		m_LegalText.alpha.Set(1.0f);
+		m_LegalBg.alpha.Set(0.4f);
+	}
+	else if(eTitleType == TITLETYPE_GameOver)
+	{
+		m_TitleText.TextSet("Bankruptcy");
+		m_PlayText.TextSet("Start Over");
+		m_Panel.AnimSetState(1);
+
+		m_LegalText.alpha.Set(0.0f);
+		m_LegalBg.alpha.Set(0.0f);
+	}
+
+	alpha.Tween(1.0f, 0.5f);
 	m_TitleText.scale.Set(0.001f, 0.001f);
 	m_TitleText.scale.Tween(1.0f, 1.0f, 2.0f, HyTween::BounceOut);
+
+	Values::Get()->Reset();
 }
 
 /*virtual*/ TitleScreenValue TitleScreen::GameUpdate() /*override*/

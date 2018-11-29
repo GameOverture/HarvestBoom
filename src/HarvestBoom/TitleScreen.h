@@ -17,7 +17,7 @@ public:
 	TitleScreen();
 	virtual ~TitleScreen();
 
-	void Start();
+	void Start(TitleScreenType eTitleType);
 	TitleScreenValue GameUpdate();
 };
 

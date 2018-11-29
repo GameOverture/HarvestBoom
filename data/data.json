@@ -13062,6 +13062,22 @@
                 "loop": false,
                 "name": "",
                 "reverse": false
+            },
+            {
+                "bounce": false,
+                "duration": 0.01600000075995922,
+                "frames": [
+                    {
+                        "checksum": 356388873,
+                        "duration": 0.01600000075995922,
+                        "id": 102,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    }
+                ],
+                "loop": false,
+                "name": "",
+                "reverse": false
             }
         ]
     }

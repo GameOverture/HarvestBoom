@@ -146,20 +146,29 @@ bool BugAttack::BugUpdate()
 			continue;
 		}
 
+		if((*iter)->GetStomach() == 1.0f)
+		{
+			if((*iter)->IsGoingHome() == false)
+				(*iter)->GoHome();
+			else if((*iter)->pos.IsTweening() == false)
+			{
+				delete (*iter);
+				iter = m_BugList.erase(iter);
+				continue;
+			}
+		}
+
 		// Check for bug collision
 		for(uint32 i = 0; i < static_cast<uint32>(m_BugList.size()); ++i)
 		{
-			if(m_BugList[i] == (*iter))
+			if(m_BugList[i] == (*iter) || (*iter)->IsGoingHome())
 				continue;
 
 			float fThisDist = glm::distance((*iter)->pos.Get(), m_WorldRef.GetDoorCenter());
 			float fTestDist = glm::distance(m_BugList[i]->pos.Get(), m_WorldRef.GetDoorCenter());
 
 			if(b2TestOverlap(m_BugList[i]->GetLeaf().GetWorldAABB(), (*iter)->GetLeaf().GetWorldAABB()) && fThisDist > fTestDist && (*iter)->IsWaiting() == false)
-			{
-
-				(*iter)->InterruptWalkTo(1.0f);
-			}
+				(*iter)->InterruptWalkTo(0.5f);
 		}
 
 		(*iter)->BugUpdate();

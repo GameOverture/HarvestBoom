@@ -35,6 +35,8 @@ public:
 	DayNight(Stamina &staminaRef, HousePanel &housePanelRef, HyEntity2d *pParent);
 	virtual ~DayNight();
 
+	void Reset();
+
 	float GetTime();
 	bool IsCycling();
 	bool IsNight();

@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Stamina.h"
 #include "Plant.h"
+#include "HarvestBoom.h"
 
 World::World(HyEntity2d *pParent) :
 	HyEntity2d(pParent),
@@ -190,11 +191,11 @@ void World::SetupNewDay()
 		SetRow("_________HHDHHH__________");
 		SetRow("_________________________");
 		SetRow("_________________________");
-		SetRow("_________++3+++__________");
+		SetRow("_________++4+++__________");
 		SetRow("_________++++++__________");
-		SetRow("_________++2+++__________");
+		SetRow("_________+3++++__________");
 		SetRow("_________++++++__________");
-		SetRow("_________++++++__________");
+		SetRow("_________++++2+__________");
 		SetRow("_________++++++__________");
 		SetRow("_________+1++++__________");
 		SetRow("_________++++++__________");
@@ -251,13 +252,16 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 
 		if(pPlayerTile->GetTileType() == HouseDoor)
 		{
-			housePanelRef.Show();
+			if(housePanelRef.Show())
+				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_DOOR_OPEN);
+
 			playerRef.SetEnabled(false);
 		}
 		else if(pPlayerTile->GetTileType() != HouseDoor)
 		{
 			if(housePanelRef.Hide())
 			{
+				HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_DOOR_CLOSE);
 				playerRef.SetEnabled(true);
 				Values::Get()->Sync();
 			}

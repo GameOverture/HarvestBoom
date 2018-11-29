@@ -34,6 +34,16 @@ Game *HarvestBoom::GetGame()
 	return m_pGame;
 }
 
+void HarvestBoom::SetTitleScreen(TitleScreenType eTitleType)
+{
+	m_pTitleScrn->Start(eTitleType);
+	m_Splash.SetEnabled(false);
+	HarvestBoom::GetSndBank()->Stop(XACT_CUE_BASEGAME_DAY_90SEC);
+	HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_WIN);
+	
+	m_eGameState = GAMESTATE_Title;
+}
+
 /*virtual*/ bool HarvestBoom::Initialize() /*override*/
 {
 	Window().CreateCamera2d();
@@ -73,11 +83,7 @@ Game *HarvestBoom::GetGame()
 	case GAMESTATE_Loading:
 		if(m_pTitleScrn->IsLoaded())
 		{
-			m_pTitleScrn->Start();
-			m_Splash.SetEnabled(false);
-			HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_WIN);
-
-			m_eGameState = GAMESTATE_Title;
+			SetTitleScreen(TITLETYPE_Start);
 		}
 		break;
 

@@ -36,6 +36,12 @@ enum TitleScreenValue
 	TITLE_Quit
 };
 
+enum TitleScreenType
+{
+	TITLETYPE_Start = 0,
+	TITLETYPE_GameOver
+};
+
 enum PlantState
 {
 	PLANTSTATE_Sprout = 0,

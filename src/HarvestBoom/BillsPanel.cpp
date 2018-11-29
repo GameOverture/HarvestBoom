@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "BillsPanel.h"
+#include "HarvestBoom.h"
 
 BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	IHy9Slice(glm::vec2(Hy_App().Window().GetWidth(), Hy_App().Window().GetHeight()), 10, pParent),
@@ -190,6 +191,7 @@ BillsPanel::~BillsPanel()
 
 	if(m_Savings.alpha.Get() == 0.0f)
 	{
+		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_SRCIBBLE_LONG);
 		m_Savings.alpha.Tween(1.0f, fFADEIN_DUR);
 		m_SavingsVal.alpha.Tween(1.0f, fFADEIN_DUR);
 	}
