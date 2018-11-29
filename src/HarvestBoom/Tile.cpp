@@ -90,6 +90,9 @@ void Tile::SetType(TileType eType)
 {
 	if(m_eTileType == eType)
 		return;
+
+	m_Grass.SetDisplayOrder(DISPLAYORDER_Ground);
+	m_Dirt.SetDisplayOrder(DISPLAYORDER_Ground);
 	
 	m_eTileType = eType;
 	switch(m_eTileType)
@@ -97,7 +100,7 @@ void Tile::SetType(TileType eType)
 	case Grass:
 		m_Dirt.SetEnabled(false);
 		m_TilledOverlay.SetEnabled(false);
-		m_Ground.SetEnabled(false);
+		
 		break;
 
 	case House:
@@ -124,6 +127,8 @@ void Tile::SetType(TileType eType)
 		break;
 	}
 
+	m_Ground.SetEnabled(false);
+
 	m_House.SetEnabled(false);
 }
 
@@ -142,37 +147,68 @@ void Tile::SetTileState()
 			m_Grass.AnimSetState(GRASS_East);
 
 		if(m_pNeighborNorthEast && m_pNeighborNorthEast->GetTileType() == Dirt &&
-		   m_pNeighborNorth && m_pNeighborNorth->GetTileType() == Grass &&
-		   m_pNeighborEast && m_pNeighborEast->GetTileType() == Grass)
+		   (m_pNeighborNorth == nullptr || m_pNeighborNorth->GetTileType() == Grass) &&
+		   (m_pNeighborEast == nullptr || m_pNeighborEast->GetTileType() == Grass))
 		{
 			m_Grass.AnimSetState(GRASS_SouthWest);
 		}
 
 		if(m_pNeighborSouthEast && m_pNeighborSouthEast->GetTileType() == Dirt &&
-		   m_pNeighborSouth && m_pNeighborSouth->GetTileType() == Grass &&
-		   m_pNeighborEast && m_pNeighborEast->GetTileType() == Grass)
+		   (m_pNeighborSouth == nullptr || m_pNeighborSouth->GetTileType() == Grass) &&
+		   (m_pNeighborEast == nullptr || m_pNeighborEast->GetTileType() == Grass))
 		{
 			m_Grass.AnimSetState(GRASS_NorthWest);
 		}
 
 		if(m_pNeighborSouthWest && m_pNeighborSouthWest->GetTileType() == Dirt &&
-		   m_pNeighborSouth && m_pNeighborSouth->GetTileType() == Grass &&
-		   m_pNeighborWest && m_pNeighborWest->GetTileType() == Grass)
+		   (m_pNeighborSouth == nullptr || m_pNeighborSouth->GetTileType() == Grass) &&
+		   (m_pNeighborWest == nullptr || m_pNeighborWest->GetTileType() == Grass))
 		{
 			m_Grass.AnimSetState(GRASS_NorthEast);
 		}
 
 		if(m_pNeighborNorthWest && m_pNeighborNorthWest->GetTileType() == Dirt &&
-		   m_pNeighborNorth && m_pNeighborNorth->GetTileType() == Grass &&
-		   m_pNeighborWest && m_pNeighborWest->GetTileType() == Grass)
+		   (m_pNeighborNorth == nullptr || m_pNeighborNorth->GetTileType() == Grass) &&
+		   (m_pNeighborWest == nullptr || m_pNeighborWest->GetTileType() == Grass))
 		{
 			m_Grass.AnimSetState(GRASS_SouthEast);
 		}
 
-		//GRASS_InnerCorner_NW,
-		//GRASS_InnerCorner_NE,
-		//GRASS_InnerCorner_SE,
-		//GRASS_InnerCorner_SW
+		if((m_pNeighborNorth == nullptr || m_pNeighborNorth->GetTileType() == Grass) &&
+		   (m_pNeighborNorthEast == nullptr || m_pNeighborNorthEast->GetTileType() == Grass) &&
+		   (m_pNeighborEast == nullptr || m_pNeighborEast->GetTileType() == Grass) &&
+		   m_pNeighborSouth && m_pNeighborSouth->GetTileType() == Dirt &&
+		   m_pNeighborWest && m_pNeighborWest->GetTileType() == Dirt)
+		{
+			m_Grass.AnimSetState(GRASS_InnerCorner_NE);
+		}
+		
+		if((m_pNeighborNorth == nullptr || m_pNeighborNorth->GetTileType() == Grass) &&
+		   (m_pNeighborNorthWest == nullptr || m_pNeighborNorthWest->GetTileType() == Grass) &&
+		   (m_pNeighborWest == nullptr || m_pNeighborWest->GetTileType() == Grass) &&
+		   m_pNeighborSouth && m_pNeighborSouth->GetTileType() == Dirt &&
+		   m_pNeighborEast && m_pNeighborEast->GetTileType() == Dirt)
+		{
+			m_Grass.AnimSetState(GRASS_InnerCorner_NW);
+		}
+		
+		if((m_pNeighborSouth == nullptr || m_pNeighborSouth->GetTileType() == Grass) &&
+		   (m_pNeighborSouthEast == nullptr || m_pNeighborSouthEast->GetTileType() == Grass) &&
+		   (m_pNeighborEast == nullptr || m_pNeighborEast->GetTileType() == Grass) &&
+		   m_pNeighborNorth && m_pNeighborNorth->GetTileType() == Dirt &&
+		   m_pNeighborWest && m_pNeighborWest->GetTileType() == Dirt)
+		{
+			m_Grass.AnimSetState(GRASS_InnerCorner_SE);
+		}
+		
+		if((m_pNeighborSouth == nullptr || m_pNeighborSouth->GetTileType() == Grass) &&
+		   (m_pNeighborSouthWest == nullptr || m_pNeighborSouthWest->GetTileType() == Grass) &&
+		   (m_pNeighborWest == nullptr || m_pNeighborWest->GetTileType() == Grass) &&
+		   m_pNeighborNorth && m_pNeighborNorth->GetTileType() == Dirt &&
+		   m_pNeighborEast && m_pNeighborEast->GetTileType() == Dirt)
+		{
+			m_Grass.AnimSetState(GRASS_InnerCorner_SW);
+		}
 
 		break;
 
@@ -400,14 +436,14 @@ bool Tile::IncrementProgress()
 
 						validTileList[i]->m_TilledOverlay.scale.Set(2.0f, 2.0f);
 						validTileList[i]->m_TilledOverlay.SetDisplayOrder(validTileList[i]->m_pNeighborNorth->m_TilledOverlay.GetDisplayOrder());
-						validTileList[i]->m_Dirt.SetDisplayOrder(validTileList[i]->m_pNeighborNorth->m_Dirt.GetDisplayOrder());
+						//validTileList[i]->m_Dirt.SetDisplayOrder(validTileList[i]->m_pNeighborNorth->m_Dirt.GetDisplayOrder());
 						validTileList[i]->m_SelectedRect.scale.Set(2.0f, 2.0f);
 					}
 					else
 					{
 						validTileList[i]->m_pPlant = validTileList[0]->m_pPlant;
 						validTileList[i]->m_TilledOverlay.SetEnabled(false);
-						validTileList[i]->m_Dirt.SetDisplayOrder(validTileList[0]->m_Dirt.GetDisplayOrder());
+						//validTileList[i]->m_Dirt.SetDisplayOrder(validTileList[0]->m_Dirt.GetDisplayOrder());
 						validTileList[i]->m_SelectedRect.alpha.Set(0.0f);
 					}
 				}
@@ -582,7 +618,7 @@ void Tile::DamagePlant(Bug &bugRef)
 	{
 	case PLANTTYPE_Corn:
 	case PLANTTYPE_Eggplant:
-	case PLANTTYPE_Pumpkin:
+	case PLANTTYPE_Pumpkin: {
 		switch(bugRef.GetBugType())
 		{
 		case BUGTYPE_Beetle:	bugRef.OffsetStomach(0.5f);		break;
@@ -592,6 +628,7 @@ void Tile::DamagePlant(Bug &bugRef)
 
 		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_EAT);
 		
+		bool bDeletePlant = false;
 		if(m_pPlant->IsFullyGrown())
 		{
 			m_ProgressBar.SetColor_Growing();
@@ -606,17 +643,78 @@ void Tile::DamagePlant(Bug &bugRef)
 				m_pPlant->AnimSetState(PLANTSTATE_Sprout);
 			}
 			else
-			{
-				delete m_pPlant;
-				m_pPlant = nullptr;
-			}
+				bDeletePlant = true;
 		}
 		else
+			bDeletePlant = true;
+
+		if(bDeletePlant)
 		{
+			if(m_pPlant->GetPlantType() == PLANTTYPE_Pumpkin)
+			{
+				if(m_pNeighborNorth->GetPlant() == m_pPlant)
+				{
+					m_pNeighborNorth->m_pPlant = nullptr;
+					m_pNeighborNorth->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborNorth->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborNorth->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+				if(m_pNeighborEast->GetPlant() == m_pPlant)
+				{
+					m_pNeighborEast->m_pPlant = nullptr;
+					m_pNeighborEast->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborEast->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborEast->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+				if(m_pNeighborSouth->GetPlant() == m_pPlant)
+				{
+					m_pNeighborSouth->m_pPlant = nullptr;
+					m_pNeighborSouth->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborSouth->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborSouth->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+				if(m_pNeighborWest->GetPlant() == m_pPlant)
+				{
+					m_pNeighborWest->m_pPlant = nullptr;
+					m_pNeighborWest->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborWest->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborWest->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+				if(m_pNeighborNorthWest->GetPlant() == m_pPlant)
+				{
+					m_pNeighborNorthWest->m_pPlant = nullptr;
+					m_pNeighborNorthWest->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborNorthWest->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborNorthWest->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+				if(m_pNeighborNorthEast->GetPlant() == m_pPlant)
+				{
+					m_pNeighborNorthEast->m_pPlant = nullptr;
+					m_pNeighborNorthEast->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborNorthEast->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborNorthEast->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+				if(m_pNeighborSouthWest->GetPlant() == m_pPlant)
+				{
+					m_pNeighborSouthWest->m_pPlant = nullptr;
+					m_pNeighborSouthWest->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborSouthWest->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborSouthWest->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+				if(m_pNeighborSouthEast->GetPlant() == m_pPlant)
+				{
+					m_pNeighborSouthEast->m_pPlant = nullptr;
+					m_pNeighborSouthEast->m_TilledOverlay.SetEnabled(true);
+					m_pNeighborSouthEast->m_TilledOverlay.scale.Set(1.0f, 1.0f);
+					m_pNeighborSouthEast->m_SelectedRect.scale.Set(1.0f, 1.0f);
+				}
+			}
+
 			delete m_pPlant;
 			m_pPlant = nullptr;
 		}
-		break;
+
+		break; }
 
 	case PLANTTYPE_Gernaium:
 	case PLANTTYPE_Marigold:

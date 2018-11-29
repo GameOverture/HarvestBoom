@@ -131,6 +131,9 @@ void Player::HandleInput(Tile *pPlayerTile)
 		}
 	}
 
+	if(Values::Get()->m_fStamina == 0.0f)
+		fMaxClamp = 0.25f;
+
 	m_vVelocity.x = HyClamp(m_vVelocity.x, -fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY, fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY);
 	m_vVelocity.y = HyClamp(m_vVelocity.y, -fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY, fMaxClamp * Values::Get()->m_fPLAYER_MAXVELOCITY);
 
@@ -151,7 +154,7 @@ void Player::HandleInput(Tile *pPlayerTile)
 bool Player::DoAction(Tile &tileRef)
 {
 	// Checks whether action is valid
-	if(tileRef.IncrementProgress())
+	if(Values::Get()->m_fStamina > 0.0f && tileRef.IncrementProgress())
 	{
 		ZeroVelocity();
 

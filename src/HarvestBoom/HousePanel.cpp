@@ -433,8 +433,8 @@ void HousePanel::Sync()
 
 	m_SavingsVal.TextSetState(1);
 	m_SavingsVal.TextSetAlignment(HYALIGN_Center);
-	m_SavingsVal.pos.Set(GetWidth(false) - GetWidth(false) * 0.5f, GetHeight(false) - 25.0f);
-	m_SavingsVal.SetAsScaleBox(GetWidth(false) * 0.5f, 25.0f);
+	m_SavingsVal.pos.Set(GetWidth(false) - GetWidth(false) * 0.5f, GetHeight(false) - 50.0f);
+	m_SavingsVal.SetAsScaleBox(GetWidth(false) * 0.5f, 50.0f);
 
 	const float fButtonSideMargin = 5.0f;
 	const float fButtonBotMargin = 35.0f;

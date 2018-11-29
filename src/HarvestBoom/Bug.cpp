@@ -10,6 +10,7 @@ Bug::Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent) :
 	m_eBUG_TYPE(eBugType),
 	m_WorldRef(worldRef),
 	m_fDeferTimer(0.0f),
+	m_bIsColliable(false),
 	m_eBugAction(BUGACTION_Nothing),
 	m_fStomach(0.0f),
 	m_bIsGoingHome(false)
@@ -107,9 +108,19 @@ void Bug::WalkTo(int32 iX, int32 iY)
 	m_ptVirtualPos = glm::vec2(iX, iY);
 }
 
+void Bug::EnableCollision()
+{
+	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_bIsColliable = true; }, 0.0f));
+}
+
 void Bug::Eat()
 {
 	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Eating; HarvestBoom::GetSndBank()->Play(pThis->GetBugType() == BUGTYPE_Beetle ? XACT_CUE_BASEGAME_SMALLBUG_CRY_SHORT : XACT_CUE_BASEGAME_BIGBUG_CRY); }, 0.0f));
+}
+
+bool Bug::IsColliable()
+{
+	return m_bIsColliable;
 }
 
 bool Bug::IsGoingHome()
@@ -167,11 +178,16 @@ void Bug::BugUpdate()
 		}
 	}
 
-	if(m_ptPrevPos != pos.Get())
+	if(m_ptPrevPos != pos.Get() && rot.IsTweening() == false)
 	{
 		glm::vec2 vOrientation = m_ptPrevPos - pos.Get();
 		vOrientation = glm::normalize(vOrientation);
-		rot.Set(glm::degrees(atan2(vOrientation.y, vOrientation.x)) + 90.0f);
+		float fNewOrientation = glm::degrees(atan2(vOrientation.y, vOrientation.x)) + 90.0f;
+
+		if(abs(fNewOrientation - rot.Get()) < 10.0f)
+			rot.Set(fNewOrientation);
+		else
+			rot.Tween(fNewOrientation, 0.4f, HyTween::QuadInOut);
 	}
 
 	m_ptPrevPos = pos.Get();

@@ -14,8 +14,8 @@ class Bug : public HyEntityLeaf2d<HySprite2d>
 	float						m_fDeferTimer;
 
 	glm::vec2					m_ptVirtualPos;
-
 	glm::vec2					m_ptPrevPos;
+	bool						m_bIsColliable;
 
 	enum BugAction
 	{
@@ -49,8 +49,10 @@ public:
 	void Wait(float fDuration);
 	void InterruptWalkTo(float fDuration);
 	void WalkTo(int32 iX, int32 iY);
+	void EnableCollision();
 	void Eat();
 
+	bool IsColliable();
 	bool IsGoingHome();
 
 	void GoHome();

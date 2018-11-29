@@ -58,6 +58,8 @@ public:
 	const uint32	m_uiBILLS_AC;
 
 	const uint32	m_uiSTARTING_MONEY;
+	const bool		m_bCAN_GO_BANKRUPT;
+
 	const uint32	m_uiSTARTING_CORNSEEDS;
 	const uint32	m_uiSTARTING_EGGPLANTSEEDS;
 	const uint32	m_uiSTARTING_PUMPKINSEEDS;

@@ -38,17 +38,33 @@ void BugAttack::Setup()
 
 	switch(Values::Get()->m_uiCurrentDay)
 	{
-	case 3:
+	case 2:
 		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
 		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
 		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, m_WorldRef, this));
 		break;
 
-	case 4:
+	case 3:
 		for(uint32 i = 0; i < 3; ++i)
 			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
 		for(uint32 i = 0; i < 2; ++i)
 			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, m_WorldRef, this));
+		break;
+
+	case 4:
+		for(uint32 i = 0; i < 5; ++i)
+			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
+		for(uint32 i = 0; i < 2; ++i)
+			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, m_WorldRef, this));
+		break;
+
+	case 5:
+		for(uint32 i = 0; i < 5; ++i)
+			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
+		for(uint32 i = 0; i < 3; ++i)
+			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, m_WorldRef, this));
+
+		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Spider, m_WorldRef, this));
 		break;
 	}
 
@@ -56,7 +72,7 @@ void BugAttack::Setup()
 	{
 		m_BugList[i]->Load();
 		m_BugList[i]->SetDisplayOrder(DISPLAYORDER_DebugGrid);
-		m_BugList[i]->SetPos(WORLD_WIDTH / 2, 0);
+		m_BugList[i]->SetPos((WORLD_WIDTH / 2) + (i * (i & 1 ? -1 : 1)), -2);
 		m_BugList[i]->WalkTo((WORLD_WIDTH / 2) + (i * (i & 1 ? -1 : 1)), 1);
 	}
 
@@ -99,7 +115,11 @@ void BugAttack::Setup()
 			}
 
 			for(uint32 j = 0; j < static_cast<uint32>(m_BugList.size()); ++j)
+			{
 				m_BugList[j]->WalkTo(m_WorldRef.GetTileWaypoint(i).x, m_WorldRef.GetTileWaypoint(i).y);
+				if(i == 1) // After first waypoint, enable collision
+					m_BugList[j]->EnableCollision();
+			}
 			
 			ptStartPos = m_WorldRef.GetPixelWaypoint(i);
 		}
@@ -161,7 +181,7 @@ bool BugAttack::BugUpdate()
 		// Check for bug collision
 		for(uint32 i = 0; i < static_cast<uint32>(m_BugList.size()); ++i)
 		{
-			if(m_BugList[i] == (*iter) || (*iter)->IsGoingHome())
+			if(m_BugList[i] == (*iter) || (*iter)->IsGoingHome() || (*iter)->IsColliable() == false)
 				continue;
 
 			float fThisDist = glm::distance((*iter)->pos.Get(), m_WorldRef.GetDoorCenter());

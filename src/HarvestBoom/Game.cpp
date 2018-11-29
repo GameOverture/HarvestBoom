@@ -132,13 +132,10 @@ void Game::GameUpdate()
 	case GAMESTATE_Bills:
 		if(m_BillsPanel.IsShown() == false && m_BillsPanel.IsTransition() == false)
 		{
-			if(Values::Get()->m_iSavings < 0)
-			{
+			if(Values::Get()->m_iSavings < 0 && Values::Get()->m_bCAN_GO_BANKRUPT)
 				m_eGameState = GAMESTATE_GameOver;
-			}
 			else
 			{
-				Values::Get()->m_uiCurrentDay++;
 				if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
 				{
 					m_DayNight.FadeToPitchBlack();
@@ -187,6 +184,8 @@ void Game::GameUpdate()
 	case GAMESTATE_Sleep:
 		if(m_DayNight.IsPitchBlack())
 		{
+			Values::Get()->m_uiCurrentDay++;
+
 			HarvestBoom::GetSndBank()->Stop(XACT_CUE_BASEGAME_FARM_ATTACK);
 			m_Stamina.Reset();
 

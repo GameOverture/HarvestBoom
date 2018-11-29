@@ -84,8 +84,8 @@ enum BugType
 #define DISPLAYORDER_TILE_House			5
 #define DISPLAYORDER_TILE_Tilled		4
 #define DISPLAYORDER_TILE_Dirt			3
-#define DISPLAYORDER_TILE_Grass			2
-#define DISPLAYORDER_TILE_Ground		1
 #define DISPLAYORDER_PerRow				20
+
+#define DISPLAYORDER_Ground				10
 
 #define PLAYER_STARTPOS 15, 10
