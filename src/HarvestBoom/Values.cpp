@@ -36,7 +36,7 @@ Values::Values() :
 	m_uiBILLS_AC(10),
 
 	m_uiSTARTING_MONEY(m_uiBILLS_RENT + m_uiBILLS_VITAMINS + (m_uiBILLS_AC / 2)),
-	m_bCAN_GO_BANKRUPT(true),
+	m_bCAN_GO_BANKRUPT(false),//true),
 
 	m_uiSTARTING_CORNSEEDS(5),
 	m_uiSTARTING_EGGPLANTSEEDS(3),

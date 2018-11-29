@@ -110,12 +110,12 @@ void Bug::WalkTo(int32 iX, int32 iY)
 
 void Bug::EnableCollision()
 {
-	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_bIsColliable = true; }, 0.0f));
+	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_bIsColliable = true; HarvestBoom::GetSndBank()->Play(pThis->GetBugType() == BUGTYPE_Beetle ? XACT_CUE_BASEGAME_SMALLBUG_CRY_SHORT : XACT_CUE_BASEGAME_BIGBUG_CRY); }, 0.0f));
 }
 
 void Bug::Eat()
 {
-	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Eating; HarvestBoom::GetSndBank()->Play(pThis->GetBugType() == BUGTYPE_Beetle ? XACT_CUE_BASEGAME_SMALLBUG_CRY_SHORT : XACT_CUE_BASEGAME_BIGBUG_CRY); }, 0.0f));
+	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Eating; }, 0.0f));
 }
 
 bool Bug::IsColliable()
@@ -157,7 +157,10 @@ void Bug::BugUpdate()
 		m_Leaf.AnimSetPause(false);
 
 		if(m_Leaf.rot.IsTweening() == false)
+		{
+			HarvestBoom::GetSndBank()->Play(GetBugType() == BUGTYPE_Beetle ? XACT_CUE_BASEGAME_SMALLBUG_CRY_SHORT : XACT_CUE_BASEGAME_BIGBUG_CRY);
 			m_Leaf.rot.Tween(-20.0f, 1.25f, HyTween::QuadOut, [this](IHyNode *) { m_Leaf.rot.Tween(3.0f, 0.25f, HyTween::QuadIn); TakeBite(); });
+		}
 	}
 	else
 	{

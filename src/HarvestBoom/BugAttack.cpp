@@ -111,6 +111,12 @@ void BugAttack::Setup()
 						m_BugList[k]->WalkTo(tilesOnPathList[j]->GetPos().x, tilesOnPathList[j]->GetPos().y);
 						m_BugList[k]->Eat();
 					}
+
+
+					// TODO: Check neighboring tiles for plants to eat?
+
+
+
 				}
 			}
 
