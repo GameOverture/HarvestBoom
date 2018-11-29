@@ -652,6 +652,10 @@ void Tile::DamagePlant(Bug &bugRef)
 		{
 			if(m_pPlant->GetPlantType() == PLANTTYPE_Pumpkin)
 			{
+				m_TilledOverlay.SetEnabled(true);
+				m_TilledOverlay.scale.Set(1.0f, 1.0f);
+				m_SelectedRect.scale.Set(1.0f, 1.0f);
+
 				if(m_pNeighborNorth->GetPlant() == m_pPlant)
 				{
 					m_pNeighborNorth->m_pPlant = nullptr;
