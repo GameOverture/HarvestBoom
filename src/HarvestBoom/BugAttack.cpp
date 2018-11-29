@@ -59,9 +59,9 @@ void BugAttack::Setup()
 		break;
 
 	case 5:
-		for(uint32 i = 0; i < 5; ++i)
+		for(uint32 i = 0; i < 7; ++i)
 			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Beetle, m_WorldRef, this));
-		for(uint32 i = 0; i < 3; ++i)
+		for(uint32 i = 0; i < 4; ++i)
 			m_BugList.push_back(HY_NEW Bug(BUGTYPE_Ant, m_WorldRef, this));
 
 		m_BugList.push_back(HY_NEW Bug(BUGTYPE_Spider, m_WorldRef, this));

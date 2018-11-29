@@ -163,12 +163,12 @@ void World::SetupNewDay()
 		SetRow("_________HHDHHH__________");
 		SetRow("_________________________");
 		SetRow("_________________________");
-		SetRow("__________+3++___________");
+		SetRow("__________+4++___________");
 		SetRow("__________++++___________");
 		SetRow("__________++++___________");
-		SetRow("__________++2+___________");
+		SetRow("__________++3+___________");
 		SetRow("___________++____________");
-		SetRow("___________++____________");
+		SetRow("___________2+____________");
 		SetRow("___________++____________");
 		SetRow("___________+1____________");
 		SetRow("_________________________");
@@ -191,12 +191,12 @@ void World::SetupNewDay()
 		SetRow("_________HHDHHH__________");
 		SetRow("_________________________");
 		SetRow("_________________________");
-		SetRow("__________+3+++__________");
-		SetRow("__________+++++__________");
+		SetRow("__________+++5+__________");
+		SetRow("__________+++4+__________");
 		SetRow("__________++++___________");
-		SetRow("__________++2+___________");
+		SetRow("__________+3++___________");
 		SetRow("___________+++___________");
-		SetRow("___________+++___________");
+		SetRow("___________++2___________");
 		SetRow("___________+++___________");
 		SetRow("___________+1+___________");
 		SetRow("_________________________");
@@ -254,8 +254,8 @@ void World::SetupNewDay()
 		SetRow("_______++++++4+++________");
 		SetRow("_________++++++++________");
 		SetRow("_________+3++++++________");
-		SetRow("_________++++2+++________");
 		SetRow("_________++++++++________");
+		SetRow("_________+2++++++________");
 		SetRow("_________++++1+__________");
 		SetRow("___________0_____________");
 		break;
@@ -301,8 +301,13 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 
 	if(pPlayerTile)
 	{
-		if(pPlayerTile->GetPlant() && playerRef.pos.Y() < pPlayerTile->pos.Y() + (TILE_SIZE * 0.5f))
-			playerRef.SetDisplayOrder(pPlayerTile->GetPlant()->GetDisplayOrder() + 1);
+		if(pPlayerTile->GetPlant())
+		{
+			if(playerRef.pos.Y() < pPlayerTile->pos.Y() + (TILE_SIZE * 0.5f))
+				playerRef.SetDisplayOrder(pPlayerTile->GetPlant()->GetDisplayOrder() + 1);
+			else
+				playerRef.SetDisplayOrder(pPlayerTile->GetPlant()->GetDisplayOrder() - 1);
+		}
 		else
 			playerRef.SetDisplayOrder(pPlayerTile->GetDisplayOrder() + DISPLAYORDER_TILE_SelectRect);
 
