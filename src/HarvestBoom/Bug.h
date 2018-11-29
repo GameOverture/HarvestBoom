@@ -10,20 +10,28 @@ class Bug : public HyEntityLeaf2d<HySprite2d>
 	World &						m_WorldRef;
 
 	typedef std::pair<std::function<void(Bug *pSelf)>, float> BugDeferFunc;
-	std::queue<BugDeferFunc>	m_DeferFuncQueue;
+	std::deque<BugDeferFunc>	m_DeferFuncDeque;
 	float						m_fDeferTimer;
 
 	glm::vec2					m_ptVirtualPos;
 
-	bool						m_bEating;
+	glm::vec2					m_ptPrevPos;
 
+	enum BugAction
+	{
+		BUGACTION_Nothing = 0,
+		BUGACTION_Waiting,
+		BUGACTION_Walking,
+		BUGACTION_Eating
+	};
+	BugAction					m_eBugAction;
+	
 public:
 	Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent);
 	virtual ~Bug();
 
 	BugType GetBugType() const;
 
-	bool IsIdle();
 	float GetHealth();
 	void OffsetHealth(float fOffset);
 	void SetHealth(float fHealth);
@@ -32,11 +40,13 @@ public:
 	void SetPos(glm::ivec2 ptPos);
 	void SetPos(int32 iX, int32 iY);
 	void Wait(float fDuration);
+	void InterruptWalkTo(float fDuration);
 	void WalkTo(int32 iX, int32 iY);
 	void Eat();
 
 	void BugUpdate();
 
+	bool IsWaiting();
 	bool IsEating();
 	void StopEating();
 

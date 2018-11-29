@@ -4,6 +4,8 @@
 #include "Tile.h"
 #include "HarvestBoom.h"
 
+#include <random>
+
 void AddUnique(std::vector<Tile *> &vectorRef, Tile *pTile)
 {
 	for(uint32 i = 0; i < static_cast<uint32>(vectorRef.size()); ++i)
@@ -57,6 +59,12 @@ void BugAttack::Setup()
 		m_BugList[i]->SetPos(WORLD_WIDTH / 2, 0);
 		m_BugList[i]->WalkTo((WORLD_WIDTH / 2) + (i * (i & 1 ? -1 : 1)), 1);
 	}
+
+	auto rng = std::default_random_engine {};
+	std::shuffle(m_BugList.begin(), m_BugList.end(), rng);
+
+	for(uint32 i = 0; i < static_cast<uint32>(m_BugList.size()); ++i)
+		m_BugList[i]->Wait(i * 2.5f);
 
 	if(m_WorldRef.GetNumWaypoints() > 0)
 	{
@@ -136,6 +144,22 @@ bool BugAttack::BugUpdate()
 			delete (*iter);
 			iter = m_BugList.erase(iter);
 			continue;
+		}
+
+		// Check for bug collision
+		for(uint32 i = 0; i < static_cast<uint32>(m_BugList.size()); ++i)
+		{
+			if(m_BugList[i] == (*iter))
+				continue;
+
+			float fThisDist = glm::distance((*iter)->pos.Get(), m_WorldRef.GetDoorCenter());
+			float fTestDist = glm::distance(m_BugList[i]->pos.Get(), m_WorldRef.GetDoorCenter());
+
+			if(b2TestOverlap(m_BugList[i]->GetLeaf().GetWorldAABB(), (*iter)->GetLeaf().GetWorldAABB()) && fThisDist > fTestDist && (*iter)->IsWaiting() == false)
+			{
+
+				(*iter)->InterruptWalkTo(1.0f);
+			}
 		}
 
 		(*iter)->BugUpdate();

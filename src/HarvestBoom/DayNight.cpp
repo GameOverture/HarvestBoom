@@ -80,7 +80,7 @@ void DayNight::Start()
 		}
 		break;
 	case 1:	m_MainText.TextSet("Good Morning!");
-		HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
+		//HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_ROOSTER_CROWING);
 		break;
 	case 2:
 		m_MainText.TextSet("Get Set...");

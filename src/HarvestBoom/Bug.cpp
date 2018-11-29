@@ -9,7 +9,7 @@ Bug::Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent) :
 	m_eBUG_TYPE(eBugType),
 	m_WorldRef(worldRef),
 	m_fDeferTimer(0.0f),
-	m_bEating(false)
+	m_eBugAction(BUGACTION_Nothing)
 {
 	m_Leaf.AnimSetState(m_eBUG_TYPE);
 }
@@ -21,11 +21,6 @@ Bug::~Bug()
 BugType Bug::GetBugType() const
 {
 	return m_eBUG_TYPE;
-}
-
-bool Bug::IsIdle()
-{
-	return m_DeferFuncQueue.empty() && m_bEating == false;
 }
 
 float Bug::GetHealth()
@@ -64,39 +59,53 @@ void Bug::SetPos(int32 iX, int32 iY)
 {
 	pos.Set(iX * TILE_SIZE, iY * TILE_SIZE);
 	m_ptVirtualPos = GetPos();
-	//m_DeferFuncQueue.push(BugDeferFunc([=](Bug *pThis) { pThis->pos.Set(iX * TILE_SIZE, iY * TILE_SIZE); }, 0.0f));
+	//m_DeferFuncDeque.push(BugDeferFunc([=](Bug *pThis) { pThis->pos.Set(iX * TILE_SIZE, iY * TILE_SIZE); }, 0.0f));
 }
 
 void Bug::Wait(float fDuration)
 {
-	m_DeferFuncQueue.push(BugDeferFunc([](Bug *pThis) {}, fDuration));
+	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Waiting; }, fDuration));
+}
+
+void Bug::InterruptWalkTo(float fDuration)
+{
+	if(m_eBugAction != BUGACTION_Walking)
+		return;
+	
+	float fRemainingDuration = pos.GetTweenRemainingDuration();
+	glm::vec2 ptTweenDest = pos.GetTweenDestination();
+	pos.StopTween();
+
+	m_DeferFuncDeque.push_front(BugDeferFunc([=](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Walking; pThis->pos.Tween(ptTweenDest.x, ptTweenDest.y, fDuration, HyTween::QuadInOut); }, fRemainingDuration));
+	m_DeferFuncDeque.push_front(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Waiting; }, fDuration));
+	m_fDeferTimer = 0.0f;
 }
 
 void Bug::WalkTo(int32 iX, int32 iY)
 {
 	float fDuration = glm::distance(m_ptVirtualPos, glm::vec2(iX, iY));
-	m_DeferFuncQueue.push(BugDeferFunc([=](Bug *pThis) { pThis->pos.Tween(iX * TILE_SIZE + (TILE_SIZE * 0.5f), iY * TILE_SIZE + (TILE_SIZE * 0.5f), fDuration, HyTween::QuadInOut); }, fDuration));
+	m_DeferFuncDeque.push_back(BugDeferFunc([=](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Walking; pThis->pos.Tween(iX * TILE_SIZE + (TILE_SIZE * 0.5f), iY * TILE_SIZE + (TILE_SIZE * 0.5f), fDuration, HyTween::QuadInOut); }, fDuration));
 
 	m_ptVirtualPos = glm::vec2(iX, iY);
 }
 
 void Bug::Eat()
 {
-	m_DeferFuncQueue.push(BugDeferFunc([](Bug *pThis) { pThis->m_bEating = true; }, 0.0f));
+	m_DeferFuncDeque.push_back(BugDeferFunc([](Bug *pThis) { pThis->m_eBugAction = BUGACTION_Eating; }, 0.0f));
 }
 
 void Bug::BugUpdate()
 {
 	m_fDeferTimer = HyMax(m_fDeferTimer - Hy_UpdateStep(), 0.0f);
-	if(m_bEating == false && m_fDeferTimer == 0.0f && m_DeferFuncQueue.empty() == false)
+	if(m_eBugAction != BUGACTION_Eating && m_fDeferTimer == 0.0f && m_DeferFuncDeque.empty() == false)
 	{
-		m_fDeferTimer = m_DeferFuncQueue.front().second;
-		m_DeferFuncQueue.front().first(this);
+		m_fDeferTimer = m_DeferFuncDeque.front().second;
+		m_DeferFuncDeque.front().first(this);
 
-		m_DeferFuncQueue.pop();
+		m_DeferFuncDeque.pop_front();
 	}
 
-	if(m_bEating)
+	if(m_eBugAction == BUGACTION_Eating)
 	{
 		m_Leaf.AnimSetPlayRate(5.0f);
 		m_Leaf.AnimSetPause(false);
@@ -122,16 +131,30 @@ void Bug::BugUpdate()
 			m_Leaf.AnimSetPause(true);
 		}
 	}
+
+	if(m_ptPrevPos != pos.Get())
+	{
+		glm::vec2 vOrientation = m_ptPrevPos - pos.Get();
+		vOrientation = glm::normalize(vOrientation);
+		rot.Set(glm::degrees(atan2(vOrientation.y, vOrientation.x)) + 90.0f);
+	}
+
+	m_ptPrevPos = pos.Get();
+}
+
+bool Bug::IsWaiting()
+{
+	return m_eBugAction == BUGACTION_Waiting;
 }
 
 bool Bug::IsEating()
 {
-	return m_bEating;
+	return m_eBugAction == BUGACTION_Eating;
 }
 
 void Bug::StopEating()
 {
-	m_bEating = false;
+	m_eBugAction = BUGACTION_Nothing;
 }
 
 void Bug::TakeBite()

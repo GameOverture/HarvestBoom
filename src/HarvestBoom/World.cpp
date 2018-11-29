@@ -5,11 +5,13 @@
 #include "Stamina.h"
 #include "Plant.h"
 
-World::World(HyEntity2d *pParent) :	HyEntity2d(pParent),
-									m_uiSetRowCurrentIndex(0),
-									m_DebugCollidePt1(nullptr),
-									m_DebugCollidePt2(nullptr),
-									m_DebugCollideNormal(nullptr)
+World::World(HyEntity2d *pParent) :
+	HyEntity2d(pParent),
+	m_uiSetRowCurrentIndex(0),
+	m_pDoorTile(nullptr),
+	m_DebugCollidePt1(nullptr),
+	m_DebugCollidePt2(nullptr),
+	m_DebugCollideNormal(nullptr)
 {
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
@@ -85,6 +87,14 @@ Tile *World::FindTile(glm::vec2 ptWorldCoordinate)
 		return m_pTileGrid[iX][iY];
 
 	return nullptr;
+}
+
+glm::vec2 World::GetDoorCenter()
+{
+	if(m_pDoorTile == nullptr)
+		return glm::vec2();
+
+	return glm::vec2(m_pDoorTile->pos.X() + (TILE_SIZE * 0.5f), m_pDoorTile->pos.Y() + (TILE_SIZE * 0.5f));
 }
 
 uint32 World::GetNumWaypoints()
@@ -330,6 +340,7 @@ void World::SetRow(std::string sRow)
 		case 'D':
 			m_PheromoneWaypointList.push_back(std::pair<uint32, Tile *>(10, m_pTileGrid[i][m_uiSetRowCurrentIndex]));
 			m_pTileGrid[i][m_uiSetRowCurrentIndex]->SetType(HouseDoor);
+			m_pDoorTile = m_pTileGrid[i][m_uiSetRowCurrentIndex];
 			break;
 
 		case '0':

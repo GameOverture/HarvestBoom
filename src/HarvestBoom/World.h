@@ -18,6 +18,8 @@ class World : public HyEntity2d
 	typedef std::pair<uint32, Tile *> PheromoneWaypoint;
 	std::vector<PheromoneWaypoint>	m_PheromoneWaypointList;
 
+	Tile *							m_pDoorTile;
+
 	HyPrimitive2d	m_DebugCollidePt1;
 	HyPrimitive2d	m_DebugCollidePt2;
 	HyPrimitive2d	m_DebugCollideNormal;
@@ -28,6 +30,8 @@ public:
 
 	Tile *GetTile(uint32 uiX, uint32 uiY);
 	Tile *FindTile(glm::vec2 ptWorldCoordinate);
+
+	glm::vec2 GetDoorCenter();
 
 	uint32 GetNumWaypoints();
 	glm::ivec2 GetTileWaypoint(uint32 uiIndex);
