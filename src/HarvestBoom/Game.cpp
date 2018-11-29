@@ -202,6 +202,11 @@ void Game::GameUpdate()
 	case GAMESTATE_GameOver:
 		static_cast<HarvestBoom &>(Hy_App()).SetTitleScreen(TITLETYPE_GameOver);
 		m_fElapsedTime = 0.0f;
+
+		Values::Get()->Reset();
+		m_World.Reset();
+		m_World.SetupNewDay();
+
 		m_eGameState = GAMESTATE_Init;
 		break;
 	}

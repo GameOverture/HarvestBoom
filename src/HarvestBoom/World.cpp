@@ -17,31 +17,10 @@ World::World(HyEntity2d *pParent) :
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-		{
-			m_pTileGrid[i][j] = HY_NEW Tile(this);
-			m_pTileGrid[i][j]->pos.Set(i * TILE_SIZE, j * TILE_SIZE);
-			m_pTileGrid[i][j]->SetDisplayOrder((WORLD_HEIGHT - j) * DISPLAYORDER_PerRow);
-		}
+			m_pTileGrid[i][j] = nullptr;
 	}
 
-	// Setting up each Tiles' neighbor
-	for(int32 i = 0; i < WORLD_WIDTH; ++i)
-	{
-		for(int32 j = 0; j < WORLD_HEIGHT; ++j)
-		{
-			Tile *pNorth = (j + 1) < WORLD_HEIGHT ?	m_pTileGrid[i][j+1] : nullptr;
-			Tile *pEast  = (i + 1) < WORLD_WIDTH ?	m_pTileGrid[i+1][j] : nullptr;
-			Tile *pSouth = (j - 1) >= 0 ?			m_pTileGrid[i][j-1] : nullptr;
-			Tile *pWest  = (i - 1) >= 0 ?			m_pTileGrid[i-1][j] : nullptr;
-
-			Tile *pNorthEast = ((i+1) < WORLD_WIDTH	&& (j+1) < WORLD_HEIGHT)	?	m_pTileGrid[i+1][j+1] : nullptr;
-			Tile *pSouthEast = ((i+1) < WORLD_WIDTH	&& (j-1) >= 0)			?	m_pTileGrid[i+1][j-1] : nullptr;
-			Tile *pSouthWest = ((i-1) >= 0			&& (j-1) >= 0)			?	m_pTileGrid[i-1][j-1] : nullptr;
-			Tile *pNorthWest = ((i-1) >= 0			&& (j+1) < WORLD_HEIGHT)	?	m_pTileGrid[i-1][j+1] : nullptr;
-
-			m_pTileGrid[i][j]->SetNeighbors(pNorth, pEast, pSouth, pWest, pNorthEast, pSouthEast, pSouthWest, pNorthWest);
-		}
-	}
+	Reset();
 
 	m_DebugCollidePt1.GetShape().SetAsCircle(2.0f);
 	m_DebugCollidePt1.topColor.Set(1.0f, 0.0f, 1.0f);
@@ -387,6 +366,39 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 
 	float fRunNormalized = playerRef.GetMagnitude() / Values::Get()->m_fPLAYER_MAXVELOCITY;
 	staminaRef.Offset((Values::Get()->m_fSTAMINA_RUN * fRunNormalized) * -Hy_UpdateStep());
+}
+
+void World::Reset()
+{
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+		{
+			delete m_pTileGrid[i][j];
+			m_pTileGrid[i][j] = HY_NEW Tile(this);
+			m_pTileGrid[i][j]->pos.Set(i * TILE_SIZE, j * TILE_SIZE);
+			m_pTileGrid[i][j]->SetDisplayOrder((WORLD_HEIGHT - j) * DISPLAYORDER_PerRow);
+		}
+	}
+
+	// Setting up each Tiles' neighbor
+	for(int32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(int32 j = 0; j < WORLD_HEIGHT; ++j)
+		{
+			Tile *pNorth = (j + 1) < WORLD_HEIGHT ?	m_pTileGrid[i][j+1] : nullptr;
+			Tile *pEast  = (i + 1) < WORLD_WIDTH ?	m_pTileGrid[i+1][j] : nullptr;
+			Tile *pSouth = (j - 1) >= 0 ?			m_pTileGrid[i][j-1] : nullptr;
+			Tile *pWest  = (i - 1) >= 0 ?			m_pTileGrid[i-1][j] : nullptr;
+
+			Tile *pNorthEast = ((i+1) < WORLD_WIDTH	&& (j+1) < WORLD_HEIGHT)	?	m_pTileGrid[i+1][j+1] : nullptr;
+			Tile *pSouthEast = ((i+1) < WORLD_WIDTH	&& (j-1) >= 0)			?	m_pTileGrid[i+1][j-1] : nullptr;
+			Tile *pSouthWest = ((i-1) >= 0			&& (j-1) >= 0)			?	m_pTileGrid[i-1][j-1] : nullptr;
+			Tile *pNorthWest = ((i-1) >= 0			&& (j+1) < WORLD_HEIGHT)	?	m_pTileGrid[i-1][j+1] : nullptr;
+
+			m_pTileGrid[i][j]->SetNeighbors(pNorth, pEast, pSouth, pWest, pNorthEast, pSouthEast, pSouthWest, pNorthWest);
+		}
+	}
 }
 
 void World::SetRow(std::string sRow)

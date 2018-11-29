@@ -11,7 +11,7 @@ Values::Values() :
 	m_fSTAMINA_RUN(0.01f),
 	m_fSTAMINA_ACTION(0.02f),
 	m_fSTAMINA_AC(0.025f),
-	m_fSTAMINA_NO_VITAMIN_PENALTY(1.0f),	// Actions take X% more stamina
+	m_fSTAMINA_NO_VITAMIN_PENALTY(2.0f),	// Actions take X% more stamina
 	m_fSTAMINA_EATCORNMODIFIER(0.2f),
 	m_fSTAMINA_EATEGGPLANTMODIFIER(0.4f),
 	m_fSTAMINA_EATPUMPKINMODIFIER(1.0f),

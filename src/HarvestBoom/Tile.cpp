@@ -37,6 +37,7 @@ Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 
 Tile::~Tile()
 {
+	delete m_pPlant;
 }
 
 glm::ivec2 Tile::GetPos()

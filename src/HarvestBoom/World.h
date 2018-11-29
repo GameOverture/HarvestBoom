@@ -42,6 +42,8 @@ public:
 	void CleanupTiles();
 	void UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &housePanelRef);
 
+	void Reset();
+
 private:
 	void SetRow(std::string sRow);
 
