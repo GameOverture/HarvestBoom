@@ -325,8 +325,17 @@ void BillsPanel::Sync()
 	}
 	else
 	{
-		m_TotalVal.TextSetLayerColor(0, 1, 1.0f, 1.0f, 1.0f);
-		m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
-		m_ContinueBtn.GetPanelPtr()->SetTint(1.0f, 1.0f, 1.0f);
+		if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiNUM_DAYS_TO_WIN)
+		{
+			m_TotalVal.TextSetLayerColor(0, 1, 1.0f, 1.0f, 1.0f);
+			m_ContinueBtn.GetTextPtr()->TextSet("Sleep");
+			m_ContinueBtn.GetPanelPtr()->SetTint(1.0f, 1.0f, 1.0f);
+		}
+		else
+		{
+			m_TotalVal.TextSetLayerColor(0, 1, 1.0f, 1.0f, 1.0f);
+			m_ContinueBtn.GetTextPtr()->TextSet("Win Game!");
+			m_ContinueBtn.GetPanelPtr()->SetTint(0.0f, 1.0f, 0.0f);
+		}
 	}
 }

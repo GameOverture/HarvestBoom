@@ -92,6 +92,7 @@ void HarvestBoom::SetTitleScreen(TitleScreenType eTitleType)
 		{
 		case TITLE_Play:
 			m_pTitleScrn->alpha.Tween(0.0f, 1.0f);
+			m_pGame->SetupNewDay();
 			m_eGameState = GAMESTATE_Game;
 			break;
 

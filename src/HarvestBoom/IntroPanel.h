@@ -14,4 +14,6 @@ public:
 	virtual void OnShown() override;
 	virtual float OnHide() override;
 	virtual void OnHidden() override;
+
+	bool IntroUpdate();
 };

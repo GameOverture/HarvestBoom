@@ -69,6 +69,7 @@ public:
 	const uint32	m_uiSTARTING_PUMPKINHARVEST;
 
 	const float		m_fDAY_LENGTH;
+	const uint32	m_uiNUM_DAYS_TO_WIN;
 
 	const float		m_fDURATION_HOEDIRT;
 	const float		m_fDURATION_PLANTCORN;

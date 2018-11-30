@@ -14,7 +14,7 @@ IntroPanel::IntroPanel(HyEntity2d *pParent) :
 	m_BodyText.pos.Set(20.0f, GetHeight(false) - 128.0f);
 	m_BodyText.TextSetState(1);
 	m_BodyText.SetAsColumn(GetWidth(false) - 40.0f);
-	m_BodyText.TextSet("You're a single tasking farming extraordinaire. With the grass in the front yard strangely receding away, you decide to exploit the situation and grow some crops to pay the bills.\n\nYou got all the tools to get started, so let's get to it!");
+	
 
 	GetFill().alpha.Set(0.5f);
 	SetDisplayOrder(DISPLAYORDER_Panel);
@@ -26,6 +26,9 @@ IntroPanel::~IntroPanel()
 
 /*virtual*/ float IntroPanel::OnShow() /*override*/
 {
+	m_BodyText.TextSet("You're a single tasking farming extraordinaire. With the grass in the front yard strangely receding away more each day, you decide to exploit the situation and harvest some crops to pay the bills.\n\nYou got all the tools to get started, so let's get to it!");
+	m_BodyText.TextSetAlignment(HYALIGN_Left);
+
 	pos.Set(-GetWidth(true), 20.0f);
 	pos.Tween(20.0f, 20.0f, 1.0f, HyTween::QuadOut);
 	return 1.0f;
@@ -45,3 +48,20 @@ IntroPanel::~IntroPanel()
 {
 }
 
+
+bool IntroPanel::IntroUpdate()
+{
+	if(Hy_App().Input().IsActionReleased(UseEquip))
+	{
+		if(m_BodyText.GetTag() == 0)
+		{
+			m_BodyText.SetTag(1);
+			//m_BodyText.TextSetAlignment(HYALIGN_Center);
+			m_BodyText.TextSet("WASD = move\n\nSpacebar = use equiped item\n\nGo into your house to manage items.\n\nBe sure to save enough money to pay your bills each day! Survive for 7 days.");
+		}
+		else
+			return true;
+	}
+
+	return false;
+}

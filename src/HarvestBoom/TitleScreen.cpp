@@ -63,11 +63,17 @@ void TitleScreen::Start(TitleScreenType eTitleType)
 	else if(eTitleType == TITLETYPE_GameOver)
 	{
 		m_TitleText.TextSet("Bankruptcy");
-		m_PlayText.TextSet("Start Over");
+		m_PlayText.TextSet("Restart (not working)");
 		m_Panel.AnimSetState(1);
 
 		m_LegalText.alpha.Set(0.0f);
 		m_LegalBg.alpha.Set(0.0f);
+	}
+	else if(eTitleType == TITLETYPE_WinGame)
+	{
+		m_TitleText.TextSet("You Win");
+		m_PlayText.TextSet("Restart (not working)");
+		m_Panel.AnimSetState(2);
 	}
 
 	alpha.Tween(1.0f, 0.5f);

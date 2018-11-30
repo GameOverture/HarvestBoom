@@ -305,7 +305,7 @@ void HousePanel::Sync()
 		m_BtnGernaiumBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
-	if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
+	if(true)//Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
 	{
 		m_BtnGernaiumEquip.SetTint(HIDDEN_BUTTON_TINT);
 		m_BtnGernaiumEquip.GetTextPtr()->SetEnabled(false);
@@ -354,7 +354,7 @@ void HousePanel::Sync()
 		m_BtnMarigoldBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
-	if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
+	if(true)//Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
 	{
 		m_BtnMarigoldEquip.SetTint(HIDDEN_BUTTON_TINT);
 		m_BtnMarigoldEquip.GetTextPtr()->SetEnabled(false);
@@ -403,7 +403,7 @@ void HousePanel::Sync()
 		m_BtnVineBuy.GetPanelPtr()->AnimSetState(HYBUTTONSTATE_Disabled);
 	}
 
-	if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
+	if(true)//Values::Get()->m_uiCurrentDay < Values::Get()->m_uiENABLE_DEFENSE_DAY)
 	{
 		m_BtnVineEquip.SetTint(HIDDEN_BUTTON_TINT);
 		m_BtnVineEquip.GetTextPtr()->SetEnabled(false);

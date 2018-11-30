@@ -12,18 +12,11 @@ InfoPanel::InfoPanel(const char *szPanelPrefix,
 					 HyEntity2d *pParent) :	HyEntity2d(pParent),
 											m_pPanel(szPanelName != nullptr ? HY_NEW HySprite2d(szPanelPrefix, szPanelName, this) : nullptr),
 											m_pText(szTextName != nullptr ? HY_NEW HyText2d(szTextPrefix, szTextName, this) : nullptr)
-#ifdef DEV_QUICKMODE
-											, m_pDebugTextBox(infoPanelInitRef.text_LoadPath.IsUsed() ? HY_NEW HyPrimitive2d(this) : nullptr)
-#endif
 {
 	if(m_pText)
 	{
 		m_pText->TextSetAlignment(HYALIGN_Center);
 		SetTextLocation(iTextOffsetX, iTextOffsetY, iTextDimensionsX, iTextDimensionsY);
-
-#ifdef DEV_QUICKMODE
-		m_pDebugTextBox->SetTint(1.0f, 0.0f, 0.0f);
-#endif
 	}
 
 	UseWindowCoordinates();
@@ -33,9 +26,6 @@ InfoPanel::~InfoPanel()
 {
 	delete m_pPanel;
 	delete m_pText;
-#ifdef DEV_QUICKMODE
-	delete m_pDebugTextBox;
-#endif
 }
 
 HySprite2d *InfoPanel::GetPanelPtr()
@@ -110,15 +100,6 @@ float InfoPanel::GetPanelHeight()
 	
 	m_pText->pos.Set(m_vTextOffset.x + vPanelOffset.x, m_vTextOffset.y + vPanelOffset.y);
 	m_pText->SetAsScaleBox(static_cast<float>(iWidth), static_cast<float>(iHeight), true);
-
-#ifdef DEV_QUICKMODE
-	if(m_pDebugTextBox)
-	{
-		m_pDebugTextBox->pos.Set(m_pText->pos);
-		m_pDebugTextBox->SetWireframe(true);
-		m_pDebugTextBox->GetShape().SetAsBox(m_pText->TextGetBox().x, m_pText->TextGetBox().y);
-	}
-#endif
 }
 
 /*virtual*/ void InfoPanel::SetTextAlignment(HyTextAlign eAlignment)

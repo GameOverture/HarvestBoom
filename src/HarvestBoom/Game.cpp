@@ -16,8 +16,6 @@ Game::Game() :
 	m_eGameState(GAMESTATE_Init),
 	m_fElapsedTime(0.0f)
 {
-	m_World.SetupNewDay();
-	
 	m_DebugGrid.GetText().pos.Set(Hy_App().Window().GetWindowSize().x - 25, Hy_App().Window().GetWindowSize().y - 25);
 	m_DebugGrid.SetEnabled(false);
 	m_DebugGrid.SetDisplayOrder(DISPLAYORDER_DebugGrid);
@@ -43,6 +41,12 @@ void Game::Sync()
 	m_BillsPanel.Sync();
 }
 
+void Game::SetupNewDay()
+{
+	//m_World.Reset();
+	m_World.SetupNewDay();
+}
+
 void Game::GameUpdate()
 {
 	HyCamera2d *pCam = Hy_App().Window().GetCamera2d(0);
@@ -50,9 +54,6 @@ void Game::GameUpdate()
 	switch(m_eGameState)
 	{
 	case GAMESTATE_Init:
-#ifdef DEV_QUICKMODE
-		m_eGameState = GAMESTATE_IntroHide;
-#else
 		m_fElapsedTime += Hy_UpdateStep();
 		if(m_fElapsedTime > 1.0f)
 		{
@@ -64,13 +65,12 @@ void Game::GameUpdate()
 
 			m_eGameState = GAMESTATE_Intro;
 		}
-#endif
 		break;
 
 	case GAMESTATE_Intro:
 		if(m_IntroPanel.IsTransition() == false)
 		{
-			if(Hy_App().Input().IsActionReleased(UseEquip))
+			if(m_IntroPanel.IntroUpdate())
 			{
 				LtGAudioManager::GetInstance()->FadeMusicOut(1.0f);
 				
@@ -141,12 +141,14 @@ void Game::GameUpdate()
 					m_DayNight.FadeToPitchBlack();
 					m_eGameState = GAMESTATE_Sleep;
 				}
-				else
+				else if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiNUM_DAYS_TO_WIN)
 				{
 					HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_FARM_ATTACK);
 					pCam->pos.Tween(TILE_SIZE * 12 * 2, TILE_SIZE * 6 * 2, 5.0f, HyTween::QuadInOut);
 					m_eGameState = GAMESTATE_BugCameraPan;
 				}
+				else
+					m_eGameState = GAMESTATE_WinGame;
 			}
 		}
 		break;
@@ -202,11 +204,12 @@ void Game::GameUpdate()
 	case GAMESTATE_GameOver:
 		static_cast<HarvestBoom &>(Hy_App()).SetTitleScreen(TITLETYPE_GameOver);
 		m_fElapsedTime = 0.0f;
+		m_eGameState = GAMESTATE_Init;
+		break;
 
-		Values::Get()->Reset();
-		m_World.Reset();
-		m_World.SetupNewDay();
-
+	case GAMESTATE_WinGame:
+		static_cast<HarvestBoom &>(Hy_App()).SetTitleScreen(TITLETYPE_WinGame);
+		m_fElapsedTime = 0.0f;
 		m_eGameState = GAMESTATE_Init;
 		break;
 	}

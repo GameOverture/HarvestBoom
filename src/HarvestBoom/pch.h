@@ -4,8 +4,6 @@
 #include "Audio/LtGAudioCues.h"
 #include "Values.h"
 
-//#define DEV_QUICKMODE
-
 #define TILE_SIZE 21.0f
 
 enum Controls
@@ -39,7 +37,8 @@ enum TitleScreenValue
 enum TitleScreenType
 {
 	TITLETYPE_Start = 0,
-	TITLETYPE_GameOver
+	TITLETYPE_GameOver,
+	TITLETYPE_WinGame
 };
 
 enum PlantState

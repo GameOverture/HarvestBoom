@@ -34,7 +34,8 @@ class Game : public HyEntity2d
 		GAMESTATE_BugCameraPan,
 		GAMESTATE_Bugs,
 		GAMESTATE_Sleep,
-		GAMESTATE_GameOver
+		GAMESTATE_GameOver,
+		GAMESTATE_WinGame
 	};
 	GameState				m_eGameState;
 	float					m_fElapsedTime;
@@ -45,6 +46,7 @@ public:
 
 	void Sync();
 
+	void SetupNewDay();
 	void GameUpdate();
 	void DebugUpdate();
 };

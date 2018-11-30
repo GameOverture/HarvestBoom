@@ -238,6 +238,35 @@ void World::SetupNewDay()
 		SetRow("_________++++1+__________");
 		SetRow("___________0_____________");
 		break;
+
+	case 6:
+	case 7:
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHHHHH__________");
+		SetRow("_________HHDHHH__________");
+		SetRow("_________________________");
+		SetRow("_________________________");
+		SetRow("_______+8++++++++________");
+		SetRow("_______+++++++7++________");
+		SetRow("_______+6++++++++________");
+		SetRow("_______+++++++5++________");
+		SetRow("_______++++++++++________");
+		SetRow("_______+++++++4++________");
+		SetRow("_______+3++++++++________");
+		SetRow("_______++++++++++________");
+		SetRow("_______+++++++2++________");
+		SetRow("_______++1+++++++________");
+		SetRow("___________0_____________");
+		break;
 	}
 
 	std::sort(m_PheromoneWaypointList.begin(), m_PheromoneWaypointList.end(), &PheromoneWaypointSortPredicate);
@@ -373,8 +402,13 @@ void World::Reset()
 	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
-		{
 			delete m_pTileGrid[i][j];
+	}
+
+	for(uint32 i = 0; i < WORLD_WIDTH; ++i)
+	{
+		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
+		{
 			m_pTileGrid[i][j] = HY_NEW Tile(this);
 			m_pTileGrid[i][j]->pos.Set(i * TILE_SIZE, j * TILE_SIZE);
 			m_pTileGrid[i][j]->SetDisplayOrder((WORLD_HEIGHT - j) * DISPLAYORDER_PerRow);

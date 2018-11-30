@@ -46,6 +46,7 @@ Values::Values() :
 	m_uiSTARTING_PUMPKINHARVEST(0),
 
 	m_fDAY_LENGTH(90.0f),
+	m_uiNUM_DAYS_TO_WIN(7),
 
 	m_fDURATION_HOEDIRT(5.0f),
 	m_fDURATION_PLANTCORN(2.0f),

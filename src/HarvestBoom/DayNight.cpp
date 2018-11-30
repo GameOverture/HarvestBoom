@@ -77,7 +77,10 @@ void DayNight::Start()
 	case 0:
 		{
 			std::string sText = "Day ";
-			sText += std::to_string(Values::Get()->m_uiCurrentDay);
+			if(Values::Get()->m_uiCurrentDay < Values::Get()->m_uiNUM_DAYS_TO_WIN)
+				sText += std::to_string(Values::Get()->m_uiCurrentDay);
+			else
+				sText = "Last Day";
 
 			m_MainText.TextSet(sText);
 			m_DayNight.alpha.Tween(0.0f, 2.5f);

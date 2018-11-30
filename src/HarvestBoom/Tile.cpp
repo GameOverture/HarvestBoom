@@ -37,7 +37,7 @@ Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 
 Tile::~Tile()
 {
-	delete m_pPlant;
+	//delete m_pPlant; TODO: leaking this for now. Pumpkins will cause a crash
 }
 
 glm::ivec2 Tile::GetPos()
