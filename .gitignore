@@ -5,7 +5,7 @@ GuiDebug/
 Release/
 GuiRelease/
 ipch/
-build-HyEditor-*/
+builds/
 .vs/
 GeneratedFiles/
 

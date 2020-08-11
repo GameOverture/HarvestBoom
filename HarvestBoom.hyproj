@@ -1,4 +1,5 @@
 {
+    "$fileVersion": 3,
     "ClassName": "HarvestBoom",
     "ConsoleInfo": {
         "LocationX": 0,
@@ -8,21 +9,21 @@
         "ResolutionY": 80,
         "Type": 3
     },
-    "DataPath": "data/",
+    "DataPath": "./data/",
     "DebugPort": 1313,
     "GameName": "Harvest Boom",
-    "MetaDataPath": "_metaData/",
+    "MetaDataPath": "./_metaData/",
     "NumInputMappings": 1,
     "PixelsPerMeter": 80,
     "ShowCursor": true,
-    "SourcePath": "src/",
+    "SourcePath": "./src/",
     "UpdateFpsCap": 0,
     "UseConsole": true,
     "WindowInfoArray": [
         {
             "LocationX": 100,
             "LocationY": 100,
-            "Name": "Harvest Boom!",
+            "Name": "Harvest Boom Deluxe",
             "ResolutionX": 640,
             "ResolutionY": 480,
             "Type": 0

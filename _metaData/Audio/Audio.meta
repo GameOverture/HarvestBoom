@@ -1,0 +1,26 @@
+{
+    "$fileVersion": 3,
+    "assets": [
+    ],
+    "banks": [
+        {
+            "bankId": 0,
+            "bankName": "Default",
+            "chkAutosize": true,
+            "chkMerge": true,
+            "chkSquare": true,
+            "cmbHeuristic": 1,
+            "cmbSortOrder": 0,
+            "extrude": 1,
+            "maxHeight": 2048,
+            "maxWidth": 2048,
+            "minFillRate": 80,
+            "sbFrameMarginBottom": 1,
+            "sbFrameMarginLeft": 0,
+            "sbFrameMarginRight": 1,
+            "sbFrameMarginTop": 0,
+            "textureFormat": "R8G8B8A8"
+        }
+    ],
+    "nextBankId": 1
+}
