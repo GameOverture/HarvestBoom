@@ -21,12 +21,12 @@
     "UseConsole": true,
     "WindowInfoArray": [
         {
-            "LocationX": 100,
+            "LocationX": -1550,
             "LocationY": 100,
             "Name": "Harvest Boom Deluxe",
             "ResolutionX": 640,
             "ResolutionY": 480,
-            "Type": 0
+            "Type": 3
         }
     ]
 }
