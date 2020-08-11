@@ -16,8 +16,8 @@
             "name": "+SystemText",
             "textureIndex": 0,
             "width": 222,
-            "x": 228,
-            "y": 290
+            "x": 453,
+            "y": 425
         },
         {
             "assetUUID": "51ecd141-297b-4ae7-9b6a-032e4f2e6b7a",
@@ -34,7 +34,7 @@
             "name": "ButtonSmall",
             "textureIndex": 0,
             "width": 83,
-            "x": 852,
+            "x": 678,
             "y": 486
         },
         {
@@ -52,8 +52,8 @@
             "name": "grasscorner_SouthEast",
             "textureIndex": 0,
             "width": 21,
-            "x": 321,
-            "y": 515
+            "x": 678,
+            "y": 524
         },
         {
             "assetUUID": "d44f8365-3d73-4a8b-86c4-2e3a572ad76c",
@@ -70,8 +70,8 @@
             "name": "openingscreen",
             "textureIndex": 0,
             "width": 321,
-            "x": 700,
-            "y": 243
+            "x": 609,
+            "y": 0
         },
         {
             "assetUUID": "d59562f1-577e-475b-a096-a15d24f5d434",
@@ -88,8 +88,8 @@
             "name": "corn_growing",
             "textureIndex": 0,
             "width": 21,
-            "x": 920,
-            "y": 524
+            "x": 261,
+            "y": 542
         },
         {
             "assetUUID": "9238e20a-36a5-41a8-85f9-31396324fdf8",
@@ -106,8 +106,8 @@
             "name": "marigoldsproutshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 105,
-            "y": 534
+            "x": 63,
+            "y": 526
         },
         {
             "assetUUID": "6b48b206-25bf-469c-ab27-1af3214e6380",
@@ -124,8 +124,8 @@
             "name": "marigoldgrownshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 800,
-            "y": 524
+            "x": 976,
+            "y": 522
         },
         {
             "assetUUID": "b8a34634-17f1-4029-9907-fbe2b7ebb645",
@@ -160,8 +160,8 @@
             "name": "ButtonSquare",
             "textureIndex": 0,
             "width": 83,
-            "x": 86,
-            "y": 461
+            "x": 2,
+            "y": 290
         },
         {
             "assetUUID": "012e3706-f440-449b-bbb3-39f75fe34976",
@@ -178,8 +178,8 @@
             "name": "GameOver",
             "textureIndex": 0,
             "width": 321,
-            "x": 285,
-            "y": 7
+            "x": 700,
+            "y": 243
         },
         {
             "assetUUID": "0fd8a18e-676d-42eb-bcf6-9850bf7a9242",
@@ -214,8 +214,8 @@
             "name": "gernaiumgrownshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 896,
-            "y": 524
+            "x": 90,
+            "y": 510
         },
         {
             "assetUUID": "cb5ba8f5-7f01-4ac2-984b-b26937b709ae",
@@ -232,8 +232,8 @@
             "name": "grass",
             "textureIndex": 0,
             "width": 21,
-            "x": 824,
-            "y": 524
+            "x": 357,
+            "y": 526
         },
         {
             "assetUUID": "c50ee17e-1aab-43b7-a30a-24e71e3f76e3",
@@ -250,8 +250,8 @@
             "name": "DayNight",
             "textureIndex": 0,
             "width": 42,
-            "x": 14,
-            "y": 380
+            "x": 172,
+            "y": 467
         },
         {
             "assetUUID": "ab94ca5f-66e3-4d77-936f-7bf03d20fd37",
@@ -268,8 +268,8 @@
             "name": "gernaiumsprout",
             "textureIndex": 0,
             "width": 21,
-            "x": 390,
-            "y": 539
+            "x": 227,
+            "y": 548
         },
         {
             "assetUUID": "8d309f52-9247-4dc1-9442-36d2039a8fa1",
@@ -286,8 +286,8 @@
             "name": "farmer2",
             "textureIndex": 0,
             "width": 21,
-            "x": 489,
-            "y": 512
+            "x": 43,
+            "y": 509
         },
         {
             "assetUUID": "8ef0857a-4c48-460c-a374-2806c452fc57",
@@ -322,8 +322,8 @@
             "name": "vinesgrownb",
             "textureIndex": 0,
             "width": 42,
-            "x": 172,
-            "y": 504
+            "x": 86,
+            "y": 488
         },
         {
             "assetUUID": "f098d3f1-6528-461a-aca1-c0d0ab07d75a",
@@ -340,8 +340,8 @@
             "name": "pumpkinsproutshadow",
             "textureIndex": 0,
             "width": 42,
-            "x": 12,
-            "y": 290
+            "x": 172,
+            "y": 422
         },
         {
             "assetUUID": "2a0e8616-a551-4fda-bdd7-80ff128461bd",
@@ -358,8 +358,8 @@
             "name": "ButtonSquareDisabled",
             "textureIndex": 0,
             "width": 83,
-            "x": 938,
-            "y": 486
+            "x": 86,
+            "y": 377
         },
         {
             "assetUUID": "9037e13d-c3b2-4f1c-8491-a0c677e05c5a",
@@ -376,8 +376,8 @@
             "name": "pumpkingrowingshadow",
             "textureIndex": 0,
             "width": 42,
-            "x": 12,
-            "y": 335
+            "x": 172,
+            "y": 377
         },
         {
             "assetUUID": "44309317-1147-4bad-8860-0d88d9096161",
@@ -394,7 +394,7 @@
             "name": "cornharvestshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 776,
+            "x": 702,
             "y": 524
         },
         {
@@ -430,8 +430,8 @@
             "name": "cornharvest",
             "textureIndex": 0,
             "width": 21,
-            "x": 408,
-            "y": 539
+            "x": 245,
+            "y": 548
         },
         {
             "assetUUID": "d06844f0-6ce7-4e38-8f4d-bf20b789ee78",
@@ -448,8 +448,8 @@
             "name": "marigoldgrowingshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 81,
-            "y": 534
+            "x": 309,
+            "y": 526
         },
         {
             "assetUUID": "937847c5-c603-4c8e-bc70-22118055228b",
@@ -466,8 +466,8 @@
             "name": "pumpkinsprout",
             "textureIndex": 0,
             "width": 42,
-            "x": 34,
-            "y": 534
+            "x": 238,
+            "y": 526
         },
         {
             "assetUUID": "435c9a5a-471e-4645-accf-5e60f3287e18",
@@ -485,7 +485,7 @@
             "textureIndex": 0,
             "width": 83,
             "x": 0,
-            "y": 461
+            "y": 436
         },
         {
             "assetUUID": "661e2888-9699-4d3b-9248-0e8c054185f9",
@@ -502,8 +502,8 @@
             "name": "beetle",
             "textureIndex": 0,
             "width": 21,
-            "x": 596,
-            "y": 534
+            "x": 678,
+            "y": 464
         },
         {
             "assetUUID": "6ee7e3a3-42a3-4269-845e-2b2475477709",
@@ -520,8 +520,8 @@
             "name": "pumpkinharvest",
             "textureIndex": 0,
             "width": 42,
-            "x": 595,
-            "y": 498
+            "x": 934,
+            "y": 486
         },
         {
             "assetUUID": "930c6d20-029c-41e4-9b05-39f09a43fd8d",
@@ -556,8 +556,8 @@
             "name": "eggplantgrowingshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 680,
-            "y": 524
+            "x": 186,
+            "y": 510
         },
         {
             "assetUUID": "a2c76d87-2b5e-4df3-8f81-be46595dd8e6",
@@ -574,8 +574,8 @@
             "name": "vinesgrown",
             "textureIndex": 0,
             "width": 42,
-            "x": 552,
-            "y": 512
+            "x": 129,
+            "y": 488
         },
         {
             "assetUUID": "40b0b063-9dc6-401b-8095-94eac2d1b729",
@@ -592,8 +592,8 @@
             "name": "ButtonSquareBlue",
             "textureIndex": 0,
             "width": 83,
-            "x": 582,
-            "y": 425
+            "x": 0,
+            "y": 363
         },
         {
             "assetUUID": "51c78e10-46f7-46ca-a275-9cf8d501fb53",
@@ -628,7 +628,7 @@
             "name": "marigoldgrown",
             "textureIndex": 0,
             "width": 21,
-            "x": 618,
+            "x": 175,
             "y": 534
         },
         {
@@ -646,8 +646,8 @@
             "name": "corngrowingshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 177,
-            "y": 526
+            "x": 162,
+            "y": 510
         },
         {
             "assetUUID": "cbf11f4d-85fe-4ff2-954d-51c55e112654",
@@ -700,8 +700,8 @@
             "name": "tilled",
             "textureIndex": 0,
             "width": 21,
-            "x": 273,
-            "y": 515
+            "x": 381,
+            "y": 526
         },
         {
             "assetUUID": "9bc91ff0-afff-4b9b-96ad-2697711c70d9",
@@ -718,8 +718,8 @@
             "name": "eggplantgrowing",
             "textureIndex": 0,
             "width": 21,
-            "x": 443,
-            "y": 539
+            "x": 153,
+            "y": 534
         },
         {
             "assetUUID": "087e0b20-0d14-432e-ae9d-f14c6172d305",
@@ -754,8 +754,8 @@
             "name": "eggplantharvestshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 153,
-            "y": 534
+            "x": 333,
+            "y": 526
         },
         {
             "assetUUID": "5c2dc7b8-960b-48a5-b7ed-81d922bd2c33",
@@ -772,8 +772,8 @@
             "name": "WinScreen",
             "textureIndex": 0,
             "width": 321,
-            "x": 609,
-            "y": 0
+            "x": 285,
+            "y": 7
         },
         {
             "assetUUID": "6df9ed92-dd7c-4188-ab4c-4bf8c21ac2f0",
@@ -808,7 +808,7 @@
             "name": "eggplantharvest",
             "textureIndex": 0,
             "width": 21,
-            "x": 552,
+            "x": 87,
             "y": 534
         },
         {
@@ -826,8 +826,8 @@
             "name": "ButtonSmallDisabled",
             "textureIndex": 0,
             "width": 83,
-            "x": 766,
-            "y": 486
+            "x": 86,
+            "y": 450
         },
         {
             "assetUUID": "8517dcdc-24a6-486e-bc4a-15a8a121c9c8",
@@ -844,8 +844,8 @@
             "name": "vinesrpoutshadow",
             "textureIndex": 0,
             "width": 42,
-            "x": 979,
-            "y": 199
+            "x": 371,
+            "y": 250
         },
         {
             "assetUUID": "03815d6d-8a77-4c48-8f50-f819e3e89e20",
@@ -862,8 +862,8 @@
             "name": "vinesgrownshadow",
             "textureIndex": 0,
             "width": 42,
-            "x": 371,
-            "y": 250
+            "x": 979,
+            "y": 199
         },
         {
             "assetUUID": "c5de2e1e-064a-41a5-bca9-e3626b9e45a1",
@@ -898,8 +898,8 @@
             "name": "spiderscorpion1",
             "textureIndex": 0,
             "width": 42,
-            "x": 638,
-            "y": 498
+            "x": 850,
+            "y": 486
         },
         {
             "assetUUID": "d843720b-fb2f-4fb0-bd15-e6e7643d6296",
@@ -916,8 +916,8 @@
             "name": "Ant2",
             "textureIndex": 0,
             "width": 21,
-            "x": 530,
-            "y": 512
+            "x": 0,
+            "y": 509
         },
         {
             "assetUUID": "ebf5e5b5-5367-4f13-8f38-5186336b09ba",
@@ -934,8 +934,8 @@
             "name": "grassside",
             "textureIndex": 0,
             "width": 21,
-            "x": 129,
-            "y": 534
+            "x": 405,
+            "y": 526
         },
         {
             "assetUUID": "74ba5060-caf4-452a-a51d-f1ceca7d176e",
@@ -952,8 +952,8 @@
             "name": "pumpkingrowing",
             "textureIndex": 0,
             "width": 42,
-            "x": 14,
-            "y": 423
+            "x": 977,
+            "y": 486
         },
         {
             "assetUUID": "04177bf2-7add-4c49-b752-dbf16be316f8",
@@ -970,8 +970,8 @@
             "name": "sythe",
             "textureIndex": 0,
             "width": 23,
-            "x": 57,
-            "y": 534
+            "x": 261,
+            "y": 526
         },
         {
             "assetUUID": "1de92050-da2e-4062-9332-3263cddb4f62",
@@ -988,7 +988,7 @@
             "name": "grasscorner",
             "textureIndex": 0,
             "width": 21,
-            "x": 848,
+            "x": 774,
             "y": 524
         },
         {
@@ -1006,8 +1006,8 @@
             "name": "gernaiumsproutshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 441,
-            "y": 515
+            "x": 750,
+            "y": 524
         },
         {
             "assetUUID": "cb257580-a421-4487-a6c9-980af5f22193",
@@ -1042,8 +1042,8 @@
             "name": "hoe",
             "textureIndex": 0,
             "width": 26,
-            "x": 668,
-            "y": 464
+            "x": 63,
+            "y": 510
         },
         {
             "assetUUID": "80334389-362d-418c-a5c9-31d12e822c43",
@@ -1060,8 +1060,8 @@
             "name": "grassinnercorner_SouthEast",
             "textureIndex": 0,
             "width": 21,
-            "x": 704,
-            "y": 524
+            "x": 429,
+            "y": 526
         },
         {
             "assetUUID": "0a438810-9b61-454a-be83-d0fe54642a0c",
@@ -1078,8 +1078,8 @@
             "name": "spiderscorpion2",
             "textureIndex": 0,
             "width": 42,
-            "x": 172,
-            "y": 461
+            "x": 892,
+            "y": 486
         },
         {
             "assetUUID": "caad80ef-bbc6-450c-961b-752850f1ea48",
@@ -1096,8 +1096,8 @@
             "name": "House",
             "textureIndex": 0,
             "width": 126,
-            "x": 453,
-            "y": 425
+            "x": 88,
+            "y": 290
         },
         {
             "assetUUID": "3f256f77-b4c8-4815-9f5a-0f305b321a74",
@@ -1114,8 +1114,8 @@
             "name": "grassside_West",
             "textureIndex": 0,
             "width": 21,
-            "x": 225,
-            "y": 515
+            "x": 918,
+            "y": 529
         },
         {
             "assetUUID": "1f536bac-a2b6-44a6-ba65-5fe91deb4c9e",
@@ -1132,8 +1132,8 @@
             "name": "grassside_South",
             "textureIndex": 0,
             "width": 21,
-            "x": 417,
-            "y": 515
+            "x": 846,
+            "y": 529
         },
         {
             "assetUUID": "146824ca-8674-4cea-8609-1c5538dc1c74",
@@ -1150,8 +1150,8 @@
             "name": "soil",
             "textureIndex": 0,
             "width": 21,
-            "x": 201,
-            "y": 526
+            "x": 726,
+            "y": 524
         },
         {
             "assetUUID": "3ab53dfd-3790-4e0b-a1de-11a310468cd9",
@@ -1168,8 +1168,8 @@
             "name": "marigoldgrowing",
             "textureIndex": 0,
             "width": 21,
-            "x": 424,
-            "y": 539
+            "x": 194,
+            "y": 534
         },
         {
             "assetUUID": "52613403-7c11-445b-aa68-d65402459b78",
@@ -1186,8 +1186,8 @@
             "name": "grassside_East",
             "textureIndex": 0,
             "width": 21,
-            "x": 297,
-            "y": 515
+            "x": 894,
+            "y": 529
         },
         {
             "assetUUID": "7b26fb03-7a88-450d-b386-e50bd96cdc33",
@@ -1204,8 +1204,8 @@
             "name": "ButtonSmallBlue",
             "textureIndex": 0,
             "width": 83,
-            "x": 680,
-            "y": 486
+            "x": 285,
+            "y": 250
         },
         {
             "assetUUID": "28b6a6e3-a293-4186-be78-dec05d864fc5",
@@ -1222,8 +1222,8 @@
             "name": "gernaiumgrowingshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 728,
-            "y": 524
+            "x": 138,
+            "y": 510
         },
         {
             "assetUUID": "03a30aad-46f6-4f11-8b46-3bb154369f6b",
@@ -1240,8 +1240,8 @@
             "name": "eggplantspoutshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 369,
-            "y": 515
+            "x": 285,
+            "y": 526
         },
         {
             "assetUUID": "884997a9-0e59-41ed-bf89-0daeeb0e1066",
@@ -1258,7 +1258,7 @@
             "name": "beetle2",
             "textureIndex": 0,
             "width": 21,
-            "x": 574,
+            "x": 131,
             "y": 534
         },
         {
@@ -1276,8 +1276,8 @@
             "name": "cornspoutshadow",
             "textureIndex": 0,
             "width": 21,
-            "x": 249,
-            "y": 515
+            "x": 822,
+            "y": 524
         },
         {
             "assetUUID": "a706affb-b13c-470b-9046-a18da9eb5694",
@@ -1294,8 +1294,8 @@
             "name": "gernaiumgrown",
             "textureIndex": 0,
             "width": 21,
-            "x": 465,
-            "y": 536
+            "x": 109,
+            "y": 534
         },
         {
             "assetUUID": "a37be86d-d1a5-4a3b-b818-c2c92881e82b",
@@ -1312,8 +1312,8 @@
             "name": "gernaiumgrowing",
             "textureIndex": 0,
             "width": 21,
-            "x": 12,
-            "y": 534
+            "x": 216,
+            "y": 526
         },
         {
             "assetUUID": "6582a9b6-ef54-49b4-a5a5-87fb200ff86e",
@@ -1330,8 +1330,8 @@
             "name": "grassinnercorner_NorthWest",
             "textureIndex": 0,
             "width": 21,
-            "x": 345,
-            "y": 515
+            "x": 114,
+            "y": 510
         },
         {
             "assetUUID": "17882e4e-13e3-46f9-8b75-627782a2b327",
@@ -1348,8 +1348,8 @@
             "name": "grassinnercorner_NorthEast",
             "textureIndex": 0,
             "width": 21,
-            "x": 465,
-            "y": 512
+            "x": 870,
+            "y": 529
         },
         {
             "assetUUID": "a7219e08-bf54-4fe2-a146-710e7b176b9e",
@@ -1366,8 +1366,8 @@
             "name": "grasscorner_NorthEast",
             "textureIndex": 0,
             "width": 21,
-            "x": 393,
-            "y": 515
+            "x": 798,
+            "y": 524
         },
         {
             "assetUUID": "6f7234d5-6a93-4075-8207-3c39805bd2a3",
@@ -1384,8 +1384,8 @@
             "name": "ButtonSmallLit",
             "textureIndex": 0,
             "width": 83,
-            "x": 285,
-            "y": 250
+            "x": 764,
+            "y": 486
         },
         {
             "assetUUID": "df8b749e-c97a-4406-98df-2516548247fa",
@@ -1402,8 +1402,8 @@
             "name": "grasscorner_SouthWest",
             "textureIndex": 0,
             "width": 21,
-            "x": 752,
-            "y": 524
+            "x": 1000,
+            "y": 522
         },
         {
             "assetUUID": "8b3dfe5d-d0f5-4a54-8e3e-4121a9051ad8",
@@ -1420,8 +1420,8 @@
             "name": "farmer4",
             "textureIndex": 0,
             "width": 21,
-            "x": 509,
-            "y": 512
+            "x": 22,
+            "y": 509
         },
         {
             "assetUUID": "319010c4-2214-4ddf-9c4a-e5a90c6bfadd",
@@ -1438,8 +1438,8 @@
             "name": "grassinnercorner_SouthWest",
             "textureIndex": 0,
             "width": 21,
-            "x": 872,
-            "y": 524
+            "x": 952,
+            "y": 522
         },
         {
             "assetUUID": "a4878c75-eb99-446d-8c5c-0695f799e153",
@@ -1456,7 +1456,7 @@
             "name": "farmer1",
             "textureIndex": 0,
             "width": 21,
-            "x": 668,
+            "x": 678,
             "y": 425
         },
         {
@@ -1480,19 +1480,19 @@
         {
             "assetUUID": "187520b0-b775-409d-8de5-841296890647",
             "bankId": 0,
-            "checksum": 328709812,
-            "cropBottom": 167,
+            "checksum": 1042941765,
+            "cropBottom": 232,
             "cropLeft": 0,
-            "cropRight": 167,
+            "cropRight": 232,
             "cropTop": 0,
             "errors": 0,
             "filter": "",
-            "height": 168,
+            "height": 233,
             "itemType": "Text",
             "name": "Small",
             "textureIndex": 0,
-            "width": 168,
-            "x": 57,
+            "width": 233,
+            "x": 217,
             "y": 290
         }
     ],
