@@ -1,5 +1,5 @@
 {
-    "$fileVersion": 3,
+    "$fileVersion": 4,
     "ClassName": "HarvestBoom",
     "ConsoleInfo": {
         "LocationX": 0,
@@ -23,7 +23,7 @@
         {
             "LocationX": -1550,
             "LocationY": 100,
-            "Name": "Harvest Boom Deluxe",
+            "Name": "Harvest Boom",
             "ResolutionX": 640,
             "ResolutionY": 480,
             "Type": 3

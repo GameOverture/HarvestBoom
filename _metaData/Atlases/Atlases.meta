@@ -1,5 +1,5 @@
 {
-    "$fileVersion": 3,
+    "$fileVersion": 4,
     "assets": [
         {
             "assetUUID": "bfe33b30-3c6c-454b-93da-95592ae69f3c",
@@ -1513,6 +1513,7 @@
             "sbFrameMarginLeft": 0,
             "sbFrameMarginRight": 1,
             "sbFrameMarginTop": 0,
+            "textureFiltering": "Bilinear",
             "textureFormat": "R8G8B8A8"
         }
     ],
