@@ -588,7 +588,7 @@
                             "top": 290
                         }
                     ],
-                    "filtering": "Bilinear",
+                    "filtering": "Nearest",
                     "format": "R8G8B8A8",
                     "height": 1024,
                     "width": 1024

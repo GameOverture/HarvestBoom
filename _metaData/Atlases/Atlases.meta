@@ -1513,7 +1513,7 @@
             "sbFrameMarginLeft": 0,
             "sbFrameMarginRight": 1,
             "sbFrameMarginTop": 0,
-            "textureFiltering": "Bilinear",
+            "textureFiltering": "Nearest",
             "textureFormat": "R8G8B8A8"
         }
     ],
