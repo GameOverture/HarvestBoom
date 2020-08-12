@@ -370,7 +370,11 @@ void World::UpdatePlayer(Player &playerRef, Stamina &staminaRef, HousePanel &hou
 	{
 		for(uint32 j = 0; j < WORLD_HEIGHT; ++j)
 		{
-			if(m_pTileGrid[i][j]->GetTileType() == House && m_pTileGrid[i][j]->GetCollision().IsColliding(mtxIdentity, playerRef.GetCollision(), mtxIdentity, manifold))
+			if(m_pTileGrid[i][j]->GetTileType() != House)
+				continue;
+
+			bool bColliding = m_pTileGrid[i][j]->GetCollision().IsColliding(m_pTileGrid[i][j]->GetWorldTransform(), playerRef.GetCollision(), playerRef.GetCollisionTransform(), manifold);
+			if(bColliding)
 			{
 				glm::vec2 vNormal;
 				vNormal.x = manifold.normal.x;

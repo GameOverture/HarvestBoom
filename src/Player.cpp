@@ -71,6 +71,11 @@ const HyShape2d &Player::GetCollision()
 	return m_Collision.GetLocalBoundingVolume();
 }
 
+const glm::mat4 &Player::GetCollisionTransform()
+{
+	return m_Collision.GetWorldTransform();
+}
+
 void Player::Equip()
 {
 	m_Tool.SetVisible(true);

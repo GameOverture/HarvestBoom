@@ -28,6 +28,7 @@ public:
 	void ZeroVelocityY();
 
 	const HyShape2d &GetCollision();
+	const glm::mat4 &GetCollisionTransform();
 
 	void Equip();
 	bool IsEquipped();
