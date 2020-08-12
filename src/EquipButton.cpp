@@ -3,7 +3,8 @@
 #include "HousePanel.h"
 #include "HarvestBoom.h"
 
-EquipButton::EquipButton(HyEntity2d *pParent) :	InfoPanel("Game", "EquipButton", "Game", "Small", 8, 5, 70, 35, pParent)
+EquipButton::EquipButton(HyEntity2d *pParent) :
+	HyInfoPanel("Game", "EquipButton", "Game", "Small", 8, 5, 70, 35, pParent)
 {
 
 }

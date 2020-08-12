@@ -4,7 +4,7 @@
 #include "HarvestBoom.h"
 
 FoodButton::FoodButton(PlantType ePlantType, bool bIsSellBtn, const char *szPanelPrefix, const char *szPanelName, HyEntity2d *pParent) :
-	InfoPanel(szPanelPrefix, szPanelName, "Game", "Small", 8, 3, 65, 30, pParent),
+	HyInfoPanel(szPanelPrefix, szPanelName, "Game", "Small", 8, 3, 65, 30, pParent),
 	m_ePLANT_TYPE(ePlantType),
 	m_bIS_SELL_BTN(bIsSellBtn),
 	m_HoverRect(this)

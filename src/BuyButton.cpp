@@ -3,7 +3,8 @@
 #include "HousePanel.h"
 #include "HarvestBoom.h"
 
-BuyButton::BuyButton(HyEntity2d *pParent) :	InfoPanel("Game", "BuyButton", HY_SYSTEM_FONT, 8, 3, 65, 30, pParent)
+BuyButton::BuyButton(HyEntity2d *pParent) :
+	HyInfoPanel("Game", "BuyButton", HY_SYSTEM_FONT, 8, 3, 65, 30, pParent)
 {
 }
 

@@ -1,10 +1,9 @@
 #pragma once
 #include "pch.h"
-#include "InfoPanel.h"
 
 class FoodStuffs;
 
-class FoodButton : public InfoPanel
+class FoodButton : public HyInfoPanel
 {
 	const PlantType		m_ePLANT_TYPE;
 	bool				m_bIS_SELL_BTN;

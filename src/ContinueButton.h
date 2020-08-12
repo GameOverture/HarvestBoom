@@ -1,8 +1,7 @@
 #pragma once
 #include "pch.h"
-#include "InfoPanel.h"
 
-class ContinueButton : public InfoPanel
+class ContinueButton : public HyInfoPanel
 {
 public:
 	ContinueButton(HyEntity2d *pParent);

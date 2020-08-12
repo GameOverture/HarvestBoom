@@ -3,7 +3,8 @@
 #include "BillsPanel.h"
 #include "HarvestBoom.h"
 
-ContinueButton::ContinueButton(HyEntity2d *pParent) :	InfoPanel("Game", "EquipButton", "Game", "Small", 3, 15, 72, 45, pParent)
+ContinueButton::ContinueButton(HyEntity2d *pParent) :
+	HyInfoPanel("Game", "EquipButton", "Game", "Small", 3, 15, 72, 45, pParent)
 {
 
 }

@@ -40,8 +40,6 @@ set(HY_SRCFILES
 	"src/HousePanel.h"
 	"src/IActor.cpp"
 	"src/IActor.h"
-	"src/InfoPanel.cpp"
-	"src/InfoPanel.h"
 	"src/IntroPanel.cpp"
 	"src/IntroPanel.h"
 	"src/main.cpp"
