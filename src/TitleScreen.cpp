@@ -2,6 +2,10 @@
 #include "TitleScreen.h"
 #include "HarvestBoom.h"
 
+extern const HarmonyInit &Hy_InitValues();
+extern HyWindow &Hy_Window();
+extern HyInput &Hy_Input();
+
 TitleScreen::TitleScreen() :	HyEntity2d(nullptr),
 								m_Panel("UI", "Title", this),
 								m_TitleText("Game", "Main", this),

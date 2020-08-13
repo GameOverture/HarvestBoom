@@ -20,7 +20,7 @@ FoodButton::FoodButton(PlantType ePlantType, bool bIsSellBtn, const char *szPane
 
 void FoodButton::Sync()
 {
-	std::string sText = "* ";
+	std::string sText = " ";
 
 	bool bEnable = true;
 	switch(m_ePLANT_TYPE)

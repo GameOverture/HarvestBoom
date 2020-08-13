@@ -12,7 +12,7 @@ public:
 
 	void Sync();
 
-	virtual void Stamina::OnLoaded() override;
+	virtual void OnLoaded() override;
 
 	void Offset(float fOffset);
 	void Reset();

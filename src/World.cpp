@@ -6,6 +6,9 @@
 #include "Plant.h"
 #include "HarvestBoom.h"
 
+extern float Hy_UpdateStep();
+extern HyInput &Hy_Input();
+
 World::World(HyEntity2d *pParent) :
 	HyEntity2d(pParent),
 	m_uiSetRowCurrentIndex(0),

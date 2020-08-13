@@ -6,8 +6,10 @@
 
 #define DAYNIGHT_SIDEMARGIN 50.0f
 #define DAYNIGHT_TOPMARGIN 50.0f
-
 #define DAYNIGHT_DARKNESSAMT 0.7f
+
+extern HyWindow &Hy_Window();
+extern float Hy_UpdateStep();
 
 DayNight::DayNight(Stamina &staminaRef, HousePanel &housePanelRef, HyEntity2d *pParent) :	HyEntity2d(pParent),
 																							m_StaminaRef(staminaRef),

@@ -4,7 +4,7 @@
 #include "HarvestBoom.h"
 
 BuyButton::BuyButton(HyEntity2d *pParent) :
-	HyInfoPanel("Game", "BuyButton", HY_SYSTEM_FONT, 8, 3, 65, 30, pParent)
+	HyInfoPanel("Game", "BuyButton", "Game", "Small", 8, 3, 65, 30, pParent)
 {
 }
 
@@ -69,6 +69,9 @@ bool BuyButton::IsUsed()
 	case EQUIP_Vine:
 		Values::Get()->m_iSavings -= Values::Get()->m_uiCOST_VINESEEDS;
 		Values::Get()->m_uiSeedsVine++;
+		break;
+
+	default:
 		break;
 	}
 	

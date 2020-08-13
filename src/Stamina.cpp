@@ -31,7 +31,6 @@ void Stamina::Sync()
 {
 	m_OuterFrame.AnimSetState(0);
 	m_Fill.AnimSetState(1);
-	m_Fill.pos.Set(2.0f, 9.0f);
 }
 
 void Stamina::Offset(float fOffset)

@@ -4,6 +4,8 @@
 #include "Bug.h"
 #include "HarvestBoom.h"
 
+extern float Hy_UpdateStep();
+
 Tile::Tile(HyEntity2d *pParent) :	HyEntity2d(pParent),
 									m_eTileType(Unknown),
 									m_Ground(this),

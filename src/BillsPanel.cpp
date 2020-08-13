@@ -2,6 +2,8 @@
 #include "BillsPanel.h"
 #include "HarvestBoom.h"
 
+extern HyWindow &Hy_Window();
+
 BillsPanel::BillsPanel(HyEntity2d *pParent) :
 	IHy9Slice(glm::vec2(Hy_Window().GetWidth(), Hy_Window().GetHeight()), 10, pParent),
 	m_Scroll("UI", "Bills", this),

@@ -5,6 +5,8 @@
 #include "Tile.h"
 #include "HarvestBoom.h"
 
+extern float Hy_UpdateStep();
+
 Bug::Bug(BugType eBugType, World &worldRef, HyEntity2d *pParent) :
 	HyEntityLeaf2d<HySprite2d>("Game", "Bug", pParent),
 	m_eBUG_TYPE(eBugType),

@@ -2,6 +2,11 @@
 #include "Game.h"
 #include "HarvestBoom.h"
 
+extern HyWindow &Hy_Window();
+extern float Hy_UpdateStep();
+extern HyInput &Hy_Input();
+extern HyDiagnostics &Hy_Diagnostics();
+
 Game::Game() :
 	HyEntity2d(nullptr),
 	m_Player(this),

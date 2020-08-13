@@ -7,6 +7,9 @@
 #define PLAYER_WIDTH 10.0f
 #define PLAYER_HEIGHT 5.0f
 
+extern HyInput &Hy_Input();
+extern float Hy_UpdateStep();
+
 Player::Player(HyEntity2d *pParent) :
 	IActor(pParent),
 	m_Body("Game", "Player", this),

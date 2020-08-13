@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "IntroPanel.h"
 
+extern HyInput &Hy_Input();
+
 IntroPanel::IntroPanel(HyEntity2d *pParent) :
 	IHy9Slice(glm::vec2(600.0f, 380.0f), 10.0f, pParent),
 	m_HeaderText("Game", "Small", this),
@@ -15,7 +17,6 @@ IntroPanel::IntroPanel(HyEntity2d *pParent) :
 	m_BodyText.TextSetState(1);
 	m_BodyText.SetAsColumn(GetWidth(false) - 40.0f);
 	
-
 	GetFill().alpha.Set(0.5f);
 	SetDisplayOrder(DISPLAYORDER_Panel);
 }
