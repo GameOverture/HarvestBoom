@@ -44,6 +44,9 @@ void FoodButton::Sync()
 		GetTextPtr()->TextSet(sText);
 		bEnable = Values::Get()->m_uiHarvestPumpkin > 0;
 		break;
+
+	default:
+		break;
 	}
 
 	if(bEnable)
@@ -116,6 +119,9 @@ void FoodButton::Sync()
 		}
 		else
 			Values::Get()->m_fStamina = HyClamp(Values::Get()->m_fStamina + Values::Get()->m_fSTAMINA_EATPUMPKINMODIFIER, 0.0f, 1.0f);
+		break;
+
+	default:
 		break;
 	}
 

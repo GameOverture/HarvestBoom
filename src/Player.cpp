@@ -196,6 +196,9 @@ bool Player::DoAction(Tile &tileRef)
 			if(rot.IsAnimating() == false)
 				rot.Tween(-20.0f, 0.25f, HyTween::QuadOut, [this](IHyNode *) { HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_USEHOE_1); rot.Tween(20.0f, 0.25f, HyTween::QuadIn); });
 			break;
+
+		default:
+			break;
 		}
 
 		return true;
@@ -253,6 +256,9 @@ void Player::Sync()
 		m_fEquipIdleHeight = 20.0f;
 		m_pEquipment->pos.Set(9.0f, m_fEquipIdleHeight);
 		m_pEquipment->Load();
+		break;
+
+	default:
 		break;
 	}
 

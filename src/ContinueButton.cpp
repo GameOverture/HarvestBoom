@@ -45,6 +45,6 @@ bool ContinueButton::IsUsed()
 {
 	HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_MENU_CURSOR);
 
-	BillsPanel *pThis = reinterpret_cast<BillsPanel *>(ParentGet());
+	BillsPanel *pThis = static_cast<BillsPanel *>(ParentGet());
 	pThis->Hide();
 }

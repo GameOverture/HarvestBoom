@@ -105,6 +105,9 @@ void HousePanel::SetEquipedUI()
 		m_BtnVineEquip.alpha.Tween(1.0f, 0.5f);
 		m_BtnVineEquip.pos.Set(vWindowSize.x - m_BtnHoeEquip.GetPanelPtr()->AnimGetCurFrameWidth() - 10.0f, 10.0f);
 		break;
+
+	default:
+		break;
 	}
 }
 
@@ -145,6 +148,9 @@ void HousePanel::HideEquipedUI()
 	case EQUIP_Vine:
 		if(m_BtnVineEquip.pos.IsAnimating() == false)
 			m_BtnVineEquip.pos.Tween(vWindowSize.x + 100.0f, 10.0f, 1.0f, HyTween::QuadIn);
+		break;
+
+	default:
 		break;
 	}
 }

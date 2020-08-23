@@ -128,6 +128,9 @@ void Tile::SetType(TileType eType)
 	case Impassable:
 		m_Ground.topColor.Set(0.6f, 0.8f, 0.196078f);
 		break;
+
+	default:
+		break;
 	}
 
 	m_Ground.SetVisible(false);
@@ -226,6 +229,9 @@ void Tile::SetTileState()
 		else
 			m_House.SetVisible(false);
 		break;
+
+	default:
+		break;
 	}
 }
 
@@ -273,6 +279,9 @@ void Tile::SetAsSelected()
 	case EQUIP_Vine:
 		if(IsPlantable(PLANTTYPE_Vine))
 			m_SelectedRect.SetVisible(true);
+		break;
+
+	default:
 		break;
 	}
 
@@ -329,6 +338,9 @@ bool Tile::IncrementProgress()
 				fElapsedTime += Hy_UpdateStep();
 				m_ProgressBar.SetPercent(fElapsedTime / Values::Get()->m_fDURATION_HARVESTPUMPKIN);
 				break;
+
+			default:
+				break;
 			}
 
 			if(m_ProgressBar.GetPercent() == 1.0f)
@@ -338,6 +350,9 @@ bool Tile::IncrementProgress()
 				case PLANTTYPE_Corn:		Values::Get()->m_uiHarvestCorn++; break;
 				case PLANTTYPE_Eggplant:	Values::Get()->m_uiHarvestEggplant++; break;
 				case PLANTTYPE_Pumpkin:		Values::Get()->m_uiHarvestPumpkin++; break;
+
+				default:
+					break;
 				}
 
 				m_ProgressBar.SetPercent(0.0f);
@@ -570,6 +585,9 @@ bool Tile::IncrementProgress()
 			}
 			return true;
 		}
+		break;
+
+	default:
 		break;
 	}
 

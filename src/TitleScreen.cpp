@@ -17,10 +17,11 @@ TitleScreen::TitleScreen() :	HyEntity2d(nullptr),
 {
 	m_Panel.scale.Set(2.0f, 2.0f);
 
+	m_TitleText.TextSet(Hy_InitValues().sGameName);
 	m_TitleText.SetAsScaleBox(static_cast<float>(Hy_Window().GetWindowSize().x) - 50.0f, 100.0f, true);
 	m_TitleText.pos.Set(25.0f, Hy_Window().GetWindowSize().y - 150.0f);
 	m_TitleText.scale_pivot.Set(m_TitleText.TextGetBox().x * 0.5f, m_TitleText.TextGetBox().y * 0.5f);
-	m_TitleText.scale.Set(0.001f, 0.001f);
+	m_TitleText.scale.Set(0.2f, 0.2f);
 
 	m_PlayText.pos.Set(Hy_Window().GetWindowSize().x * 0.5f, Hy_Window().GetWindowSize().y * 0.5f);
 	m_PlayText.pos.Offset(0.0f, 50.0f);
@@ -81,7 +82,7 @@ void TitleScreen::Start(TitleScreenType eTitleType)
 	}
 
 	alpha.Tween(1.0f, 0.5f);
-	m_TitleText.scale.Set(0.001f, 0.001f);
+	m_TitleText.scale.Set(0.2f, 0.2f);
 	m_TitleText.scale.Tween(1.0f, 1.0f, 2.0f, HyTween::BounceOut);
 
 	Values::Get()->Reset();

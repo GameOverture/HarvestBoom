@@ -21,7 +21,7 @@ class HarvestBoom : public HyEngine
 	TitleScreen *				m_pTitleScrn;
 	Game *						m_pGame;
 
-	static LtGAudioSndBank		sm_SndBnk;
+	LtGAudioSndBank				m_SndBnk;
 
 	enum GameState
 	{

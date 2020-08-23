@@ -5,7 +5,6 @@ extern HyWindow &Hy_Window();
 extern HyInput &Hy_Input();
 
 HarvestBoom * HarvestBoom::sm_pInstance = nullptr;
-LtGAudioSndBank HarvestBoom::sm_SndBnk;
 
 HarvestBoom::HarvestBoom(HarmonyInit &initStruct) :
 	HyEngine(initStruct),
@@ -16,8 +15,8 @@ HarvestBoom::HarvestBoom(HarmonyInit &initStruct) :
 
 	Hy_Window().CreateCamera2d();
 
-	m_Splash.SetAsBox(Hy_Window().GetWidth(), Hy_Window().GetHeight());
 	m_Splash.Load();
+	m_Splash.SetAsBox(Hy_Window().GetWidth(), Hy_Window().GetHeight());
 	m_Splash.topColor.Set(0.0f, 0.0f, 0.0f);
 	m_Splash.topColor.Tween(139.0f / 255.0f, 160.0f / 255.0f, 231.0f / 255.0f, 2.0f);
 	m_Splash.SetDisplayOrder(DISPLAYORDER_Splash);
@@ -55,7 +54,7 @@ HarvestBoom::~HarvestBoom()
 
 /*static*/ LtGAudioSndBank *HarvestBoom::GetSndBank()
 {
-	return &sm_SndBnk;
+	return &sm_pInstance->m_SndBnk;
 }
 
 Game *HarvestBoom::GetGame()
@@ -80,6 +79,7 @@ void HarvestBoom::SetTitleScreen(TitleScreenType eTitleType)
 	case GAMESTATE_Loading:
 		if(m_pTitleScrn->IsLoaded())
 		{
+			HyLog("LOADING COMPLETE!");
 			SetTitleScreen(TITLETYPE_Start);
 		}
 		break;
@@ -95,16 +95,22 @@ void HarvestBoom::SetTitleScreen(TitleScreenType eTitleType)
 
 		case TITLE_Quit:
 			return false;
+
+		default:
+			break;
 		}
 		break;
 
-	case GAMESTATE_TitleFade:
-		if(m_pTitleScrn->alpha.IsAnimating() == false && m_pGame->IsLoaded())
-			m_eGameState = GAMESTATE_Game;
-		break;
+	//case GAMESTATE_TitleFade:
+	//	if(m_pTitleScrn->alpha.IsAnimating() == false && m_pGame->IsLoaded())
+	//		m_eGameState = GAMESTATE_Game;
+	//	break;
 
 	case GAMESTATE_Game:
 		m_pGame->GameUpdate();
+		break;
+
+	default:
 		break;
 	}
 
