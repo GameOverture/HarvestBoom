@@ -1,6 +1,30 @@
 {
-    "$fileVersion": 3,
+    "$fileVersion": 4,
     "assets": [
+        {
+            "assetUUID": "b4a13cc8-eaae-48d9-93f0-203e20626ac9",
+            "bankId": 0,
+            "checksum": 1289476379,
+            "errors": 0,
+            "filter": "",
+            "globalLimit": -1,
+            "isCompressed": false,
+            "isExportMono": false,
+            "isMusic": false,
+            "itemType": "Audio",
+            "name": "buystuff",
+            "vbrQuality": 1,
+            "wavHeader": {
+                "audioFormat": 1,
+                "bitsPerSample": 16,
+                "blockAlign": 4,
+                "byteRate": 176400,
+                "chunkSize": 116788,
+                "dataSize": 36,
+                "numChannels": 2,
+                "sampleRate": 44100
+            }
+        }
     ],
     "banks": [
         {

@@ -13,7 +13,8 @@ TitleScreen::TitleScreen() :	HyEntity2d(nullptr),
 								m_QuitText("Game", "Small", this),
 								m_Selector("Game", "Small", this),
 								m_LegalBg(this),
-								m_LegalText("Game", "Small", this)
+								m_LegalText("Game", "Small", this),
+								m_SfxSelector("UI", "Purchase", this)
 {
 	m_Panel.scale.Set(2.0f, 2.0f);
 
@@ -101,6 +102,7 @@ void TitleScreen::Start(TitleScreenType eTitleType)
 	{
 		if(m_Selector.pos.Y() != m_PlayText.pos.Y())
 		{
+			m_SfxSelector.PlayOneShot(true);
 			HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_MENU_CURSOR);
 			m_Selector.pos.Y(m_PlayText.pos.Y());
 		}
@@ -109,6 +111,7 @@ void TitleScreen::Start(TitleScreenType eTitleType)
 	{
 		if(m_Selector.pos.Y() != m_QuitText.pos.Y())
 		{
+			m_SfxSelector.PlayOneShot(true);
 			HarvestBoom::GetSndBank()->Play(XACT_CUE_BASEGAME_MENU_CURSOR);
 			m_Selector.pos.Y(m_QuitText.pos.Y());
 		}

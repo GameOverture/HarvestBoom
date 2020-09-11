@@ -1,6 +1,24 @@
 {
     "$fileVersion": 4,
     "Audio": {
+        "UI/Purchase": {
+            "stateArray": [
+                {
+                    "loops": 2,
+                    "maxDist": 0,
+                    "pitch": 1,
+                    "playList": [
+                        {
+                            "checksum": 1289476379,
+                            "weight": 10
+                        }
+                    ],
+                    "playListMode": 0,
+                    "priority": 0,
+                    "volume": 1
+                }
+            ]
+        }
     },
     "BoundingVolumes": {
     },

@@ -13,6 +13,8 @@ class TitleScreen : public HyEntity2d
 	HyPrimitive2d		m_LegalBg;
 	HyText2d			m_LegalText;
 
+	HyAudio2d			m_SfxSelector;
+
 public:
 	TitleScreen();
 	virtual ~TitleScreen();

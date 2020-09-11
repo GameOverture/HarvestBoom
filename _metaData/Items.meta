@@ -1,6 +1,22 @@
 {
     "$fileVersion": 4,
     "Audio": {
+        "UI/Purchase": {
+            "CameraPos": [
+                0,
+                0
+            ],
+            "CameraZoom": 1,
+            "UUID": "439ae275-d711-44c6-98cb-d1b42ae1e4d7",
+            "stateArray": [
+                {
+                    "assetUUIDs": [
+                        "b4a13cc8-eaae-48d9-93f0-203e20626ac9"
+                    ],
+                    "name": "d"
+                }
+            ]
+        }
     },
     "BoundingVolumes": {
     },
