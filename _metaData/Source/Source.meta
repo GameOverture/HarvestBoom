@@ -1,0 +1,450 @@
+{
+    "$fileVersion": 9,
+    "assets": [
+        {
+            "assetUUID": "b45b9775-d5c2-4fb9-a4b0-a5b63932f9d1",
+            "bankId": 0,
+            "checksum": 424676427,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "BillsPanel.cpp"
+        },
+        {
+            "assetUUID": "bb49358e-044b-4f18-8eb2-cb42b93296f7",
+            "bankId": 0,
+            "checksum": 3421473971,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "BillsPanel.h"
+        },
+        {
+            "assetUUID": "0ff58128-275b-4a6d-8757-46a4708cea23",
+            "bankId": 0,
+            "checksum": 2231242787,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "Bug.cpp"
+        },
+        {
+            "assetUUID": "82d5f351-dc0f-42f1-85fb-972772dc9d69",
+            "bankId": 0,
+            "checksum": 2093465213,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "Bug.h"
+        },
+        {
+            "assetUUID": "21143314-eea1-4d0a-b133-91fa9eab5980",
+            "bankId": 0,
+            "checksum": 665380722,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "BugAttack.cpp"
+        },
+        {
+            "assetUUID": "006e4c38-ffbe-4b40-885a-9a942ee97bc1",
+            "bankId": 0,
+            "checksum": 1587930617,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "BugAttack.h"
+        },
+        {
+            "assetUUID": "d030e912-6b2f-4daa-8b04-217fd0846dfc",
+            "bankId": 0,
+            "checksum": 2912967581,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "BuyButton.cpp"
+        },
+        {
+            "assetUUID": "6b32510c-3f4e-4494-a634-fd675f887e53",
+            "bankId": 0,
+            "checksum": 4131526124,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "BuyButton.h"
+        },
+        {
+            "assetUUID": "1cb8b0ce-5068-4d83-beb5-34bafb4ee58a",
+            "bankId": 0,
+            "checksum": 1220554657,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "CheckBox.cpp"
+        },
+        {
+            "assetUUID": "f8638922-ab25-4dad-854e-f3f98c07cde4",
+            "bankId": 0,
+            "checksum": 3971803473,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "CheckBox.h"
+        },
+        {
+            "assetUUID": "310955e0-5d69-4ad3-ae25-47d4d476a4a2",
+            "bankId": 0,
+            "checksum": 4108056774,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "ContinueButton.cpp"
+        },
+        {
+            "assetUUID": "af020337-5555-4581-91e3-74b2b5b8d074",
+            "bankId": 0,
+            "checksum": 3210734046,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "ContinueButton.h"
+        },
+        {
+            "assetUUID": "ba0c0522-af16-4f58-b8c9-7714d44930c9",
+            "bankId": 0,
+            "checksum": 1126206457,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "DayNight.cpp"
+        },
+        {
+            "assetUUID": "f306bea0-d1f3-434e-8c47-64e25211e696",
+            "bankId": 0,
+            "checksum": 4192595569,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "DayNight.h"
+        },
+        {
+            "assetUUID": "c51114a1-466c-4697-b840-b80fc704f8cf",
+            "bankId": 0,
+            "checksum": 3334677019,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "DebugGrid.cpp"
+        },
+        {
+            "assetUUID": "61181091-4866-4f48-8a77-f29031af62b3",
+            "bankId": 0,
+            "checksum": 3004000417,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "DebugGrid.h"
+        },
+        {
+            "assetUUID": "11456894-cc0e-4554-8147-a03ff64b1b4d",
+            "bankId": 0,
+            "checksum": 3371534809,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "EquipButton.cpp"
+        },
+        {
+            "assetUUID": "f72e2e55-99ec-4d77-b39d-dba2a9a937aa",
+            "bankId": 0,
+            "checksum": 679362593,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "EquipButton.h"
+        },
+        {
+            "assetUUID": "02a62644-4948-4d16-a90f-48b784f7e644",
+            "bankId": 0,
+            "checksum": 3272690792,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "FoodButton.cpp"
+        },
+        {
+            "assetUUID": "efedbbd1-1313-4079-a2be-30294d359f7c",
+            "bankId": 0,
+            "checksum": 2280149639,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "FoodButton.h"
+        },
+        {
+            "assetUUID": "49485eb2-01d0-45f6-b678-287ae314e170",
+            "bankId": 0,
+            "checksum": 2677161343,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "FoodStuffs.cpp"
+        },
+        {
+            "assetUUID": "67115d84-3a05-4e48-9a6d-17e2eb65a25a",
+            "bankId": 0,
+            "checksum": 688128104,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "FoodStuffs.h"
+        },
+        {
+            "assetUUID": "685d4453-6c53-4e35-bc16-62faee94593f",
+            "bankId": 0,
+            "checksum": 36925597,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "Game.cpp"
+        },
+        {
+            "assetUUID": "4cf52abe-d07a-415e-af94-7dcce60201cb",
+            "bankId": 0,
+            "checksum": 3479111407,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "Game.h"
+        },
+        {
+            "assetUUID": "c814ca77-309f-4e0a-9a97-4990ca0a1d04",
+            "bankId": 0,
+            "checksum": 3383603000,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "HarvestBoom.cpp"
+        },
+        {
+            "assetUUID": "7d7ea0ec-c9f7-47db-a21d-aff19de9e0a5",
+            "bankId": 0,
+            "checksum": 2887566902,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "HarvestBoom.h"
+        },
+        {
+            "assetUUID": "86019b2b-92a4-4c97-b850-48f774849939",
+            "bankId": 0,
+            "checksum": 3985448898,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "HousePanel.cpp"
+        },
+        {
+            "assetUUID": "e9ca7b48-d10a-4097-b0b9-a455a1605b38",
+            "bankId": 0,
+            "checksum": 3682316735,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "HousePanel.h"
+        },
+        {
+            "assetUUID": "7bbf2d61-7681-44fd-8752-6870720e8af8",
+            "bankId": 0,
+            "checksum": 3436522197,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "IActor.cpp"
+        },
+        {
+            "assetUUID": "709c6c45-cdbe-4769-bddd-0346db611d4f",
+            "bankId": 0,
+            "checksum": 2032903038,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "IActor.h"
+        },
+        {
+            "assetUUID": "3b365b7e-8348-428f-a22c-7b3c505c0a0e",
+            "bankId": 0,
+            "checksum": 3760006231,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "IntroPanel.cpp"
+        },
+        {
+            "assetUUID": "95506a90-205b-439c-b838-56b58c3a18ac",
+            "bankId": 0,
+            "checksum": 3895017893,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "IntroPanel.h"
+        },
+        {
+            "assetUUID": "8396376c-8f44-4235-929e-7a3c00936d21",
+            "bankId": 0,
+            "checksum": 2142379858,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "main.cpp"
+        },
+        {
+            "assetUUID": "1719ac88-82c7-4a1c-809e-2dad960b4817",
+            "bankId": 0,
+            "checksum": 415839713,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "pch.h"
+        },
+        {
+            "assetUUID": "166e4fdb-ca13-4849-a145-170463c83cc2",
+            "bankId": 0,
+            "checksum": 4156926021,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "Plant.cpp"
+        },
+        {
+            "assetUUID": "d8b6e9ba-cf85-48f5-87d8-15ad8585bb88",
+            "bankId": 0,
+            "checksum": 1779383923,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "Plant.h"
+        },
+        {
+            "assetUUID": "dc3308df-8e59-4213-8242-2d00bbe3d6b1",
+            "bankId": 0,
+            "checksum": 1682449019,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "Player.cpp"
+        },
+        {
+            "assetUUID": "20baa54a-7945-4af1-8bb9-19ec4e9d4444",
+            "bankId": 0,
+            "checksum": 2716691808,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "Player.h"
+        },
+        {
+            "assetUUID": "def1ba3b-0d1d-4d10-a4a8-f6d06270b084",
+            "bankId": 0,
+            "checksum": 248978478,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "Stamina.cpp"
+        },
+        {
+            "assetUUID": "9d88cc2c-550e-4d47-8f2d-378b9adcf735",
+            "bankId": 0,
+            "checksum": 3493264220,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "Stamina.h"
+        },
+        {
+            "assetUUID": "7b5b1af8-f832-4cc6-8f4c-d94e923210f1",
+            "bankId": 0,
+            "checksum": 146070423,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "Tile.cpp"
+        },
+        {
+            "assetUUID": "ca56ea5e-195d-4dd1-a01f-55ccb495dda5",
+            "bankId": 0,
+            "checksum": 3268500094,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "Tile.h"
+        },
+        {
+            "assetUUID": "63df7f16-7be3-4ce4-9631-6974caebba0e",
+            "bankId": 0,
+            "checksum": 1274561934,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "TitleScreen.cpp"
+        },
+        {
+            "assetUUID": "245c27bb-77e5-4336-99d8-5f69d9548f85",
+            "bankId": 0,
+            "checksum": 3664810700,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "TitleScreen.h"
+        },
+        {
+            "assetUUID": "1ed7ea59-de93-44c5-bf37-6ba5f6ff4686",
+            "bankId": 0,
+            "checksum": 4192002942,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "Values.cpp"
+        },
+        {
+            "assetUUID": "cf7169aa-7c75-4f05-80c7-b2493a67caa6",
+            "bankId": 0,
+            "checksum": 2130285007,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "Values.h"
+        },
+        {
+            "assetUUID": "cee03f3c-763f-4849-81cd-4ce42514ed04",
+            "bankId": 0,
+            "checksum": 1714778805,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Source",
+            "name": "World.cpp"
+        },
+        {
+            "assetUUID": "f67304b7-3995-4b41-9774-7bb5c3186563",
+            "bankId": 0,
+            "checksum": 3092509946,
+            "errors": 0,
+            "filter": "",
+            "itemType": "Header",
+            "name": "World.h"
+        }
+    ],
+    "banks": [
+        {
+            "OutputName": "HarvestBoom",
+            "SrcDepends": [
+            ],
+            "UseGlfw": false,
+            "UseIcu": false,
+            "UseSdlNet": false,
+            "bankId": 0,
+            "bankName": "Default"
+        }
+    ],
+    "nextBankId": 1
+}

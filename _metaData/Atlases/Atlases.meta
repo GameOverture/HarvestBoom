@@ -1,5 +1,5 @@
 {
-    "$fileVersion": 4,
+    "$fileVersion": 9,
     "assets": [
         {
             "assetUUID": "51ecd141-297b-4ae7-9b6a-032e4f2e6b7a",
@@ -15,6 +15,7 @@
             "itemType": "Atlas",
             "name": "ButtonSmall",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 0,
             "y": 755
@@ -33,6 +34,7 @@
             "itemType": "Atlas",
             "name": "grasscorner_SouthEast",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 957,
             "y": 817
@@ -51,6 +53,7 @@
             "itemType": "Atlas",
             "name": "openingscreen",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 321,
             "x": 585,
             "y": 243
@@ -69,6 +72,7 @@
             "itemType": "Atlas",
             "name": "corn_growing",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 214,
             "y": 844
@@ -87,6 +91,7 @@
             "itemType": "Atlas",
             "name": "marigoldsproutshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 675,
             "y": 486
@@ -105,6 +110,7 @@
             "itemType": "Atlas",
             "name": "marigoldgrownshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 675,
             "y": 534
@@ -123,6 +129,7 @@
             "itemType": "Atlas",
             "name": "meterempty",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 46,
             "x": 933,
             "y": 0
@@ -141,6 +148,7 @@
             "itemType": "Atlas",
             "name": "ButtonSquare",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 938,
             "y": 215
@@ -159,6 +167,7 @@
             "itemType": "Atlas",
             "name": "GameOver",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 321,
             "x": 700,
             "y": 486
@@ -177,6 +186,7 @@
             "itemType": "Atlas",
             "name": "Ant1",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 585,
             "y": 7
@@ -195,6 +205,7 @@
             "itemType": "Atlas",
             "name": "gernaiumgrownshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 312
@@ -213,6 +224,7 @@
             "itemType": "Atlas",
             "name": "grass",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 989,
             "y": 777
@@ -231,6 +243,7 @@
             "itemType": "Atlas",
             "name": "DayNight",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 86,
             "y": 755
@@ -249,6 +262,7 @@
             "itemType": "Atlas",
             "name": "gernaiumsprout",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 1006,
             "y": 199
@@ -267,6 +281,7 @@
             "itemType": "Atlas",
             "name": "farmer2",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 585,
             "y": 164
@@ -285,6 +300,7 @@
             "itemType": "Atlas",
             "name": "bagoseeds",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 10,
             "x": 1011,
             "y": 14
@@ -303,6 +319,7 @@
             "itemType": "Atlas",
             "name": "vinesgrownb",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 981,
             "y": 817
@@ -321,6 +338,7 @@
             "itemType": "Atlas",
             "name": "pumpkinsproutshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 947,
             "y": 729
@@ -339,6 +357,7 @@
             "itemType": "Atlas",
             "name": "ButtonSquareDisabled",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 909,
             "y": 361
@@ -357,6 +376,7 @@
             "itemType": "Atlas",
             "name": "pumpkingrowingshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 36,
             "y": 679
@@ -375,6 +395,7 @@
             "itemType": "Atlas",
             "name": "cornharvestshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 12,
             "y": 664
@@ -393,6 +414,7 @@
             "itemType": "Atlas",
             "name": "eggplantspout",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 1011,
             "y": 28
@@ -411,6 +433,7 @@
             "itemType": "Atlas",
             "name": "cornharvest",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 230,
             "y": 844
@@ -429,6 +452,7 @@
             "itemType": "Atlas",
             "name": "marigoldgrowingshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 408
@@ -447,6 +471,7 @@
             "itemType": "Atlas",
             "name": "pumpkinsprout",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 128,
             "y": 827
@@ -465,6 +490,7 @@
             "itemType": "Atlas",
             "name": "ButtonSquareLit",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 585,
             "y": 486
@@ -483,6 +509,7 @@
             "itemType": "Atlas",
             "name": "beetle",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 1002,
             "y": 839
@@ -501,6 +528,7 @@
             "itemType": "Atlas",
             "name": "pumpkinharvest",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 42,
             "y": 793
@@ -519,6 +547,7 @@
             "itemType": "Atlas",
             "name": "marigoldsprout",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 978,
             "y": 209
@@ -537,6 +566,7 @@
             "itemType": "Atlas",
             "name": "eggplantgrowingshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 12,
             "y": 616
@@ -555,6 +585,7 @@
             "itemType": "Atlas",
             "name": "vinesgrown",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 42,
             "y": 829
@@ -573,6 +604,7 @@
             "itemType": "Atlas",
             "name": "ButtonSquareBlue",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 909,
             "y": 288
@@ -591,6 +623,7 @@
             "itemType": "Atlas",
             "name": "vinesrpout",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 978,
             "y": 199
@@ -609,6 +642,7 @@
             "itemType": "Atlas",
             "name": "marigoldgrown",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 1,
             "y": 836
@@ -627,6 +661,7 @@
             "itemType": "Atlas",
             "name": "corngrowingshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 384
@@ -645,6 +680,7 @@
             "itemType": "Atlas",
             "name": "cornspout",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 1011,
             "y": 0
@@ -663,6 +699,7 @@
             "itemType": "Atlas",
             "name": "MeterFilled_NoBottom",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 978,
             "y": 0
@@ -681,6 +718,7 @@
             "itemType": "Atlas",
             "name": "tilled",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 129,
             "y": 779
@@ -699,6 +737,7 @@
             "itemType": "Atlas",
             "name": "eggplantgrowing",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 173,
             "y": 844
@@ -717,6 +756,7 @@
             "itemType": "Atlas",
             "name": "lineBig",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 610,
             "x": 0,
             "y": 0
@@ -735,6 +775,7 @@
             "itemType": "Atlas",
             "name": "eggplantharvestshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 12,
             "y": 712
@@ -753,6 +794,7 @@
             "itemType": "Atlas",
             "name": "WinScreen",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 321,
             "x": 609,
             "y": 0
@@ -771,6 +813,7 @@
             "itemType": "Atlas",
             "name": "vinesgrowing",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 85,
             "y": 834
@@ -789,6 +832,7 @@
             "itemType": "Atlas",
             "name": "eggplantharvest",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 20,
             "y": 836
@@ -807,6 +851,7 @@
             "itemType": "Atlas",
             "name": "ButtonSmallDisabled",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 81,
             "y": 717
@@ -825,6 +870,7 @@
             "itemType": "Atlas",
             "name": "vinesrpoutshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 630,
             "y": 559
@@ -843,6 +889,7 @@
             "itemType": "Atlas",
             "name": "vinesgrownshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 36,
             "y": 724
@@ -861,6 +908,7 @@
             "itemType": "Atlas",
             "name": "vinesgrowingshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 585,
             "y": 559
@@ -879,6 +927,7 @@
             "itemType": "Atlas",
             "name": "spiderscorpion1",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 947,
             "y": 774
@@ -897,6 +946,7 @@
             "itemType": "Atlas",
             "name": "Ant2",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 585,
             "y": 86
@@ -915,6 +965,7 @@
             "itemType": "Atlas",
             "name": "grassside",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 432
@@ -933,6 +984,7 @@
             "itemType": "Atlas",
             "name": "pumpkingrowing",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 85,
             "y": 798
@@ -951,6 +1003,7 @@
             "itemType": "Atlas",
             "name": "sythe",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 23,
             "x": 585,
             "y": 227
@@ -969,6 +1022,7 @@
             "itemType": "Atlas",
             "name": "grasscorner",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 129,
             "y": 755
@@ -987,6 +1041,7 @@
             "itemType": "Atlas",
             "name": "gernaiumsproutshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 675,
             "y": 510
@@ -1005,6 +1060,7 @@
             "itemType": "Atlas",
             "name": "scrollbig",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 246,
             "x": 700,
             "y": 729
@@ -1023,6 +1079,7 @@
             "itemType": "Atlas",
             "name": "hoe",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 26,
             "x": 909,
             "y": 243
@@ -1041,6 +1098,7 @@
             "itemType": "Atlas",
             "name": "grassinnercorner_SouthEast",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 585,
             "y": 203
@@ -1059,6 +1117,7 @@
             "itemType": "Atlas",
             "name": "spiderscorpion2",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 42,
             "x": 0,
             "y": 793
@@ -1077,6 +1136,7 @@
             "itemType": "Atlas",
             "name": "House",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 126,
             "x": 38,
             "y": 592
@@ -1095,6 +1155,7 @@
             "itemType": "Atlas",
             "name": "grassside_West",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 12,
             "y": 592
@@ -1113,6 +1174,7 @@
             "itemType": "Atlas",
             "name": "grassside_South",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 909,
             "y": 259
@@ -1131,6 +1193,7 @@
             "itemType": "Atlas",
             "name": "soil",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 360
@@ -1149,6 +1212,7 @@
             "itemType": "Atlas",
             "name": "marigoldgrowing",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 195,
             "y": 844
@@ -1167,6 +1231,7 @@
             "itemType": "Atlas",
             "name": "grassside_East",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 456
@@ -1185,6 +1250,7 @@
             "itemType": "Atlas",
             "name": "ButtonSmallBlue",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 81,
             "y": 679
@@ -1203,6 +1269,7 @@
             "itemType": "Atlas",
             "name": "gernaiumgrowingshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 12,
             "y": 688
@@ -1221,6 +1288,7 @@
             "itemType": "Atlas",
             "name": "eggplantspoutshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 336
@@ -1239,6 +1307,7 @@
             "itemType": "Atlas",
             "name": "beetle2",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 958,
             "y": 841
@@ -1257,6 +1326,7 @@
             "itemType": "Atlas",
             "name": "cornspoutshadow",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 1000,
             "y": 753
@@ -1275,6 +1345,7 @@
             "itemType": "Atlas",
             "name": "gernaiumgrown",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 980,
             "y": 841
@@ -1293,6 +1364,7 @@
             "itemType": "Atlas",
             "name": "gernaiumgrowing",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 151,
             "y": 844
@@ -1311,6 +1383,7 @@
             "itemType": "Atlas",
             "name": "grassinnercorner_NorthWest",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 995,
             "y": 288
@@ -1329,6 +1402,7 @@
             "itemType": "Atlas",
             "name": "grassinnercorner_NorthEast",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 12,
             "y": 640
@@ -1347,6 +1421,7 @@
             "itemType": "Atlas",
             "name": "grasscorner_NorthEast",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 675,
             "y": 558
@@ -1365,6 +1440,7 @@
             "itemType": "Atlas",
             "name": "ButtonSmallLit",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 83,
             "x": 909,
             "y": 434
@@ -1383,6 +1459,7 @@
             "itemType": "Atlas",
             "name": "grasscorner_SouthWest",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 992,
             "y": 729
@@ -1401,6 +1478,7 @@
             "itemType": "Atlas",
             "name": "farmer4",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 585,
             "y": 125
@@ -1419,6 +1497,7 @@
             "itemType": "Atlas",
             "name": "grassinnercorner_SouthWest",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 128,
             "y": 803
@@ -1437,6 +1516,7 @@
             "itemType": "Atlas",
             "name": "farmer1",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 21,
             "x": 585,
             "y": 47
@@ -1455,6 +1535,7 @@
             "itemType": "Text",
             "name": "Main",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 582,
             "x": 0,
             "y": 7
@@ -1473,6 +1554,7 @@
             "itemType": "Text",
             "name": "Small",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 249,
             "x": 167,
             "y": 592
@@ -1491,6 +1573,7 @@
             "itemType": "Text",
             "name": "+SystemText",
             "textureIndex": 0,
+            "textureInfo": 65280,
             "width": 278,
             "x": 419,
             "y": 592
@@ -1513,8 +1596,9 @@
             "sbFrameMarginLeft": 0,
             "sbFrameMarginRight": 1,
             "sbFrameMarginTop": 0,
-            "textureFiltering": "Nearest",
-            "textureFormat": "R8G8B8A8"
+            "unfilledIndices": [
+                0
+            ]
         }
     ],
     "nextBankId": 1

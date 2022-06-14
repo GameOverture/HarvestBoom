@@ -1,5 +1,5 @@
 {
-    "$fileVersion": 4,
+    "$fileVersion": 9,
     "banks": [
         {
             "bankId": 0,
@@ -588,9 +588,8 @@
                             "top": 592
                         }
                     ],
-                    "filtering": "Nearest",
-                    "format": "R8G8B8A8",
                     "height": 1024,
+                    "textureInfo": 262144,
                     "width": 1024
                 }
             ]

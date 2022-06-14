@@ -1,5 +1,5 @@
 {
-    "$fileVersion": 4,
+    "$fileVersion": 9,
     "Audio": {
         "UI/Purchase": {
             "stateArray": [
